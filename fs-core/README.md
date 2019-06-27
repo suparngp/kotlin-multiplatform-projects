@@ -12,9 +12,9 @@ A kotlin multiplatform library for iOS and Android to provide file system access
         }
     }
     ``` 
-2. Add `implementation 'com.suparnatural:fs-core-metadata:1.0.0'` to `commonMain`.
-3. Add `implementation 'com.suparnatural:fs-core-ios:1.0.0'` to `iosMain`
-4. Add `implementation 'com.suparnatural:android-core-ios:1.0.0'` to `iosMain`
+2. Add `implementation 'com.suparnatural:fs-core-metadata:1.0.1'` to `commonMain`.
+3. Add `implementation 'com.suparnatural:fs-core-iosx64(or iosarm64)'` to `iosMain`
+4. Add `implementation 'com.suparnatural:android-core-ios:1.0.1'` to `iosMain`
 
 ### Usage
 

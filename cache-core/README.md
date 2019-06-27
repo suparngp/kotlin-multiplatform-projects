@@ -14,9 +14,9 @@ Check the API documentation for details.
         }
     }
     ``` 
-2. Add `implementation 'com.suparnatural:cache-core-metadata:1.0.0'` to `commonMain`.
-3. Add `implementation 'com.suparnatural:cache-core-ios:1.0.0'` to `iosMain`.
-4. Add `implementation 'com.suparnatural:cache-core-android:1.0.0'` to `iosMain`.
+2. Add `implementation 'com.suparnatural:cache-core-metadata:1.0.1'` to `commonMain`.
+3. Add `implementation 'com.suparnatural:cache-core-iosx64(or iosarm64):1.0.1'` to `iosMain`.
+4. Add `implementation 'com.suparnatural:cache-core-android:1.0.1'` to `iosMain`.
 
 
 ### Usage
