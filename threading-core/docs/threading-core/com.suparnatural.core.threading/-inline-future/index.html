@@ -1,0 +1,53 @@
+<HTML>
+<HEAD>
+<meta charset="UTF-8">
+<title>InlineFuture - threading-core</title>
+<link rel="stylesheet" href="../../../style.css">
+</HEAD>
+<BODY>
+<a href="../../index.html">threading-core</a>&nbsp;/&nbsp;<a href="../index.html">com.suparnatural.core.threading</a>&nbsp;/&nbsp;<a href="./index.html">InlineFuture</a><br/>
+<br/>
+<h1>InlineFuture</h1>
+<code><span class="keyword">class </span><span class="identifier">InlineFuture</span><span class="symbol">&lt;</span><span class="identifier">T</span><span class="symbol">&gt;</span>&nbsp;<span class="symbol">:</span>&nbsp;<a href="../-future/index.html"><span class="identifier">Future</span></a><span class="symbol">&lt;</span><a href="index.html#T"><span class="identifier">T</span></a><span class="symbol">&gt;</span></code>
+<p>A naive future implementation to wrap a given <code>result</code>.
+It executes on the calling thread synchronously.</p>
+<h3>Examples</h3>
+<pre><code>val future: Future&lt;String&gt; = InlineFuture("hello")
+future.consume {it: String -&gt;
+    assertEquals("Hello", it)
+}
+
+</code></pre>
+<h3>Constructors</h3>
+<table>
+<tbody>
+<tr>
+<td>
+<p><a href="-init-.html">&lt;init&gt;</a></p>
+</td>
+<td>
+<code><span class="identifier">InlineFuture</span><span class="symbol">(</span><span class="identifier" id="com.suparnatural.core.threading.InlineFuture$<init>(com.suparnatural.core.threading.InlineFuture.T)/result">result</span><span class="symbol">:</span>&nbsp;<a href="index.html#T"><span class="identifier">T</span></a><span class="symbol">)</span></code>
+<p>A naive future implementation to wrap a given <code>result</code>.
+It executes on the calling thread synchronously.</p>
+</td>
+</tr>
+</tbody>
+</table>
+<h3>Functions</h3>
+<table>
+<tbody>
+<tr>
+<td>
+<p><a href="consume.html">consume</a></p>
+</td>
+<td>
+<code><span class="keyword">fun </span><span class="symbol">&lt;</span><span class="identifier">R</span><span class="symbol">&gt;</span> <span class="identifier">consume</span><span class="symbol">(</span><span class="identifier" id="com.suparnatural.core.threading.InlineFuture$consume(kotlin.Function1((com.suparnatural.core.threading.InlineFuture.T, com.suparnatural.core.threading.InlineFuture.consume.R)))/code">code</span><span class="symbol">:</span>&nbsp;<span class="symbol">(</span><a href="index.html#T"><span class="identifier">T</span></a><span class="symbol">)</span>&nbsp;<span class="symbol">-&gt;</span>&nbsp;<a href="consume.html#R"><span class="identifier">R</span></a><span class="symbol">)</span><span class="symbol">: </span><a href="consume.html#R"><span class="identifier">R</span></a></code>
+<p>Consume the future value in <code>code</code> as input.
+This method may or may not block the calling thread
+depending upon the implementation.</p>
+</td>
+</tr>
+</tbody>
+</table>
+</BODY>
+</HTML>

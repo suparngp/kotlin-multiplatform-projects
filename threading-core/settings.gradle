@@ -1,0 +1,2 @@
+rootProject.name = 'threading-core'
+enableFeaturePreview('GRADLE_METADATA')

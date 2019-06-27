@@ -1,0 +1,67 @@
+<HTML>
+<HEAD>
+<meta charset="UTF-8">
+<title>AtomicReference - threading-core</title>
+<link rel="stylesheet" href="../../../style.css">
+</HEAD>
+<BODY>
+<a href="../../index.html">threading-core</a>&nbsp;/&nbsp;<a href="../index.html">com.suparnatural.core.threading</a>&nbsp;/&nbsp;<a href="./index.html">AtomicReference</a><br/>
+<br/>
+<h1>AtomicReference</h1>
+<code><span class="keyword">expect</span> <span class="keyword">class </span><span class="identifier">AtomicReference</span><span class="symbol">&lt;</span><span class="identifier">T</span><span class="symbol">&gt;</span></code>
+<p>An <a href="./index.html">AtomicReference</a> uses CAS instruction to get and update
+the wrapped volatile variable to ensure lock free thread safety.</p>
+<h3>Examples</h3>
+<pre><code>val person = AtomicReference(toImmutable(Person()))
+val newPerson = toImmutable(Person())
+val value = person.value
+person.compareAndSet(value, newPerson)
+</code></pre>
+<h3>Constructors</h3>
+<table>
+<tbody>
+<tr>
+<td>
+<p><a href="-init-.html">&lt;init&gt;</a></p>
+</td>
+<td>
+<code><span class="identifier">AtomicReference</span><span class="symbol">(</span><span class="identifier" id="com.suparnatural.core.threading.AtomicReference$<init>(com.suparnatural.core.threading.AtomicReference.T)/value_">value_</span><span class="symbol">:</span>&nbsp;<a href="index.html#T"><span class="identifier">T</span></a><span class="symbol">)</span></code>
+<p>An <a href="./index.html">AtomicReference</a> uses CAS instruction to get and update
+the wrapped volatile variable to ensure lock free thread safety.</p>
+</td>
+</tr>
+</tbody>
+</table>
+<h3>Properties</h3>
+<table>
+<tbody>
+<tr>
+<td>
+<p><a href="value.html">value</a></p>
+</td>
+<td>
+<code><span class="keyword">var </span><span class="identifier">value</span><span class="symbol">: </span><a href="index.html#T"><span class="identifier">T</span></a></code>
+<p>The wrapped value</p>
+</td>
+</tr>
+</tbody>
+</table>
+<h3>Functions</h3>
+<table>
+<tbody>
+<tr>
+<td>
+<p><a href="compare-and-set.html">compareAndSet</a></p>
+</td>
+<td>
+<code><span class="keyword">fun </span><span class="identifier">compareAndSet</span><span class="symbol">(</span><span class="identifier" id="com.suparnatural.core.threading.AtomicReference$compareAndSet(com.suparnatural.core.threading.AtomicReference.T, com.suparnatural.core.threading.AtomicReference.T)/expected">expected</span><span class="symbol">:</span>&nbsp;<a href="index.html#T"><span class="identifier">T</span></a><span class="symbol">, </span><span class="identifier" id="com.suparnatural.core.threading.AtomicReference$compareAndSet(com.suparnatural.core.threading.AtomicReference.T, com.suparnatural.core.threading.AtomicReference.T)/new">new</span><span class="symbol">:</span>&nbsp;<a href="index.html#T"><span class="identifier">T</span></a><span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html"><span class="identifier">Boolean</span></a></code>
+<p>Compares the current value to <code>expected</code> and if it matches, replaces with <code>new</code> value.
+If the result is successful, it returns true, otherwise false.
+The get and update operations are performed atomically. The <code>new</code> value must be an immutable
+object. Use <a href="../to-immutable.html">toImmutable</a> to make an immutable version of an object.</p>
+</td>
+</tr>
+</tbody>
+</table>
+</BODY>
+</HTML>

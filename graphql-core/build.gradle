@@ -1,0 +1,22 @@
+apply plugin: 'kotlinx-serialization'
+apply plugin: 'org.jetbrains.kotlin.native.cocoapods'
+
+kotlin.cocoapods {
+    summary = "GraphQL helpers for Kotlin Multiplatform"
+    homepage = "https://github.com/suparngp/kotlin-multiplatform-projects/tree/master/graphql-core"
+}
+
+
+kotlin.targets.ios.compilations.main.defaultSourceSet {
+    dependencies {
+        implementation 'com.suparnatural:threading-core-ios:1.0.0'
+        implementation 'org.jetbrains.kotlinx:kotlinx-serialization-runtime-native:0.11.1'
+    }
+}
+
+kotlin.sourceSets.commonMain {
+    dependencies {
+        implementation 'com.suparnatural:threading-core:1.0.0'
+        implementation 'org.jetbrains.kotlinx:kotlinx-serialization-runtime-common:0.11.1'
+    }
+}

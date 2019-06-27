@@ -1,0 +1,2 @@
+rootProject.name = 'fs-core'
+enableFeaturePreview('GRADLE_METADATA')

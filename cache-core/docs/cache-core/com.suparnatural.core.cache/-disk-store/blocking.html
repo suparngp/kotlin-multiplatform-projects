@@ -1,0 +1,24 @@
+<HTML>
+<HEAD>
+<meta charset="UTF-8">
+<title>DiskStore.blocking - cache-core</title>
+<link rel="stylesheet" href="../../../style.css">
+</HEAD>
+<BODY>
+<a href="../../index.html">cache-core</a>&nbsp;/&nbsp;<a href="../index.html">com.suparnatural.core.cache</a>&nbsp;/&nbsp;<a href="index.html">DiskStore</a>&nbsp;/&nbsp;<a href="./blocking.html">blocking</a><br/>
+<br/>
+<h1>blocking</h1>
+<a name="com.suparnatural.core.cache.DiskStore$blocking"></a>
+<code><span class="keyword">val </span><span class="identifier">blocking</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html"><span class="identifier">Boolean</span></a></code>
+<p>Overrides <a href="../-cache-store/blocking.html">CacheStore.blocking</a></p>
+<p>Marker whether the store does any blocking I/O. If it is set to true, then
+it is expected that the calling thread will be blocked. Otherwise, certain method calls
+on the <a href="../-cache-store/index.html">CacheStore</a> will return immediately and all the operations will be scheduled on
+a separate worker thread.</p>
+<p>Note: If blocking is set to false, then the store does not guarantee that the objects
+will be persisted immediately. For example, if the application terminates, some tasks
+scheduled on the worker may not finish and therefore, some objects may not be persisted.</p>
+<p>If guaranteed persistence is desired, this flag should be set to true.
+For maximum performance, this can be set to false.</p>
+</BODY>
+</HTML>

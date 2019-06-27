@@ -1,0 +1,36 @@
+<HTML>
+<HEAD>
+<meta charset="UTF-8">
+<title>ReadWriteLock.<init> - threading-core</title>
+<link rel="stylesheet" href="../../../style.css">
+</HEAD>
+<BODY>
+<a href="../../index.html">threading-core</a>&nbsp;/&nbsp;<a href="../index.html">com.suparnatural.core.threading</a>&nbsp;/&nbsp;<a href="index.html">ReadWriteLock</a>&nbsp;/&nbsp;<a href="./-init-.html">&lt;init&gt;</a><br/>
+<br/>
+<h1>&lt;init&gt;</h1>
+<a name="com.suparnatural.core.threading.ReadWriteLock$&lt;init&gt;()"></a>
+<code><span class="identifier">ReadWriteLock</span><span class="symbol">(</span><span class="symbol">)</span></code>
+<p>A ReadWrite lock allows multiple readers to read a value
+and only one writer to update it. A read lock cannot be obtained until
+write lock is released. A write lock cannot be obtained until current
+readers don't release read lock.</p>
+<h3>Examples</h3>
+<pre><code>val lock = ReadWriteLock()
+
+// read from multiple threads simultaneously.
+lock.acquireReadLock() // call from as many threads
+
+// perform read ....
+
+lock.releaseReadLock()
+
+// to protect writes
+lock.acquireWriteLock() // only one thread will get lock, others will be blocked.
+
+// perform write ....
+
+lock.releaseWriteLock() // next thread will now unblock.
+
+</code></pre>
+</BODY>
+</HTML>

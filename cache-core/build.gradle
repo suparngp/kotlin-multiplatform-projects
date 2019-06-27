@@ -1,0 +1,43 @@
+apply plugin: 'org.jetbrains.kotlin.native.cocoapods'
+
+kotlin.cocoapods {
+    summary = "Cache lib for Kotlin Native"
+    homepage = "https://github.com/suparngp/kotlin-multiplatform-projects/tree/master/cache-core"
+}
+
+kotlin.targets.ios.compilations.main.defaultSourceSet {
+    dependencies {
+        implementation 'com.suparnatural:threading-core-ios:1.0.0'
+        implementation 'com.suparnatural:utilities-core-ios:1.0.0'
+        implementation 'com.suparnatural:fs-core-ios:1.0.0'
+    }
+}
+
+kotlin.sourceSets.commonMain {
+    dependencies {
+        implementation 'com.suparnatural:threading-core-metadata:1.0.0'
+        implementation 'com.suparnatural:utilities-core-metadata:1.0.0'
+        implementation 'com.suparnatural:fs-core-metadata:1.0.0'
+
+    }
+}
+
+
+kotlin.sourceSets.androidMain {
+    dependencies {
+        implementation 'com.suparnatural:threading-core-android:1.0.0'
+        implementation 'com.suparnatural:fs-core-android:1.0.0'
+        implementation 'com.suparnatural:utilities-core-android:1.0.0'
+
+    }
+}
+
+kotlin.sourceSets.androidTest {
+    dependencies {
+        implementation 'com.suparnatural:threading-core-android:1.0.0'
+        implementation 'com.suparnatural:fs-core-android:1.0.0'
+        implementation 'com.suparnatural:utilities-core-android:1.0.0'
+
+    }
+}
+

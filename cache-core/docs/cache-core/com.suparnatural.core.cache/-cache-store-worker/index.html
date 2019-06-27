@@ -1,0 +1,92 @@
+<HTML>
+<HEAD>
+<meta charset="UTF-8">
+<title>CacheStoreWorker - cache-core</title>
+<link rel="stylesheet" href="../../../style.css">
+</HEAD>
+<BODY>
+<a href="../../index.html">cache-core</a>&nbsp;/&nbsp;<a href="../index.html">com.suparnatural.core.cache</a>&nbsp;/&nbsp;<a href="./index.html">CacheStoreWorker</a><br/>
+<br/>
+<h1>CacheStoreWorker</h1>
+<code><span class="keyword">interface </span><span class="identifier">CacheStoreWorker</span></code>
+<p>A <a href="../-cache-store/index.html">CacheStore</a> schedules its operations (controlled by <a href="../-cache-store/blocking.html">CacheStore.blocking</a> parameter)
+on a <a href="./index.html">CacheStoreWorker</a>. Workers are expected to operate in a single mode (blocking/non-blocking).
+Therefore, each worker can assume the mode in which it will be invoked in and should schedule
+all of its tasks (with exceptions) in that mode forever.</p>
+<p>Workers should always operate with a non-capturing lambda meaning, all the state outside of
+the invocation context of a worker should be considered invisible to a worker task.</p>
+<h3>Examples</h3>
+<h4>Non capturing task</h4>
+<pre><code>class MyBackgroundWorker: CacheStoreWorker {
+    fun persistObject(input..., task...) {
+        myHandlerBasedScheduler.execute {
+            task(input)
+        }
+    }
+
+
+}
+</code></pre>
+<h3>Functions</h3>
+<table>
+<tbody>
+<tr>
+<td>
+<p><a href="persist-object.html">persistObject</a></p>
+</td>
+<td>
+<code><span class="keyword">abstract</span> <span class="keyword">fun </span><span class="symbol">&lt;</span><span class="identifier">T</span>&nbsp;<span class="symbol">:</span>&nbsp;<a href="../-cacheable/index.html"><span class="identifier">Cacheable</span></a><span class="symbol">&gt;</span> <span class="identifier">persistObject</span><span class="symbol">(</span><span class="identifier" id="com.suparnatural.core.cache.CacheStoreWorker$persistObject(((com.suparnatural.core.cache.CacheStoreWorker.persistObject.T, , kotlin.collections.List((com.suparnatural.core.cache.CacheStorePreprocessor((com.suparnatural.core.cache.Cacheable, , )))))), kotlin.Function1((((com.suparnatural.core.cache.CacheStoreWorker.persistObject.T, , kotlin.collections.List((com.suparnatural.core.cache.CacheStorePreprocessor((com.suparnatural.core.cache.Cacheable, , )))))), kotlin.Unit)))/input">input</span><span class="symbol">:</span>&nbsp;<span class="identifier">&lt;ERROR CLASS&gt;</span><span class="symbol">&lt;</span><a href="persist-object.html#T"><span class="identifier">T</span></a><span class="symbol">,</span>&nbsp;<span class="identifier">&lt;ERROR CLASS&gt;</span><span class="symbol">,</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.collections/-list/index.html"><span class="identifier">List</span></a><span class="symbol">&lt;</span><a href="../-cache-store-preprocessor/index.html"><span class="identifier">CacheStorePreprocessor</span></a><span class="symbol">&lt;</span><a href="../-cacheable/index.html"><span class="identifier">Cacheable</span></a><span class="symbol">,</span>&nbsp;<a href="../-cacheable/index.html"><span class="identifier">Cacheable</span></a><span class="symbol">,</span>&nbsp;<a href="../-cacheable/index.html"><span class="identifier">Cacheable</span></a><span class="symbol">&gt;</span><span class="symbol">&gt;</span><span class="symbol">?</span><span class="symbol">&gt;</span><span class="symbol">, </span><span class="identifier" id="com.suparnatural.core.cache.CacheStoreWorker$persistObject(((com.suparnatural.core.cache.CacheStoreWorker.persistObject.T, , kotlin.collections.List((com.suparnatural.core.cache.CacheStorePreprocessor((com.suparnatural.core.cache.Cacheable, , )))))), kotlin.Function1((((com.suparnatural.core.cache.CacheStoreWorker.persistObject.T, , kotlin.collections.List((com.suparnatural.core.cache.CacheStorePreprocessor((com.suparnatural.core.cache.Cacheable, , )))))), kotlin.Unit)))/task">task</span><span class="symbol">:</span>&nbsp;<span class="symbol">(</span><span class="identifier">&lt;ERROR CLASS&gt;</span><span class="symbol">&lt;</span><a href="persist-object.html#T"><span class="identifier">T</span></a><span class="symbol">,</span>&nbsp;<span class="identifier">&lt;ERROR CLASS&gt;</span><span class="symbol">,</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.collections/-list/index.html"><span class="identifier">List</span></a><span class="symbol">&lt;</span><a href="../-cache-store-preprocessor/index.html"><span class="identifier">CacheStorePreprocessor</span></a><span class="symbol">&lt;</span><a href="../-cacheable/index.html"><span class="identifier">Cacheable</span></a><span class="symbol">,</span>&nbsp;<a href="../-cacheable/index.html"><span class="identifier">Cacheable</span></a><span class="symbol">,</span>&nbsp;<a href="../-cacheable/index.html"><span class="identifier">Cacheable</span></a><span class="symbol">&gt;</span><span class="symbol">&gt;</span><span class="symbol">?</span><span class="symbol">&gt;</span><span class="symbol">)</span>&nbsp;<span class="symbol">-&gt;</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html"><span class="identifier">Unit</span></a><span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html"><span class="identifier">Unit</span></a></code>
+<p>Invokes a strictly non-capturing lambda <a href="persist-object.html#com.suparnatural.core.cache.CacheStoreWorker$persistObject(((com.suparnatural.core.cache.CacheStoreWorker.persistObject.T, , kotlin.collections.List((com.suparnatural.core.cache.CacheStorePreprocessor((com.suparnatural.core.cache.Cacheable, , )))))), kotlin.Function1((((com.suparnatural.core.cache.CacheStoreWorker.persistObject.T, , kotlin.collections.List((com.suparnatural.core.cache.CacheStorePreprocessor((com.suparnatural.core.cache.Cacheable, , )))))), kotlin.Unit)))/task">task</a> with the <a href="persist-object.html#com.suparnatural.core.cache.CacheStoreWorker$persistObject(((com.suparnatural.core.cache.CacheStoreWorker.persistObject.T, , kotlin.collections.List((com.suparnatural.core.cache.CacheStorePreprocessor((com.suparnatural.core.cache.Cacheable, , )))))), kotlin.Function1((((com.suparnatural.core.cache.CacheStoreWorker.persistObject.T, , kotlin.collections.List((com.suparnatural.core.cache.CacheStorePreprocessor((com.suparnatural.core.cache.Cacheable, , )))))), kotlin.Unit)))/input">input</a> as an argument to persist <a href="persist-object.html#T">T</a>.
+The <a href="persist-object.html#com.suparnatural.core.cache.CacheStoreWorker$persistObject(((com.suparnatural.core.cache.CacheStoreWorker.persistObject.T, , kotlin.collections.List((com.suparnatural.core.cache.CacheStorePreprocessor((com.suparnatural.core.cache.Cacheable, , )))))), kotlin.Function1((((com.suparnatural.core.cache.CacheStoreWorker.persistObject.T, , kotlin.collections.List((com.suparnatural.core.cache.CacheStorePreprocessor((com.suparnatural.core.cache.Cacheable, , )))))), kotlin.Unit)))/task">task</a> must not access any state other than its arguments including
+any immutable of frozen objects to guarantee thread safety.</p>
+</td>
+</tr>
+<tr>
+<td>
+<p><a href="terminate.html">terminate</a></p>
+</td>
+<td>
+<code><span class="keyword">abstract</span> <span class="keyword">fun </span><span class="identifier">terminate</span><span class="symbol">(</span><span class="symbol">)</span><span class="symbol">: </span><span class="identifier">&lt;ERROR CLASS&gt;</span><span class="symbol">&lt;</span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html"><span class="identifier">Unit</span></a><span class="symbol">&gt;</span></code>
+<p>Close all resource handles and terminate the worker.</p>
+</td>
+</tr>
+<tr>
+<td>
+<p><a href="unlink-object.html">unlinkObject</a></p>
+</td>
+<td>
+<code><span class="keyword">abstract</span> <span class="keyword">fun </span><span class="identifier">unlinkObject</span><span class="symbol">(</span><span class="identifier" id="com.suparnatural.core.cache.CacheStoreWorker$unlinkObject(, kotlin.Function1((, kotlin.Unit)))/input">input</span><span class="symbol">:</span>&nbsp;<span class="identifier">&lt;ERROR CLASS&gt;</span><span class="symbol">, </span><span class="identifier" id="com.suparnatural.core.cache.CacheStoreWorker$unlinkObject(, kotlin.Function1((, kotlin.Unit)))/task">task</span><span class="symbol">:</span>&nbsp;<span class="symbol">(</span><span class="identifier">&lt;ERROR CLASS&gt;</span><span class="symbol">)</span>&nbsp;<span class="symbol">-&gt;</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html"><span class="identifier">Unit</span></a><span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html"><span class="identifier">Unit</span></a></code>
+<p>Invokes a strictly non-capturing lambda <a href="unlink-object.html#com.suparnatural.core.cache.CacheStoreWorker$unlinkObject(, kotlin.Function1((, kotlin.Unit)))/task">task</a> with <a href="unlink-object.html#com.suparnatural.core.cache.CacheStoreWorker$unlinkObject(, kotlin.Function1((, kotlin.Unit)))/input">input</a> to delete
+an object located at <a href="unlink-object.html#com.suparnatural.core.cache.CacheStoreWorker$unlinkObject(, kotlin.Function1((, kotlin.Unit)))/input">input</a>. The <a href="unlink-object.html#com.suparnatural.core.cache.CacheStoreWorker$unlinkObject(, kotlin.Function1((, kotlin.Unit)))/task">task</a> must not access any state other than its arguments including
+any immutable of frozen objects to guarantee thread safety.</p>
+</td>
+</tr>
+</tbody>
+</table>
+<h3>Inheritors</h3>
+<table>
+<tbody>
+<tr>
+<td>
+<p><a href="../-cache-store-blocking-worker/index.html">CacheStoreBlockingWorker</a></p>
+</td>
+<td>
+<code><span class="keyword">class </span><span class="identifier">CacheStoreBlockingWorker</span>&nbsp;<span class="symbol">:</span>&nbsp;<a href="./index.html"><span class="identifier">CacheStoreWorker</span></a></code>
+<p>A <a href="./index.html">CacheStoreWorker</a> which blocks the calling thread.</p>
+</td>
+</tr>
+<tr>
+<td>
+<p><a href="../-cache-store-non-blocking-worker/index.html">CacheStoreNonBlockingWorker</a></p>
+</td>
+<td>
+<code><span class="keyword">class </span><span class="identifier">CacheStoreNonBlockingWorker</span>&nbsp;<span class="symbol">:</span>&nbsp;<a href="./index.html"><span class="identifier">CacheStoreWorker</span></a></code>
+<p>A background worker for the cache store which does not block the calling thread.
+The calling thread cannot wait for the result. Therefore, this worker is supposed
+to be used in a fire and forget scenario. Otherwise, use <a href="../-cache-store-blocking-worker/index.html">CacheStoreBlockingWorker</a>.</p>
+</td>
+</tr>
+</tbody>
+</table>
+</BODY>
+</HTML>

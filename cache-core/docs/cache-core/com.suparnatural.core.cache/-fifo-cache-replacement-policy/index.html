@@ -1,0 +1,88 @@
+<HTML>
+<HEAD>
+<meta charset="UTF-8">
+<title>FifoCacheReplacementPolicy - cache-core</title>
+<link rel="stylesheet" href="../../../style.css">
+</HEAD>
+<BODY>
+<a href="../../index.html">cache-core</a>&nbsp;/&nbsp;<a href="../index.html">com.suparnatural.core.cache</a>&nbsp;/&nbsp;<a href="./index.html">FifoCacheReplacementPolicy</a><br/>
+<br/>
+<h1>FifoCacheReplacementPolicy</h1>
+<code><span class="keyword">class </span><span class="identifier">FifoCacheReplacementPolicy</span>&nbsp;<span class="symbol">:</span>&nbsp;<a href="../-cache-replacement-policy/index.html"><span class="identifier">CacheReplacementPolicy</span></a></code>
+<p>A cache replacement policy which evicts the oldest object from cache
+to make space when cache is full.</p>
+<h3>Constructors</h3>
+<table>
+<tbody>
+<tr>
+<td>
+<p><a href="-init-.html">&lt;init&gt;</a></p>
+</td>
+<td>
+<code><span class="identifier">FifoCacheReplacementPolicy</span><span class="symbol">(</span><span class="identifier" id="com.suparnatural.core.cache.FifoCacheReplacementPolicy$<init>(kotlin.Int)/cacheSize">cacheSize</span><span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html"><span class="identifier">Int</span></a><span class="symbol">)</span></code>
+<p>A cache replacement policy which evicts the oldest object from cache
+to make space when cache is full.</p>
+</td>
+</tr>
+</tbody>
+</table>
+<h3>Properties</h3>
+<table>
+<tbody>
+<tr>
+<td>
+<p><a href="cache-size.html">cacheSize</a></p>
+</td>
+<td>
+<code><span class="keyword">val </span><span class="identifier">cacheSize</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html"><span class="identifier">Int</span></a></code>
+<p>Size of the cache</p>
+</td>
+</tr>
+</tbody>
+</table>
+<h3>Functions</h3>
+<table>
+<tbody>
+<tr>
+<td>
+<p><a href="clear-registry-unsafe.html">clearRegistryUnsafe</a></p>
+</td>
+<td>
+<code><span class="keyword">fun </span><span class="identifier">clearRegistryUnsafe</span><span class="symbol">(</span><span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html"><span class="identifier">Unit</span></a></code>
+<p>Clear any state and reset to initial. For example,
+clearRegistryUnsafe any linked list state for LRU or FIFO cache.</p>
+</td>
+</tr>
+<tr>
+<td>
+<p><a href="evict-unsafe.html">evictUnsafe</a></p>
+</td>
+<td>
+<code><span class="keyword">fun </span><span class="identifier">evictUnsafe</span><span class="symbol">(</span><span class="symbol">)</span><span class="symbol">: </span><a href="../-cacheable-container/index.html"><span class="identifier">CacheableContainer</span></a><span class="symbol">?</span></code>
+<p>Prune the cache by 1 entry. Returns the removed object.
+Call this method when cache runs out of space.</p>
+</td>
+</tr>
+<tr>
+<td>
+<p><a href="register-object-unsafe.html">registerObjectUnsafe</a></p>
+</td>
+<td>
+<code><span class="keyword">fun </span><span class="identifier">registerObjectUnsafe</span><span class="symbol">(</span><span class="identifier" id="com.suparnatural.core.cache.FifoCacheReplacementPolicy$registerObjectUnsafe(com.suparnatural.core.cache.CacheableContainer)/obj">obj</span><span class="symbol">:</span>&nbsp;<a href="../-cacheable-container/index.html"><span class="identifier">CacheableContainer</span></a><span class="symbol">)</span><span class="symbol">: </span><a href="../-cacheable-container/index.html"><span class="identifier">CacheableContainer</span></a><span class="symbol">?</span></code>
+<p>Adds a cache entry for the object and returns the entry of a pruned object.
+Pruning occurs when the cache space is full.</p>
+</td>
+</tr>
+<tr>
+<td>
+<p><a href="unregister-object-unsafe.html">unregisterObjectUnsafe</a></p>
+</td>
+<td>
+<code><span class="keyword">fun </span><span class="identifier">unregisterObjectUnsafe</span><span class="symbol">(</span><span class="identifier" id="com.suparnatural.core.cache.FifoCacheReplacementPolicy$unregisterObjectUnsafe(com.suparnatural.core.cache.CacheableContainer)/obj">obj</span><span class="symbol">:</span>&nbsp;<a href="../-cacheable-container/index.html"><span class="identifier">CacheableContainer</span></a><span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html"><span class="identifier">Unit</span></a></code>
+<p>Remove <code>obj</code> from cache registry.</p>
+</td>
+</tr>
+</tbody>
+</table>
+</BODY>
+</HTML>

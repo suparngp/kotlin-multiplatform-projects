@@ -1,0 +1,157 @@
+<HTML>
+<HEAD>
+<meta charset="UTF-8">
+<title>alltypes - cache-core</title>
+<link rel="stylesheet" href="../../style.css">
+</HEAD>
+<BODY>
+<h3>All Types</h3>
+<table>
+<tbody>
+<tr>
+<td>
+<a href="../com.suparnatural.core.cache/-cache/index.html">com.suparnatural.core.cache.Cache</a></td>
+<td>
+<p>A generic Cache. A cache can be backed by persistent stores.
+The main different between cache and a persistent store is that
+the latter is considered to be slower than the former.
+Therefore, the APIs to access objects from a persistent store are not
+the same as that of a cache. For example, in <a href="../com.suparnatural.core.cache/-in-memory-cache/index.html">InMemoryCache</a> vs <a href="../com.suparnatural.core.cache/-disk-store/index.html">DiskStore</a>,
+the <a href="../com.suparnatural.core.cache/-in-memory-cache/index.html">InMemoryCache</a> is the primary data structure which other parts
+of the application should interact with while <a href="../com.suparnatural.core.cache/-disk-store/index.html">DiskStore</a> can be used
+to rehydrate the cache after a cold start.</p>
+</td>
+</tr>
+<tr>
+<td>
+<a href="../com.suparnatural.core.cache/-cacheable/index.html">com.suparnatural.core.cache.Cacheable</a></td>
+<td>
+<p>Any object which should be cached must be <a href="../com.suparnatural.core.cache/-cacheable/index.html">Cacheable</a>.
+Each cache object must have a unique identifier returned by <a href="../com.suparnatural.core.cache/-cacheable/cache-key.html">cacheKey</a>.
+If the object wishes to be persistable, then the <a href="../com.suparnatural.core.cache/-cacheable/serialize-for-persistence.html">serializeForPersistence</a>
+method can return a string which represents its serialized version.</p>
+</td>
+</tr>
+<tr>
+<td>
+<a href="../com.suparnatural.core.cache/-cacheable-container/index.html">com.suparnatural.core.cache.CacheableContainer</a></td>
+<td>
+<p>A Container which holds <a href="../com.suparnatural.core.cache/-cacheable/index.html">Cacheable</a> objects which can identified by the <a href="../com.suparnatural.core.cache/-cacheable-container/key.html">key</a> derived from <a href="../com.suparnatural.core.cache/-cacheable/cache-key.html">Cacheable.cacheKey</a>.
+The cached object is converted to immutable before caching. So any updates to the same object will cause an error.</p>
+</td>
+</tr>
+<tr>
+<td>
+<a href="../com.suparnatural.core.cache/-cache-manager/index.html">com.suparnatural.core.cache.CacheManager</a></td>
+<td>
+<p>A thread-safe object which manages the <a href="../com.suparnatural.core.cache/-cache-manager/cache.html">cache</a> based on initialization parameters.</p>
+</td>
+</tr>
+<tr>
+<td>
+<a href="../com.suparnatural.core.cache/-cache-replacement-policy/index.html">com.suparnatural.core.cache.CacheReplacementPolicy</a></td>
+<td>
+<p>A Cache Replacement policy maintains a registry of cached objects
+to free space when cache is full. The object removed when cache
+fills up depends on the implementation of <a href="../com.suparnatural.core.cache/-cache-replacement-policy/evict-unsafe.html">CacheReplacementPolicy.evictUnsafe</a> method.</p>
+</td>
+</tr>
+<tr>
+<td>
+<a href="../com.suparnatural.core.cache/-cache-store/index.html">com.suparnatural.core.cache.CacheStore</a></td>
+<td>
+<p>A persistent store to back a cache.
+This store is considered to be slow by default.
+Therefore, direct interaction with it to access cached objects
+should be avoided. The store is useful in certain scenarios.</p>
+</td>
+</tr>
+<tr>
+<td>
+<a href="../com.suparnatural.core.cache/-cache-store-blocking-worker/index.html">com.suparnatural.core.cache.CacheStoreBlockingWorker</a></td>
+<td>
+<p>A <a href="../com.suparnatural.core.cache/-cache-store-worker/index.html">CacheStoreWorker</a> which blocks the calling thread.</p>
+</td>
+</tr>
+<tr>
+<td>
+<a href="../com.suparnatural.core.cache/-cache-store-non-blocking-worker/index.html">com.suparnatural.core.cache.CacheStoreNonBlockingWorker</a></td>
+<td>
+<p>A background worker for the cache store which does not block the calling thread.
+The calling thread cannot wait for the result. Therefore, this worker is supposed
+to be used in a fire and forget scenario. Otherwise, use <a href="../com.suparnatural.core.cache/-cache-store-blocking-worker/index.html">CacheStoreBlockingWorker</a>.</p>
+</td>
+</tr>
+<tr>
+<td>
+<a href="../com.suparnatural.core.cache/-cache-store-preprocessor/index.html">com.suparnatural.core.cache.CacheStorePreprocessor</a></td>
+<td>
+<p>A <a href="../com.suparnatural.core.cache/-cache-store-preprocessor/index.html">CacheStorePreprocessor</a> processes <a href="../com.suparnatural.core.cache/-cacheable/index.html">Cacheable</a> objects before persisting them in the store
+and after they are read from the store.</p>
+</td>
+</tr>
+<tr>
+<td>
+<a href="../com.suparnatural.core.cache/-cache-store-worker/index.html">com.suparnatural.core.cache.CacheStoreWorker</a></td>
+<td>
+<p>A <a href="../com.suparnatural.core.cache/-cache-store/index.html">CacheStore</a> schedules its operations (controlled by <a href="../com.suparnatural.core.cache/-cache-store/blocking.html">CacheStore.blocking</a> parameter)
+on a <a href="../com.suparnatural.core.cache/-cache-store-worker/index.html">CacheStoreWorker</a>. Workers are expected to operate in a single mode (blocking/non-blocking).
+Therefore, each worker can assume the mode in which it will be invoked in and should schedule
+all of its tasks (with exceptions) in that mode forever.</p>
+</td>
+</tr>
+<tr>
+<td>
+<a href="../com.suparnatural.core.cache/-disk-store/index.html">com.suparnatural.core.cache.DiskStore</a></td>
+<td>
+<p>A <a href="../com.suparnatural.core.cache/-cache-store/index.html">CacheStore</a> which persists <a href="../com.suparnatural.core.cache/-cacheable/index.html">Cacheable</a> objects on the disk.
+By default, the store blocks the calling thread for all its operations which can changed by
+setting <a href="../com.suparnatural.core.cache/-disk-store/blocking.html">blocking</a> to false.</p>
+</td>
+</tr>
+<tr>
+<td>
+<a href="../com.suparnatural.core.cache/-fifo-cache-replacement-policy/index.html">com.suparnatural.core.cache.FifoCacheReplacementPolicy</a></td>
+<td>
+<p>A cache replacement policy which evicts the oldest object from cache
+to make space when cache is full.</p>
+</td>
+</tr>
+<tr>
+<td>
+<a href="../com.suparnatural.core.cache/-in-memory-cache/index.html">com.suparnatural.core.cache.InMemoryCache</a></td>
+<td>
+<p>An abstract, thread-safe in-memory cache with a
+custom HashTable implementation backed by an array of atomic values.
+It guarantees consistency in both single and multi-threaded environment.</p>
+</td>
+</tr>
+<tr>
+<td>
+<a href="../com.suparnatural.core.cache/-linear-probing-cache/index.html">com.suparnatural.core.cache.LinearProbingCache</a></td>
+<td>
+<p>A thread-safe <a href="../com.suparnatural.core.cache/-in-memory-cache/index.html">InMemoryCache</a> with a custom HashTable implementation based on Linear Probing.</p>
+</td>
+</tr>
+<tr>
+<td>
+<a href="../com.suparnatural.core.cache/-raw-cacheable/index.html">com.suparnatural.core.cache.RawCacheable</a></td>
+<td>
+<p>A container to hold raw version for a cached object read from a persistent store.
+For example, in case of a disk store, <a href="../com.suparnatural.core.cache/-raw-cacheable/key.html">key</a> is the file name and <a href="../com.suparnatural.core.cache/-raw-cacheable/value.html">value</a>
+is the file contents. This is the first Cacheable object passed to the
+preprocessor chain. Therefore, your first preprocessor should
+expect <a href="../com.suparnatural.core.cache/-raw-cacheable/index.html">RawCacheable</a> as the input to <a href="../com.suparnatural.core.cache/-cache-store-preprocessor/unarchive.html">CacheStorePreprocessor.unarchive</a> method.</p>
+</td>
+</tr>
+<tr>
+<td>
+<a href="../com.suparnatural.core.cache/-robin-hood-probing-cache/index.html">com.suparnatural.core.cache.RobinHoodProbingCache</a></td>
+<td>
+<p>A thread-safe <a href="../com.suparnatural.core.cache/-in-memory-cache/index.html">InMemoryCache</a> with a custom HashTable implementation using Robin Hood hashing.</p>
+</td>
+</tr>
+</tbody>
+</table>
+</BODY>
+</HTML>

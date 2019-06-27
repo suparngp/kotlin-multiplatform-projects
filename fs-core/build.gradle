@@ -1,0 +1,27 @@
+kotlin.targets.ios.compilations.main.defaultSourceSet {
+    dependencies {
+        implementation 'com.suparnatural:utilities-core-ios:1.0.0'
+    }
+}
+
+kotlin.sourceSets.commonMain {
+    dependencies {
+        implementation 'com.suparnatural:utilities-core:1.0.0'
+
+    }
+}
+
+
+kotlin.sourceSets.androidMain {
+    dependencies {
+        implementation 'com.suparnatural:utilities-core-android:1.0.0'
+    }
+}
+
+kotlin.sourceSets.androidTest {
+    dependencies {
+        implementation 'com.suparnatural:utilities-core-android:1.0.0'
+
+    }
+}
+

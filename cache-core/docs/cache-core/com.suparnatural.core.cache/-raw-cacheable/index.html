@@ -1,0 +1,81 @@
+<HTML>
+<HEAD>
+<meta charset="UTF-8">
+<title>RawCacheable - cache-core</title>
+<link rel="stylesheet" href="../../../style.css">
+</HEAD>
+<BODY>
+<a href="../../index.html">cache-core</a>&nbsp;/&nbsp;<a href="../index.html">com.suparnatural.core.cache</a>&nbsp;/&nbsp;<a href="./index.html">RawCacheable</a><br/>
+<br/>
+<h1>RawCacheable</h1>
+<code><span class="keyword">data</span> <span class="keyword">class </span><span class="identifier">RawCacheable</span>&nbsp;<span class="symbol">:</span>&nbsp;<a href="../-cacheable/index.html"><span class="identifier">Cacheable</span></a></code>
+<p>A container to hold raw version for a cached object read from a persistent store.
+For example, in case of a disk store, <a href="key.html">key</a> is the file name and <a href="value.html">value</a>
+is the file contents. This is the first Cacheable object passed to the
+preprocessor chain. Therefore, your first preprocessor should
+expect <a href="./index.html">RawCacheable</a> as the input to <a href="../-cache-store-preprocessor/unarchive.html">CacheStorePreprocessor.unarchive</a> method.</p>
+<h3>Constructors</h3>
+<table>
+<tbody>
+<tr>
+<td>
+<p><a href="-init-.html">&lt;init&gt;</a></p>
+</td>
+<td>
+<code><span class="identifier">RawCacheable</span><span class="symbol">(</span><span class="identifier" id="com.suparnatural.core.cache.RawCacheable$<init>(kotlin.String, kotlin.String)/key">key</span><span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html"><span class="identifier">String</span></a><span class="symbol">, </span><span class="identifier" id="com.suparnatural.core.cache.RawCacheable$<init>(kotlin.String, kotlin.String)/value">value</span><span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html"><span class="identifier">String</span></a><span class="symbol">)</span></code>
+<p>A container to hold raw version for a cached object read from a persistent store.
+For example, in case of a disk store, <a href="key.html">key</a> is the file name and <a href="value.html">value</a>
+is the file contents. This is the first Cacheable object passed to the
+preprocessor chain. Therefore, your first preprocessor should
+expect <a href="./index.html">RawCacheable</a> as the input to <a href="../-cache-store-preprocessor/unarchive.html">CacheStorePreprocessor.unarchive</a> method.</p>
+</td>
+</tr>
+</tbody>
+</table>
+<h3>Properties</h3>
+<table>
+<tbody>
+<tr>
+<td>
+<p><a href="key.html">key</a></p>
+</td>
+<td>
+<code><span class="keyword">val </span><span class="identifier">key</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html"><span class="identifier">String</span></a></code></td>
+</tr>
+<tr>
+<td>
+<p><a href="value.html">value</a></p>
+</td>
+<td>
+<code><span class="keyword">val </span><span class="identifier">value</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html"><span class="identifier">String</span></a></code></td>
+</tr>
+</tbody>
+</table>
+<h3>Functions</h3>
+<table>
+<tbody>
+<tr>
+<td>
+<p><a href="cache-key.html">cacheKey</a></p>
+</td>
+<td>
+<code><span class="keyword">fun </span><span class="identifier">cacheKey</span><span class="symbol">(</span><span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html"><span class="identifier">String</span></a></code>
+<p>Returns the unique key used to identify the object in the cache.</p>
+</td>
+</tr>
+<tr>
+<td>
+<p><a href="serialize-for-persistence.html">serializeForPersistence</a></p>
+</td>
+<td>
+<code><span class="keyword">fun </span><span class="identifier">serializeForPersistence</span><span class="symbol">(</span><span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html"><span class="identifier">String</span></a></code>
+<p>Returns a serialized string which can be persisted.
+If this is the last object returned by the preprocessor chain,
+the return value of this method will be persisted as it is.
+Otherwise, this method will not called.</p>
+</td>
+</tr>
+</tbody>
+</table>
+</BODY>
+</HTML>
