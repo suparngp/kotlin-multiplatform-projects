@@ -35,3 +35,4 @@ Pods
 *.iml
 
 local.properties
+/build.sh
