@@ -1,18 +1,18 @@
 kotlin.sourceSets.iosX64Main {
     dependencies {
-        implementation 'com.suparnatural:utilities-core-iosx64:1.0.0'
+        implementation "com.suparnatural:utilities-core-iosx64:$suparnatural_version"
     }
 }
 
 kotlin.sourceSets.iosArm64Main {
     dependencies {
-        implementation 'com.suparnatural:utilities-core-iosarm64:1.0.0'
+        implementation "com.suparnatural:utilities-core-iosarm64:$suparnatural_version"
     }
 }
 
 kotlin.sourceSets.commonMain {
     dependencies {
-        implementation 'com.suparnatural:utilities-core:1.0.0'
+        implementation "com.suparnatural:utilities-core:$suparnatural_version"
 
     }
 }
@@ -20,13 +20,13 @@ kotlin.sourceSets.commonMain {
 
 kotlin.sourceSets.androidMain {
     dependencies {
-        implementation 'com.suparnatural:utilities-core-android:1.0.0'
+        implementation "com.suparnatural:utilities-core-android:$suparnatural_version"
     }
 }
 
 kotlin.sourceSets.androidTest {
     dependencies {
-        implementation 'com.suparnatural:utilities-core-android:1.0.0'
+        implementation "com.suparnatural:utilities-core-android:$suparnatural_version"
 
     }
 }

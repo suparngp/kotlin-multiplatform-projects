@@ -12,6 +12,7 @@ buildscript {
     dependencies {
         classpath 'com.android.tools.build:gradle:3.4.1'
     }
+    ext.suparnatural_version = '1.0.1'
 }
 
 plugins {
@@ -25,13 +26,12 @@ plugins {
 subprojects {
 
     def projectName = name
-    def projectVersion = '1.0.1'
 
     Properties localProperties = new Properties()
     localProperties.load(project.rootProject.file('local.properties').newDataInputStream())
 
     group 'com.suparnatural'
-    version projectVersion
+    version suparnatural_version
 
     repositories {
         mavenCentral()
@@ -184,8 +184,8 @@ subprojects {
             licenses = ['MIT']
             vcsUrl = 'https://github.com/suparngp/kotlin-multiplatform-projects/tree/master/' + projectName
             version {
-                name = projectVersion
-                desc = projectVersion
+                name = suparnatural_version
+                desc = suparnatural_version
                 released = new Date()
             }
         }

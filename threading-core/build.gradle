@@ -1,6 +1,0 @@
-apply plugin: 'org.jetbrains.kotlin.native.cocoapods'
-
-kotlin.cocoapods {
-    summary = "Multithreading lib for Kotlin Native"
-    homepage = "https://github.com/suparngp/kotlin-multiplatform-projects/tree/master/threading-core"
-}
