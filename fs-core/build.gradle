@@ -1,6 +1,12 @@
-kotlin.targets.ios.compilations.main.defaultSourceSet {
+kotlin.sourceSets.iosX64Main {
     dependencies {
-        implementation 'com.suparnatural:utilities-core-ios:1.0.0'
+        implementation 'com.suparnatural:utilities-core-iosx64:1.0.0'
+    }
+}
+
+kotlin.sourceSets.iosArm64Main {
+    dependencies {
+        implementation 'com.suparnatural:utilities-core-iosarm64:1.0.0'
     }
 }
 
