@@ -1,6 +1,6 @@
 Pod::Spec.new do |spec|
     spec.name                     = 'cache_core'
-    spec.version                  = '1.0.0'
+    spec.version                  = '1.0.1'
     spec.homepage                 = 'https://github.com/suparngp/kotlin-multiplatform-projects/tree/master/cache-core'
     spec.source                   = { :git => "Not Published", :tag => "Cocoapods/#{spec.name}/#{spec.version}" }
     spec.authors                  = ''
