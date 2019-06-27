@@ -47,6 +47,7 @@ subprojects {
     apply plugin: 'com.jfrog.bintray'
     apply plugin: 'org.jetbrains.dokka'
     apply plugin: 'com.android.library'
+    apply plugin: 'org.jetbrains.kotlin.native.cocoapods'
 
 
     // apply idea
@@ -108,9 +109,14 @@ subprojects {
 
     // kotlin multiplatform config
     kotlin {
-
-        // create ios target with preset based on platform
-        System.getenv('SDK_NAME')?.startsWith('iphoneos') ? iosArm64("ios") : iosX64("ios")
+        cocoapods {
+            // Configure fields required by CocoaPods.
+            summary = projectName
+            homepage = "https://github.com/suparngp/kotlin-multiplatform-projects/tree/master/${projectName}"
+        }
+        
+        iosX64('iosX64')
+        iosArm64('iosArm64')
 
         android('android') {
             publishLibraryVariants("release")
@@ -129,22 +135,7 @@ subprojects {
                     implementation kotlin('test-annotations-common')
                 }
             }
-
-//            def jvmTarget = jvm()
-//            jvmTarget.compilations.main.defaultSourceSet {
-//                dependencies {
-//                    implementation kotlin('stdlib')
-//                }
-//            }
-//
-//            jvmTarget.compilations.test.defaultSourceSet {
-//                dependencies {
-//                    implementation kotlin('test')
-//                    implementation kotlin('test-junit')
-//                }
-//            }
-
-
+            
             androidMain {
                 dependencies {
                     implementation kotlin('stdlib')
@@ -156,6 +147,22 @@ subprojects {
                     implementation kotlin('test')
                     implementation kotlin('test-junit')
                 }
+            }
+
+            iosMain {}
+            iosTest {}
+
+            iosArm64Main {
+                dependsOn iosMain
+            }
+            iosArm64Test {
+                dependsOn iosTest
+            }
+            iosX64Main {
+                dependsOn iosMain
+            }
+            iosX64Test {
+                dependsOn iosTest
             }
 
         }
@@ -186,7 +193,7 @@ subprojects {
     }
 
     task copyPlist(type: Copy) {
-        def binary = kotlin.targets.ios.binaries.getTest('DEBUG')
+        def binary = kotlin.targets.iosX64.binaries.getTest('DEBUG')
         def infoPlistSrc = file("$rootProject.projectDir/src/iosTest/resources/Info.plist")
         def infoPlistDest = file(binary.outputDirectory)
         from infoPlistSrc
@@ -195,13 +202,13 @@ subprojects {
 
     task iosTest {
         def device = project.findProperty("iosDevice")?.toString() ?: "iPhone 8"
-        dependsOn kotlin.targets.ios.binaries.getTest('DEBUG').linkTaskName
+        dependsOn kotlin.targets.iosX64.binaries.getTest('DEBUG').linkTaskName
         dependsOn copyPlist
         group = JavaBasePlugin.VERIFICATION_GROUP
         description = "Runs tests for target 'ios' on an iOS simulator"
 
         doLast {
-            def binary = kotlin.targets.ios.binaries.getTest('DEBUG').outputFile
+            def binary = kotlin.targets.iosX64.binaries.getTest('DEBUG').outputFile
             exec {
                 commandLine 'xcrun', 'simctl', 'spawn', device, binary.absolutePath
             }
