@@ -15,9 +15,9 @@ Check the API documentation for details.
         }
     }
     ``` 
-2. Add `implementation 'com.suparnatural:threading-core-metadata:1.0.1'` to `commonMain`.
-3. Add `implementation 'com.suparnatural:threading-core-iosx64(or iosarm64):1.0.1'` to `iosMain`.
-4. Add `implementation 'com.suparnatural:threading-core-android:1.0.1'` to `iosMain`.
+2. Add `implementation 'com.suparnatural:threading-core-metadata:1.0.2'` to `commonMain`.
+3. Add `implementation 'com.suparnatural:threading-core-iosx64(or iosarm64):1.0.2'` to `iosMain`.
+4. Add `implementation 'com.suparnatural:threading-core-android:1.0.2'` to `iosMain`.
 
 
 ### Usage

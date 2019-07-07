@@ -1,11 +1,11 @@
 Pod::Spec.new do |spec|
     spec.name                     = 'threading_core'
-    spec.version                  = '1.0.1'
+    spec.version                  = '1.0.2'
     spec.homepage                 = 'https://github.com/suparngp/kotlin-multiplatform-projects/tree/master/threading-core'
     spec.source                   = { :git => "Not Published", :tag => "Cocoapods/#{spec.name}/#{spec.version}" }
     spec.authors                  = ''
     spec.license                  = ''
-    spec.summary                  = 'Multithreading lib for Kotlin Native'
+    spec.summary                  = 'threading-core'
 
     spec.static_framework         = true
     spec.vendored_frameworks      = "build/cocoapods/framework/#{spec.name}.framework"
