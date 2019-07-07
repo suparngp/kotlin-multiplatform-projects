@@ -1,6 +1,6 @@
 Pod::Spec.new do |spec|
     spec.name                     = 'utilities_core'
-    spec.version                  = '1.0.1'
+    spec.version                  = '1.0.2'
     spec.homepage                 = 'https://github.com/suparngp/kotlin-multiplatform-projects/tree/master/utilities-core'
     spec.source                   = { :git => "Not Published", :tag => "Cocoapods/#{spec.name}/#{spec.version}" }
     spec.authors                  = ''
