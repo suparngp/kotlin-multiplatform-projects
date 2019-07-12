@@ -1,4 +1,6 @@
 import constants.Dependencies
+import org.gradle.api.Project
+import org.jetbrains.kotlin.gradle.dsl.KotlinMultiplatformExtension
 import org.jetbrains.kotlin.gradle.plugin.KotlinDependencyHandler
 
 fun KotlinDependencyHandler.add(dep: Dependencies) {
@@ -9,3 +11,6 @@ fun KotlinDependencyHandler.add(dep: Dependencies) {
         implementation(it)
     }
 }
+
+val Project.kmpKotlin: KotlinMultiplatformExtension
+    get() = extensions.getByType(KotlinMultiplatformExtension::class.java)

@@ -18,7 +18,7 @@ plugins {
 
     id("kotlinx-serialization").version("1.3.41").apply(false)
     id("com.jfrog.bintray").version("1.8.4").apply(false)
-    id("org.jetbrains.dokka").version("0.9.18").apply(false)
+
 //    id("com.android.library").version("3.4.1").apply(false)
     idea
 }
@@ -32,11 +32,7 @@ subprojects {
     }
     apply(plugin = "maven-publish")
     apply(plugin = "idea")
-//    apply(plugin = "org.jetbrains.kotlin.multiplatform")
     apply(plugin = "com.jfrog.bintray")
-    apply(plugin = "org.jetbrains.dokka")
-//    apply(plugin = "com.android.library")
-//    apply(plugin = "org.jetbrains.kotlin.native.cocoapods")
 
     group = "com.suparnatural"
     version = suparnaturalVersion

@@ -1,7 +1,9 @@
 import constants.PluginNames
 import org.gradle.api.Plugin
 import org.gradle.api.Project
+import org.jetbrains.dokka.gradle.DokkaPlugin
 import org.jetbrains.kotlin.gradle.dsl.KotlinMultiplatformExtension
+import org.jetbrains.kotlin.gradle.plugin.mpp.KotlinMultiplatformPlugin
 
 open class SuparnaturalExtension {
     var summary: String = ""
@@ -20,8 +22,11 @@ class SuparnaturalProjectPlugin : Plugin<Project> {
     override fun apply(target: Project) {
         target.extensions.create("__suparnatural", SuparnaturalExtension::class.java)
         target.plugins.apply(PluginNames.multiplatform)
+//        target.plugins.apply(PluginNames.dokka)
         val kotlin = target.extensions.getByType(KotlinMultiplatformExtension::class.java)
         target.configureCommon(kotlin)
+
+        target.configureDocs()
     }
 
 
@@ -29,7 +34,7 @@ class SuparnaturalProjectPlugin : Plugin<Project> {
 
 fun Project.suparnatural(callback: (SuparnaturalExtension.() -> Unit)) {
     val config = extensions.getByType(SuparnaturalExtension::class.java).apply(callback)
-    val kotlin = extensions.getByType(KotlinMultiplatformExtension::class.java)
+    val kotlin = kmpKotlin
     println(config)
     if (config.supportsCocoapods) {
         configureCocoapods(kotlin, CocoapodsConfig(config.summary, config.homepage))

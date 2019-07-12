@@ -43,19 +43,19 @@ fun Project.configureIos(k: KotlinMultiplatformExtension) {
             val iosMain = getByName(SourceSetNames.iosCommonMain)
             val iosTest = getByName(SourceSetNames.iosCommonTest)
 
-            val iosX64Main = getByName(SourceSetNames.iosX64Main) {
+            getByName(SourceSetNames.iosX64Main) {
                 dependsOn(iosMain)
             }
 
-            val iosX64Test = getByName(SourceSetNames.iosX64Test) {
+            getByName(SourceSetNames.iosX64Test) {
                 dependsOn(iosTest)
             }
 
-            val iosArm64Main = getByName(SourceSetNames.iosArm64Main) {
+            getByName(SourceSetNames.iosArm64Main) {
                 dependsOn(iosMain)
             }
 
-            val iosArm64Test = getByName(SourceSetNames.iosArm64Test) {
+            getByName(SourceSetNames.iosArm64Test) {
                 dependsOn(iosTest)
             }
         }
