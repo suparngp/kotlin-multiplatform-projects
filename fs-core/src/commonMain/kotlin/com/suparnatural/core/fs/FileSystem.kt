@@ -59,6 +59,8 @@ expect object FileSystem {
      */
     fun readFile(path: String, encoding: ContentEncoding = ContentEncoding.Utf8): String?
 
+    fun readFileAsByteArray(path: String):ByteArray?
+
     /**
      *
      * Returns the contents of the file located at `pathComponent`. The content is parsed according to `encoding`.

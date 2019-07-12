@@ -149,6 +149,21 @@ actual object FileSystem {
 
     }
 
+    actual fun readFileAsByteArray(path: String): ByteArray? {
+        val url = Path.urlFromString(path)
+        val path = url?.standardizedURL?.path ?: return null
+        val data = manager.contentsAtPath(path) ?: return null
+        return nsDataToByteArray(data)
+
+    }
+
+    private fun nsDataToByteArray(data: NSData): ByteArray? {
+        if (data.bytes == null) {
+            return null
+        }
+        return data.bytes!!.readBytes(data.length.toInt())
+    }
+
     actual fun readFile(path: String, encoding: ContentEncoding): String? = readFile(Path.urlFromString(path), encoding)
     actual fun readFile(pathComponent: PathComponent, encoding: ContentEncoding): String? = readFile(pathComponent.url, encoding)
 
