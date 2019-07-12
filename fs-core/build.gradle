@@ -13,7 +13,6 @@ kotlin.sourceSets.iosArm64Main {
 kotlin.sourceSets.commonMain {
     dependencies {
         implementation "com.suparnatural:utilities-core:$suparnatural_version"
-
     }
 }
 
@@ -31,3 +30,15 @@ kotlin.sourceSets.androidTest {
     }
 }
 
+kotlin {
+    sourceSets {
+        //only used for running unit tests in Android Studio easily
+        jvm('jvm')
+    }
+}
+
+kotlin.sourceSets.jvmMain {
+    dependencies {
+        implementation kotlin('stdlib')
+    }
+}
