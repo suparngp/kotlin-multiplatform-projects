@@ -164,6 +164,16 @@ actual object FileSystem {
         return data.bytes!!.readBytes(data.length.toInt())
     }
 
+    private fun byteArrayToNsData(byteArray: ByteArray): NSData? {
+        if (byteArray.isEmpty()){
+            return null
+        }
+
+        return byteArray.usePinned {
+            return@usePinned NSData.dataWithBytes(it.addressOf(0), it.get().size.toULong())
+        }
+    }
+
     actual fun readFile(path: String, encoding: ContentEncoding): String? = readFile(Path.urlFromString(path), encoding)
     actual fun readFile(pathComponent: PathComponent, encoding: ContentEncoding): String? = readFile(pathComponent.url, encoding)
 
@@ -173,6 +183,16 @@ actual object FileSystem {
         return input.timeIntervalSince1970()
     }
 
+    actual fun writeFile(path: String, contents: ByteArray, create: Boolean): Boolean {
+        val pathStandardized = Path.urlFromString(path)?.standardizedURL?.path ?: return false
+
+        if (!ensureFileExists(pathStandardized, create, false)) {
+            return false
+        }
+
+        val data = byteArrayToNsData(contents) ?: return false
+        return data.writeToFile(pathStandardized, true)
+    }
 
     private fun writeFile(url: NSURL?, contents: String, create: Boolean, encoding: ContentEncoding): Boolean {
         val path = url?.standardizedURL?.path ?: return false

@@ -95,6 +95,21 @@ actual object FileSystem {
         return readFile(path, encoding)
     }
 
+    /**
+     * Writes `contents` to the file located at `path`. If `create` is true, then file is created if it does not exist.
+     * Returns true if operation is successful, otherwise false.
+     */
+    actual fun writeFile(path: String, contents: ByteArray, create: Boolean): Boolean {
+        val file = File(path).canonicalFile
+        if (!file.exists()) {
+            if (!create) return false
+            file.createNewFile()
+        }
+
+        FileOutputStream(file, false).write(contents)
+        return true
+    }
+
     private fun writeFile(path: String, contents: String, create: Boolean, encoding: ContentEncoding, append: Boolean = false): Boolean {
         val file = File(path).canonicalFile
         if (!file.exists()) {

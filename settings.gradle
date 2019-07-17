@@ -21,6 +21,6 @@ pluginManagement {
 }
 
 rootProject.name = 'suparnatural-kotlin-multiplatform'
-include 'graphql-core', 'threading-core', 'cache-core', 'utilities-core', 'fs-core'
+include 'threading-core', 'cache-core', 'utilities-core', 'fs-core'
 
 enableFeaturePreview('GRADLE_METADATA')

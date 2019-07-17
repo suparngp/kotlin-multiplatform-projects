@@ -71,6 +71,12 @@ expect object FileSystem {
 
     /**
      * Writes `contents` to the file located at `path`. If `create` is true, then file is created if it does not exist.
+     * Returns true if operation is successful, otherwise false.
+     */
+    fun writeFile(path: String, contents: ByteArray, create: Boolean = false): Boolean
+
+    /**
+     * Writes `contents` to the file located at `path`. If `create` is true, then file is created if it does not exist.
      * For binary files, use `encoding` = [ContentEncoding.Base64].
      * * Returns true if operation is successful, otherwise false.
      */

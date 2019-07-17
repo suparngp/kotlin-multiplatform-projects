@@ -38,7 +38,7 @@ subprojects {
         jcenter()
         google()
         maven { url "https://kotlin.bintray.com/kotlinx" }
-        maven { url "https://dl.bintray.com/suparnatural/kotlin-multiplatform" }
+        maven { url "https://dl.bintray.com/svendroid/kotlin-multiplatform" }
     }
 
     apply plugin: 'maven-publish'

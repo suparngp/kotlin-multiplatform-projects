@@ -23,7 +23,6 @@ class FileSystemTests {
         assertTrue(FileSystem.writeFile(testFilePath, testString, true))
     }
 
-
     @Test
     fun testKnownPaths() {
         assertNotNull(FileSystem.contentsDirectory)
@@ -38,9 +37,6 @@ class FileSystemTests {
             assertTrue(it.absolutePath!!.component!!.isNotEmpty())
             assertTrue(it.relativePath!!.component!!.isNotEmpty())
         }
-
-
-
     }
 
     @Test
@@ -102,6 +98,14 @@ class FileSystemTests {
         assertTrue(FileSystem.writeFile(testFilePath, testString, false, ContentEncoding.Base64))
         assertEquals(testBase64String, FileSystem.readFile(testFilePath, ContentEncoding.Utf8))
 
+    }
+
+    @ExperimentalStdlibApi
+    @Test
+    fun testWriteFileByteArray(){
+
+        assertTrue(FileSystem.writeFile(testFilePath.component!!, "HelloByteArray".encodeToByteArray(), true))
+        assertEquals("HelloByteArray", FileSystem.readFile(testFilePath, ContentEncoding.Utf8))
     }
 
     @Test
