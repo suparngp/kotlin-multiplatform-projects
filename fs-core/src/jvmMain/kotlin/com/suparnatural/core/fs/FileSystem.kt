@@ -8,7 +8,7 @@ actual object FileSystem {
 
     actual val contentsDirectory: Path
         get() {
-            val path = Paths.get("/").toAbsolutePath().toString()
+            val path = Paths.get("./contents/").toAbsolutePath().toString()
             File(path).mkdirs()
             return Path.simplified(path)
         }
@@ -16,7 +16,7 @@ actual object FileSystem {
 
     actual val cachesDirectory: Path
         get() {
-            val path = Paths.get("/caches/").toAbsolutePath().toString()
+            val path = Paths.get("./caches/").toAbsolutePath().toString()
             File(path).mkdirs()
             return Path.simplified(path)
         }
