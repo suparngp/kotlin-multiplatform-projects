@@ -1,14 +1,12 @@
+import constants.PluginNames
 import constants.SourceSetNames
 import org.gradle.api.Project
 import org.gradle.kotlin.dsl.getting
-import org.jetbrains.dokka.DokkaConfiguration
 import org.jetbrains.dokka.gradle.DokkaTask
-import org.jetbrains.kotlin.gradle.dsl.KotlinMultiplatformExtension
 
 fun Project.configureDocs() {
-    println("I am here")
-    tasks.getting(DokkaTask::class) {
-        println(kmpKotlin.sourceSets.getByName(SourceSetNames.commonMain).kotlin.srcDirs.first().absolutePath)
+    plugins.apply(PluginNames.dokka)
+    (tasks.getByName("dokka") as DokkaTask).apply {
         outputFormat = "html"
         outputDirectory = "${project.projectDir.path}/docs"
         impliedPlatforms = mutableListOf("common") // This will force platform tags for all non-common sources e.g. "JVM"
@@ -24,7 +22,4 @@ fun Project.configureDocs() {
             platforms = listOf("common")
         }
     }
-
-    defaultTasks("dokka")
-
 }

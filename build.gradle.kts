@@ -5,21 +5,14 @@
  * Learn how to create Gradle builds at https://guides.gradle.org/creating-new-gradle-builds/
  */
 
-import com.jfrog.bintray.gradle.tasks.BintrayUploadTask
-import org.jetbrains.dokka.gradle.DokkaTask
-import org.jetbrains.kotlin.gradle.dsl.KotlinMultiplatformExtension
-import com.android.build.gradle.LibraryExtension
 import com.jfrog.bintray.gradle.BintrayExtension
+import com.jfrog.bintray.gradle.tasks.BintrayUploadTask
 
 plugins {
     base
     id("maven-publish")
-
-
     id("kotlinx-serialization").version("1.3.41").apply(false)
     id("com.jfrog.bintray").version("1.8.4").apply(false)
-
-//    id("com.android.library").version("3.4.1").apply(false)
     idea
 }
 
@@ -85,5 +78,3 @@ subprojects {
 //        }
     })
 }
-
-//configurations.create("compileClasspath")
