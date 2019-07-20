@@ -6,4 +6,8 @@ suparnatural {
     supportsAndroid = true
     supportsCocoapods = true
     supportsIos = true
+    bintray {
+        publish = true
+
+    }
 }

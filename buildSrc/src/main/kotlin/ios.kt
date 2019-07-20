@@ -1,5 +1,5 @@
 import constants.IosTarget
-import constants.PluginNames
+import constants.Plugins
 import constants.SourceSetNames
 import constants.TargetNames
 import org.gradle.api.Project
@@ -15,17 +15,17 @@ import org.jetbrains.kotlin.gradle.plugin.mpp.KotlinNativeTarget
 
 data class CocoapodsConfig(val summary: String, val homepage: String)
 
-fun Project.configureCocoapods(kotlin: KotlinMultiplatformExtension, config: CocoapodsConfig) {
-    plugins.apply(PluginNames.cocoapods)
-    val cocoapods = (kotlin as ExtensionAware).extensions.getByType(CocoapodsExtension::class.java)
+fun Project.configureCocoapods(config: CocoapodsConfig) {
+    plugins.apply(Plugins.cocoapods.id)
+    val cocoapods = (kmpKotlin as ExtensionAware).extensions.getByType(CocoapodsExtension::class.java)
     cocoapods.apply {
         summary = config.summary
         homepage = config.homepage
     }
 }
 
-fun Project.configureIos(k: KotlinMultiplatformExtension) {
-    k.apply {
+fun Project.configureIos() {
+    kmpKotlin.apply {
         iosX64(TargetNames.iosX64)
         iosArm64(TargetNames.iosArm64)
 
@@ -62,7 +62,7 @@ fun Project.configureIos(k: KotlinMultiplatformExtension) {
     }
 
     val copyPlist = tasks.create("copyPlist", Copy::class.java) {
-        val binary = (k.targets.getByName(TargetNames.iosX64) as KotlinNativeTarget).binaries.getTest("DEBUG")
+        val binary = (kmpKotlin.targets.getByName(TargetNames.iosX64) as KotlinNativeTarget).binaries.getTest("DEBUG")
         val infoPlistSrc = file("$rootProject.projectDir/src/iosTest/resources/Info.plist")
         val infoPlistDest = file(binary.outputDirectory)
         from(infoPlistSrc)
@@ -71,7 +71,7 @@ fun Project.configureIos(k: KotlinMultiplatformExtension) {
 
     tasks.create("iosTest") {
         val device = findProperty("iosDevice")?.toString() ?: "iPhone 8"
-        val target = k.targets.getByName(TargetNames.iosX64) as KotlinNativeTarget
+        val target = kmpKotlin.targets.getByName(TargetNames.iosX64) as KotlinNativeTarget
         val testBinary = target.binaries.getTest("DEBUG")
         println(testBinary.linkTaskName)
         dependsOn(testBinary.linkTaskName)

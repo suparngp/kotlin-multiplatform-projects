@@ -5,8 +5,8 @@ import org.gradle.kotlin.dsl.getValue
 import org.gradle.kotlin.dsl.getting
 import org.jetbrains.kotlin.gradle.dsl.KotlinMultiplatformExtension
 
-fun Project.configureAndroid(kotlin: KotlinMultiplatformExtension) {
-    plugins.apply(PluginNames.android)
+fun Project.configureAndroid() {
+    plugins.apply(Plugins.android.id)
     extensions.getByType(LibraryExtension::class.java).apply {
         compileSdkVersion(AndroidTarget.compileSdkVersion)
         defaultConfig {
@@ -36,7 +36,7 @@ fun Project.configureAndroid(kotlin: KotlinMultiplatformExtension) {
     }
     dependencies.add(AndroidTarget.testRunnerConfigurationName, AndroidTarget.testRunnerDependency)
 
-    kotlin.apply {
+    kmpKotlin.apply {
         android(TargetNames.android) {
             publishLibraryVariants(AndroidTarget.publishVariantRelease)
         }

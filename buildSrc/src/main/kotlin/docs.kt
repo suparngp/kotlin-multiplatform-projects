@@ -1,11 +1,10 @@
-import constants.PluginNames
+import constants.Plugins
 import constants.SourceSetNames
 import org.gradle.api.Project
-import org.gradle.kotlin.dsl.getting
 import org.jetbrains.dokka.gradle.DokkaTask
 
 fun Project.configureDocs() {
-    plugins.apply(PluginNames.dokka)
+    plugins.apply(Plugins.dokka.id)
     (tasks.getByName("dokka") as DokkaTask).apply {
         outputFormat = "html"
         outputDirectory = "${project.projectDir.path}/docs"

@@ -1,51 +1,50 @@
-import constants.PluginNames
+import constants.Plugins
 import org.gradle.api.Plugin
 import org.gradle.api.Project
-import org.jetbrains.dokka.gradle.DokkaPlugin
-import org.jetbrains.kotlin.gradle.dsl.KotlinMultiplatformExtension
-import org.jetbrains.kotlin.gradle.plugin.mpp.KotlinMultiplatformPlugin
+
 
 open class SuparnaturalExtension {
-    var summary: String = ""
-    var homepage: String = ""
-    var supportsCocoapods: Boolean = false
-    var supportsAndroid: Boolean = false
-    var supportsIos: Boolean = false
-    override fun toString(): String {
-        return "SuparnaturalExtension(summary='$summary', homepage='$homepage', supportsCocoapods=$supportsCocoapods, supportsAndroid=$supportsAndroid, supportsIos=$supportsIos)"
-    }
+    var summary = ""
+    var homepage = ""
+    var supportsCocoapods = false
+    var supportsAndroid = false
+    var supportsIos = false
+    var bintray = SuparnaturalBintrayExtension()
+        private set
 
+    fun bintray(callback: SuparnaturalBintrayExtension.() -> Unit) {
+        bintray.apply(callback)
+    }
 
 }
 
 class SuparnaturalProjectPlugin : Plugin<Project> {
     override fun apply(target: Project) {
         target.extensions.create("__suparnatural", SuparnaturalExtension::class.java)
-        target.plugins.apply(PluginNames.multiplatform)
-//        target.plugins.apply(PluginNames.dokka)
-        val kotlin = target.extensions.getByType(KotlinMultiplatformExtension::class.java)
-        target.configureCommon(kotlin)
+        target.plugins.apply(Plugins.multiplatform.id)
 
-        target.configureDocs()
+        target.configureCommon()
+//        target.configureDocs()
     }
-
-
 }
 
 fun Project.suparnatural(callback: (SuparnaturalExtension.() -> Unit)) {
     val config = extensions.getByType(SuparnaturalExtension::class.java).apply(callback)
-    val kotlin = kmpKotlin
-    println(config)
+    configureMultiplatform()
+    configureDocs()
     if (config.supportsCocoapods) {
-        configureCocoapods(kotlin, CocoapodsConfig(config.summary, config.homepage))
+        configureCocoapods(CocoapodsConfig(config.summary, config.homepage))
     }
 
     if (config.supportsAndroid) {
-        configureAndroid(kotlin)
+        configureAndroid()
     }
 
     if (config.supportsIos) {
-        configureIos(kotlin)
+        configureIos()
     }
 
+    if (config.bintray.publish) {
+        configureBintray(config.bintray)
+    }
 }
