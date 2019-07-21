@@ -30,9 +30,7 @@ fun Project.suparnatural(callback: (SuparnaturalExtension.() -> Unit)) {
 
     configureMultiplatform()
     configureDocs()
-    if (config.supportsCocoapods) {
-        configureCocoapods(CocoapodsConfig(config.description, config.docsUrl))
-    }
+
 
     if (config.supportsAndroid) {
         configureAndroid()
@@ -40,6 +38,10 @@ fun Project.suparnatural(callback: (SuparnaturalExtension.() -> Unit)) {
 
     if (config.supportsIos) {
         configureIos()
+    }
+
+    if (config.supportsCocoapods) {
+        configureCocoapods(CocoapodsConfig(config.description, config.docsUrl))
     }
 
     if (config.bintray.publish) {

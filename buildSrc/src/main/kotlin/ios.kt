@@ -21,42 +21,52 @@ fun Project.configureCocoapods(config: CocoapodsConfig) {
     }
 }
 
-fun Project.configureIos() {
+enum class IosPlatform {
+    X64,
+    Arm64
+}
+
+fun Project.configureIosTarget(name: String, platform: IosPlatform, dependsOnTarget: String? = null) {
     kmpKotlin.apply {
-        iosX64(TargetNames.iosX64)
-        iosArm64(TargetNames.iosArm64)
+
+        when (platform) {
+            IosPlatform.X64 -> iosX64(name)
+            IosPlatform.Arm64 -> iosArm64(name)
+        }
+        val mainTargetName = mainTargetName(name)
+        val testTargetName = testTargetName(name)
 
         sourceSets.apply {
-            register(SourceSetNames.iosCommonMain) {
-                kotlin.srcDir(IosTarget.mainSrcPath)
-                resources.srcDir(IosTarget.mainResPath)
+            getByName(mainTargetName) {
+                if (dependsOnTarget != null) dependsOn(getByName(mainTargetName(dependsOnTarget)))
             }
-
-            register(SourceSetNames.iosCommonTest) {
-                kotlin.srcDir(IosTarget.testSrcPath)
-                resources.srcDir(IosTarget.testResPath)
-            }
-
-            val iosMain = getByName(SourceSetNames.iosCommonMain)
-            val iosTest = getByName(SourceSetNames.iosCommonTest)
-
-            getByName(SourceSetNames.iosX64Main) {
-                dependsOn(iosMain)
-            }
-
-            getByName(SourceSetNames.iosX64Test) {
-                dependsOn(iosTest)
-            }
-
-            getByName(SourceSetNames.iosArm64Main) {
-                dependsOn(iosMain)
-            }
-
-            getByName(SourceSetNames.iosArm64Test) {
-                dependsOn(iosTest)
+            getByName(testTargetName) {
+                if (dependsOnTarget != null) dependsOn(getByName(testTargetName(dependsOnTarget)))
             }
         }
     }
+}
+
+fun iosTargetSrcPath(sourceSetName: String) = "src/$sourceSetName/kotlin";
+fun iosTargetResourcesPath(sourceSetName: String) = "src/$sourceSetName/resources";
+
+fun Project.registerIosSourceSet(name: String) {
+    kmpKotlin.apply {
+        sourceSets.apply {
+            register(name) {
+                kotlin.srcDir(iosTargetSrcPath(name))
+                resources.srcDir(iosTargetResourcesPath(name))
+            }
+        }
+    }
+}
+
+fun Project.configureIos() {
+    registerIosSourceSet(mainTargetName(TargetNames.ios))
+    registerIosSourceSet(testTargetName(TargetNames.ios))
+    configureIosTarget(TargetNames.iosX64, IosPlatform.X64, "ios")
+    configureIosTarget(TargetNames.iosArm64, IosPlatform.Arm64, "ios")
+
 
     val copyPlist = tasks.create(TaskNames.copyIosTestPlist, Copy::class.java) {
         val binary = (kmpKotlin.targets.getByName(TargetNames.iosX64) as KotlinNativeTarget).binaries.getTest("DEBUG")

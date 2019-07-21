@@ -2,6 +2,7 @@ package constants
 
 object TargetNames {
     const val android = "android"
+    const val ios = "ios"
     const val iosX64 = "iosX64"
     const val iosArm64 = "iosArm64"
     const val common = "Common"
