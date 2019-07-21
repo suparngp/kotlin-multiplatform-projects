@@ -8,5 +8,10 @@ object ProjectConfig {
     object Properties {
         const val iosDevice = "iosDevice"
         const val targetName = "targetName"
+        const val environment = "environment"
+    }
+    object PropertyValue {
+        const val environmentRelease = "release"
+
     }
 }

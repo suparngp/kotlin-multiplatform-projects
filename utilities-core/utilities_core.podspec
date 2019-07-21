@@ -1,11 +1,11 @@
 Pod::Spec.new do |spec|
     spec.name                     = 'utilities_core'
-    spec.version                  = '1.0.2'
-    spec.homepage                 = 'https://github.com/suparngp/kotlin-multiplatform-projects/tree/master/utilities-core'
+    spec.version                  = 'unspecified'
+    spec.homepage                 = ''
     spec.source                   = { :git => "Not Published", :tag => "Cocoapods/#{spec.name}/#{spec.version}" }
     spec.authors                  = ''
     spec.license                  = ''
-    spec.summary                  = 'utilities-core'
+    spec.summary                  = ''
 
     spec.static_framework         = true
     spec.vendored_frameworks      = "build/cocoapods/framework/#{spec.name}.framework"

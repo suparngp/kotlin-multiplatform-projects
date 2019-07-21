@@ -1,4 +1,5 @@
 import constants.Plugins
+import constants.ProjectConfig
 import org.gradle.api.Plugin
 import org.gradle.api.Project
 
@@ -28,6 +29,8 @@ class SuparnaturalProjectPlugin : Plugin<Project> {
 fun Project.suparnatural(callback: (SuparnaturalExtension.() -> Unit)) {
     val config = extensions.getByType(SuparnaturalExtension::class.java).apply(callback)
 
+    val environment = findProperty(ProjectConfig.Properties.environment)?.toString()
+
     configureMultiplatform()
     configureDocs()
 
@@ -37,7 +40,7 @@ fun Project.suparnatural(callback: (SuparnaturalExtension.() -> Unit)) {
     }
 
     if (config.supportsIos) {
-        configureIos()
+        configureIos(environment == ProjectConfig.PropertyValue.environmentRelease)
     }
 
     if (config.supportsCocoapods) {
@@ -47,4 +50,6 @@ fun Project.suparnatural(callback: (SuparnaturalExtension.() -> Unit)) {
     if (config.bintray.publish) {
         configureBintray(config.bintray)
     }
+
+    configureReleaseTask()
 }

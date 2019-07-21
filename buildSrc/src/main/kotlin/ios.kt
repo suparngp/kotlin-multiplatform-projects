@@ -71,12 +71,21 @@ fun Project.configureCopyPlistTask() {
     }
 }
 
-fun Project.configureIos() {
+fun Project.configureIos(release: Boolean = false) {
 
-    registerSourceSet(sourceSetName(TargetNames.ios, SourceSetType.Main))
-    registerSourceSet(sourceSetName(TargetNames.ios, SourceSetType.Test))
-    configureIosTarget(TargetNames.iosX64, IosPlatform.X64, TargetNames.ios)
-    configureIosTarget(TargetNames.iosArm64, IosPlatform.Arm64, TargetNames.ios)
+    if (release) {
+        registerSourceSet(sourceSetName(TargetNames.ios, SourceSetType.Main))
+        registerSourceSet(sourceSetName(TargetNames.ios, SourceSetType.Test))
+        configureIosTarget(TargetNames.iosX64, IosPlatform.X64, TargetNames.ios)
+        configureIosTarget(TargetNames.iosArm64, IosPlatform.Arm64, TargetNames.ios)
+    } else {
+        val platform = if (System.getenv("SDK_NAME")?.startsWith("iphoneos") == true) IosPlatform.Arm64 else IosPlatform.X64
+        configureIosTarget(TargetNames.ios, platform)
+    }
+//    registerSourceSet(sourceSetName(TargetNames.ios, SourceSetType.Main))
+//    registerSourceSet(sourceSetName(TargetNames.ios, SourceSetType.Test))
+//    configureIosTarget(TargetNames.iosX64, IosPlatform.X64, TargetNames.ios)
+//    configureIosTarget(TargetNames.iosArm64, IosPlatform.Arm64, TargetNames.ios)
 
     configureCopyPlistTask()
     configureIosTestTask()
