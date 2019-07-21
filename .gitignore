@@ -34,5 +34,5 @@ Pods
 .classpath
 *.iml
 
-local.properties
 /build.sh
+.local.gradle.kts

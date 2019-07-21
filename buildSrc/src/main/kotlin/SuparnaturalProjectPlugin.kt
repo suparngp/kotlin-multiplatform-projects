@@ -7,14 +7,20 @@ import org.gradle.api.Project
 open class SuparnaturalExtension {
     var description = ""
     var docsUrl = ""
+    var vcsUrl = ""
     var supportsCocoapods = false
     var supportsAndroid = false
     var supportsIos = false
+    var versionLabel = ""
     var bintray = SuparnaturalBintrayExtension()
         private set
 
     fun bintray(callback: SuparnaturalBintrayExtension.() -> Unit) {
+        bintray.versionLabel = versionLabel
+        bintray.description = description
+        bintray.vcsUrl = vcsUrl
         bintray.apply(callback)
+        println(this.bintray)
     }
 
 }

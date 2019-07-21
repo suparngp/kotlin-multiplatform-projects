@@ -38,7 +38,8 @@ fun Project.configureBintray(config: SuparnaturalBintrayExtension) {
         dependsOn(tasks.named(TaskNames.publishToMavenLocal))
 
         doFirst {
-            setPublications(publishing.publications.map { it.name })
+            println(publishing.publications.map { it.name })
+            (this as BintrayUploadTask).setPublications(*publishing.publications.map { it.name }.toTypedArray())
         }
     }
 

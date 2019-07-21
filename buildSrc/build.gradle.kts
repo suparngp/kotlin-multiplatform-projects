@@ -7,6 +7,7 @@ repositories {
 val kotlinVersion = "1.3.41"
 
 plugins {
+    java
     `kotlin-dsl`
     idea
     id("maven-publish")
@@ -33,3 +34,13 @@ gradlePlugin {
         }
     }
 }
+
+val bintrayUsername: String by extra
+val bintrayApiKey: String by extra
+
+//println(bintrayUsername)
+//subprojects {
+//    println("Configured project ")
+//    this.setProperty("bintrayUserName", bintrayUsername)
+////    extra.set("bintrayUsername", bintrayUsername)
+//}
