@@ -1,7 +1,4 @@
-import constants.IosTarget
-import constants.Plugins
-import constants.SourceSetNames
-import constants.TargetNames
+import constants.*
 import org.gradle.api.Project
 import org.gradle.api.plugins.ExtensionAware
 import org.gradle.api.plugins.JavaBasePlugin
@@ -61,7 +58,7 @@ fun Project.configureIos() {
         }
     }
 
-    val copyPlist = tasks.create("copyPlist", Copy::class.java) {
+    val copyPlist = tasks.create(TaskNames.copyIosTestPlist, Copy::class.java) {
         val binary = (kmpKotlin.targets.getByName(TargetNames.iosX64) as KotlinNativeTarget).binaries.getTest("DEBUG")
         val infoPlistSrc = file("$rootProject.projectDir/src/iosTest/resources/Info.plist")
         val infoPlistDest = file(binary.outputDirectory)
@@ -69,11 +66,10 @@ fun Project.configureIos() {
         into(infoPlistDest)
     }
 
-    tasks.create("iosTest") {
+    tasks.create(TaskNames.iosTest) {
         val device = findProperty("iosDevice")?.toString() ?: "iPhone 8"
         val target = kmpKotlin.targets.getByName(TargetNames.iosX64) as KotlinNativeTarget
         val testBinary = target.binaries.getTest("DEBUG")
-        println(testBinary.linkTaskName)
         dependsOn(testBinary.linkTaskName)
         dependsOn(copyPlist)
         group = JavaBasePlugin.VERIFICATION_GROUP

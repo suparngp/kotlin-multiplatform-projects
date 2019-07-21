@@ -4,8 +4,8 @@ import org.gradle.api.Project
 
 
 open class SuparnaturalExtension {
-    var summary = ""
-    var homepage = ""
+    var description = ""
+    var docsUrl = ""
     var supportsCocoapods = false
     var supportsAndroid = false
     var supportsIos = false
@@ -21,19 +21,17 @@ open class SuparnaturalExtension {
 class SuparnaturalProjectPlugin : Plugin<Project> {
     override fun apply(target: Project) {
         target.extensions.create("__suparnatural", SuparnaturalExtension::class.java)
-        target.plugins.apply(Plugins.multiplatform.id)
-
         target.configureCommon()
-//        target.configureDocs()
     }
 }
 
 fun Project.suparnatural(callback: (SuparnaturalExtension.() -> Unit)) {
     val config = extensions.getByType(SuparnaturalExtension::class.java).apply(callback)
+
     configureMultiplatform()
     configureDocs()
     if (config.supportsCocoapods) {
-        configureCocoapods(CocoapodsConfig(config.summary, config.homepage))
+        configureCocoapods(CocoapodsConfig(config.description, config.docsUrl))
     }
 
     if (config.supportsAndroid) {

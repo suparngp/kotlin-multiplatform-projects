@@ -42,9 +42,9 @@ fun Project.configureAndroid() {
         }
         sourceSets.apply {
             val androidMain by getting {
-//                dependencies {
-//                    add(TargetDependencies.Android.main)
-//                }
+                dependencies {
+                    add(TargetDependencies.Android.main)
+                }
             }
             val androidTest by getting {
                 dependencies {

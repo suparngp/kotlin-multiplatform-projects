@@ -36,6 +36,6 @@ object SourceSetNames {
     const val iosCommonTest = "iosTest"
     const val iosX64Main = "iosX64Main"
     const val iosX64Test = "iosX64Test"
-    const val iosArm64Main = "iosX64Main"
-    const val iosArm64Test = "iosX64Test"
+    const val iosArm64Main = "iosArm64Main"
+    const val iosArm64Test = "iosArm64Test"
 }

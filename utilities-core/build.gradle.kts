@@ -7,7 +7,7 @@ suparnatural {
     supportsCocoapods = true
     supportsIos = true
     bintray {
-        publish = true
+        publish = false
 
     }
 }

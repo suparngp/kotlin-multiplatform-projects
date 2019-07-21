@@ -1,6 +1,7 @@
 import com.jfrog.bintray.gradle.BintrayExtension
 import com.jfrog.bintray.gradle.tasks.BintrayUploadTask
 import constants.Plugins
+import constants.ProjectConfig
 import constants.TaskNames
 import org.gradle.api.Project
 import org.gradle.api.publish.PublishingExtension
@@ -14,8 +15,8 @@ open class SuparnaturalBintrayExtension {
     var repository = ""
     var username = ""
     var apiKey = ""
-    var vcsUrl = ""
-    var versionLabel = ""
+    var vcsUrl = ProjectConfig.vcsUrl
+    var versionLabel = ProjectConfig.versionString
     var description = ""
     var licenses = arrayOf("MIT")
     var publishDate:  ZonedDateTime =  ZonedDateTime.now()
