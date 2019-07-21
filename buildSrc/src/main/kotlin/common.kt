@@ -9,3 +9,14 @@ fun Project.configureCommon() {
         maven(url = "https://dl.bintray.com/kotlin/dokka")
     }
 }
+
+fun Project.registerSourceSet(name: String) {
+    kmpKotlin.apply {
+        sourceSets.apply {
+            register(name) {
+                kotlin.srcDir(srcPath(name))
+                resources.srcDir(resourcesPath(name))
+            }
+        }
+    }
+}
