@@ -11,8 +11,8 @@ enum class SourceSetType(val value: String) {
 
 fun sourceSetName(targetName: String, type: SourceSetType) = "$targetName${type.value}"
 
-fun srcPath(sourceSetName: String) = "src/$sourceSetName/kotlin";
-fun resourcesPath(sourceSetName: String) = "src/$sourceSetName/resources";
+fun srcPath(sourceSetName: String) = "src/$sourceSetName/kotlin"
+fun resourcesPath(sourceSetName: String) = "src/$sourceSetName/resources"
 
 
 fun Project.getNativeTarget(name: String) = kmpKotlin.targets.getByName(name) as KotlinNativeTarget
