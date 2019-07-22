@@ -1,10 +1,10 @@
 Pod::Spec.new do |spec|
     spec.name                     = 'utilities'
     spec.version                  = '1.0.4'
-    spec.homepage                 = 'https://suparngp.github.io/kotlin-multiplatform-projects/utilities-core/docs/utilities-core/com.suparnatural.core.utilities/index.html'
+    spec.homepage                 = 'https://suparngp.github.io/kotlin-multiplatform-projects/utilities/docs/utilities/com.suparnatural.core.utilities/index.html'
     spec.source                   = { :git => "Not Published", :tag => "Cocoapods/#{spec.name}/#{spec.version}" }
-    spec.authors                  = ''
-    spec.license                  = ''
+    spec.authors                  = 'suparnatural'
+    spec.license                  = 'MIT'
     spec.summary                  = 'Utilities shared across all suparnatural projects.'
 
     spec.static_framework         = true

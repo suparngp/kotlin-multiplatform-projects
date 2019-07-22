@@ -12,6 +12,7 @@ open class SuparnaturalExtension {
     var supportsAndroid = false
     var supportsIos = false
     var versionLabel = ""
+    var license = "MIT"
     var bintray = SuparnaturalBintrayExtension()
         private set
 
@@ -19,6 +20,7 @@ open class SuparnaturalExtension {
         bintray.versionLabel = versionLabel
         bintray.description = description
         bintray.vcsUrl = vcsUrl
+        bintray.licenses = arrayOf(license)
         bintray.apply(callback)
     }
 
@@ -49,7 +51,7 @@ fun Project.suparnatural(callback: (SuparnaturalExtension.() -> Unit)) {
     }
 
     if (config.supportsCocoapods) {
-        configureCocoapods(CocoapodsConfig(config.description, config.docsUrl))
+        configureCocoapods(CocoapodsConfig(config.description, config.docsUrl, config.license, "suparnatural"))
     }
 
     if (config.bintray.publish) {

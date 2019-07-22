@@ -18,7 +18,7 @@ open class SuparnaturalBintrayExtension {
     var vcsUrl = ProjectConfig.vcsUrl
     var versionLabel = ProjectConfig.versionString
     var description = ""
-    var licenses = arrayOf("MIT")
+    var licenses = emptyArray<String>()
     var publishDate:  ZonedDateTime =  ZonedDateTime.now()
 
     override fun toString(): String {

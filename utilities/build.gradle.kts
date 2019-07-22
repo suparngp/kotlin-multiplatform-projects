@@ -6,8 +6,8 @@ version = "1.0.4"
 
 suparnatural {
     description = "Utilities shared across all suparnatural projects."
-    docsUrl = "https://suparngp.github.io/kotlin-multiplatform-projects/utilities-core/docs/utilities-core/com.suparnatural.core.utilities/index.html"
-    vcsUrl = "https://github.com/suparngp/kotlin-multiplatform-projects/tree/master/utilities-core"
+    docsUrl = "https://suparngp.github.io/kotlin-multiplatform-projects/utilities/docs/utilities/com.suparnatural.core.utilities/index.html"
+    vcsUrl = "https://github.com/suparngp/kotlin-multiplatform-projects/tree/master/utilities"
     versionLabel = project.version.toString()
     supportsAndroid = true
     supportsCocoapods = true
