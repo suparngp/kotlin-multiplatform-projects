@@ -1,11 +1,11 @@
 Pod::Spec.new do |spec|
-    spec.name                     = 'utilities_core'
-    spec.version                  = 'unspecified'
-    spec.homepage                 = ''
+    spec.name                     = 'utilities'
+    spec.version                  = '1.0.4'
+    spec.homepage                 = 'https://suparngp.github.io/kotlin-multiplatform-projects/utilities-core/docs/utilities-core/com.suparnatural.core.utilities/index.html'
     spec.source                   = { :git => "Not Published", :tag => "Cocoapods/#{spec.name}/#{spec.version}" }
     spec.authors                  = ''
     spec.license                  = ''
-    spec.summary                  = ''
+    spec.summary                  = 'Utilities shared across all suparnatural projects.'
 
     spec.static_framework         = true
     spec.vendored_frameworks      = "build/cocoapods/framework/#{spec.name}.framework"
@@ -22,13 +22,13 @@ Pod::Spec.new do |spec|
 
     spec.script_phases = [
         {
-            :name => 'Build utilities_core',
+            :name => 'Build utilities',
             :execution_position => :before_compile,
             :shell_path => '/bin/sh',
             :script => <<-SCRIPT
                 set -ev
                 REPO_ROOT="$PODS_TARGET_SRCROOT"
-                "$REPO_ROOT/../gradlew" -p "$REPO_ROOT" :utilities-core:syncFramework \
+                "$REPO_ROOT/../gradlew" -p "$REPO_ROOT" :utilities:syncFramework \
                     -Pkotlin.native.cocoapods.target=$KOTLIN_TARGET \
                     -Pkotlin.native.cocoapods.configuration=$CONFIGURATION \
                     -Pkotlin.native.cocoapods.cflags="$OTHER_CFLAGS" \
