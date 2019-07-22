@@ -6,7 +6,10 @@ fun Project.configureReleaseTask() {
 
     afterEvaluate {
         tasks.create(TaskNames.release) {
-            findProperty(ProjectConfig.Properties.environment)?.toString() == ProjectConfig.PropertyValue.environmentRelease ?: return@create
+            if (findProperty(ProjectConfig.Properties.environment)?.toString() !=  ProjectConfig.PropertyValue.environmentRelease) {
+                return@create
+            }
+
             gradle.taskGraph.whenReady {
                 val test = tasks.getByName(TaskNames.test)
                 if (hasTask(test)) {

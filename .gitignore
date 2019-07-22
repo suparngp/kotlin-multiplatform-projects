@@ -36,3 +36,4 @@ Pods
 
 /build.sh
 .local.gradle.kts
+*.hprof
