@@ -33,6 +33,8 @@ object IosTarget {
 object SourceSetNames {
     const val commonMain = "commonMain"
     const val commonTest = "commonTest"
+    const val androidMain = "androidMain"
+    const val androidTest = "androidTest"
     const val iosCommonMain = "iosMain"
     const val iosCommonTest = "iosTest"
     const val iosX64Main = "iosX64Main"

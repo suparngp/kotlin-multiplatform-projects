@@ -1,23 +1,11 @@
 import constants.SourceSetNames
-import constants.TargetDependencies
+import constants.DefaultDependencies
 import org.gradle.api.Project
 import constants.Plugins
+import extensions.SuparnaturalExtension
 
-fun Project.configureMultiplatform() {
+fun Project.configureMultiplatform(config: SuparnaturalExtension) {
     plugins.apply(Plugins.multiplatform.id)
-    kmpKotlin.apply {
-
-        sourceSets.apply {
-            this.getByName(SourceSetNames.commonMain).apply {
-                dependencies {
-                    add(TargetDependencies.Common.main)
-                }
-            }
-            getByName(SourceSetNames.commonTest).apply {
-                dependencies {
-                    add(TargetDependencies.Common.test)
-                }
-            }
-        }
-    }
+    configureKmpSourceSet(SourceSetNames.commonMain, config.commonMain)
+    configureKmpSourceSet(SourceSetNames.commonTest, config.commonTest)
 }

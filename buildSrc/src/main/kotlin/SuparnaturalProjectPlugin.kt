@@ -1,31 +1,16 @@
+import constants.DefaultDependencies
+import constants.Dependencies
 import constants.Plugins
 import constants.ProjectConfig
+import extensions.SuparnaturalExtension
 import org.gradle.api.Plugin
 import org.gradle.api.Project
+import org.gradle.kotlin.dsl.DependencyHandlerScope
+import org.jetbrains.kotlin.gradle.plugin.KotlinDependencyHandler
+import kotlin.reflect.KClass
+import kotlin.reflect.full.createInstance
 
 
-open class SuparnaturalExtension {
-    var description = ""
-    var docsUrl = ""
-    var vcsUrl = ""
-    var supportsCocoapods = false
-    var supportsAndroid = false
-    var supportsIos = false
-    var versionLabel = ""
-    var buildNumber = 1
-    var license = "MIT"
-    var bintray = SuparnaturalBintrayExtension()
-        private set
-
-    fun bintray(callback: SuparnaturalBintrayExtension.() -> Unit) {
-        bintray.versionLabel = versionLabel
-        bintray.description = description
-        bintray.vcsUrl = vcsUrl
-        bintray.licenses = arrayOf(license)
-        bintray.apply(callback)
-    }
-
-}
 
 class SuparnaturalProjectPlugin : Plugin<Project> {
     override fun apply(target: Project) {
@@ -38,7 +23,7 @@ fun Project.suparnatural(callback: (SuparnaturalExtension.() -> Unit)) {
     val config = extensions.getByType(SuparnaturalExtension::class.java).apply(callback)
     val isRelease = hasReleaseTask()
 
-    configureMultiplatform()
+    configureMultiplatform(config)
     configureDocs()
 
 

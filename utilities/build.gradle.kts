@@ -19,4 +19,20 @@ suparnatural {
         username = extra["bintrayUsername"]!!.toString()
         apiKey = extra["bintrayApiKey"]!!.toString()
     }
+
+    androidMain.apply {
+        dependencies.apply {
+            stdlib = true
+            additional {
+
+            }
+        }
+    }
+
+    androidTest.apply {
+        dependencies.apply {
+            test = true
+            testJunit = true
+        }
+    }
 }

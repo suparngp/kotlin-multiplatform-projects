@@ -1,34 +1,14 @@
 import com.jfrog.bintray.gradle.BintrayExtension
 import com.jfrog.bintray.gradle.tasks.BintrayUploadTask
 import constants.Plugins
-import constants.ProjectConfig
 import constants.TaskNames
 import org.gradle.api.Project
 import org.gradle.api.publish.PublishingExtension
 import org.gradle.kotlin.dsl.delegateClosureOf
-import java.time.ZonedDateTime
 import java.time.format.DateTimeFormatter
-import java.util.*
-
-open class SuparnaturalBintrayExtension {
-    var publish = false
-    var repository = ""
-    var username = ""
-    var apiKey = ""
-    var vcsUrl = ""
-    var versionLabel = ""
-    var description = ""
-    var licenses = emptyArray<String>()
-    var publishDate:  ZonedDateTime =  ZonedDateTime.now()
-
-    override fun toString(): String {
-        return "SuparnaturalBintrayExtension(publish=$publish, repository='$repository', username='$username', apiKey='$apiKey', vcsUrl='$vcsUrl', versionLabel='$versionLabel', description='$description', licenses=${Arrays.toString(licenses)}, publishDate=$publishDate)"
-    }
 
 
-}
-
-fun Project.configureBintray(config: SuparnaturalBintrayExtension) {
+fun Project.configureBintray(config: extensions.BintrayExtension) {
     plugins.apply(Plugins.mavenPublish.id)
     plugins.apply(Plugins.bintray.id)
     val datePattern = "yyyy-MM-dd'T'HH:mm:ss.SSSZZ"

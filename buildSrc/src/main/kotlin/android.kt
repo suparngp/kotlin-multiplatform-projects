@@ -1,9 +1,9 @@
 import com.android.build.gradle.LibraryExtension
 import constants.*
+import extensions.SuparnaturalExtension
 import org.gradle.api.Project
 import org.gradle.kotlin.dsl.getValue
 import org.gradle.kotlin.dsl.getting
-import org.jetbrains.kotlin.gradle.dsl.KotlinMultiplatformExtension
 
 fun Project.configureAndroid(config: SuparnaturalExtension) {
     plugins.apply(Plugins.android.id)
@@ -40,17 +40,7 @@ fun Project.configureAndroid(config: SuparnaturalExtension) {
         android(TargetNames.android) {
             publishLibraryVariants(AndroidTarget.publishVariantRelease)
         }
-        sourceSets.apply {
-            val androidMain by getting {
-                dependencies {
-                    add(TargetDependencies.Android.main)
-                }
-            }
-            val androidTest by getting {
-                dependencies {
-                    add(TargetDependencies.Android.test)
-                }
-            }
-        }
     }
+    configureKmpSourceSet(SourceSetNames.androidMain, config.androidMain)
+    configureKmpSourceSet(SourceSetNames.androidTest, config.androidTest)
 }
