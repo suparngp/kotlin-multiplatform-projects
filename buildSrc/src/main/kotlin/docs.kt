@@ -16,7 +16,6 @@ fun Project.configureDocs() {
         }
         sourceRoot {
             // assuming there is only a single source dir...
-            println(kmpKotlin.sourceSets.getByName(SourceSetNames.commonMain).kotlin.srcDirs.first().absolutePath)
             path = kmpKotlin.sourceSets.getByName(SourceSetNames.commonMain).kotlin.srcDirs.first().absolutePath
             platforms = listOf("common")
         }

@@ -34,13 +34,3 @@ gradlePlugin {
         }
     }
 }
-
-val bintrayUsername: String by extra
-val bintrayApiKey: String by extra
-
-//println(bintrayUsername)
-//subprojects {
-//    println("Configured project ")
-//    this.setProperty("bintrayUserName", bintrayUsername)
-////    extra.set("bintrayUsername", bintrayUsername)
-//}

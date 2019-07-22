@@ -20,7 +20,6 @@ open class SuparnaturalExtension {
         bintray.description = description
         bintray.vcsUrl = vcsUrl
         bintray.apply(callback)
-        println(this.bintray)
     }
 
 }
