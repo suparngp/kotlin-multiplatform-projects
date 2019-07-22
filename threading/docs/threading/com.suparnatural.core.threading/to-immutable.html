@@ -1,0 +1,23 @@
+<HTML>
+<HEAD>
+<meta charset="UTF-8">
+<title>toImmutable - threading</title>
+<link rel="stylesheet" href="../../style.css">
+</HEAD>
+<BODY>
+<a href="../index.html">threading</a>&nbsp;/&nbsp;<a href="index.html">com.suparnatural.core.threading</a>&nbsp;/&nbsp;<a href="./to-immutable.html">toImmutable</a><br/>
+<br/>
+<h1>toImmutable</h1>
+<a name="com.suparnatural.core.threading$toImmutable(com.suparnatural.core.threading.toImmutable.T)"></a>
+<code><span class="keyword">expect</span> <span class="keyword">fun </span><span class="symbol">&lt;</span><span class="identifier">T</span><span class="symbol">&gt;</span> <span class="identifier">toImmutable</span><span class="symbol">(</span><span class="identifier" id="com.suparnatural.core.threading$toImmutable(com.suparnatural.core.threading.toImmutable.T)/obj">obj</span><span class="symbol">:</span>&nbsp;<a href="to-immutable.html#T"><span class="identifier">T</span></a><span class="symbol">)</span><span class="symbol">: </span><a href="to-immutable.html#T"><span class="identifier">T</span></a></code>
+<p>Returns an immutable instance of an object.</p>
+<p>On Android, it simply echoes the input back because threads can have shared state.
+On iOS, it calls .toImmutable method.</p>
+<h3>Examples</h3>
+<pre><code>val person = toImmutable(Person(name = "Bob"))
+
+person.name = "Jerry" // error
+
+</code></pre>
+</BODY>
+</HTML>

@@ -9,5 +9,5 @@
 
 rootProject.name = "suparnatural-kotlin-multiplatform"
 //include "graphql-core", "threading-core", "cache-core", "utilities-core", "fs-core"
-include("utilities")
+include("utilities", "threading")
 enableFeaturePreview("GRADLE_METADATA")

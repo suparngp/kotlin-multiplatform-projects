@@ -1,0 +1,95 @@
+<HTML>
+<HEAD>
+<meta charset="UTF-8">
+<title>alltypes - threading</title>
+<link rel="stylesheet" href="../../style.css">
+</HEAD>
+<BODY>
+<h3>All Types</h3>
+<table>
+<tbody>
+<tr>
+<td>
+<a href="../com.suparnatural.core.threading/-atomic-reference/index.html">com.suparnatural.core.threading.AtomicReference</a></td>
+<td>
+<p>An <a href="../com.suparnatural.core.threading/-atomic-reference/index.html">AtomicReference</a> uses CAS instruction to get and update
+the wrapped volatile variable to ensure lock free thread safety.</p>
+</td>
+</tr>
+<tr>
+<td>
+<a href="../com.suparnatural.core.threading/-blocking-future.html">com.suparnatural.core.threading.BlockingFuture</a></td>
+<td>
+<p>A <a href="../com.suparnatural.core.threading/-blocking-future.html">BlockingFuture</a> which blocks the current thread to consume result.
+Calling <a href="../com.suparnatural.core.threading/-future/consume.html">BlockingFuture.consume</a> will wait until the result is available.</p>
+</td>
+</tr>
+<tr>
+<td>
+<a href="../com.suparnatural.core.threading/-future/index.html">com.suparnatural.core.threading.Future</a></td>
+<td>
+<p>A <a href="../com.suparnatural.core.threading/-future/index.html">Future</a> defers the resolution of a value to the future.
+The value can be consumed by calling <a href="../com.suparnatural.core.threading/-future/consume.html">Future.consume</a> method.
+The implementation decides whether <a href="../com.suparnatural.core.threading/-future/consume.html">Future.consume</a> blocks
+the calling thread or not.</p>
+</td>
+</tr>
+<tr>
+<td>
+<a href="../com.suparnatural.core.threading/-immutable-value/index.html">com.suparnatural.core.threading.ImmutableValue</a></td>
+<td>
+<p>A property delegate to create thread safe immutable frozen properties backed by <a href="../com.suparnatural.core.threading/-atomic-reference/index.html">AtomicReference</a>.
+The property can be declared with <code>by [ImmutableValue] (initialValue)</code> keyword.
+All get and set operations are then performed atomically.
+Note that the values are immutable once set.
+So any updates to the internal properties of the value will cause a failure.</p>
+</td>
+</tr>
+<tr>
+<td>
+<a href="../com.suparnatural.core.threading/-inline-future/index.html">com.suparnatural.core.threading.InlineFuture</a></td>
+<td>
+<p>A naive future implementation to wrap a given <code>result</code>.
+It executes on the calling thread synchronously.</p>
+</td>
+</tr>
+<tr>
+<td>
+<a href="../com.suparnatural.core.threading/-job-dispatcher/index.html">com.suparnatural.core.threading.JobDispatcher</a></td>
+<td>
+<p>Dispatches a given job on a particular thread.</p>
+</td>
+</tr>
+<tr>
+<td>
+<a href="../com.suparnatural.core.threading/-read-write-lock/index.html">com.suparnatural.core.threading.ReadWriteLock</a></td>
+<td>
+<p>A ReadWrite lock allows multiple readers to read a value
+and only one writer to update it. A read lock cannot be obtained until
+write lock is released. A write lock cannot be obtained until current
+readers don't release read lock.</p>
+</td>
+</tr>
+<tr>
+<td>
+<a href="../com.suparnatural.core.threading/-thread-transferable-job/index.html">com.suparnatural.core.threading.ThreadTransferableJob</a></td>
+<td>
+<p>A data structure to pass a payload and a callback job safely between threads by freezing its contents.
+The <a href="../com.suparnatural.core.threading/-thread-transferable-job/payload.html">payload</a> of type <a href="../com.suparnatural.core.threading/-thread-transferable-job/index.html#Input">Input</a> can be used by the consumer of this object for processing.
+The result of the processing of type <a href="../com.suparnatural.core.threading/-thread-transferable-job/index.html#Output">Output</a> can then be posted on a non capturing lambda <a href="../com.suparnatural.core.threading/-thread-transferable-job/job.html">job</a> as argument.</p>
+</td>
+</tr>
+<tr>
+<td>
+<a href="../com.suparnatural.core.threading/-worker/index.html">com.suparnatural.core.threading.Worker</a></td>
+<td>
+<p>A <a href="../com.suparnatural.core.threading/-worker/index.html">Worker</a> executes tasks on a background thread.
+A task must be a non capturing lambda depending only upon its
+arguments for state. If a lambda captures any outside state,
+the program will error out.</p>
+</td>
+</tr>
+</tbody>
+</table>
+</BODY>
+</HTML>
