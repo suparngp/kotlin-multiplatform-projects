@@ -15,8 +15,8 @@ open class SuparnaturalBintrayExtension {
     var repository = ""
     var username = ""
     var apiKey = ""
-    var vcsUrl = ProjectConfig.vcsUrl
-    var versionLabel = ProjectConfig.versionString
+    var vcsUrl = ""
+    var versionLabel = ""
     var description = ""
     var licenses = emptyArray<String>()
     var publishDate:  ZonedDateTime =  ZonedDateTime.now()
@@ -48,8 +48,8 @@ fun Project.configureBintray(config: SuparnaturalBintrayExtension) {
     bintray.apply {
         user = config.username
         key = config.apiKey
-        isOverride = true
-        isPublish = true
+        isOverride = false
+        isPublish = false
         pkg(delegateClosureOf<BintrayExtension.PackageConfig> {
             repo = config.repository
             name = projectName

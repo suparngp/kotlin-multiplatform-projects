@@ -61,7 +61,7 @@ abstract class ModuleProvider(private val ownerIdentifier: String, private val p
 
     override fun attachInfo(context: Context?, info: ProviderInfo?) {
         if (info == null) {
-            throw NullPointerException("ModuleProvider $providerIdentifier in $ownerIdentifier 's ProviderInfo cannot be null.");
+            throw NullPointerException("ModuleProvider $providerIdentifier in $ownerIdentifier 's ProviderInfo cannot be null.")
         }
         // So if the authorities equal the library internal ones, the developer forgot to set his applicationId
         if ("$ownerIdentifier.$providerIdentifier" == info.authority) {

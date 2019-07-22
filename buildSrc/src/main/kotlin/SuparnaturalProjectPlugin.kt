@@ -12,6 +12,7 @@ open class SuparnaturalExtension {
     var supportsAndroid = false
     var supportsIos = false
     var versionLabel = ""
+    var buildNumber = 1
     var license = "MIT"
     var bintray = SuparnaturalBintrayExtension()
         private set
@@ -35,19 +36,18 @@ class SuparnaturalProjectPlugin : Plugin<Project> {
 
 fun Project.suparnatural(callback: (SuparnaturalExtension.() -> Unit)) {
     val config = extensions.getByType(SuparnaturalExtension::class.java).apply(callback)
-
-    val environment = findProperty(ProjectConfig.Properties.environment)?.toString()
+    val isRelease = hasReleaseTask()
 
     configureMultiplatform()
     configureDocs()
 
 
     if (config.supportsAndroid) {
-        configureAndroid()
+        configureAndroid(config)
     }
 
     if (config.supportsIos) {
-        configureIos(environment == ProjectConfig.PropertyValue.environmentRelease)
+        configureIos(isRelease)
     }
 
     if (config.supportsCocoapods) {

@@ -1,19 +1,17 @@
-import constants.ProjectConfig
 import constants.TaskNames
 import org.gradle.api.Project
 
 fun Project.configureReleaseTask() {
+    val isRelease = hasReleaseTask()
 
     afterEvaluate {
         tasks.create(TaskNames.release) {
-            if (findProperty(ProjectConfig.Properties.environment)?.toString() !=  ProjectConfig.PropertyValue.environmentRelease) {
-                return@create
-            }
-
+            onlyIf { isRelease }
             gradle.taskGraph.whenReady {
-                val test = tasks.getByName(TaskNames.test)
-                if (hasTask(test)) {
-                    test.enabled = false
+                tasks.all {
+                    if (name.startsWith(TaskNames.test)) {
+                        enabled = false
+                    }
                 }
             }
 

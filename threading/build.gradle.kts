@@ -12,6 +12,7 @@ suparnatural {
     supportsAndroid = true
     supportsCocoapods = true
     supportsIos = true
+    buildNumber = 3
     bintray {
         publish = true
         repository = extra["bintrayRepository"]!!.toString()

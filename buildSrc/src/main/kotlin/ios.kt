@@ -1,5 +1,4 @@
 import constants.*
-import org.gradle.api.GradleException
 import org.gradle.api.Project
 import org.gradle.api.plugins.JavaBasePlugin
 import org.gradle.api.tasks.Copy
@@ -32,37 +31,33 @@ fun Project.configureIosTarget(name: String, platform: IosPlatform, dependsOnTar
 
 
 
-fun Project.configureIosTestTask() {
+fun Project.configureIosTestTask(targetName: String) {
     tasks.create(TaskNames.iosTest) {
         group = JavaBasePlugin.VERIFICATION_GROUP
         description = "Runs tests for target ios on an iOS simulator"
         val copyIosTestPlistTask = tasks.getByName(TaskNames.copyIosTestPlist)
         dependsOn(copyIosTestPlistTask)
 
-        val targetName = getTargetName()
-        if (targetName != null) {
-            val target = getNativeTarget(targetName)
+        val target = getNativeTarget(targetName)
 
-            val testBinary = target.binaries.getTest("DEBUG")
-            dependsOn(testBinary.linkTaskName)
+        val testBinary = target.binaries.getTest("DEBUG")
+        dependsOn(testBinary.linkTaskName)
 
-            doLast {
-                val device = findProperty(ProjectConfig.Properties.iosDevice)?.toString() ?: ProjectConfig.defaultIosSimulator
-                val binary = testBinary.outputFile
-                exec {
-                    commandLine("xcrun", "simctl", "spawn", device, binary.absolutePath)
-                }
+        doLast {
+            val device = findProperty(ProjectConfig.Properties.iosDevice)?.toString() ?: ProjectConfig.defaultIosSimulator
+            val binary = testBinary.outputFile
+            exec {
+                commandLine("xcrun", "simctl", "spawn", device, binary.absolutePath)
             }
         }
     }
 }
 
-fun Project.configureCopyPlistTask() {
+fun Project.configureCopyPlistTask(testTargetName: String, srcIosTargetName: String) {
     tasks.create(TaskNames.copyIosTestPlist, Copy::class.java) {
         doLast {
-            val targetName = getTargetName() ?: throw GradleException("Missing Target Name")
-            val testSourceSetName = sourceSetName(targetName, SourceSetType.Test)
-            val binary = getNativeTarget(targetName).binaries.getTest("DEBUG")
+            val testSourceSetName = sourceSetName(srcIosTargetName, SourceSetType.Test)
+            val binary = getNativeTarget(testTargetName).binaries.getTest("DEBUG")
             val infoPlistSrc = file("$rootProject.projectDir/${resourcesPath(testSourceSetName)}/Info.plist")
             val infoPlistDest = file(binary.outputDirectory)
             from(infoPlistSrc)
@@ -82,12 +77,8 @@ fun Project.configureIos(release: Boolean = false) {
         val platform = if (System.getenv("SDK_NAME")?.startsWith("iphoneos") == true) IosPlatform.Arm64 else IosPlatform.X64
         configureIosTarget(TargetNames.ios, platform)
     }
-//    registerSourceSet(sourceSetName(TargetNames.ios, SourceSetType.Main))
-//    registerSourceSet(sourceSetName(TargetNames.ios, SourceSetType.Test))
-//    configureIosTarget(TargetNames.iosX64, IosPlatform.X64, TargetNames.ios)
-//    configureIosTarget(TargetNames.iosArm64, IosPlatform.Arm64, TargetNames.ios)
-
-    configureCopyPlistTask()
-    configureIosTestTask()
+    val testTargetName = if (release) TargetNames.iosX64 else TargetNames.ios
+    configureCopyPlistTask(testTargetName, TargetNames.ios)
+    configureIosTestTask(testTargetName)
 }
 

@@ -38,3 +38,4 @@ Pods
 .local.gradle.kts
 *.hprof
 /local.properties
+/gradle.properties

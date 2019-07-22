@@ -5,15 +5,15 @@ import org.gradle.kotlin.dsl.getValue
 import org.gradle.kotlin.dsl.getting
 import org.jetbrains.kotlin.gradle.dsl.KotlinMultiplatformExtension
 
-fun Project.configureAndroid() {
+fun Project.configureAndroid(config: SuparnaturalExtension) {
     plugins.apply(Plugins.android.id)
     extensions.getByType(LibraryExtension::class.java).apply {
         compileSdkVersion(AndroidTarget.compileSdkVersion)
         defaultConfig {
             minSdkVersion(AndroidTarget.minSdkVersion)
             targetSdkVersion(AndroidTarget.targetSdkVersion)
-            versionCode = ProjectConfig.buildNumber
-            versionName = ProjectConfig.versionString
+            versionCode = config.buildNumber
+            versionName = config.versionLabel
             testInstrumentationRunner = AndroidTarget.testRunnerName
         }
         buildTypes {
