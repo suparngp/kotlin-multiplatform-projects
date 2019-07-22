@@ -1,11 +1,11 @@
 import com.android.build.gradle.LibraryExtension
 import constants.*
-import extensions.SuparnaturalExtension
+import extensions.SuparnaturalPluginExtension
 import org.gradle.api.Project
 import org.gradle.kotlin.dsl.getValue
 import org.gradle.kotlin.dsl.getting
 
-fun Project.configureAndroid(config: SuparnaturalExtension) {
+fun Project.configureAndroid(config: SuparnaturalPluginExtension) {
     plugins.apply(Plugins.android.id)
     extensions.getByType(LibraryExtension::class.java).apply {
         compileSdkVersion(AndroidTarget.compileSdkVersion)

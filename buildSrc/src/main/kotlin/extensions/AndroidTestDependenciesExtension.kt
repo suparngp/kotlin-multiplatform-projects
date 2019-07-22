@@ -3,8 +3,8 @@ package extensions
 import org.jetbrains.kotlin.gradle.plugin.KotlinDependencyHandler
 
 class AndroidTestDependenciesExtension: DependenciesExtension() {
-    var test = false
-    var testJunit = false
+    var test = true
+    var testJunit = true
     override val defaultDependencies: KotlinDependencyHandler.() -> Unit
         get() = {
             if (test) {
@@ -15,4 +15,13 @@ class AndroidTestDependenciesExtension: DependenciesExtension() {
                 implementation(kotlin("test-junit"))
             }
         }
+
+    override fun disableDefaultDependencies() {
+        test = false
+        testJunit = false
+    }
+
+    operator fun invoke(closure: AndroidTestDependenciesExtension.() -> Unit) {
+        apply(closure)
+    }
 }

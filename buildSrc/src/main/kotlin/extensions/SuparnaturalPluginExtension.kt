@@ -1,6 +1,6 @@
 package extensions
 
-open class SuparnaturalExtension {
+open class SuparnaturalPluginExtension {
     var description = ""
     var docsUrl = ""
     var vcsUrl = ""
@@ -18,11 +18,11 @@ open class SuparnaturalExtension {
     var commonMain = SourceSetExtension(CommonMainDependenciesExtension::class)
     var commonTest = SourceSetExtension(CommonTestDependenciesExtension::class)
 
-    fun bintray(callback: BintrayExtension.() -> Unit) {
-        bintray.versionLabel = versionLabel
-        bintray.description = description
-        bintray.vcsUrl = vcsUrl
-        bintray.licenses = arrayOf(license)
-        bintray.apply(callback)
-    }
+//    fun bintray(callback: BintrayExtension.() -> Unit) {
+//        bintray.versionLabel = versionLabel
+//        bintray.description = description
+//        bintray.vcsUrl = vcsUrl
+//        bintray.licenses = arrayOf(license)
+//        bintray.apply(callback)
+//    }
 }

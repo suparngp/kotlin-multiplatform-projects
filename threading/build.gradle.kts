@@ -1,3 +1,5 @@
+import constants.ProjectConfig
+
 plugins {
     id("suparnatural-project")
 }
@@ -15,8 +17,8 @@ suparnatural {
     buildNumber = 3
     bintray {
         publish = true
-        repository = extra["bintrayRepository"]!!.toString()
-        username = extra["bintrayUsername"]!!.toString()
-        apiKey = extra["bintrayApiKey"]!!.toString()
+        repository = extra[ProjectConfig.Properties.bintrayRepository]!!.toString()
+        username = extra[ProjectConfig.Properties.bintrayUsername]!!.toString()
+        apiKey = extra[ProjectConfig.Properties.bintrayApiKey]!!.toString()
     }
 }

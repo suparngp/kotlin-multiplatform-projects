@@ -3,8 +3,8 @@ package extensions
 import org.jetbrains.kotlin.gradle.plugin.KotlinDependencyHandler
 
 class CommonTestDependenciesExtension: DependenciesExtension() {
-    var test = false
-    var testAnnotations = false
+    var test = true
+    var testAnnotations = true
     override val defaultDependencies: KotlinDependencyHandler.() -> Unit
         get() = {
             if (test) {
@@ -14,4 +14,13 @@ class CommonTestDependenciesExtension: DependenciesExtension() {
                 implementation(kotlin("test-annotations-common"))
             }
         }
+
+    override fun disableDefaultDependencies() {
+        test = false
+        testAnnotations = false
+    }
+
+    operator fun invoke(closure: CommonTestDependenciesExtension.() -> Unit) {
+        apply(closure)
+    }
 }
