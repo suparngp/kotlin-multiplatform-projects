@@ -4,6 +4,7 @@ data class Plugin(val id: String, val version: String? = null, val group: String
 
 val kotlinVersion = "1.3.41"
 object Plugins {
+    val java = Plugin("java")
     val kotlinDsl = Plugin("kotlin-dsl")
     val mavenPublish = Plugin("maven-publish")
     val idea = Plugin("idea")

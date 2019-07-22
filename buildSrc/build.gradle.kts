@@ -7,7 +7,6 @@ repositories {
 val kotlinVersion = "1.3.41"
 
 plugins {
-    java
     `kotlin-dsl`
     idea
     id("maven-publish")

@@ -2,8 +2,7 @@ plugins {
     id("suparnatural-project")
 }
 
-//val version = "1.0.3"
-version = "1.0.3"
+version = "1.0.4"
 
 suparnatural {
     description = "Utilities shared across all suparnatural projects."
