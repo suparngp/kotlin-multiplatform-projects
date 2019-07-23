@@ -28,9 +28,9 @@ class AtomicReferenceTests {
     fun testPureAtomicReference() {
         class Person(val value: String = "")
 
-        val ref = toImmutable(Person("name1"))
+        val ref = Person("name1").toImmutable()
         val person = AtomicReference(ref)
-        assertFalse(person.compareAndSet(Person("name1"), toImmutable(Person("name2"))))
+        assertFalse(person.compareAndSet(Person("name1"), Person("name2").toImmutable()))
         assertEquals(ref, person.value)
 
     }

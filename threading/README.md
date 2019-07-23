@@ -15,19 +15,19 @@ Check the API documentation for details.
         }
     }
     ``` 
-2. Add `implementation 'com.suparnatural:threading-core-metadata:1.0.2'` to `commonMain`.
-3. Add `implementation 'com.suparnatural:threading-core-iosx64(or iosarm64):1.0.2'` to `iosMain`.
-4. Add `implementation 'com.suparnatural:threading-core-android:1.0.2'` to `iosMain`.
+2. Add `implementation 'com.suparnatural:threading-metadata:1.0.2'` to `commonMain`.
+3. Add `implementation 'com.suparnatural:threading-iosx64(or iosarm64):1.0.2'` to `iosMain`.
+4. Add `implementation 'com.suparnatural:threading-android:1.0.2'` to `iosMain`.
 
 
 ### Usage
 
-Check out the [API Docs](https://suparngp.github.io/kotlin-multiplatform-projects/threading-core/docs/threading-core/com.suparnatural.core.threading/index.html).
+Check out the [API Docs](https://suparngp.github.io/kotlin-multiplatform-projects/threading/docs/threading/com.suparnatural.core.threading/index.html).
 They are always up to date with code examples. 
 
 ### Run a job on background thread
 
-Use the [`Worker`](https://suparngp.github.io/kotlin-multiplatform-projects/threading-core/docs/threading-core/com.suparnatural.core.threading/-worker/index.html) API.
+Use the [`Worker`](https://suparngp.github.io/kotlin-multiplatform-projects/threading/docs/threading/com.suparnatural.core.threading/-worker/index.html) API.
 
 ```
 val worker = Worker()
@@ -43,7 +43,7 @@ worker.execute("Jerry") {it: String ->
 ```
 
 ### Read Write Lock
-[`ReadWriteLock`](https://suparngp.github.io/kotlin-multiplatform-projects/threading-core/docs/threading-core/com.suparnatural.core.threading/-read-write-lock/index.html) allows multiple readers to read a shared memory or a single thread to mutate it.
+[`ReadWriteLock`](https://suparngp.github.io/kotlin-multiplatform-projects/threading/docs/threading/com.suparnatural.core.threading/-read-write-lock/index.html) allows multiple readers to read a shared memory or a single thread to mutate it.
 
 ```
 val lock = ReadWriteLock()
@@ -64,7 +64,7 @@ lock.releaseWriteLock() // next thread will now unblock.
 ```
 
 ### Communicate Between threads
-Use [`ThreadTransferrableJob`](https://suparngp.github.io/kotlin-multiplatform-projects/threading-core/docs/threading-core/com.suparnatural.core.threading/-thread-transferable-job/index.html) to pass around data and callbacks between threads without worrying about the thread safety or mutability.
+Use [`executeAndResume`](https://suparngp.github.io/kotlin-multiplatform-projects/threading/docs/threading/com.suparnatural.core.threading/-thread-transferable-job/index.html) to pass around data and callbacks between threads without worrying about the thread safety or mutability.
 
 ```
 val safeJob = ThreadTransferableJob.create("Hello") {it: Int ->
@@ -77,14 +77,16 @@ safeJob.job(safeJob.payload.hashCode())
 ```
 
 ### Dispatch a job on UI or Background thread
-Use [`JobDispatcher`](https://suparngp.github.io/kotlin-multiplatform-projects/threading-core/docs/threading-core/com.suparnatural.core.threading/-job-dispatcher/index.html) to dispatch a task on ui or background thread.
+Use [`JobDispatcher`](https://suparngp.github.io/kotlin-multiplatform-projects/threading/docs/threading/com.suparnatural.core.threading/-job-dispatcher/index.html) to dispatch a task on ui or background thread.
 
 ```
-JobDispatcher.dispatchOnMainThread("Hello") {it: String ->
+val future = JobDispatcher.dispatchOnMainThread("Hello") {it: String ->
     assertEquals("Hello", it) // runs on main thread
 }
+future.await()
 
-JobDispatcher.dispatchOnBackgroundThread("Hello") {it: String ->
+val future = JobDispatcher.dispatchOnBackgroundThread("Hello") {it: String ->
     assertEquals("Hello", it) // runs on background thread
 }
+future.await()
 ```

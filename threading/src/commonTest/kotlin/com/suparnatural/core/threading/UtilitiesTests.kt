@@ -10,7 +10,7 @@ class UtilitiesTests {
         JobDispatcher.dispatchOnMainThread(Unit) {
             assertTrue(isMainThread())
         }
-        JobDispatcher.dispatchOnBackgroundThread(Unit) {
+        JobDispatcher.dispatchOnNewBackgroundThread(Unit) {
             assertFalse(isMainThread())
         }
     }
