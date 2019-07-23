@@ -1,0 +1,133 @@
+<HTML>
+<HEAD>
+<meta charset="UTF-8">
+<title>DiskStore - cache</title>
+<link rel="stylesheet" href="../../../style.css">
+</HEAD>
+<BODY>
+<a href="../../index.html">cache</a>&nbsp;/&nbsp;<a href="../index.html">com.suparnatural.core.cache</a>&nbsp;/&nbsp;<a href="./index.html">DiskStore</a><br/>
+<br/>
+<h1>DiskStore</h1>
+<code><span class="keyword">class </span><span class="identifier">DiskStore</span>&nbsp;<span class="symbol">:</span>&nbsp;<a href="../-cache-store/index.html"><span class="identifier">CacheStore</span></a></code>
+<p>A <a href="../-cache-store/index.html">CacheStore</a> which persists <a href="../-cacheable/index.html">Cacheable</a> objects on the disk.
+By default, the store blocks the calling thread for all its operations which can changed by
+setting <a href="blocking.html">blocking</a> to false.</p>
+<p>A new file is created under <a href="location.html">location</a> per cached object.</p>
+<p>Note: Even though <a href="./index.html">DiskStore</a> does not impose any limits on the number of persisted objects,
+the underlying platform may impose a limit on number of files created by the application
+in which case the persistence will fail without any recovery.</p>
+<h3>Constructors</h3>
+<table>
+<tbody>
+<tr>
+<td>
+<p><a href="-init-.html">&lt;init&gt;</a></p>
+</td>
+<td>
+<code><span class="identifier">DiskStore</span><span class="symbol">(</span><span class="identifier" id="com.suparnatural.core.cache.DiskStore$<init>(kotlin.Boolean, kotlin.collections.List((com.suparnatural.core.cache.CacheStorePreprocessor((com.suparnatural.core.cache.Cacheable, , )))), )/blocking">blocking</span><span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html"><span class="identifier">Boolean</span></a>&nbsp;<span class="symbol">=</span>&nbsp;true<span class="symbol">, </span><span class="identifier" id="com.suparnatural.core.cache.DiskStore$<init>(kotlin.Boolean, kotlin.collections.List((com.suparnatural.core.cache.CacheStorePreprocessor((com.suparnatural.core.cache.Cacheable, , )))), )/preprocessors">preprocessors</span><span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.collections/-list/index.html"><span class="identifier">List</span></a><span class="symbol">&lt;</span><a href="../-cache-store-preprocessor/index.html"><span class="identifier">CacheStorePreprocessor</span></a><span class="symbol">&lt;</span><a href="../-cacheable/index.html"><span class="identifier">Cacheable</span></a><span class="symbol">,</span>&nbsp;<a href="../-cacheable/index.html"><span class="identifier">Cacheable</span></a><span class="symbol">,</span>&nbsp;<a href="../-cacheable/index.html"><span class="identifier">Cacheable</span></a><span class="symbol">&gt;</span><span class="symbol">&gt;</span><span class="symbol">?</span>&nbsp;<span class="symbol">=</span>&nbsp;null<span class="symbol">, </span><span class="identifier" id="com.suparnatural.core.cache.DiskStore$<init>(kotlin.Boolean, kotlin.collections.List((com.suparnatural.core.cache.CacheStorePreprocessor((com.suparnatural.core.cache.Cacheable, , )))), )/location">location</span><span class="symbol">:</span>&nbsp;<span class="identifier">&lt;ERROR CLASS&gt;</span>&nbsp;<span class="symbol">=</span>&nbsp;FileSystem.contentsDirectory.absolutePath?.byAppending("cache")!!<span class="symbol">)</span></code>
+<p>A <a href="../-cache-store/index.html">CacheStore</a> which persists <a href="../-cacheable/index.html">Cacheable</a> objects on the disk.
+By default, the store blocks the calling thread for all its operations which can changed by
+setting <a href="blocking.html">blocking</a> to false.</p>
+</td>
+</tr>
+</tbody>
+</table>
+<h3>Properties</h3>
+<table>
+<tbody>
+<tr>
+<td>
+<p><a href="blocking.html">blocking</a></p>
+</td>
+<td>
+<code><span class="keyword">val </span><span class="identifier">blocking</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html"><span class="identifier">Boolean</span></a></code>
+<p>Marker whether the store does any blocking I/O. If it is set to true, then
+it is expected that the calling thread will be blocked. Otherwise, certain method calls
+on the <a href="../-cache-store/index.html">CacheStore</a> will return immediately and all the operations will be scheduled on
+a separate worker thread.</p>
+</td>
+</tr>
+<tr>
+<td>
+<p><a href="location.html">location</a></p>
+</td>
+<td>
+<code><span class="keyword">var </span><span class="identifier">location</span><span class="symbol">: </span><span class="identifier">&lt;ERROR CLASS&gt;</span></code>
+<p>Location of cache directory on the disk.
+Defaults to DocumentsDirectory/cache.</p>
+</td>
+</tr>
+<tr>
+<td>
+<p><a href="preprocessors.html">preprocessors</a></p>
+</td>
+<td>
+<code><span class="keyword">val </span><span class="identifier">preprocessors</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.collections/-list/index.html"><span class="identifier">List</span></a><span class="symbol">&lt;</span><a href="../-cache-store-preprocessor/index.html"><span class="identifier">CacheStorePreprocessor</span></a><span class="symbol">&lt;</span><a href="../-cacheable/index.html"><span class="identifier">Cacheable</span></a><span class="symbol">,</span>&nbsp;<a href="../-cacheable/index.html"><span class="identifier">Cacheable</span></a><span class="symbol">,</span>&nbsp;<a href="../-cacheable/index.html"><span class="identifier">Cacheable</span></a><span class="symbol">&gt;</span><span class="symbol">&gt;</span><span class="symbol">?</span></code>
+<p>Chain of preprocessors to archive and unarchive <a href="../-cacheable/index.html">Cacheable</a> objects.
+While persisting, the preprocessors are applied to the incoming <a href="../-cacheable/index.html">Cacheable</a> instance
+and are expected to return an archived <a href="../-cacheable/index.html">Cacheable</a> instance.
+Before archiving, a <a href="../-cache-store/index.html">CacheStore</a> always adds a special <a href="../-cache-store-preprocessor/index.html">CacheStorePreprocessor</a> at the end
+of the <a href="../-cache-store/preprocessors.html">preprocessors</a> chain which outputs a <a href="../-raw-cacheable/index.html">RawCacheable</a>.</p>
+</td>
+</tr>
+</tbody>
+</table>
+<h3>Functions</h3>
+<table>
+<tbody>
+<tr>
+<td>
+<p><a href="fetch-all-objects.html">fetchAllObjects</a></p>
+</td>
+<td>
+<code><span class="keyword">fun </span><span class="identifier">fetchAllObjects</span><span class="symbol">(</span><span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.collections/-list/index.html"><span class="identifier">List</span></a><span class="symbol">&lt;</span><a href="../-cacheable/index.html"><span class="identifier">Cacheable</span></a><span class="symbol">&gt;</span></code>
+<p>Returns a list containing all the objects persisted in the store. This method is always
+invoked on the calling thread and is not affected by <a href="../-cache-store/blocking.html">blocking</a> value.</p>
+</td>
+</tr>
+<tr>
+<td>
+<p><a href="flush-and-close.html">flushAndClose</a></p>
+</td>
+<td>
+<code><span class="keyword">fun </span><span class="identifier">flushAndClose</span><span class="symbol">(</span><span class="symbol">)</span><span class="symbol">: </span><span class="identifier">&lt;ERROR CLASS&gt;</span><span class="symbol">&lt;</span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html"><span class="identifier">Unit</span></a><span class="symbol">&gt;</span></code>
+<p>Close all the handles to the resources by flushing any scheduled tasks.
+This method should be used in conjunction when <a href="../-cache-store/blocking.html">blocking</a> is set to true.
+The store implementation is expected to guarantee that calling this method
+will not result in any loss and that all resources will be freed only after
+the schedules tasks are completed.</p>
+</td>
+</tr>
+<tr>
+<td>
+<p><a href="persist-object.html">persistObject</a></p>
+</td>
+<td>
+<code><span class="keyword">fun </span><span class="symbol">&lt;</span><span class="identifier">T</span>&nbsp;<span class="symbol">:</span>&nbsp;<a href="../-cacheable/index.html"><span class="identifier">Cacheable</span></a><span class="symbol">&gt;</span> <span class="identifier">persistObject</span><span class="symbol">(</span><span class="identifier" id="com.suparnatural.core.cache.DiskStore$persistObject(com.suparnatural.core.cache.DiskStore.persistObject.T)/obj">obj</span><span class="symbol">:</span>&nbsp;<a href="persist-object.html#T"><span class="identifier">T</span></a><span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html"><span class="identifier">Unit</span></a></code>
+<p>Persists a <a href="../-cacheable/index.html">Cacheable</a> <code>obj</code> to the store. Uses a background worker if <a href="../-cache-store/blocking.html">blocking</a> is false.</p>
+</td>
+</tr>
+<tr>
+<td>
+<p><a href="unlink-object.html">unlinkObject</a></p>
+</td>
+<td>
+<code><span class="keyword">fun </span><span class="identifier">unlinkObject</span><span class="symbol">(</span><span class="identifier" id="com.suparnatural.core.cache.DiskStore$unlinkObject(kotlin.String)/key">key</span><span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html"><span class="identifier">String</span></a><span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html"><span class="identifier">Unit</span></a></code>
+<p>Deletes an object with the given <code>key</code>. Uses a background worker is <a href="../-cache-store/blocking.html">blocking</a> is false.</p>
+</td>
+</tr>
+<tr>
+<td>
+<p><a href="wipe.html">wipe</a></p>
+</td>
+<td>
+<code><span class="keyword">fun </span><span class="identifier">wipe</span><span class="symbol">(</span><span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html"><span class="identifier">Unit</span></a></code>
+<p>Calling this method guarantees that all traces of persisted objects are
+removed from the system. This method is always invoked on the calling thread
+and is not affected by <a href="../-cache-store/blocking.html">blocking</a> value.</p>
+</td>
+</tr>
+</tbody>
+</table>
+</BODY>
+</HTML>

@@ -1,0 +1,21 @@
+<HTML>
+<HEAD>
+<meta charset="UTF-8">
+<title>DiskStore.<init> - cache</title>
+<link rel="stylesheet" href="../../../style.css">
+</HEAD>
+<BODY>
+<a href="../../index.html">cache</a>&nbsp;/&nbsp;<a href="../index.html">com.suparnatural.core.cache</a>&nbsp;/&nbsp;<a href="index.html">DiskStore</a>&nbsp;/&nbsp;<a href="./-init-.html">&lt;init&gt;</a><br/>
+<br/>
+<h1>&lt;init&gt;</h1>
+<a name="com.suparnatural.core.cache.DiskStore$&lt;init&gt;(kotlin.Boolean, kotlin.collections.List((com.suparnatural.core.cache.CacheStorePreprocessor((com.suparnatural.core.cache.Cacheable, , )))), )"></a>
+<code><span class="identifier">DiskStore</span><span class="symbol">(</span><span class="identifier" id="com.suparnatural.core.cache.DiskStore$<init>(kotlin.Boolean, kotlin.collections.List((com.suparnatural.core.cache.CacheStorePreprocessor((com.suparnatural.core.cache.Cacheable, , )))), )/blocking">blocking</span><span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html"><span class="identifier">Boolean</span></a>&nbsp;<span class="symbol">=</span>&nbsp;true<span class="symbol">, </span><span class="identifier" id="com.suparnatural.core.cache.DiskStore$<init>(kotlin.Boolean, kotlin.collections.List((com.suparnatural.core.cache.CacheStorePreprocessor((com.suparnatural.core.cache.Cacheable, , )))), )/preprocessors">preprocessors</span><span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.collections/-list/index.html"><span class="identifier">List</span></a><span class="symbol">&lt;</span><a href="../-cache-store-preprocessor/index.html"><span class="identifier">CacheStorePreprocessor</span></a><span class="symbol">&lt;</span><a href="../-cacheable/index.html"><span class="identifier">Cacheable</span></a><span class="symbol">,</span>&nbsp;<a href="../-cacheable/index.html"><span class="identifier">Cacheable</span></a><span class="symbol">,</span>&nbsp;<a href="../-cacheable/index.html"><span class="identifier">Cacheable</span></a><span class="symbol">&gt;</span><span class="symbol">&gt;</span><span class="symbol">?</span>&nbsp;<span class="symbol">=</span>&nbsp;null<span class="symbol">, </span><span class="identifier" id="com.suparnatural.core.cache.DiskStore$<init>(kotlin.Boolean, kotlin.collections.List((com.suparnatural.core.cache.CacheStorePreprocessor((com.suparnatural.core.cache.Cacheable, , )))), )/location">location</span><span class="symbol">:</span>&nbsp;<span class="identifier">&lt;ERROR CLASS&gt;</span>&nbsp;<span class="symbol">=</span>&nbsp;FileSystem.contentsDirectory.absolutePath?.byAppending("cache")!!<span class="symbol">)</span></code>
+<p>A <a href="../-cache-store/index.html">CacheStore</a> which persists <a href="../-cacheable/index.html">Cacheable</a> objects on the disk.
+By default, the store blocks the calling thread for all its operations which can changed by
+setting <a href="blocking.html">blocking</a> to false.</p>
+<p>A new file is created under <a href="location.html">location</a> per cached object.</p>
+<p>Note: Even though <a href="index.html">DiskStore</a> does not impose any limits on the number of persisted objects,
+the underlying platform may impose a limit on number of files created by the application
+in which case the persistence will fail without any recovery.</p>
+</BODY>
+</HTML>

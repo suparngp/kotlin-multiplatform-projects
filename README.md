@@ -29,7 +29,7 @@ A super fast, persistable, thread safe in-memory cache for iOS and Android
 |---------|-----|---------|
 | [suparnatural-threading](threading-core/README.md) | Y | Y |
 | [suparnatural-fs](fs/README.md) | Y | Y |
-| [suparnatural-cache](cache-core/README.md) | Y | Y |
+| [suparnatural-cache](cache/README.md) | Y | Y |
 
 ## Build Plugin
 
