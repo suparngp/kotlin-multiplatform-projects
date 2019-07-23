@@ -17,8 +17,4 @@ open class BintrayExtension {
     override fun toString(): String {
         return "SuparnaturalBintrayExtension(publish=$publish, repository='$repository', username='$username', apiKey='$apiKey', vcsUrl='$vcsUrl', versionLabel='$versionLabel', description='$description', licenses=${Arrays.toString(licenses)}, publishDate=$publishDate)"
     }
-
-    operator fun invoke(closure: BintrayExtension.() -> Unit) {
-        apply(closure)
-    }
 }

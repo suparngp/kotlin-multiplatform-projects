@@ -15,7 +15,7 @@ API docs are also available for every module.
 
 Classes and utilities to manage make multithreading easy peasy on iOS and Android.
 
-### [suparnatural-fs](fs-core/README.md)
+### [suparnatural-fs](fs/README.md)
 
 Provides file system access for iOS and Android.
 
@@ -28,9 +28,13 @@ A super fast, persistable, thread safe in-memory cache for iOS and Android
 | Project | iOS | Android |
 |---------|-----|---------|
 | [suparnatural-threading](threading-core/README.md) | Y | Y |
-| [suparnatural-fs](fs-core/README.md) | Y | Y |
+| [suparnatural-fs](fs/README.md) | Y | Y |
 | [suparnatural-cache](cache-core/README.md) | Y | Y |
 
+## Build Plugin
+
+Each sub project uses `SuparnaturalPlugin` defined in `buildSrc`. It provides a very simple api
+to configure a new project.
 
 MIT License
 

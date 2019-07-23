@@ -2,6 +2,7 @@ repositories {
     jcenter()
     google()
     maven(url = "https://dl.bintray.com/kotlin/dokka")
+    maven(url = "https://dl.bintray.com/suparnatural/kotlin-multiplatform")
 }
 
 val kotlinVersion = "1.3.41"

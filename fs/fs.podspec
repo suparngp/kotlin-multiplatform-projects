@@ -1,11 +1,11 @@
 Pod::Spec.new do |spec|
-    spec.name                     = 'fs_core'
-    spec.version                  = '1.0.2'
-    spec.homepage                 = 'https://github.com/suparngp/kotlin-multiplatform-projects/tree/master/fs-core'
+    spec.name                     = 'fs'
+    spec.version                  = '1.0.4'
+    spec.homepage                 = 'https://suparngp.github.io/kotlin-multiplatform-projects/fs/docs/fs/com.suparnatural.core.fs/index.html'
     spec.source                   = { :git => "Not Published", :tag => "Cocoapods/#{spec.name}/#{spec.version}" }
-    spec.authors                  = ''
-    spec.license                  = ''
-    spec.summary                  = 'fs-core'
+    spec.authors                  = 'suparnatural'
+    spec.license                  = 'MIT'
+    spec.summary                  = 'Multiplatform File system api for iOS and Android.'
 
     spec.static_framework         = true
     spec.vendored_frameworks      = "build/cocoapods/framework/#{spec.name}.framework"
@@ -22,13 +22,13 @@ Pod::Spec.new do |spec|
 
     spec.script_phases = [
         {
-            :name => 'Build fs_core',
+            :name => 'Build fs',
             :execution_position => :before_compile,
             :shell_path => '/bin/sh',
             :script => <<-SCRIPT
                 set -ev
                 REPO_ROOT="$PODS_TARGET_SRCROOT"
-                "$REPO_ROOT/../gradlew" -p "$REPO_ROOT" :fs-core:syncFramework \
+                "$REPO_ROOT/../gradlew" -p "$REPO_ROOT" :fs:syncFramework \
                     -Pkotlin.native.cocoapods.target=$KOTLIN_TARGET \
                     -Pkotlin.native.cocoapods.configuration=$CONFIGURATION \
                     -Pkotlin.native.cocoapods.cflags="$OTHER_CFLAGS" \

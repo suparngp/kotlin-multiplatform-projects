@@ -23,4 +23,12 @@ open class SuparnaturalPluginExtension {
 
     val iosArm64Main = SourceSetExtension(IosArm64MainDefaultDependencies::class)
     val iosArm64Test = SourceSetExtension(IosArm64TestDefaultDependencies::class)
+
+    fun bintray(closure: BintrayExtension.() -> Unit) {
+        bintray.licenses = arrayOf(license)
+        bintray.description = description
+        bintray.vcsUrl = vcsUrl
+        bintray.versionLabel = versionLabel
+        bintray.apply(closure)
+    }
 }

@@ -28,8 +28,8 @@ fun Project.configureBintray(config: extensions.BintrayExtension) {
     bintray.apply {
         user = config.username
         key = config.apiKey
-        isOverride = false
-        isPublish = false
+        isOverride = true
+        isPublish = true
         pkg(delegateClosureOf<BintrayExtension.PackageConfig> {
             repo = config.repository
             name = projectName

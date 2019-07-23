@@ -14,7 +14,7 @@ suparnatural {
     supportsAndroid = true
     supportsCocoapods = true
     supportsIos = true
-    buildNumber = 3
+    buildNumber = 4
     bintray {
         publish = true
         repository = extra[ProjectConfig.Properties.bintrayRepository]!!.toString()
