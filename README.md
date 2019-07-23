@@ -11,7 +11,7 @@ API docs are also available for every module.
 
 ## Projects
 
-### [suparnatural-threading](threading-core/README.md) 
+### [suparnatural-threading](threading/README.md) 
 
 Classes and utilities to manage make multithreading easy peasy on iOS and Android.
 
@@ -20,14 +20,14 @@ Classes and utilities to manage make multithreading easy peasy on iOS and Androi
 Provides file system access for iOS and Android.
 
 
-### [suparnatural-cache](https://suparngp.github.io/kotlin-multiplatform-projects/cache-core/docs/cache-core/index.html) 
+### [suparnatural-cache](https://suparngp.github.io/kotlin-multiplatform-projects/cache/docs/cache/index.html) 
 
 A super fast, persistable, thread safe in-memory cache for iOS and Android
 
 
 | Project | iOS | Android |
 |---------|-----|---------|
-| [suparnatural-threading](threading-core/README.md) | Y | Y |
+| [suparnatural-threading](threading/README.md) | Y | Y |
 | [suparnatural-fs](fs/README.md) | Y | Y |
 | [suparnatural-cache](cache/README.md) | Y | Y |
 
