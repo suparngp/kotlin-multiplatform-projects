@@ -12,17 +12,15 @@ open class SuparnaturalPluginExtension {
     var license = "MIT"
     var bintray = BintrayExtension()
         private set
-    var androidMain = SourceSetExtension(AndroidMainDependenciesExtension::class)
-    var androidTest = SourceSetExtension(AndroidTestDependenciesExtension::class)
+    val androidMain = SourceSetExtension(AndroidMainDefaultDependencies::class)
+    val androidTest = SourceSetExtension(AndroidTestDefaultDependencies::class)
 
-    var commonMain = SourceSetExtension(CommonMainDependenciesExtension::class)
-    var commonTest = SourceSetExtension(CommonTestDependenciesExtension::class)
+    val commonMain = SourceSetExtension(CommonMainDefaultDependencies::class)
+    val commonTest = SourceSetExtension(CommonTestDefaultDependencies::class)
 
-//    fun bintray(callback: BintrayExtension.() -> Unit) {
-//        bintray.versionLabel = versionLabel
-//        bintray.description = description
-//        bintray.vcsUrl = vcsUrl
-//        bintray.licenses = arrayOf(license)
-//        bintray.apply(callback)
-//    }
+    val iosX64Main = SourceSetExtension(IosX64MainDefaultDependencies::class)
+    val iosX64Test = SourceSetExtension(IosX64TestDefaultDependencies::class)
+
+    val iosArm64Main = SourceSetExtension(IosArm64MainDefaultDependencies::class)
+    val iosArm64Test = SourceSetExtension(IosArm64TestDefaultDependencies::class)
 }

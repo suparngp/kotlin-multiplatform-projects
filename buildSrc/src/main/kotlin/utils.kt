@@ -36,8 +36,8 @@ fun Project.configureKmpSourceSet(sourceSetName: String, config: SourceSetExtens
         sourceSets.apply {
             getByName(sourceSetName).apply {
                 dependencies {
-                    config.dependencies.defaultDependencies(this)
-                    config.dependencies.additionalDependencies?.invoke(this)
+                    config.dependencies.defaults.apply(this)
+                    config.dependencies.additional.apply(this)
                 }
             }
         }

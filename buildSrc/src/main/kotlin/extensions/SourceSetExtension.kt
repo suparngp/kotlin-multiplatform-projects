@@ -1,11 +1,9 @@
 package extensions
 
 import kotlin.reflect.KClass
-import kotlin.reflect.full.createInstance
 
-open class SourceSetExtension<T: DependenciesExtension>(dependenciesExtensionClass: KClass<T>) {
-    var dependencies: T = dependenciesExtensionClass.createInstance()
-
+open class SourceSetExtension<T: DefaultDependencies>(DefaultsClass: KClass<T>) {
+    val dependencies: DependencyGroups<T> = DependencyGroups(DefaultsClass)
     operator fun invoke(closure: SourceSetExtension<T>.() -> Unit) {
         apply(closure)
     }

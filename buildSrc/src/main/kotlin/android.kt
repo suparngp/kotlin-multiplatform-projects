@@ -17,18 +17,19 @@ fun Project.configureAndroid(config: SuparnaturalPluginExtension) {
             testInstrumentationRunner = AndroidTarget.testRunnerName
         }
         buildTypes {
-            val release by getting {
+            getByName("release") {
                 isMinifyEnabled = false
             }
         }
 
         sourceSets {
-            val main by getting {
+            getByName("main") {
                 manifest.srcFile(AndroidTarget.manifestSrcPath)
                 java.srcDirs(AndroidTarget.mainSrcPath)
                 res.srcDirs(AndroidTarget.mainResPath)
             }
-            val androidTest by getting {
+
+            getByName("androidTest") {
                 java.srcDirs(AndroidTarget.testSrcPath)
                 res.srcDirs(AndroidTarget.testResPath)
             }

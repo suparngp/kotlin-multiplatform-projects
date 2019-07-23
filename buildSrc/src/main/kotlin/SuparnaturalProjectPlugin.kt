@@ -23,7 +23,7 @@ fun Project.suparnatural(callback: (SuparnaturalPluginExtension.() -> Unit)) {
     }
 
     if (config.supportsIos) {
-        configureIos(isRelease)
+        configureIos(config, isRelease)
     }
 
     if (config.supportsCocoapods) {
