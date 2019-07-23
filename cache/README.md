@@ -14,18 +14,18 @@ Check the API documentation for details.
         }
     }
     ``` 
-2. Add `implementation 'com.suparnatural:cache-core-metadata:1.0.2'` to `commonMain`.
-3. Add `implementation 'com.suparnatural:cache-core-iosx64(or iosarm64):1.0.2'` to `iosMain`.
-4. Add `implementation 'com.suparnatural:cache-core-android:1.0.2'` to `iosMain`.
+2. Add `implementation 'com.suparnatural:cache-metadata:1.0.2'` to `commonMain`.
+3. Add `implementation 'com.suparnatural:cache-iosx64(or iosarm64):1.0.2'` to `iosMain`.
+4. Add `implementation 'com.suparnatural:cache-android:1.0.2'` to `iosMain`.
 
 
 ### Usage
 
-Check out the [API Docs](https://suparngp.github.io/kotlin-multiplatform-projects/cache-core/docs/cache-core/com.suparnatural.core.cache/index.html).
+Check out the [API Docs](https://suparngp.github.io/kotlin-multiplatform-projects/cache/docs/cache/com.suparnatural.core.cache/index.html).
 They are always up to date with code examples.
 
 #### Models
-Every object which you want to cache must implement [`Cacheable`](https://suparngp.github.io/kotlin-multiplatform-projects/cache-core/docs/cache-core/com.suparnatural.core.cache/-cacheable/index.html) interface. The only requirement is to implement [`cacheKey()`](https://suparngp.github.io/kotlin-multiplatform-projects/cache-core/docs/cache-core/com.suparnatural.core.cache/-cacheable/cache-key.html) to return a unique identifier using which the object will be identified.
+Every object which you want to cache must implement [`Cacheable`](https://suparngp.github.io/kotlin-multiplatform-projects/cache/docs/cache/com.suparnatural.core.cache/-cacheable/index.html) interface. The only requirement is to implement [`cacheKey()`](https://suparngp.github.io/kotlin-multiplatform-projects/cache/docs/cache/com.suparnatural.core.cache/-cacheable/cache-key.html) to return a unique identifier using which the object will be identified.
 
 ```
 class Person(val name: String): Cacheable {
@@ -37,7 +37,7 @@ class Person(val name: String): Cacheable {
 ```
 
 #### CacheManager
-[CacheManager](https://suparngp.github.io/kotlin-multiplatform-projects/cache-core/docs/cache-core/com.suparnatural.core.cache/-cache-manager/index.html) is a thread safe singleton which you will interact with. It needs to be initialized by calling [initialize](https://suparngp.github.io/kotlin-multiplatform-projects/cache-core/docs/cache-core/com.suparnatural.core.cache/-cache-manager/initialize.html) which accepts an instance of [`Cache`](https://suparngp.github.io/kotlin-multiplatform-projects/cache-core/docs/cache-core/com.suparnatural.core.cache/-cache/index.html). The library provides a default implementation with an `abstract class` [`InMemoryCache`](https://suparngp.github.io/kotlin-multiplatform-projects/cache-core/docs/cache-core/com.suparnatural.core.cache/-in-memory-cache/index.html) with a [FIFO cache replacement policy](https://suparngp.github.io/kotlin-multiplatform-projects/cache-core/docs/cache-core/com.suparnatural.core.cache/-fifo-cache-replacement-policy/index.html). On top of that, you can choose a hashing algorithm as well. Two such algorithms are provided [`Linear Probing`](https://suparngp.github.io/kotlin-multiplatform-projects/cache-core/docs/cache-core/com.suparnatural.core.cache/-linear-probing-cache/index.html) and [`Robinhood Hashing`](https://suparngp.github.io/kotlin-multiplatform-projects/cache-core/docs/cache-core/com.suparnatural.core.cache/-robin-hood-probing-cache/index.html). 
+[CacheManager](https://suparngp.github.io/kotlin-multiplatform-projects/cache/docs/cache/com.suparnatural.core.cache/-cache-manager/index.html) is a thread safe singleton which you will interact with. It needs to be initialized by calling [initialize](https://suparngp.github.io/kotlin-multiplatform-projects/cache/docs/cache/com.suparnatural.core.cache/-cache-manager/initialize.html) which accepts an instance of [`Cache`](https://suparngp.github.io/kotlin-multiplatform-projects/cache/docs/cache/com.suparnatural.core.cache/-cache/index.html). The library provides a default implementation with an `abstract class` [`InMemoryCache`](https://suparngp.github.io/kotlin-multiplatform-projects/cache/docs/cache/com.suparnatural.core.cache/-in-memory-cache/index.html) with a [FIFO cache replacement policy](https://suparngp.github.io/kotlin-multiplatform-projects/cache/docs/cache/com.suparnatural.core.cache/-fifo-cache-replacement-policy/index.html). On top of that, you can choose a hashing algorithm as well. Two such algorithms are provided [`Linear Probing`](https://suparngp.github.io/kotlin-multiplatform-projects/cache/docs/cache/com.suparnatural.core.cache/-linear-probing-cache/index.html) and [`Robinhood Hashing`](https://suparngp.github.io/kotlin-multiplatform-projects/cache/docs/cache/com.suparnatural.core.cache/-robin-hood-probing-cache/index.html). 
 
 #### Initialization
 
@@ -65,11 +65,11 @@ CacheManager.cache.addObject(Person("BOB"))
 
 A custom store can also be used to back the in memory cache.
 
-Implement the [`CacheStore`](https://suparngp.github.io/kotlin-multiplatform-projects/cache-core/docs/cache-core/com.suparnatural.core.cache/-cache-store/index.html) interface and pass it in `persistentStores` argument.
+Implement the [`CacheStore`](https://suparngp.github.io/kotlin-multiplatform-projects/cache/docs/cache/com.suparnatural.core.cache/-cache-store/index.html) interface and pass it in `persistentStores` argument.
 
 
 #### Rehydration
-If you are using a persistent store, chances are that you want your cache to be reloaded after your app's cold start. If that is the case, then you must provide a list of preprocessors to the storage object where each item in the list is a [`CacheStorePreprocessor`](https://suparngp.github.io/kotlin-multiplatform-projects/cache-core/docs/cache-core/com.suparnatural.core.cache/-cache-store-preprocessor/index.html). 
+If you are using a persistent store, chances are that you want your cache to be reloaded after your app's cold start. If that is the case, then you must provide a list of preprocessors to the storage object where each item in the list is a [`CacheStorePreprocessor`](https://suparngp.github.io/kotlin-multiplatform-projects/cache/docs/cache/com.suparnatural.core.cache/-cache-store-preprocessor/index.html). 
 
 #### Custom Cache Replacement Policy
-By default, the inmemory cache uses a FIFO replacement policy where the old object in the cache is evicted first when cache is full. You can also create your own replacement policy like `LRU` by implementing [`CacheReplacementPolicy`](https://suparngp.github.io/kotlin-multiplatform-projects/cache-core/docs/cache-core/com.suparnatural.core.cache/-cache-replacement-policy/index.html) and then passing it in the [`Linear Probing`](https://suparngp.github.io/kotlin-multiplatform-projects/cache-core/docs/cache-core/com.suparnatural.core.cache/-linear-probing-cache/index.html) or [`Robinhood Hashing`](https://suparngp.github.io/kotlin-multiplatform-projects/cache-core/docs/cache-core/com.suparnatural.core.cache/-robin-hood-probing-cache/index.html) constructors.
+By default, the inmemory cache uses a FIFO replacement policy where the old object in the cache is evicted first when cache is full. You can also create your own replacement policy like `LRU` by implementing [`CacheReplacementPolicy`](https://suparngp.github.io/kotlin-multiplatform-projects/cache/docs/cache/com.suparnatural.core.cache/-cache-replacement-policy/index.html) and then passing it in the [`Linear Probing`](https://suparngp.github.io/kotlin-multiplatform-projects/cache/docs/cache/com.suparnatural.core.cache/-linear-probing-cache/index.html) or [`Robinhood Hashing`](https://suparngp.github.io/kotlin-multiplatform-projects/cache/docs/cache/com.suparnatural.core.cache/-robin-hood-probing-cache/index.html) constructors.

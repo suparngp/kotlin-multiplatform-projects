@@ -12,7 +12,7 @@ import com.suparnatural.core.threading.Worker
 class CacheStoreNonBlockingWorker : CacheStoreWorker {
 
     /**
-     * An instance of [Worker] from threading-core.
+     * An instance of [Worker] from threading.
      */
     val worker = Worker()
 
