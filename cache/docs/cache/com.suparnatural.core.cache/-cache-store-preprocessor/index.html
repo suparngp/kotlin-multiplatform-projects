@@ -1,0 +1,63 @@
+<HTML>
+<HEAD>
+<meta charset="UTF-8">
+<title>CacheStorePreprocessor - cache</title>
+<link rel="stylesheet" href="../../../style.css">
+</HEAD>
+<BODY>
+<a href="../../index.html">cache</a>&nbsp;/&nbsp;<a href="../index.html">com.suparnatural.core.cache</a>&nbsp;/&nbsp;<a href="./index.html">CacheStorePreprocessor</a><br/>
+<br/>
+<h1>CacheStorePreprocessor</h1>
+<code><span class="keyword">interface </span><span class="identifier">CacheStorePreprocessor</span><span class="symbol">&lt;</span><span class="identifier">T</span>&nbsp;<span class="symbol">:</span>&nbsp;<a href="../-cacheable/index.html"><span class="identifier">Cacheable</span></a><span class="symbol">, </span><span class="keyword">out</span>&nbsp;<span class="identifier">R</span>&nbsp;<span class="symbol">:</span>&nbsp;<a href="../-cacheable/index.html"><span class="identifier">Cacheable</span></a><span class="symbol">, </span><span class="keyword">in</span>&nbsp;<span class="identifier">V</span>&nbsp;<span class="symbol">:</span>&nbsp;<a href="../-cacheable/index.html"><span class="identifier">Cacheable</span></a><span class="symbol">&gt;</span></code>
+<p>A <a href="./index.html">CacheStorePreprocessor</a> processes <a href="../-cacheable/index.html">Cacheable</a> objects before persisting them in the store
+and after they are read from the store.</p>
+<p>For example, a preprocessor can encrypt a <a href="../-cacheable/index.html">Cacheable</a> object before it is persisted to the <a href="../-cache-store/index.html">CacheStore</a>
+and decrypt the persisted value when it is read from the <a href="../-cache-store/index.html">CacheStore</a>.</p>
+<p>It takes three parameters <a href="index.html#T">T</a>, <a href="index.html#R">R</a> and <a href="index.html#V">V</a> which are all <a href="../-cacheable/index.html">Cacheable</a>.
+The preprocessor archives <a href="index.html#T">T</a> and transforms it into <a href="index.html#R">R</a> which can then be archived
+by the next preprocessor. Similarly, it unarchives <a href="index.html#V">V</a> into a <a href="index.html#T">T</a>.</p>
+<p>In many cases, <a href="index.html#R">R</a> and <a href="index.html#V">V</a> can be same. However, a <a href="../-cache-store/index.html">CacheStore</a> performs a final archiving of the object
+in a <a href="../-raw-cacheable/index.html">RawCacheable</a> object before persisting it. Therefore for the last preprocessor in the chain,
+<a href="index.html#V">V</a> can be <a href="../-raw-cacheable/index.html">RawCacheable</a> while <a href="index.html#R">R</a> can be another type.</p>
+<h3>Examples</h3>
+<h4>An encrypted Preprocessor</h4>
+<pre><code>data class PlainObject(val plainText: String): Cacheable....
+data class EncryptedObject(val cipherText: String): Cacheable...
+
+class SecureStorePreprocessor: CacheStorePreprocessor&lt;PlainObject, EncryptedObject, RawCacheable&gt; {
+    override fun archive(obj: PlainObject) {
+        return EncryptedObject(cipherText = aes256.encrypt(KEY, obj.plainText))
+    }
+
+    override fun unarchive(obj: RawCacheable): Person {
+        val encryptedObject = EncryptedObject.deserializeFromPersistence(obj.key, obj.value)
+        return Person(plainText = aes256.decrypt(KEY, encryptedObject.cipherText)
+    }
+}
+
+</code></pre>
+<h3>Functions</h3>
+<table>
+<tbody>
+<tr>
+<td>
+<p><a href="archive.html">archive</a></p>
+</td>
+<td>
+<code><span class="keyword">abstract</span> <span class="keyword">fun </span><span class="identifier">archive</span><span class="symbol">(</span><span class="identifier" id="com.suparnatural.core.cache.CacheStorePreprocessor$archive(com.suparnatural.core.cache.CacheStorePreprocessor.T)/obj">obj</span><span class="symbol">:</span>&nbsp;<a href="index.html#T"><span class="identifier">T</span></a><span class="symbol">)</span><span class="symbol">: </span><a href="index.html#R"><span class="identifier">R</span></a></code>
+<p>Archives the <code>T</code> into <code>R</code></p>
+</td>
+</tr>
+<tr>
+<td>
+<p><a href="unarchive.html">unarchive</a></p>
+</td>
+<td>
+<code><span class="keyword">abstract</span> <span class="keyword">fun </span><span class="identifier">unarchive</span><span class="symbol">(</span><span class="identifier" id="com.suparnatural.core.cache.CacheStorePreprocessor$unarchive(com.suparnatural.core.cache.CacheStorePreprocessor.V)/obj">obj</span><span class="symbol">:</span>&nbsp;<a href="index.html#V"><span class="identifier">V</span></a><span class="symbol">)</span><span class="symbol">: </span><a href="index.html#T"><span class="identifier">T</span></a></code>
+<p>Unarchives the <code>V</code> into <code>T</code></p>
+</td>
+</tr>
+</tbody>
+</table>
+</BODY>
+</HTML>
