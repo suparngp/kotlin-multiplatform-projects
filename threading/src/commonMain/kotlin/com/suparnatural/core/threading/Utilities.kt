@@ -16,7 +16,7 @@ package com.suparnatural.core.threading
  * ```
  *
  */
-expect fun <T> toImmutable(obj: T): T
+expect fun <T> T.toImmutable(): T
 
 /**
  * Returns if the current thread is main thread.

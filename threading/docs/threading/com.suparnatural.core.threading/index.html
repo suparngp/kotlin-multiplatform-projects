@@ -23,34 +23,24 @@ the wrapped volatile variable to ensure lock free thread safety.</p>
 </tr>
 <tr>
 <td>
-<p><a href="-blocking-future.html">BlockingFuture</a></p>
-</td>
-<td>
-<code><span class="keyword">expect</span> <span class="keyword">class </span><span class="identifier">BlockingFuture</span><span class="symbol">&lt;</span><span class="identifier">T</span><span class="symbol">&gt;</span>&nbsp;<span class="symbol">:</span>&nbsp;<a href="-future/index.html"><span class="identifier">Future</span></a><span class="symbol">&lt;</span><a href="-blocking-future.html#T"><span class="identifier">T</span></a><span class="symbol">&gt;</span></code>
-<p>A <a href="-blocking-future.html">BlockingFuture</a> which blocks the current thread to consume result.
-Calling <a href="-future/consume.html">BlockingFuture.consume</a> will wait until the result is available.</p>
-</td>
-</tr>
-<tr>
-<td>
 <p><a href="-future/index.html">Future</a></p>
 </td>
 <td>
 <code><span class="keyword">interface </span><span class="identifier">Future</span><span class="symbol">&lt;</span><span class="identifier">T</span><span class="symbol">&gt;</span></code>
 <p>A <a href="-future/index.html">Future</a> defers the resolution of a value to the future.
-The value can be consumed by calling <a href="-future/consume.html">Future.consume</a> method.
-The implementation decides whether <a href="-future/consume.html">Future.consume</a> blocks
+The value can be consumed by calling <a href="-future/await.html">Future.await</a> method.
+The implementation decides whether <a href="-future/await.html">Future.await</a> blocks
 the calling thread or not.</p>
 </td>
 </tr>
 <tr>
 <td>
-<p><a href="-immutable-value/index.html">ImmutableValue</a></p>
+<p><a href="-immutability/index.html">Immutability</a></p>
 </td>
 <td>
-<code><span class="keyword">class </span><span class="identifier">ImmutableValue</span><span class="symbol">&lt;</span><span class="identifier">T</span><span class="symbol">&gt;</span></code>
+<code><span class="keyword">class </span><span class="identifier">Immutability</span><span class="symbol">&lt;</span><span class="identifier">T</span><span class="symbol">&gt;</span></code>
 <p>A property delegate to create thread safe immutable frozen properties backed by <a href="-atomic-reference/index.html">AtomicReference</a>.
-The property can be declared with <code>by [ImmutableValue] (initialValue)</code> keyword.
+The property can be declared with <code>by [Immutability] (initialValue)</code> keyword.
 All get and set operations are then performed atomically.
 Note that the values are immutable once set.
 So any updates to the internal properties of the value will cause a failure.</p>
@@ -58,12 +48,13 @@ So any updates to the internal properties of the value will cause a failure.</p>
 </tr>
 <tr>
 <td>
-<p><a href="-inline-future/index.html">InlineFuture</a></p>
+<p><a href="-job/index.html">Job</a></p>
 </td>
 <td>
-<code><span class="keyword">class </span><span class="identifier">InlineFuture</span><span class="symbol">&lt;</span><span class="identifier">T</span><span class="symbol">&gt;</span>&nbsp;<span class="symbol">:</span>&nbsp;<a href="-future/index.html"><span class="identifier">Future</span></a><span class="symbol">&lt;</span><a href="-inline-future/index.html#T"><span class="identifier">T</span></a><span class="symbol">&gt;</span></code>
-<p>A naive future implementation to wrap a given <code>result</code>.
-It executes on the calling thread synchronously.</p>
+<code><span class="keyword">class </span><span class="identifier">Job</span><span class="symbol">&lt;</span><span class="identifier">Input</span><span class="symbol">, </span><span class="identifier">Output</span><span class="symbol">&gt;</span></code>
+<p>A data structure to pass a payload and a callback job safely between threads by freezing its contents.
+The <a href="-job/payload.html">payload</a> of type <a href="-job/index.html#Input">Input</a> can be used by the consumer of this object for processing.
+The result of the processing of type <a href="-job/index.html#Output">Output</a> can then be posted on a non capturing lambda <a href="-job/job.html">job</a> as argument.</p>
 </td>
 </tr>
 <tr>
@@ -71,8 +62,41 @@ It executes on the calling thread synchronously.</p>
 <p><a href="-job-dispatcher/index.html">JobDispatcher</a></p>
 </td>
 <td>
-<code><span class="keyword">expect</span> <span class="keyword">object </span><span class="identifier">JobDispatcher</span></code>
+<code><span class="keyword">object </span><span class="identifier">JobDispatcher</span></code>
 <p>Dispatches a given job on a particular thread.</p>
+</td>
+</tr>
+<tr>
+<td>
+<p><a href="-job-future/index.html">JobFuture</a></p>
+</td>
+<td>
+<code><span class="keyword">class </span><span class="identifier">JobFuture</span><span class="symbol">&lt;</span><span class="identifier">T</span><span class="symbol">, </span><span class="identifier">V</span><span class="symbol">&gt;</span>&nbsp;<span class="symbol">:</span>&nbsp;<a href="-future/index.html"><span class="identifier">Future</span></a><span class="symbol">&lt;</span><a href="-job-future/index.html#V"><span class="identifier">V</span></a><span class="symbol">&gt;</span></code>
+<p>Wraps a <a href="-job-future/job.html">job</a> closure in a future. The <a href="-job-future/job.html">job</a> is not invoked until <a href="-job-future/await.html">await</a>
+is called. The <a href="-job-future/job-input.html">jobInput</a> is passed as the only argument to job.</p>
+</td>
+</tr>
+<tr>
+<td>
+<p><a href="-mutex/index.html">Mutex</a></p>
+</td>
+<td>
+<code><span class="keyword">expect</span> <span class="keyword">class </span><span class="identifier">Mutex</span></code>
+<p>A <a href="-mutex/index.html">Mutex</a> is a locking mechanism which allows only one thread
+to gain access to a resource protected by an instance of <a href="-mutex/index.html">Mutex</a>.
+If more than one thread tries to acquire <code>lock</code>, only the first thread
+is successful while the other threads either wait or return depending on
+whether <a href="-mutex/lock.html">lock</a> or <a href="-mutex/try-lock.html">tryLock</a> was invoked.</p>
+</td>
+</tr>
+<tr>
+<td>
+<p><a href="-native-future.html">NativeFuture</a></p>
+</td>
+<td>
+<code><span class="keyword">expect</span> <span class="keyword">class </span><span class="identifier">NativeFuture</span><span class="symbol">&lt;</span><span class="identifier">T</span><span class="symbol">&gt;</span>&nbsp;<span class="symbol">:</span>&nbsp;<a href="-future/index.html"><span class="identifier">Future</span></a><span class="symbol">&lt;</span><a href="-native-future.html#T"><span class="identifier">T</span></a><span class="symbol">&gt;</span></code>
+<p>A <a href="-native-future.html">NativeFuture</a> returns an instance of platform specific Future wrapped in a common API.
+Calling <a href="-future/await.html">NativeFuture.await</a> will wait until the result is available.</p>
 </td>
 </tr>
 <tr>
@@ -89,13 +113,25 @@ readers don't release read lock.</p>
 </tr>
 <tr>
 <td>
-<p><a href="-thread-transferable-job/index.html">ThreadTransferableJob</a></p>
+<p><a href="-resumable-job/index.html">ResumableJob</a></p>
 </td>
 <td>
-<code><span class="keyword">class </span><span class="identifier">ThreadTransferableJob</span><span class="symbol">&lt;</span><span class="identifier">Input</span><span class="symbol">, </span><span class="identifier">Output</span><span class="symbol">&gt;</span></code>
-<p>A data structure to pass a payload and a callback job safely between threads by freezing its contents.
-The <a href="-thread-transferable-job/payload.html">payload</a> of type <a href="-thread-transferable-job/index.html#Input">Input</a> can be used by the consumer of this object for processing.
-The result of the processing of type <a href="-thread-transferable-job/index.html#Output">Output</a> can then be posted on a non capturing lambda <a href="-thread-transferable-job/job.html">job</a> as argument.</p>
+<code><span class="keyword">class </span><span class="identifier">ResumableJob</span><span class="symbol">&lt;</span><span class="identifier">JobInput</span><span class="symbol">, </span><span class="identifier">ResultHandlerInput</span><span class="symbol">, </span><span class="identifier">ResultHandlerOutput</span><span class="symbol">&gt;</span></code>
+<p>A resumable job can be started in one worker and can be resumed in the original caller worker.
+For example, an API call can be started in a background worker but its results can be delivered
+on the main thread. The resumed job is a closure which takes the output of the original job as input.
+The caller does not need to wait for the background worker to complete just like co-routines as the
+resuming job is added to the event loop of the caller thread.</p>
+</td>
+</tr>
+<tr>
+<td>
+<p><a href="-value-future/index.html">ValueFuture</a></p>
+</td>
+<td>
+<code><span class="keyword">class </span><span class="identifier">ValueFuture</span><span class="symbol">&lt;</span><span class="identifier">T</span><span class="symbol">&gt;</span>&nbsp;<span class="symbol">:</span>&nbsp;<a href="-future/index.html"><span class="identifier">Future</span></a><span class="symbol">&lt;</span><a href="-value-future/index.html#T"><span class="identifier">T</span></a><span class="symbol">&gt;</span></code>
+<p>A naive future implementation to wrap a given <code>result</code>.
+It executes on the calling thread synchronously.</p>
 </td>
 </tr>
 <tr>
@@ -103,11 +139,20 @@ The result of the processing of type <a href="-thread-transferable-job/index.htm
 <p><a href="-worker/index.html">Worker</a></p>
 </td>
 <td>
-<code><span class="keyword">expect</span> <span class="keyword">class </span><span class="identifier">Worker</span></code>
+<code><span class="keyword">interface </span><span class="identifier">Worker</span></code>
 <p>A <a href="-worker/index.html">Worker</a> executes tasks on a background thread.
 A task must be a non capturing lambda depending only upon its
 arguments for state. If a lambda captures any outside state,
 the program will error out.</p>
+</td>
+</tr>
+<tr>
+<td>
+<p><a href="-worker-factory/index.html">WorkerFactory</a></p>
+</td>
+<td>
+<code><span class="keyword">expect</span> <span class="keyword">class </span><span class="identifier">WorkerFactory</span></code>
+<p>A factory which creates and returns <a href="-worker/index.html">Worker</a> instances.</p>
 </td>
 </tr>
 </tbody>
@@ -129,7 +174,7 @@ the program will error out.</p>
 <p><a href="to-immutable.html">toImmutable</a></p>
 </td>
 <td>
-<code><span class="keyword">expect</span> <span class="keyword">fun </span><span class="symbol">&lt;</span><span class="identifier">T</span><span class="symbol">&gt;</span> <span class="identifier">toImmutable</span><span class="symbol">(</span><span class="identifier" id="com.suparnatural.core.threading$toImmutable(com.suparnatural.core.threading.toImmutable.T)/obj">obj</span><span class="symbol">:</span>&nbsp;<a href="to-immutable.html#T"><span class="identifier">T</span></a><span class="symbol">)</span><span class="symbol">: </span><a href="to-immutable.html#T"><span class="identifier">T</span></a></code>
+<code><span class="keyword">expect</span> <span class="keyword">fun </span><span class="symbol">&lt;</span><span class="identifier">T</span><span class="symbol">&gt;</span> <a href="to-immutable.html#T"><span class="identifier">T</span></a><span class="symbol">.</span><span class="identifier">toImmutable</span><span class="symbol">(</span><span class="symbol">)</span><span class="symbol">: </span><a href="to-immutable.html#T"><span class="identifier">T</span></a></code>
 <p>Returns an immutable instance of an object.</p>
 </td>
 </tr>

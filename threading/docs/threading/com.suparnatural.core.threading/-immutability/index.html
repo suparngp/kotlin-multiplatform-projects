@@ -1,0 +1,89 @@
+<HTML>
+<HEAD>
+<meta charset="UTF-8">
+<title>Immutability - threading</title>
+<link rel="stylesheet" href="../../../style.css">
+</HEAD>
+<BODY>
+<a href="../../index.html">threading</a>&nbsp;/&nbsp;<a href="../index.html">com.suparnatural.core.threading</a>&nbsp;/&nbsp;<a href="./index.html">Immutability</a><br/>
+<br/>
+<h1>Immutability</h1>
+<code><span class="keyword">class </span><span class="identifier">Immutability</span><span class="symbol">&lt;</span><span class="identifier">T</span><span class="symbol">&gt;</span></code>
+<p>A property delegate to create thread safe immutable frozen properties backed by <a href="../-atomic-reference/index.html">AtomicReference</a>.
+The property can be declared with <code>by [Immutability] (initialValue)</code> keyword.
+All get and set operations are then performed atomically.
+Note that the values are immutable once set.
+So any updates to the internal properties of the value will cause a failure.</p>
+<p>This is really useful if you want an immutable object so that it can be shared
+among different threads with some dynamic behavior (like lazy initialization)</p>
+<h3>Examples</h3>
+<pre><code>// Since top level objects are always immutable, they can be accessed from any thread.
+object SharedObject{
+
+ val person: Person? by ImmutableValue(null)
+
+ fun initialize(p: Person) { // any thread can now atomically update the person property.
+     person = p // will succeed
+
+     person.name = ""  // will cause error
+ }
+}
+
+</code></pre>
+<h3>Constructors</h3>
+<table>
+<tbody>
+<tr>
+<td>
+<p><a href="-init-.html">&lt;init&gt;</a></p>
+</td>
+<td>
+<code><span class="identifier">Immutability</span><span class="symbol">(</span><span class="identifier" id="com.suparnatural.core.threading.Immutability$<init>(com.suparnatural.core.threading.Immutability.T)/initialValue">initialValue</span><span class="symbol">:</span>&nbsp;<a href="index.html#T"><span class="identifier">T</span></a><span class="symbol">)</span></code>
+<p>A property delegate to create thread safe immutable frozen properties backed by <a href="../-atomic-reference/index.html">AtomicReference</a>.
+The property can be declared with <code>by [Immutability] (initialValue)</code> keyword.
+All get and set operations are then performed atomically.
+Note that the values are immutable once set.
+So any updates to the internal properties of the value will cause a failure.</p>
+</td>
+</tr>
+</tbody>
+</table>
+<h3>Functions</h3>
+<table>
+<tbody>
+<tr>
+<td>
+<p><a href="get-value.html">getValue</a></p>
+</td>
+<td>
+<code><span class="keyword">operator</span> <span class="keyword">fun </span><span class="identifier">getValue</span><span class="symbol">(</span><span class="identifier" id="com.suparnatural.core.threading.Immutability$getValue(kotlin.Any, kotlin.reflect.KProperty((kotlin.Any)))/thisRef">thisRef</span><span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/index.html"><span class="identifier">Any</span></a><span class="symbol">?</span><span class="symbol">, </span><span class="identifier" id="com.suparnatural.core.threading.Immutability$getValue(kotlin.Any, kotlin.reflect.KProperty((kotlin.Any)))/property">property</span><span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.reflect/-k-property/index.html"><span class="identifier">KProperty</span></a><span class="symbol">&lt;</span><span class="identifier">*</span><span class="symbol">&gt;</span><span class="symbol">)</span><span class="symbol">: </span><a href="index.html#T"><span class="identifier">T</span></a></code>
+<p>Get the immutable value instance.</p>
+</td>
+</tr>
+<tr>
+<td>
+<p><a href="set-value.html">setValue</a></p>
+</td>
+<td>
+<code><span class="keyword">operator</span> <span class="keyword">fun </span><span class="identifier">setValue</span><span class="symbol">(</span><span class="identifier" id="com.suparnatural.core.threading.Immutability$setValue(kotlin.Any, kotlin.reflect.KProperty((kotlin.Any)), com.suparnatural.core.threading.Immutability.T)/thisRef">thisRef</span><span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/index.html"><span class="identifier">Any</span></a><span class="symbol">?</span><span class="symbol">, </span><span class="identifier" id="com.suparnatural.core.threading.Immutability$setValue(kotlin.Any, kotlin.reflect.KProperty((kotlin.Any)), com.suparnatural.core.threading.Immutability.T)/property">property</span><span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.reflect/-k-property/index.html"><span class="identifier">KProperty</span></a><span class="symbol">&lt;</span><span class="identifier">*</span><span class="symbol">&gt;</span><span class="symbol">, </span><span class="identifier" id="com.suparnatural.core.threading.Immutability$setValue(kotlin.Any, kotlin.reflect.KProperty((kotlin.Any)), com.suparnatural.core.threading.Immutability.T)/value">value</span><span class="symbol">:</span>&nbsp;<a href="index.html#T"><span class="identifier">T</span></a><span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html"><span class="identifier">Unit</span></a></code>
+<p>Makes the new value Immutable and sets the value</p>
+</td>
+</tr>
+</tbody>
+</table>
+<h3>Extension Functions</h3>
+<table>
+<tbody>
+<tr>
+<td>
+<p><a href="../to-immutable.html">toImmutable</a></p>
+</td>
+<td>
+<code><span class="keyword">expect</span> <span class="keyword">fun </span><span class="symbol">&lt;</span><span class="identifier">T</span><span class="symbol">&gt;</span> <a href="../to-immutable.html#T"><span class="identifier">T</span></a><span class="symbol">.</span><span class="identifier">toImmutable</span><span class="symbol">(</span><span class="symbol">)</span><span class="symbol">: </span><a href="../to-immutable.html#T"><span class="identifier">T</span></a></code>
+<p>Returns an immutable instance of an object.</p>
+</td>
+</tr>
+</tbody>
+</table>
+</BODY>
+</HTML>
