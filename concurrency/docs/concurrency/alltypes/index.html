@@ -1,0 +1,133 @@
+<HTML>
+<HEAD>
+<meta charset="UTF-8">
+<title>alltypes - concurrency</title>
+<link rel="stylesheet" href="../../style.css">
+</HEAD>
+<BODY>
+<h3>All Types</h3>
+<table>
+<tbody>
+<tr>
+<td>
+<a href="../com.suparnatural.core.concurrency/-atomic-reference/index.html">com.suparnatural.core.concurrency.AtomicReference</a></td>
+<td>
+<p>An <a href="../com.suparnatural.core.concurrency/-atomic-reference/index.html">AtomicReference</a> uses CAS instruction to get and update
+the wrapped volatile variable to ensure lock free thread safety.</p>
+</td>
+</tr>
+<tr>
+<td>
+<a href="../com.suparnatural.core.concurrency/-future/index.html">com.suparnatural.core.concurrency.Future</a></td>
+<td>
+<p>A <a href="../com.suparnatural.core.concurrency/-future/index.html">Future</a> defers the resolution of a value to the future.
+The value can be consumed by calling <a href="../com.suparnatural.core.concurrency/-future/await.html">Future.await</a> method.
+The implementation decides whether <a href="../com.suparnatural.core.concurrency/-future/await.html">Future.await</a> blocks
+the calling thread or not.</p>
+</td>
+</tr>
+<tr>
+<td>
+<a href="../com.suparnatural.core.concurrency/-immutability/index.html">com.suparnatural.core.concurrency.Immutability</a></td>
+<td>
+<p>A property delegate to create thread safe immutable frozen properties backed by <a href="../com.suparnatural.core.concurrency/-atomic-reference/index.html">AtomicReference</a>.
+The property can be declared with <code>by [Immutability] (initialValue)</code> keyword.
+All get and set operations are then performed atomically.
+Note that the values are immutable once set.
+So any updates to the internal properties of the value will cause a failure.</p>
+</td>
+</tr>
+<tr>
+<td>
+<a href="../com.suparnatural.core.concurrency/-job/index.html">com.suparnatural.core.concurrency.Job</a></td>
+<td>
+<p>A data structure to pass a payload and a callback job safely between threads by freezing its contents.
+The <a href="../com.suparnatural.core.concurrency/-job/payload.html">payload</a> of type <a href="../com.suparnatural.core.concurrency/-job/index.html#Input">Input</a> can be used by the consumer of this object for processing.
+The result of the processing of type <a href="../com.suparnatural.core.concurrency/-job/index.html#Output">Output</a> can then be posted on a non capturing lambda <a href="../com.suparnatural.core.concurrency/-job/job.html">job</a> as argument.</p>
+</td>
+</tr>
+<tr>
+<td>
+<a href="../com.suparnatural.core.concurrency/-job-dispatcher/index.html">com.suparnatural.core.concurrency.JobDispatcher</a></td>
+<td>
+<p>Dispatches a given job on a particular thread.</p>
+</td>
+</tr>
+<tr>
+<td>
+<a href="../com.suparnatural.core.concurrency/-job-future/index.html">com.suparnatural.core.concurrency.JobFuture</a></td>
+<td>
+<p>Wraps a <a href="../com.suparnatural.core.concurrency/-job-future/job.html">job</a> closure in a future. The <a href="../com.suparnatural.core.concurrency/-job-future/job.html">job</a> is not invoked until <a href="../com.suparnatural.core.concurrency/-job-future/await.html">await</a>
+is called. The <a href="../com.suparnatural.core.concurrency/-job-future/job-input.html">jobInput</a> is passed as the only argument to job.</p>
+</td>
+</tr>
+<tr>
+<td>
+<a href="../com.suparnatural.core.concurrency/-mutex-lock/index.html">com.suparnatural.core.concurrency.MutexLock</a></td>
+<td>
+<p>A <a href="../com.suparnatural.core.concurrency/-mutex-lock/index.html">MutexLock</a> is a locking mechanism which allows only one thread
+to gain access to a resource protected by an instance of <a href="../com.suparnatural.core.concurrency/-mutex-lock/index.html">MutexLock</a>.
+If more than one thread tries to acquire <code>lock</code>, only the first thread
+is successful while the other threads either wait or return depending on
+whether <a href="../com.suparnatural.core.concurrency/-mutex-lock/lock.html">lock</a> or <a href="../com.suparnatural.core.concurrency/-mutex-lock/try-lock.html">tryLock</a> was invoked.</p>
+</td>
+</tr>
+<tr>
+<td>
+<a href="../com.suparnatural.core.concurrency/-native-future.html">com.suparnatural.core.concurrency.NativeFuture</a></td>
+<td>
+<p>A <a href="../com.suparnatural.core.concurrency/-native-future.html">NativeFuture</a> returns an instance of platform specific Future wrapped in a common API.
+Calling <a href="../com.suparnatural.core.concurrency/-future/await.html">NativeFuture.await</a> will wait until the result is available.</p>
+</td>
+</tr>
+<tr>
+<td>
+<a href="../com.suparnatural.core.concurrency/-read-write-lock/index.html">com.suparnatural.core.concurrency.ReadWriteLock</a></td>
+<td>
+<p>A ReadWrite lock allows multiple readers to read a value
+and only one writer to update it. A read lock cannot be obtained until
+write lock is released. A write lock cannot be obtained until current
+readers don't release read lock.</p>
+</td>
+</tr>
+<tr>
+<td>
+<a href="../com.suparnatural.core.concurrency/-resumable-job/index.html">com.suparnatural.core.concurrency.ResumableJob</a></td>
+<td>
+<p>A resumable job can be started in one worker and can be resumed in the original caller worker.
+For example, an API call can be started in a background worker but its results can be delivered
+on the main thread. The resumed job is a closure which takes the output of the original job as input.
+The caller does not need to wait for the background worker to complete just like co-routines as the
+resuming job is added to the event loop of the caller thread.</p>
+</td>
+</tr>
+<tr>
+<td>
+<a href="../com.suparnatural.core.concurrency/-value-future/index.html">com.suparnatural.core.concurrency.ValueFuture</a></td>
+<td>
+<p>A naive future implementation to wrap a given <code>result</code>.
+It executes on the calling thread synchronously.</p>
+</td>
+</tr>
+<tr>
+<td>
+<a href="../com.suparnatural.core.concurrency/-worker/index.html">com.suparnatural.core.concurrency.Worker</a></td>
+<td>
+<p><a href="../com.suparnatural.core.concurrency/-worker/index.html">Worker</a> presents a unified API across all platforms to interact with threads.
+A <a href="../com.suparnatural.core.concurrency/-worker/index.html">Worker</a> can execute a job in its event loop. If needed, it can also resume the
+flow on a different worker instance. All threads including <code>main</code> are exposed
+via this API. For example, to get a <a href="../com.suparnatural.core.concurrency/-worker/index.html">Worker</a> backed by <code>main</code> thread, use
+<a href="../com.suparnatural.core.concurrency/-worker-factory/main.html">WorkerFactory.main</a>.</p>
+</td>
+</tr>
+<tr>
+<td>
+<a href="../com.suparnatural.core.concurrency/-worker-factory/index.html">com.suparnatural.core.concurrency.WorkerFactory</a></td>
+<td>
+<p>A factory which creates and returns <a href="../com.suparnatural.core.concurrency/-worker/index.html">Worker</a> instances.</p>
+</td>
+</tr>
+</tbody>
+</table>
+</BODY>
+</HTML>

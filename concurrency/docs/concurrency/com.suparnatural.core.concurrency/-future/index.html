@@ -1,0 +1,96 @@
+<HTML>
+<HEAD>
+<meta charset="UTF-8">
+<title>Future - concurrency</title>
+<link rel="stylesheet" href="../../../style.css">
+</HEAD>
+<BODY>
+<a href="../../index.html">concurrency</a>&nbsp;/&nbsp;<a href="../index.html">com.suparnatural.core.concurrency</a>&nbsp;/&nbsp;<a href="./index.html">Future</a><br/>
+<br/>
+<h1>Future</h1>
+<code><span class="keyword">interface </span><span class="identifier">Future</span><span class="symbol">&lt;</span><span class="identifier">T</span><span class="symbol">&gt;</span></code>
+<p>A <a href="./index.html">Future</a> defers the resolution of a value to the future.
+The value can be consumed by calling <a href="await.html">Future.await</a> method.
+The implementation decides whether <a href="await.html">Future.await</a> blocks
+the calling thread or not.</p>
+<h3>Properties</h3>
+<table>
+<tbody>
+<tr>
+<td>
+<p><a href="is-completed.html">isCompleted</a></p>
+</td>
+<td>
+<code><span class="keyword">abstract</span> <span class="keyword">var </span><span class="identifier">isCompleted</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html"><span class="identifier">Boolean</span></a></code>
+<p>Returns <code>true</code> if the future has completed and is ready to <a href="await.html">await</a>.</p>
+</td>
+</tr>
+</tbody>
+</table>
+<h3>Functions</h3>
+<table>
+<tbody>
+<tr>
+<td>
+<p><a href="await.html">await</a></p>
+</td>
+<td>
+<code><span class="keyword">abstract</span> <span class="keyword">fun </span><span class="identifier">await</span><span class="symbol">(</span><span class="symbol">)</span><span class="symbol">: </span><a href="index.html#T"><span class="identifier">T</span></a></code>
+<p>Consume the future value in <code>code</code> as input.
+This method may or may not block the calling thread
+depending upon the implementation.</p>
+</td>
+</tr>
+</tbody>
+</table>
+<h3>Extension Functions</h3>
+<table>
+<tbody>
+<tr>
+<td>
+<p><a href="../to-immutable.html">toImmutable</a></p>
+</td>
+<td>
+<code><span class="keyword">expect</span> <span class="keyword">fun </span><span class="symbol">&lt;</span><span class="identifier">T</span><span class="symbol">&gt;</span> <a href="../to-immutable.html#T"><span class="identifier">T</span></a><span class="symbol">.</span><span class="identifier">toImmutable</span><span class="symbol">(</span><span class="symbol">)</span><span class="symbol">: </span><a href="../to-immutable.html#T"><span class="identifier">T</span></a></code>
+<p>Returns an immutable instance of an object.</p>
+</td>
+</tr>
+</tbody>
+</table>
+<h3>Inheritors</h3>
+<table>
+<tbody>
+<tr>
+<td>
+<p><a href="../-job-future/index.html">JobFuture</a></p>
+</td>
+<td>
+<code><span class="keyword">class </span><span class="identifier">JobFuture</span><span class="symbol">&lt;</span><span class="identifier">T</span><span class="symbol">, </span><span class="identifier">V</span><span class="symbol">&gt;</span>&nbsp;<span class="symbol">:</span>&nbsp;<a href="./index.html"><span class="identifier">Future</span></a><span class="symbol">&lt;</span><a href="../-job-future/index.html#V"><span class="identifier">V</span></a><span class="symbol">&gt;</span></code>
+<p>Wraps a <a href="../-job-future/job.html">job</a> closure in a future. The <a href="../-job-future/job.html">job</a> is not invoked until <a href="../-job-future/await.html">await</a>
+is called. The <a href="../-job-future/job-input.html">jobInput</a> is passed as the only argument to job.</p>
+</td>
+</tr>
+<tr>
+<td>
+<p><a href="../-native-future.html">NativeFuture</a></p>
+</td>
+<td>
+<code><span class="keyword">expect</span> <span class="keyword">class </span><span class="identifier">NativeFuture</span><span class="symbol">&lt;</span><span class="identifier">T</span><span class="symbol">&gt;</span>&nbsp;<span class="symbol">:</span>&nbsp;<a href="./index.html"><span class="identifier">Future</span></a><span class="symbol">&lt;</span><a href="../-native-future.html#T"><span class="identifier">T</span></a><span class="symbol">&gt;</span></code>
+<p>A <a href="../-native-future.html">NativeFuture</a> returns an instance of platform specific Future wrapped in a common API.
+Calling <a href="await.html">NativeFuture.await</a> will wait until the result is available.</p>
+</td>
+</tr>
+<tr>
+<td>
+<p><a href="../-value-future/index.html">ValueFuture</a></p>
+</td>
+<td>
+<code><span class="keyword">class </span><span class="identifier">ValueFuture</span><span class="symbol">&lt;</span><span class="identifier">T</span><span class="symbol">&gt;</span>&nbsp;<span class="symbol">:</span>&nbsp;<a href="./index.html"><span class="identifier">Future</span></a><span class="symbol">&lt;</span><a href="../-value-future/index.html#T"><span class="identifier">T</span></a><span class="symbol">&gt;</span></code>
+<p>A naive future implementation to wrap a given <code>result</code>.
+It executes on the calling thread synchronously.</p>
+</td>
+</tr>
+</tbody>
+</table>
+</BODY>
+</HTML>

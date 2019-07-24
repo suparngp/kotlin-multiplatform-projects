@@ -1,0 +1,30 @@
+<HTML>
+<HEAD>
+<meta charset="UTF-8">
+<title>MutexLock.<init> - concurrency</title>
+<link rel="stylesheet" href="../../../style.css">
+</HEAD>
+<BODY>
+<a href="../../index.html">concurrency</a>&nbsp;/&nbsp;<a href="../index.html">com.suparnatural.core.concurrency</a>&nbsp;/&nbsp;<a href="index.html">MutexLock</a>&nbsp;/&nbsp;<a href="./-init-.html">&lt;init&gt;</a><br/>
+<br/>
+<h1>&lt;init&gt;</h1>
+<a name="com.suparnatural.core.concurrency.MutexLock$&lt;init&gt;()"></a>
+<code><span class="identifier">MutexLock</span><span class="symbol">(</span><span class="symbol">)</span></code>
+<p>A <a href="index.html">MutexLock</a> is a locking mechanism which allows only one thread
+to gain access to a resource protected by an instance of <a href="index.html">MutexLock</a>.
+If more than one thread tries to acquire <code>lock</code>, only the first thread
+is successful while the other threads either wait or return depending on
+whether <a href="lock.html">lock</a> or <a href="try-lock.html">tryLock</a> was invoked.</p>
+<h3>Examples</h3>
+<pre><code>val mutex = MutexLock()
+mutex.lock()
+assertFalse(mutex.tryLock())
+val future = WorkerFactory.newBackgroundWorker().execute(mutex) {
+  assertFalse(mutex.tryLock())
+}
+future.await()
+mutex.unlock()
+mutex.destroy()
+</code></pre>
+</BODY>
+</HTML>
