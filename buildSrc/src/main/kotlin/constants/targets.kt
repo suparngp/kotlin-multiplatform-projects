@@ -5,7 +5,8 @@ object TargetNames {
     const val ios = "ios"
     const val iosX64 = "iosX64"
     const val iosArm64 = "iosArm64"
-    const val common = "Common"
+    const val common = "common"
+    const val jvm = "jvm"
 }
 
 object AndroidTarget {
@@ -41,4 +42,6 @@ object SourceSetNames {
     const val iosX64Test = "iosX64Test"
     const val iosArm64Main = "iosArm64Main"
     const val iosArm64Test = "iosArm64Test"
+    const val jvmMain = "jvmMain"
+    const val jvmTest = "jvmTest"
 }

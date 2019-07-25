@@ -8,6 +8,7 @@ open class SuparnaturalPluginExtension {
     var supportsCocoapods = false
     var supportsAndroid = false
     var supportsIos = false
+    var supportsJvm = false
     var versionLabel = ""
     var buildNumber = 1
     var license = "MIT"
@@ -24,6 +25,9 @@ open class SuparnaturalPluginExtension {
 
     val iosArm64Main = SourceSetExtension(IosArm64MainDefaultDependencies::class)
     val iosArm64Test = SourceSetExtension(IosArm64TestDefaultDependencies::class)
+
+    val jvmMain = SourceSetExtension(JvmMainDefaultDependencies::class)
+    val jvmTest = SourceSetExtension(JvmTestDefaultDependencies::class)
 
     fun bintray(closure: BintrayExtension.() -> Unit) {
         bintray.licenses = arrayOf(license)
