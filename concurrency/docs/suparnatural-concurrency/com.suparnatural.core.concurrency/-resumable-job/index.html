@@ -1,0 +1,106 @@
+<HTML>
+<HEAD>
+<meta charset="UTF-8">
+<title>ResumableJob - suparnatural-concurrency</title>
+<link rel="stylesheet" href="../../../style.css">
+</HEAD>
+<BODY>
+<a href="../../index.html">suparnatural-concurrency</a>&nbsp;/&nbsp;<a href="../index.html">com.suparnatural.core.concurrency</a>&nbsp;/&nbsp;<a href="./index.html">ResumableJob</a><br/>
+<br/>
+<h1>ResumableJob</h1>
+<code><span class="keyword">class </span><span class="identifier">ResumableJob</span><span class="symbol">&lt;</span><span class="identifier">JobInput</span><span class="symbol">, </span><span class="identifier">ResultHandlerInput</span><span class="symbol">, </span><span class="identifier">ResultHandlerOutput</span><span class="symbol">&gt;</span></code>
+<p>A resumable job can be started in one worker and can be resumed in the original caller worker.
+For example, an API call can be started in a background worker but its results can be delivered
+on the main thread. The resumed job is a closure which takes the output of the original job as input.
+The caller does not need to wait for the background worker to complete just like co-routines as the
+resuming job is added to the event loop of the caller thread.</p>
+<p><strong>Note: This is an attempt to close the gap until multi-threaded coroutines becomeavailable on both platforms.</strong></p>
+<h3>Parameters</h3>
+<p><a name="JobInput"></a>
+<code>JobInput</code> - the type of job input</p>
+<p><a name="ResultHandlerInput"></a>
+<code>ResultHandlerInput</code> - the type of job out put which will be passed to the result handler</p>
+<p><a name="ResultHandlerOutput"></a>
+<code>ResultHandlerOutput</code> - the type of the</p>
+<h3>Properties</h3>
+<table>
+<tbody>
+<tr>
+<td>
+<p><a href="await-resuming-job.html">awaitResumingJob</a></p>
+</td>
+<td>
+<code><span class="keyword">val </span><span class="identifier">awaitResumingJob</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html"><span class="identifier">Boolean</span></a></code>
+<p>whether target worker should wait for the resumed job closure to complete.
+It is useful in testing.</p>
+</td>
+</tr>
+<tr>
+<td>
+<p><a href="job.html">job</a></p>
+</td>
+<td>
+<code><span class="keyword">val </span><span class="identifier">job</span><span class="symbol">: </span><span class="symbol">(</span><a href="index.html#JobInput"><span class="identifier">JobInput</span></a><span class="symbol">)</span>&nbsp;<span class="symbol">-&gt;</span>&nbsp;<a href="index.html#ResultHandlerInput"><span class="identifier">ResultHandlerInput</span></a></code>
+<p>the non capturing closure which will execute on the target worker.</p>
+</td>
+</tr>
+<tr>
+<td>
+<p><a href="job-input.html">jobInput</a></p>
+</td>
+<td>
+<code><span class="keyword">val </span><span class="identifier">jobInput</span><span class="symbol">: </span><a href="index.html#JobInput"><span class="identifier">JobInput</span></a></code>
+<p>the input to the job which will execute on the target worker.</p>
+</td>
+</tr>
+<tr>
+<td>
+<p><a href="resuming-job.html">resumingJob</a></p>
+</td>
+<td>
+<code><span class="keyword">val </span><span class="identifier">resumingJob</span><span class="symbol">: </span><span class="symbol">(</span><a href="index.html#ResultHandlerInput"><span class="identifier">ResultHandlerInput</span></a><span class="symbol">)</span>&nbsp;<span class="symbol">-&gt;</span>&nbsp;<a href="index.html#ResultHandlerOutput"><span class="identifier">ResultHandlerOutput</span></a></code>
+<p>the non capturing closure which runs on the caller thread and accepts the <code>job</code> output
+as the only argument.</p>
+</td>
+</tr>
+<tr>
+<td>
+<p><a href="resuming-worker.html">resumingWorker</a></p>
+</td>
+<td>
+<code><span class="keyword">val </span><span class="identifier">resumingWorker</span><span class="symbol">: </span><a href="../-worker/index.html"><span class="identifier">Worker</span></a></code>
+<p>the worker on which the job should be resumed once the target worker is finished.</p>
+</td>
+</tr>
+</tbody>
+</table>
+<h3>Companion Object Functions</h3>
+<table>
+<tbody>
+<tr>
+<td>
+<p><a href="create.html">create</a></p>
+</td>
+<td>
+<code><span class="keyword">fun </span><span class="symbol">&lt;</span><span class="identifier">JobInput</span><span class="symbol">, </span><span class="identifier">ResultHandlerInput</span><span class="symbol">, </span><span class="identifier">ResultHandlerOutput</span><span class="symbol">&gt;</span> <span class="identifier">create</span><span class="symbol">(</span><span class="identifier" id="com.suparnatural.core.concurrency.ResumableJob.Companion$create(com.suparnatural.core.concurrency.ResumableJob.Companion.create.JobInput, kotlin.Function1((com.suparnatural.core.concurrency.ResumableJob.Companion.create.JobInput, com.suparnatural.core.concurrency.ResumableJob.Companion.create.ResultHandlerInput)), com.suparnatural.core.concurrency.Worker, kotlin.Boolean, kotlin.Function1((com.suparnatural.core.concurrency.ResumableJob.Companion.create.ResultHandlerInput, com.suparnatural.core.concurrency.ResumableJob.Companion.create.ResultHandlerOutput)))/jobInput">jobInput</span><span class="symbol">:</span>&nbsp;<a href="create.html#JobInput"><span class="identifier">JobInput</span></a><span class="symbol">, </span><span class="identifier" id="com.suparnatural.core.concurrency.ResumableJob.Companion$create(com.suparnatural.core.concurrency.ResumableJob.Companion.create.JobInput, kotlin.Function1((com.suparnatural.core.concurrency.ResumableJob.Companion.create.JobInput, com.suparnatural.core.concurrency.ResumableJob.Companion.create.ResultHandlerInput)), com.suparnatural.core.concurrency.Worker, kotlin.Boolean, kotlin.Function1((com.suparnatural.core.concurrency.ResumableJob.Companion.create.ResultHandlerInput, com.suparnatural.core.concurrency.ResumableJob.Companion.create.ResultHandlerOutput)))/job">job</span><span class="symbol">:</span>&nbsp;<span class="symbol">(</span><a href="create.html#JobInput"><span class="identifier">JobInput</span></a><span class="symbol">)</span>&nbsp;<span class="symbol">-&gt;</span>&nbsp;<a href="create.html#ResultHandlerInput"><span class="identifier">ResultHandlerInput</span></a><span class="symbol">, </span><span class="identifier" id="com.suparnatural.core.concurrency.ResumableJob.Companion$create(com.suparnatural.core.concurrency.ResumableJob.Companion.create.JobInput, kotlin.Function1((com.suparnatural.core.concurrency.ResumableJob.Companion.create.JobInput, com.suparnatural.core.concurrency.ResumableJob.Companion.create.ResultHandlerInput)), com.suparnatural.core.concurrency.Worker, kotlin.Boolean, kotlin.Function1((com.suparnatural.core.concurrency.ResumableJob.Companion.create.ResultHandlerInput, com.suparnatural.core.concurrency.ResumableJob.Companion.create.ResultHandlerOutput)))/resumingWorker">resumingWorker</span><span class="symbol">:</span>&nbsp;<a href="../-worker/index.html"><span class="identifier">Worker</span></a>&nbsp;<span class="symbol">=</span>&nbsp;WorkerFactory.current<span class="symbol">, </span><span class="identifier" id="com.suparnatural.core.concurrency.ResumableJob.Companion$create(com.suparnatural.core.concurrency.ResumableJob.Companion.create.JobInput, kotlin.Function1((com.suparnatural.core.concurrency.ResumableJob.Companion.create.JobInput, com.suparnatural.core.concurrency.ResumableJob.Companion.create.ResultHandlerInput)), com.suparnatural.core.concurrency.Worker, kotlin.Boolean, kotlin.Function1((com.suparnatural.core.concurrency.ResumableJob.Companion.create.ResultHandlerInput, com.suparnatural.core.concurrency.ResumableJob.Companion.create.ResultHandlerOutput)))/awaitResumingJob">awaitResumingJob</span><span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html"><span class="identifier">Boolean</span></a>&nbsp;<span class="symbol">=</span>&nbsp;false<span class="symbol">, </span><span class="identifier" id="com.suparnatural.core.concurrency.ResumableJob.Companion$create(com.suparnatural.core.concurrency.ResumableJob.Companion.create.JobInput, kotlin.Function1((com.suparnatural.core.concurrency.ResumableJob.Companion.create.JobInput, com.suparnatural.core.concurrency.ResumableJob.Companion.create.ResultHandlerInput)), com.suparnatural.core.concurrency.Worker, kotlin.Boolean, kotlin.Function1((com.suparnatural.core.concurrency.ResumableJob.Companion.create.ResultHandlerInput, com.suparnatural.core.concurrency.ResumableJob.Companion.create.ResultHandlerOutput)))/resumingJob">resumingJob</span><span class="symbol">:</span>&nbsp;<span class="symbol">(</span><a href="create.html#ResultHandlerInput"><span class="identifier">ResultHandlerInput</span></a><span class="symbol">)</span>&nbsp;<span class="symbol">-&gt;</span>&nbsp;<a href="create.html#ResultHandlerOutput"><span class="identifier">ResultHandlerOutput</span></a><span class="symbol">)</span><span class="symbol">: </span><a href="./index.html"><span class="identifier">ResumableJob</span></a><span class="symbol">&lt;</span><a href="create.html#JobInput"><span class="identifier">JobInput</span></a><span class="symbol">,</span>&nbsp;<a href="create.html#ResultHandlerInput"><span class="identifier">ResultHandlerInput</span></a><span class="symbol">,</span>&nbsp;<a href="create.html#ResultHandlerOutput"><span class="identifier">ResultHandlerOutput</span></a><span class="symbol">&gt;</span></code>
+<p>Creates an immutable instance of <a href="./index.html">ResumableJob</a>.</p>
+</td>
+</tr>
+</tbody>
+</table>
+<h3>Extension Functions</h3>
+<table>
+<tbody>
+<tr>
+<td>
+<p><a href="../to-immutable.html">toImmutable</a></p>
+</td>
+<td>
+<code><span class="keyword">expect</span> <span class="keyword">fun </span><span class="symbol">&lt;</span><span class="identifier">T</span><span class="symbol">&gt;</span> <a href="../to-immutable.html#T"><span class="identifier">T</span></a><span class="symbol">.</span><span class="identifier">toImmutable</span><span class="symbol">(</span><span class="symbol">)</span><span class="symbol">: </span><a href="../to-immutable.html#T"><span class="identifier">T</span></a></code>
+<p>Returns an immutable instance of an object.</p>
+</td>
+</tr>
+</tbody>
+</table>
+</BODY>
+</HTML>

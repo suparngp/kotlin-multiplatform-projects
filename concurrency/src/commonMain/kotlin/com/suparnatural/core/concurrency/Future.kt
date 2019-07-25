@@ -2,9 +2,10 @@ package com.suparnatural.core.concurrency
 
 /**
  * A [Future] defers the resolution of a value to the future.
- * The value can be consumed by calling [Future.await] method.
- * The implementation decides whether [Future.await] blocks
- * the calling thread or not.
+ * The value can be consumed by calling [Future.await] method
+ * which is expected to block the current thread. Therefore,
+ * never call [Future.await] on the same thread as it will
+ * result in a dead lock.
  */
 interface Future<T> {
 

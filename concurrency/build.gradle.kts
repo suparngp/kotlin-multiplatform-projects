@@ -7,6 +7,7 @@ plugins {
 version = "1.0.4"
 
 suparnatural {
+    name = "suparnatural-concurrency"
     description = "Supercharged Kotlin multiplatform threading for iOS and Android."
     docsUrl = "https://suparngp.github.io/kotlin-multiplatform-projects/concurrency/docs/concurrency/com.suparnatural.core.concurrency/index.html"
     vcsUrl = "https://github.com/suparngp/kotlin-multiplatform-projects/tree/master/concurrency"

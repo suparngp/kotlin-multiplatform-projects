@@ -1,0 +1,110 @@
+<HTML>
+<HEAD>
+<meta charset="UTF-8">
+<title>MutexLock - suparnatural-concurrency</title>
+<link rel="stylesheet" href="../../../style.css">
+</HEAD>
+<BODY>
+<a href="../../index.html">suparnatural-concurrency</a>&nbsp;/&nbsp;<a href="../index.html">com.suparnatural.core.concurrency</a>&nbsp;/&nbsp;<a href="./index.html">MutexLock</a><br/>
+<br/>
+<h1>MutexLock</h1>
+<code><span class="keyword">expect</span> <span class="keyword">class </span><span class="identifier">MutexLock</span></code>
+<p>A <a href="./index.html">MutexLock</a> is a locking mechanism which allows only one thread
+to gain access to a resource protected by an instance of <a href="./index.html">MutexLock</a>.
+If more than one thread tries to acquire <code>lock</code>, only the first thread
+is successful while the other threads either wait or return depending on
+whether <a href="lock.html">lock</a> or <a href="try-lock.html">tryLock</a> was invoked.</p>
+<h3>Examples</h3>
+<pre><code>val mutex = MutexLock()
+mutex.lock()
+assertFalse(mutex.tryLock())
+val future = WorkerFactory.newBackgroundWorker().execute(mutex) {
+  assertFalse(mutex.tryLock())
+}
+future.await()
+mutex.unlock()
+mutex.destroy()
+</code></pre>
+<h3>Constructors</h3>
+<table>
+<tbody>
+<tr>
+<td>
+<p><a href="-init-.html">&lt;init&gt;</a></p>
+</td>
+<td>
+<code><span class="identifier">MutexLock</span><span class="symbol">(</span><span class="symbol">)</span></code>
+<p>A <a href="./index.html">MutexLock</a> is a locking mechanism which allows only one thread
+to gain access to a resource protected by an instance of <a href="./index.html">MutexLock</a>.
+If more than one thread tries to acquire <code>lock</code>, only the first thread
+is successful while the other threads either wait or return depending on
+whether <a href="lock.html">lock</a> or <a href="try-lock.html">tryLock</a> was invoked.</p>
+</td>
+</tr>
+</tbody>
+</table>
+<h3>Functions</h3>
+<table>
+<tbody>
+<tr>
+<td>
+<p><a href="destroy.html">destroy</a></p>
+</td>
+<td>
+<code><span class="keyword">fun </span><span class="identifier">destroy</span><span class="symbol">(</span><span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html"><span class="identifier">Unit</span></a></code>
+<p>Releases any memory resources. The instance should
+be discarded after calling this method.</p>
+</td>
+</tr>
+<tr>
+<td>
+<p><a href="lock.html">lock</a></p>
+</td>
+<td>
+<code><span class="keyword">fun </span><span class="identifier">lock</span><span class="symbol">(</span><span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html"><span class="identifier">Unit</span></a></code>
+<p>Acquires a lock on the mutex.
+If the lock is already acquired by another thread,
+then the subsequent callers of this method are blocked
+until the lock is released.</p>
+</td>
+</tr>
+<tr>
+<td>
+<p><a href="try-lock.html">tryLock</a></p>
+</td>
+<td>
+<code><span class="keyword">fun </span><span class="identifier">tryLock</span><span class="symbol">(</span><span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html"><span class="identifier">Boolean</span></a></code>
+<p>Tries to acquire a lock on the mutex.
+If the lock is already acquired by another thread,
+this method returns immediately with a <code>false</code> value.
+Otherwise, if the lock is obtained, this method returns <code>true</code>.</p>
+</td>
+</tr>
+<tr>
+<td>
+<p><a href="unlock.html">unlock</a></p>
+</td>
+<td>
+<code><span class="keyword">fun </span><span class="identifier">unlock</span><span class="symbol">(</span><span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html"><span class="identifier">Unit</span></a></code>
+<p>Releases an acquired lock on the mutex.
+This method may throw a RuntimeException depending on the platform.</p>
+</td>
+</tr>
+</tbody>
+</table>
+<h3>Extension Functions</h3>
+<table>
+<tbody>
+<tr>
+<td>
+<p><a href="../to-immutable.html">toImmutable</a></p>
+</td>
+<td>
+<code><span class="keyword">expect</span> <span class="keyword">fun </span><span class="symbol">&lt;</span><span class="identifier">T</span><span class="symbol">&gt;</span> <a href="../to-immutable.html#T"><span class="identifier">T</span></a><span class="symbol">.</span><span class="identifier">toImmutable</span><span class="symbol">(</span><span class="symbol">)</span><span class="symbol">: </span><a href="../to-immutable.html#T"><span class="identifier">T</span></a></code>
+<p>Returns an immutable instance of an object.</p>
+</td>
+</tr>
+</tbody>
+</table>
+</BODY>
+</HTML>

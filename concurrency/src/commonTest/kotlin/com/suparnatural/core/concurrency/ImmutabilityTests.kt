@@ -2,7 +2,7 @@ package com.suparnatural.core.concurrency
 
 import kotlin.test.Test
 
-class ImmutableValueTests {
+class ImmutabilityTests {
 
     class FD {
         var x by Immutability<FD?>(null)

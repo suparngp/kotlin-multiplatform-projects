@@ -1,9 +1,18 @@
-# suparnatural-concurrency
+# Module suparnatural-concurrency
 
-This library provides convenient methods and common implementations for various use cases
-in Kotlin Multiplatform/Native for multithreading on both `iOS` and `Android`.
+This library provides convenient methods and common implementations for various
+use cases in Kotlin Multiplatform/Native for multithreading on both `iOS` and `Android`.
 
-Check the API documentation for details.
+This package is intended to unify the concurrency patterns on all the platforms.
+For example, Native concurrency is different than how JVM works thus in many
+cases, it may be hard to write common code without platform specific considerations.
+
+In such cases, this package is useful because it provides a common unified API
+for many similar constructs by choosing the most restrictive ones.
+
+For example, in case of Native, any background operations must use a non-state
+capturing lambda where as JVM does not impose such restrictions. Therefore,
+the `Worker` API in this package exposes and implementation based on the former expectation.
 
 ## Setup
 
@@ -22,7 +31,7 @@ Check the API documentation for details.
 
 ## Usage
 
-Check out the [API Docs](https://suparngp.github.io/kotlin-multiplatform-projects/concurrency/docs/concurrency/com.suparnatural.core.concurrency/index.html).
+Check out the [API Docs](https://suparngp.github.io/kotlin-multiplatform-projects/concurrency/docs/suparnatural-concurrency/com.suparnatural.core.concurrency/index.html).
 They are always up to date with code examples.
 
 ### Worker
@@ -97,7 +106,7 @@ val future = worker.executeAndResume(INPUT, {
 
 
 #### Read Write Lock
-[`ReadWriteLock`](https://suparngp.github.io/kotlin-multiplatform-projects/concurrency/docs/concurrency/com.suparnatural.core.concurrency/-read-write-lock/index.html) allows multiple readers to read a shared memory or a single thread to mutate it.
+[`ReadWriteLock`](https://suparngp.github.io/kotlin-multiplatform-projects/concurrency/docs/suparnatural-concurrency/com.suparnatural.core.concurrency/-read-write-lock/index.html) allows multiple readers to read a shared memory or a single thread to mutate it.
 
 ```
 val lock = ReadWriteLock()
@@ -133,8 +142,8 @@ mutex.unlock()
 mutex.destroy()
 ```
 
-### Dispatch a job Main or Background Worker
-Use [`JobDispatcher`](https://suparngp.github.io/kotlin-multiplatform-projects/concurrency/docs/concurrency/com.suparnatural.core.concurrency/-job-dispatcher/index.html) to dispatch a task on main or background thread.
+### JobDispatcher
+Use [`JobDispatcher`](https://suparngp.github.io/kotlin-multiplatform-projects/concurrency/docs/suparnatural-concurrency/com.suparnatural.core.concurrency/-job-dispatcher/index.html) to dispatch a task on main or background thread.
 
 ```
 val future = JobDispatcher.dispatchOnMainThread("Hello") {it: String ->
@@ -146,4 +155,53 @@ val future = JobDispatcher.dispatchOnBackgroundThread("Hello") {it: String ->
     assertEquals("Hello", it) // runs on background thread
 }
 future.await()
+```
+
+### Immutability Property Delegate
+Any property can be made thread safe by using [`Immutability`](https://suparngp.github.io/kotlin-multiplatform-projects/concurrency/docs/suparnatural-concurrency/com.suparnatural.core.concurrency/-immutability/index.html) property delegate.
+Such properties are internally backed by [`AtomicReference`](https://suparngp.github.io/kotlin-multiplatform-projects/concurrency/docs/suparnatural-concurrency/com.suparnatural.core.concurrency/-atomic-reference/index.html) but it remains transparent to the rest of the code.
+
+```
+// Since top level objects are always immutable, they can be accessed from any thread.
+object SharedObject{
+
+val person: Person? by Immutability<Person?>(initialValue = null)
+
+  fun initialize(p: Person) { // any thread can now atomically update the person property.
+    person = p // will succeed
+    person.name = ""  // will cause error
+  }
+}
+
+class MyClass {
+  val value: Int by Immutability<Int>(initialValue = 0)
+}
+
+// can be called from any thread as long as instance is thread shareable.
+instance.value = 3
+```
+
+### Utilities
+
+#### Make objects thread shareable
+
+Use [`toImmutable`](https://suparngp.github.io/kotlin-multiplatform-projects/concurrency/docs/suparnatural-concurrency/com.suparnatural.core.concurrency/to-immutable.html) to make objects immutable and thus shareable across threads.
+
+```
+val person = Person(name = "Bob").toImmutable()
+person.name = "Jerry" // error
+```
+
+#### Check if current thread is main thread
+
+Use [`isMainThread`]() to check whether current thread is main or not.
+
+```
+JobDispatcher.dispatchOnMainThread(Unit) {
+   assertTrue(isMainThread())
+}
+
+JobDispatcher.dispatchOnBackgroundThread(Unit) {
+   assertFalse(isMainThread())
+}
 ```

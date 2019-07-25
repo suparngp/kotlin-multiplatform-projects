@@ -15,7 +15,7 @@ fun Project.suparnatural(callback: (SuparnaturalPluginExtension.() -> Unit)) {
     val isRelease = hasReleaseTask()
 
     configureMultiplatform(config)
-    configureDocs()
+    configureDocs(config.name)
 
 
     if (config.supportsAndroid) {

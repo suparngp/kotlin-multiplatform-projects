@@ -11,7 +11,7 @@ API docs are also available for every module.
 
 ## Projects
 
-### [suparnatural-threading](threading/README.md) 
+### [suparnatural-concurrency](concurrency/README.md)
 
 Classes and utilities to manage make multithreading easy peasy on iOS and Android.
 
@@ -20,14 +20,14 @@ Classes and utilities to manage make multithreading easy peasy on iOS and Androi
 Provides file system access for iOS and Android.
 
 
-### [suparnatural-cache](https://suparngp.github.io/kotlin-multiplatform-projects/cache/docs/cache/index.html) 
+### [suparnatural-cache](https://suparngp.github.io/kotlin-multiplatform-projects/cache/docs/cache/index.html)
 
 A super fast, persistable, thread safe in-memory cache for iOS and Android
 
 
 | Project | iOS | Android |
 |---------|-----|---------|
-| [suparnatural-threading](threading/README.md) | Y | Y |
+| [suparnatural-concurrency](concurrency/README.md) | Y | Y |
 | [suparnatural-fs](fs/README.md) | Y | Y |
 | [suparnatural-cache](cache/README.md) | Y | Y |
 
@@ -36,18 +36,18 @@ By default, KMP plugin cannot create universal binaries ( a single `klib` which 
 
 However, this poses a problem because now, `IntelliJ` does not know that `iosMain` and `iosTest` are really two ios source sets. It thinks of them as a generic source set and you lose all the code completion. The code will compile fine, its just that IntelliJ will not know about it as you are typing.
 
-As a fix to this problem, by default, `iosMain` and `iosTest` source sets are created for either `X64` or `Arm64` depending on where your code is running. So Intellij now gives you are all the good features. Then, to upload `klibs` for each platform separately, `:release` task 
-1. Creates `iosMain` and `iosTest` as generic resources (doesn't tie them to any platform). 
+As a fix to this problem, by default, `iosMain` and `iosTest` source sets are created for either `X64` or `Arm64` depending on where your code is running. So Intellij now gives you are all the good features. Then, to upload `klibs` for each platform separately, `:release` task
+1. Creates `iosMain` and `iosTest` as generic resources (doesn't tie them to any platform).
 2. Creates two new targets `iosX64` and `iosArm64`.
 3. Connects their source sets to `iosMain` and `iosTest`.
 
 ## Build Plugin
 
 Each sub project uses `SuparnaturalPlugin` defined in `buildSrc`. It provides a very simple api
-to configure a new project to avoid a lot of boilerplate code. 
+to configure a new project to avoid a lot of boilerplate code.
 
 1. The properties of `suparnatural` extension are copied over to `cocoapods` and `bintray` by default. Bintray properties can be overridden in its in `closure` if needed.
-2. The `bintray` credentials are supplied from `.local.build.gradle.kts` by setting 3 `extra` properties on the project. For example 
+2. The `bintray` credentials are supplied from `.local.build.gradle.kts` by setting 3 `extra` properties on the project. For example
 ```
 subprojects {
     this.extra["bintrayUsername"] = "bintray username"
@@ -76,7 +76,7 @@ subprojects {
 
 6. The dependencies for each source set are split into two kinds `defaults` and `additional`. By default, some dependencies are configured for the source sets out of the box (as mentioned in the table above). To disable all of them, use `disable()` or to disable a single default dependency, set its value to false.
 
-7. Additional dependencies can be added using under `additional` block. 
+7. Additional dependencies can be added using under `additional` block.
 
 8. The `iosX64Main`, `iosX64Test`, `iosArm64Main` and `iosArm64Test` dependencies are shared with `iosMain` and `iosTest` targets. For example, if you are building locally or using cocoapods in a simulator, all dependencies defined in `iosX64Main` will be used in `iosMain` target and same thing happens for the real device as well.
 
@@ -146,7 +146,7 @@ suparnatural {
 }
 ```
 
-### 
+###
 
 MIT License
 
