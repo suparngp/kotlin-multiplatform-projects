@@ -1,6 +1,7 @@
 package extensions
 
 open class SuparnaturalPluginExtension {
+    var name = ""
     var description = ""
     var docsUrl = ""
     var vcsUrl = ""

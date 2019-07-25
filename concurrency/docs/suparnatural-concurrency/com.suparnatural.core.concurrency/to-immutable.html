@@ -1,0 +1,23 @@
+<HTML>
+<HEAD>
+<meta charset="UTF-8">
+<title>toImmutable - suparnatural-concurrency</title>
+<link rel="stylesheet" href="../../style.css">
+</HEAD>
+<BODY>
+<a href="../index.html">suparnatural-concurrency</a>&nbsp;/&nbsp;<a href="index.html">com.suparnatural.core.concurrency</a>&nbsp;/&nbsp;<a href="./to-immutable.html">toImmutable</a><br/>
+<br/>
+<h1>toImmutable</h1>
+<a name="com.suparnatural.core.concurrency$toImmutable(com.suparnatural.core.concurrency.toImmutable.T)"></a>
+<code><span class="keyword">expect</span> <span class="keyword">fun </span><span class="symbol">&lt;</span><span class="identifier">T</span><span class="symbol">&gt;</span> <a href="to-immutable.html#T"><span class="identifier">T</span></a><span class="symbol">.</span><span class="identifier">toImmutable</span><span class="symbol">(</span><span class="symbol">)</span><span class="symbol">: </span><a href="to-immutable.html#T"><span class="identifier">T</span></a></code>
+<p>Returns an immutable instance of an object.</p>
+<p>On Android, it simply echoes the input back because threads can have shared state.
+On iOS, it calls .toImmutable method.</p>
+<h3>Examples</h3>
+<pre><code>val person = Person(name = "Bob").toImmutable(
+
+person.name = "Jerry" // error
+
+</code></pre>
+</BODY>
+</HTML>

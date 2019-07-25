@@ -9,7 +9,7 @@ package com.suparnatural.core.concurrency
  * ### Examples
  *
  * ```
- * val person = toImmutable(Person(name = "Bob"))
+ * val person = Person(name = "Bob").toImmutable(
  *
  * person.name = "Jerry" // error
  *

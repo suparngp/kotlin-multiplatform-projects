@@ -1,0 +1,21 @@
+<HTML>
+<HEAD>
+<meta charset="UTF-8">
+<title>ValueFuture.<init> - suparnatural-concurrency</title>
+<link rel="stylesheet" href="../../../style.css">
+</HEAD>
+<BODY>
+<a href="../../index.html">suparnatural-concurrency</a>&nbsp;/&nbsp;<a href="../index.html">com.suparnatural.core.concurrency</a>&nbsp;/&nbsp;<a href="index.html">ValueFuture</a>&nbsp;/&nbsp;<a href="./-init-.html">&lt;init&gt;</a><br/>
+<br/>
+<h1>&lt;init&gt;</h1>
+<a name="com.suparnatural.core.concurrency.ValueFuture$&lt;init&gt;(com.suparnatural.core.concurrency.ValueFuture.T)"></a>
+<code><span class="identifier">ValueFuture</span><span class="symbol">(</span><span class="identifier" id="com.suparnatural.core.concurrency.ValueFuture$<init>(com.suparnatural.core.concurrency.ValueFuture.T)/result">result</span><span class="symbol">:</span>&nbsp;<a href="index.html#T"><span class="identifier">T</span></a><span class="symbol">)</span></code>
+<p>A naive future implementation to wrap a given <code>result</code>.
+It executes on the calling thread synchronously.</p>
+<h3>Examples</h3>
+<pre><code>val future: Future&lt;String&gt; = ValueFuture("hello")
+val result: String = future.await()
+
+</code></pre>
+</BODY>
+</HTML>

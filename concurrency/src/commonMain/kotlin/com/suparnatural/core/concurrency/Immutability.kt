@@ -14,19 +14,23 @@ import kotlin.reflect.KProperty
  * ### Examples
  *
  * ```
- *
  * // Since top level objects are always immutable, they can be accessed from any thread.
  * object SharedObject{
  *
- *  val person: Person? by ImmutableValue(null)
+ * val person: Person? by Immutability<Person?>(initialValue = null)
  *
- *  fun initialize(p: Person) { // any thread can now atomically update the person property.
- *      person = p // will succeed
- *
- *      person.name = ""  // will cause error
- *  }
+ *   fun initialize(p: Person) { // any thread can now atomically update the person property.
+ *     person = p // will succeed
+ *     person.name = ""  // will cause error
+ *   }
  * }
  *
+ * class MyClass {
+ *   val value: Int by Immutability<Int>(initialValue = 0)
+ * }
+ *
+ * // can be called from any thread as long as instance is thread shareable.
+ * instance.value = 3
  * ```
  */
 class Immutability<T>(initialValue: T) {
