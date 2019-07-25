@@ -6,17 +6,18 @@ plugins {
     id("suparnatural-project")
 }
 
-version = "1.0.4"
+version = "1.0.5"
 
 suparnatural {
+    name = "suparnatural-fs"
     description = "Multiplatform File system api for iOS and Android."
-    docsUrl = "https://suparngp.github.io/kotlin-multiplatform-projects/fs/docs/fs/com.suparnatural.core.fs/index.html"
+    docsUrl = "https://suparngp.github.io/kotlin-multiplatform-projects/fs//docs/suparnatural-fs/com.suparnatural.core.fs/index.html"
     vcsUrl = "https://github.com/suparngp/kotlin-multiplatform-projects/tree/master/fs"
     versionLabel = project.version.toString()
     supportsAndroid = true
     supportsCocoapods = true
     supportsIos = true
-    buildNumber = 4
+    buildNumber = 5
     bintray {
         publish = true
         repository = extra[ProjectConfig.Properties.bintrayRepository]!!.toString()
