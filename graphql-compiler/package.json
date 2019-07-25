@@ -1,0 +1,41 @@
+{
+  "name": "graphql-codegen",
+  "version": "1.0.0",
+  "main": "index.js",
+  "repository": "https://suparngp@github.com/suparngp/graphql-codegen.git",
+  "author": "Suparn Gupta <suparng@medallia.com>",
+  "license": "MIT",
+  "devDependencies": {
+    "eslint": "^5.16.0",
+    "parcel-bundler": "^1.12.3"
+  },
+  "scripts": {
+    "build": "yarn parcel src/index.js --target=node",
+    "start": "node dist/index.js ../input-2.json output.kt && ./ktlint -F --experimental output.kt"
+  },
+  "dependencies": {
+    "@babel/core": "^7.4.5",
+    "@babel/plugin-transform-flow-strip-types": "^7.4.4",
+    "@babel/preset-env": "^7.4.5",
+    "babel-eslint": "^10.0.1",
+    "babel-jest": "^24.8.0",
+    "eslint-plugin-flowtype": "^3.9.1",
+    "eslint-plugin-jest": "^22.6.4",
+    "flow-bin": "^0.100.0",
+    "fs-extra": "^8.0.1",
+    "jest": "^24.8.0",
+    "lodash": "^4.17.11",
+    "prettier": "^1.17.1"
+  },
+  "babel": {
+    "presets": [
+      "@babel/preset-env"
+    ],
+    "plugins": [
+      "@babel/plugin-transform-flow-strip-types"
+    ]
+  },
+  "jest": {
+    "testRegex": "(/__tests__/.*|(\\.|/)(test|spec))\\.[jt]sx?$"
+  }
+}
