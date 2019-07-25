@@ -17,6 +17,9 @@ fun Project.suparnatural(callback: (SuparnaturalPluginExtension.() -> Unit)) {
     configureMultiplatform(config)
     configureDocs(config.name)
 
+    if (config.supportsJvm) {
+        configureJvm(config)
+    }
 
     if (config.supportsAndroid) {
         configureAndroid(config)

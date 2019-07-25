@@ -161,3 +161,44 @@ class IosX64TestDefaultDependencies : DefaultDependencies() {
         apply(closure)
     }
 }
+
+class JvmMainDefaultDependencies: DefaultDependencies() {
+    var stdlib = true
+    override fun disable() {
+        stdlib = false
+    }
+
+    override var closure: (KotlinDependencyHandler.() -> Unit)?
+        get() = {
+            if (stdlib)
+                implementation(kotlin("stdlib"))
+        }
+        set(_) {}
+
+    operator fun invoke(closure: JvmMainDefaultDependencies.() -> Unit) {
+        apply(closure)
+    }
+}
+
+class JvmTestDefaultDependencies: DefaultDependencies() {
+    var test = true
+    var testJunit = true
+    override var closure: (KotlinDependencyHandler.() -> Unit)?
+        get() = {
+            if (test)
+                implementation(kotlin("test"))
+
+            if (testJunit)
+                implementation(kotlin("test-junit"))
+        }
+        set(_) {}
+
+    override fun disable() {
+        test = false
+        testJunit = false
+    }
+
+    operator fun invoke(closure: JvmTestDefaultDependencies.() -> Unit) {
+        apply(closure)
+    }
+}

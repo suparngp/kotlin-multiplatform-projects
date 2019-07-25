@@ -62,6 +62,8 @@ subprojects {
 |--------------|--------------------------------------|------------------------|
 | commonMain   | stdlib-common                        | Always created         |
 | commonTest   | test-common, test-annotations-common | Always created         |
+| jvmMain      | stdlib                               | supportsJvm = true     |
+| jvmTest      | test, test-junit                     | supportsJvm = true     |
 | androidMain  | stdlib                               | supportsAndroid = true |
 | androidTest  | test, test-junit                     | supportsAndroid = true |
 | iosMain      | none                                 | supportsIos = true*    |
