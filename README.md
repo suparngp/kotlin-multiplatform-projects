@@ -21,7 +21,7 @@ concurrency/multi-threading in Kotlin Multiplatform projects for `iOS` and `Andr
 Provides file system access for iOS and Android.
 
 
-### [suparnatural-cache](https://suparngp.github.io/kotlin-multiplatform-projects/cache/docs/suparnatural-cache/index.html)
+### [suparnatural-cache](cache/README.md)
 
 A super fast, persistable, thread safe in-memory cache for iOS and Android
 
@@ -94,8 +94,9 @@ plugins {
 version = "1.0.4"
 
 suparnatural {
+    name = "suparnatural-fs"
     description = "Multiplatform File system api for iOS and Android."
-    docsUrl = "https://suparngp.github.io/kotlin-multiplatform-projects/fs//docs/suparnatural-fs/com.suparnatural.core.fs/index.html"
+    docsUrl = "https://suparngp.github.io/kotlin-multiplatform-projects/fs/docs/suparnatural-fs/com.suparnatural.core.fs/index.html"
     vcsUrl = "https://github.com/suparngp/kotlin-multiplatform-projects/tree/master/fs"
     versionLabel = project.version.toString()
     supportsAndroid = true

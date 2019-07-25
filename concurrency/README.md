@@ -31,7 +31,7 @@ the `Worker` API in this package exposes and implementation based on the former 
 
 ## Usage
 
-Check out the [API Docs](https://suparngp.github.io/kotlin-multiplatform-projects/concurrency/docs/suparnatural-concurrency/com.suparnatural.core.concurrency/index.html).
+Check out the [API Docs](https://suparngp.github.io/kotlin-multiplatform-projects/concurrency/docs/suparnatural-concurrency/index.html).
 They are always up to date with code examples.
 
 ### Worker

@@ -21,7 +21,7 @@ enum class FileType {
 }
 
 /**
- * Stats for a file at [path] with name as [name].
+ * Stats for a file with name as [name].
  */
 data class StatResult(
         /**
