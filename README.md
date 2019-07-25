@@ -95,7 +95,7 @@ version = "1.0.4"
 
 suparnatural {
     description = "Multiplatform File system api for iOS and Android."
-    docsUrl = "https://suparngp.github.io/kotlin-multiplatform-projects/fs/docs/fs/com.suparnatural.core.fs/index.html"
+    docsUrl = "https://suparngp.github.io/kotlin-multiplatform-projects/fs//docs/suparnatural-fs/com.suparnatural.core.fs/index.html"
     vcsUrl = "https://github.com/suparngp/kotlin-multiplatform-projects/tree/master/fs"
     versionLabel = project.version.toString()
     supportsAndroid = true
