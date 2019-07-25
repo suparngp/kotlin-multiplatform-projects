@@ -7,8 +7,8 @@
 <BODY>
 <a href="./index.html">suparnatural-concurrency</a><br/>
 <br/>
-<p>This library provides convenient methods and common implementations for various
-use cases in Kotlin Multiplatform/Native for multithreading on both <code>iOS</code> and <code>Android</code>.</p>
+<p>This library provides convenient methods and common implementations to simplify
+concurrency/multi-threading in Kotlin Multiplatform projects for <code>iOS</code> and <code>Android</code>.</p>
 <p>This package is intended to unify the concurrency patterns on all the platforms.
 For example, Native concurrency is different than how JVM works thus in many
 cases, it may be hard to write common code without platform specific considerations.</p>
@@ -108,7 +108,7 @@ lock.acquireWriteLock() // only one thread will get lock, others will be blocked
 lock.releaseWriteLock() // next thread will now unblock.
 </code></pre>
 <h4>Mutex Lock</h4>
-<p><a href="https://suparngp.github.io/kotlin-multiplatform-projects/threading/docs/threading/com.suparnatural.core.threading/-mutex/index.html"><code>MutexLock</code></a> is a locking mechanism which allows only one thread to gain access to a resource protected by an instance of <a href="com.suparnatural.core.concurrency/-mutex-lock/index.html">MutexLock</a>. If more than one thread tries to acquire <code>lock</code>, only the first thread is successful while the other threads either wait or return depending on whether <code>lock</code> or <code>tryLock</code> was invoked.</p>
+<p><a href="https://suparngp.github.io/kotlin-multiplatform-projects/concurrency/docs/concurrency/com.suparnatural.core.concurrency/-mutex/index.html"><code>MutexLock</code></a> is a locking mechanism which allows only one thread to gain access to a resource protected by an instance of <a href="com.suparnatural.core.concurrency/-mutex-lock/index.html">MutexLock</a>. If more than one thread tries to acquire <code>lock</code>, only the first thread is successful while the other threads either wait or return depending on whether <code>lock</code> or <code>tryLock</code> was invoked.</p>
 <pre><code>val mutex = MutexLock()
 mutex.lock()
 assertFalse(mutex.tryLock())

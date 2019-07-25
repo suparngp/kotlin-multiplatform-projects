@@ -13,7 +13,8 @@ API docs are also available for every module.
 
 ### [suparnatural-concurrency](concurrency/README.md)
 
-Classes and utilities to manage make multithreading easy peasy on iOS and Android.
+This library provides convenient methods and common implementations to simplify
+concurrency/multi-threading in Kotlin Multiplatform projects for `iOS` and `Android`.
 
 ### [suparnatural-fs](fs/README.md)
 

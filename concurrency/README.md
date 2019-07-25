@@ -1,7 +1,7 @@
 # Module suparnatural-concurrency
 
-This library provides convenient methods and common implementations for various
-use cases in Kotlin Multiplatform/Native for multithreading on both `iOS` and `Android`.
+This library provides convenient methods and common implementations to simplify
+concurrency/multi-threading in Kotlin Multiplatform projects for `iOS` and `Android`.
 
 This package is intended to unify the concurrency patterns on all the platforms.
 For example, Native concurrency is different than how JVM works thus in many
@@ -128,7 +128,7 @@ lock.releaseWriteLock() // next thread will now unblock.
 
 #### Mutex Lock
 
-[`MutexLock`](https://suparngp.github.io/kotlin-multiplatform-projects/threading/docs/threading/com.suparnatural.core.threading/-mutex/index.html) is a locking mechanism which allows only one thread to gain access to a resource protected by an instance of [MutexLock]. If more than one thread tries to acquire `lock`, only the first thread is successful while the other threads either wait or return depending on whether `lock` or `tryLock` was invoked.
+[`MutexLock`](https://suparngp.github.io/kotlin-multiplatform-projects/concurrency/docs/concurrency/com.suparnatural.core.concurrency/-mutex/index.html) is a locking mechanism which allows only one thread to gain access to a resource protected by an instance of [MutexLock]. If more than one thread tries to acquire `lock`, only the first thread is successful while the other threads either wait or return depending on whether `lock` or `tryLock` was invoked.
 
 ```
 val mutex = MutexLock()

@@ -1,11 +1,11 @@
 Pod::Spec.new do |spec|
     spec.name                     = 'concurrency'
-    spec.version                  = '1.0.4'
+    spec.version                  = '1.0.5'
     spec.homepage                 = 'https://suparngp.github.io/kotlin-multiplatform-projects/concurrency/docs/concurrency/com.suparnatural.core.concurrency/index.html'
     spec.source                   = { :git => "Not Published", :tag => "Cocoapods/#{spec.name}/#{spec.version}" }
     spec.authors                  = 'suparnatural'
     spec.license                  = 'MIT'
-    spec.summary                  = 'Supercharged Kotlin multiplatform threading for iOS and Android.'
+    spec.summary                  = 'Supercharged Kotlin Multiplatform concurrency/threading for iOS and Android.'
 
     spec.static_framework         = true
     spec.vendored_frameworks      = "build/cocoapods/framework/#{spec.name}.framework"
