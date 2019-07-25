@@ -40,3 +40,13 @@ Pods
 *.hprof
 /local.properties
 /gradle.properties
+
+
+.next
+.cache
+dist
+META-INF
+API.swift
+node_modules
+/graphql-compiler/output.kt
+/graphql-compiler/schema.json
