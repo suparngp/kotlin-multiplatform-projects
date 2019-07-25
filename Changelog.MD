@@ -1,6 +1,12 @@
 # Change Log
 
-## 1.0.4
+## v1.0.5
+1. Renamed `threading` module to `concurrency`.
+2. Introduced unified `Worker` api for all platforms.
+3. Jobs which can resume on a different thread.
+4. Cleaner `JobDispatcher` APIs.
+
+## v1.0.4
 
 1. Removed `core` from each package name.
 2. Updated the bintray repository.
