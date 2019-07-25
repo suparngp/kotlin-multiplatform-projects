@@ -1,7 +1,7 @@
 Pod::Spec.new do |spec|
     spec.name                     = 'cache'
-    spec.version                  = '1.0.4'
-    spec.homepage                 = 'https://suparngp.github.io/kotlin-multiplatform-projects/cache/docs/cache/com.suparnatural.core.cache/index.html'
+    spec.version                  = '1.0.5'
+    spec.homepage                 = 'https://suparngp.github.io/kotlin-multiplatform-projects/cache/docs/suparnatural-cache/com.suparnatural.core.cache/index.html'
     spec.source                   = { :git => "Not Published", :tag => "Cocoapods/#{spec.name}/#{spec.version}" }
     spec.authors                  = 'suparnatural'
     spec.license                  = 'MIT'

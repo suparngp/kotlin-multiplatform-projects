@@ -1,7 +1,7 @@
 package com.suparnatural.core.cache
 
-import com.suparnatural.core.threading.ImmutableValue
-import com.suparnatural.core.threading.toImmutable
+import com.suparnatural.core.concurrency.Immutability
+import com.suparnatural.core.concurrency.toImmutable
 
 /**
  * A Container which holds [Cacheable] objects which can identified by the [key] derived from [Cacheable.cacheKey].
@@ -21,14 +21,14 @@ data class CacheableContainer(
     /**
      * A pointer to next cached object. Useful in Cache Registry and book keeping.
      */
-    var next: CacheableContainer? by ImmutableValue(null)
+    var next: CacheableContainer? by Immutability(null)
 
     /**
      * A pointer to previous cached object. Useful in Cache Registry and book keeping.
      */
-    var previous: CacheableContainer? by ImmutableValue(null)
+    var previous: CacheableContainer? by Immutability(null)
 
     init {
-        toImmutable(this)
+        this.toImmutable()
     }
 }

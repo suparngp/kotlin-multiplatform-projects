@@ -1,9 +1,10 @@
 package com.suparnatural.core.cache
 
 import com.suparnatural.core.fs.FileSystem
-import com.suparnatural.core.threading.Future
-import com.suparnatural.core.threading.Worker
-import com.suparnatural.core.threading.toImmutable
+import com.suparnatural.core.concurrency.Future
+import com.suparnatural.core.concurrency.Worker
+import com.suparnatural.core.concurrency.WorkerFactory
+import com.suparnatural.core.concurrency.toImmutable
 import com.suparnatural.core.utilities.measureTimeMillis
 import kotlin.math.abs
 import kotlin.random.Random
@@ -149,11 +150,10 @@ class CacheTests {
         CacheManager.initialize(LinearProbingCache(cacheSize, persistentStores = listOf(diskStorage)))
         testCache(testData)
 
-        diskStorage.flushAndClose().consume {
-            // for .DS_STORE
-            val size = FileSystem.readDir(diskStorage.location)!!.size
-            assertTrue { size == 0 || size == 1 }
-        }
+        diskStorage.flushAndClose().await()
+        val size = FileSystem.readDir(diskStorage.location)!!.size
+        // for .DS_STORE
+        assertTrue { size == 0 || size == 1 }
     }
 
     @Test
@@ -215,15 +215,15 @@ class CacheTests {
         }
 
         futures.forEach {
-            it.consume {}
+            it.await()
         }
 
     }
 
     fun testWithWorker(testDataSize: Int): Future<List<Person>> {
-        val worker = Worker()
+        val worker = WorkerFactory.newBackgroundWorker()
         return worker.execute(testDataSize) {
-            val data = toImmutable(createData(it))
+            val data = createData(it).toImmutable()
 
             data.forEach { p ->
                 assertTrue(CacheManager.cache.addObject(p), "Object was not added in cache")

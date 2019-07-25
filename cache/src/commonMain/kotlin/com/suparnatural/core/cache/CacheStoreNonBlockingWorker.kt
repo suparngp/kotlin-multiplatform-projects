@@ -1,8 +1,9 @@
 package com.suparnatural.core.cache
 
+import com.suparnatural.core.concurrency.Future
+import com.suparnatural.core.concurrency.Worker
+import com.suparnatural.core.concurrency.WorkerFactory
 import com.suparnatural.core.fs.PathComponent
-import com.suparnatural.core.threading.Future
-import com.suparnatural.core.threading.Worker
 
 /**
  * A background worker for the cache store which does not block the calling thread.
@@ -12,12 +13,14 @@ import com.suparnatural.core.threading.Worker
 class CacheStoreNonBlockingWorker : CacheStoreWorker {
 
     /**
-     * An instance of [Worker] from threading.
+     * An instance of [com.suparnatural.core.concurrency.Worker].
      */
-    val worker = Worker()
+    val worker = WorkerFactory.newBackgroundWorker()
 
     /**
      * Adds an object by scheduling a task on the [worker].
+     *
+     * @param T the type of object being persisted.
      */
     override fun <T: Cacheable> persistObject(
             input: Triple<T, PathComponent, List<CacheStorePreprocessor<Cacheable, Cacheable, Cacheable>>?>,

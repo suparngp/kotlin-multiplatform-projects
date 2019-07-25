@@ -6,6 +6,9 @@ package com.suparnatural.core.cache
  * is the file contents. This is the first Cacheable object passed to the
  * preprocessor chain. Therefore, your first preprocessor should
  * expect [RawCacheable] as the input to [CacheStorePreprocessor.unarchive] method.
+ *
+ * @property key the key to identify this object with.
+ * @property value the serialized version of the cached object
  */
 data class RawCacheable(val key: String, val value: String): Cacheable {
     override fun cacheKey(): String {

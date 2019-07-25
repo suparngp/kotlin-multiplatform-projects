@@ -1,0 +1,24 @@
+<HTML>
+<HEAD>
+<meta charset="UTF-8">
+<title>DiskStore.preprocessors - suparnatural-cache</title>
+<link rel="stylesheet" href="../../../style.css">
+</HEAD>
+<BODY>
+<a href="../../index.html">suparnatural-cache</a>&nbsp;/&nbsp;<a href="../index.html">com.suparnatural.core.cache</a>&nbsp;/&nbsp;<a href="index.html">DiskStore</a>&nbsp;/&nbsp;<a href="./preprocessors.html">preprocessors</a><br/>
+<br/>
+<h1>preprocessors</h1>
+<a name="com.suparnatural.core.cache.DiskStore$preprocessors"></a>
+<code><span class="keyword">val </span><span class="identifier">preprocessors</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.collections/-list/index.html"><span class="identifier">List</span></a><span class="symbol">&lt;</span><a href="../-cache-store-preprocessor/index.html"><span class="identifier">CacheStorePreprocessor</span></a><span class="symbol">&lt;</span><a href="../-cacheable/index.html"><span class="identifier">Cacheable</span></a><span class="symbol">,</span>&nbsp;<a href="../-cacheable/index.html"><span class="identifier">Cacheable</span></a><span class="symbol">,</span>&nbsp;<a href="../-cacheable/index.html"><span class="identifier">Cacheable</span></a><span class="symbol">&gt;</span><span class="symbol">&gt;</span><span class="symbol">?</span></code>
+<p>Overrides <a href="../-cache-store/preprocessors.html">CacheStore.preprocessors</a></p>
+<p>Chain of preprocessors to archive and unarchive <a href="../-cacheable/index.html">Cacheable</a> objects.
+While persisting, the preprocessors are applied to the incoming <a href="../-cacheable/index.html">Cacheable</a> instance
+and are expected to return an archived <a href="../-cacheable/index.html">Cacheable</a> instance.
+Before archiving, a <a href="../-cache-store/index.html">CacheStore</a> always adds a special <a href="../-cache-store-preprocessor/index.html">CacheStorePreprocessor</a> at the end
+of the <a href="../-cache-store/preprocessors.html">preprocessors</a> chain which outputs a <a href="../-raw-cacheable/index.html">RawCacheable</a>.</p>
+<p>While reading an object for the persistence, the preprocessors are applied in a reverse order.
+The store first unarchives the read content into a <a href="../-raw-cacheable/index.html">RawCacheable</a> and then passes to the
+last (or first preprocessor in reversed <a href="../-cache-store/preprocessors.html">preprocessors</a> chain) preprocessor in the chain moving its way
+back to the first (or the last in reverse <a href="../-cache-store/preprocessors.html">preprocessors</a> chain).</p>
+</BODY>
+</HTML>

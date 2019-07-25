@@ -43,6 +43,18 @@ class RobinHoodProbingCache(
         }
     }
 
+    /**
+     * A class representing a group of four values
+     * @param A the type of first value
+     * @param B the type of second value
+     * @param C the type of third value
+     * @param D the type of fourth value
+     *
+     * @property first the first value
+     * @property second the second value
+     * @property third the third value
+     * @property fourth the fourth value
+     */
     data class Quintuple<A, B, C, D>(val first: A, val second: B, val third: C, val fourth: D)
 
     private fun addObjectUnsafe(newObj: CacheableContainer, hash: Int, index: Int): Quintuple<CacheableContainer?, Int, Int, Boolean>? {
@@ -117,6 +129,9 @@ class RobinHoodProbingCache(
     }
 
 
+    /**
+     * @param T the object being remove by [key].
+     */
     override fun <T : Cacheable> removeObject(key: String): Pair<T?, Boolean> {
         try {
             lock.acquireWriteLock()

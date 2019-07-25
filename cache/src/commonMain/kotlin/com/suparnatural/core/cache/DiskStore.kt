@@ -2,7 +2,7 @@ package com.suparnatural.core.cache
 
 import com.suparnatural.core.fs.FileSystem
 import com.suparnatural.core.fs.PathComponent
-import com.suparnatural.core.threading.Future
+import com.suparnatural.core.concurrency.Future
 
 /**
  * A [CacheStore] which persists [Cacheable] objects on the disk.

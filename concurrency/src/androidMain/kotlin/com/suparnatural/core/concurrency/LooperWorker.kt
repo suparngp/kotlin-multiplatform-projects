@@ -40,8 +40,17 @@ class LooperWorker(private val looper: Looper) : Worker {
         }
         val thread = looper.thread
         if (thread is HandlerThread) {
-            if (finishPendingTasks) thread.quitSafely() else thread.quit()
-            return ValueFuture(Unit)
+            return if (finishPendingTasks) {
+                val futureTask = FutureTask {
+                    thread.quitSafely()
+                    Unit
+                }
+                handler.post(futureTask)
+                NativeFuture(futureTask)
+            } else {
+                thread.quit()
+                ValueFuture(Unit)
+            }
         } else {
             throw Exception("Looper thread is not HandlerThread")
         }

@@ -39,17 +39,24 @@ interface Cache {
 
     /**
      * Returns a object with the given [key].
+     *
+     * @param T the type of object being fetched.
      */
     fun <T : Cacheable> getObject(key: String): T?
 
     /**
      * Adds a [Cacheable] object to the cache. The cache key is retrieved
      * by calling [Cacheable.cacheKey] method.
+     *
+     * @param T the type of object being added.
      */
     fun <T : Cacheable> addObject(obj: T): Boolean
 
     /**
      * Removed a [Cacheable] object from the cache.
+     *
+     * @param T the type of object removed from [key]
+     * @return A Pair of removed object and a boolean which is true if the object is removed.
      */
     fun <T : Cacheable> removeObject(key: String): Pair<T?, Boolean>
 
