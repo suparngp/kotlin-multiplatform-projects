@@ -21,7 +21,7 @@ concurrency/multi-threading in Kotlin Multiplatform projects for `iOS` and `Andr
 Provides file system access for iOS and Android.
 
 
-### [suparnatural-cache](https://suparngp.github.io/kotlin-multiplatform-projects/cache/docs/cache/index.html)
+### [suparnatural-cache](https://suparngp.github.io/kotlin-multiplatform-projects/cache/docs/suparnatural-cache/index.html)
 
 A super fast, persistable, thread safe in-memory cache for iOS and Android
 

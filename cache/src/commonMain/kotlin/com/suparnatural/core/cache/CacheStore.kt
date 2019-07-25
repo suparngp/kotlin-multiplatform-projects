@@ -1,6 +1,6 @@
 package com.suparnatural.core.cache
 
-import com.suparnatural.core.threading.Future
+import com.suparnatural.core.concurrency.Future
 
 
 /**
@@ -45,6 +45,8 @@ interface CacheStore {
 
     /**
      * Persists a [Cacheable] `obj` to the store. Uses a background worker if [blocking] is false.
+     *
+     * @param T the type of object being persisted.
      */
     fun <T : Cacheable> persistObject(obj: T)
 

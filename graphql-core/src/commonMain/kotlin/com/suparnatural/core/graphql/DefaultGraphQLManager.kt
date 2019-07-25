@@ -1,6 +1,6 @@
 package com.suparnatural.core.graphql
 
-import com.suparnatural.core.threading.ThreadTransferableJob
+import com.suparnatural.core.concurrency.ThreadTransferableJob
 import kotlinx.serialization.UnstableDefault
 import kotlinx.serialization.json.Json
 

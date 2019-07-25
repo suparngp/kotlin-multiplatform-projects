@@ -1,8 +1,8 @@
 package com.suparnatural.core.cache
 
 import com.suparnatural.core.fs.PathComponent
-import com.suparnatural.core.threading.Future
-import com.suparnatural.core.threading.InlineFuture
+import com.suparnatural.core.concurrency.Future
+import com.suparnatural.core.concurrency.ValueFuture
 
 /**
  * A [CacheStoreWorker] which blocks the calling thread.
@@ -10,6 +10,8 @@ import com.suparnatural.core.threading.InlineFuture
 class CacheStoreBlockingWorker : CacheStoreWorker {
     /**
      * Adds an object by blocking the calling thread.
+     *
+     * @param T the type of object being persisted.
      */
     override fun <T: Cacheable> persistObject(
             input: Triple<T, PathComponent, List<CacheStorePreprocessor<Cacheable, Cacheable, Cacheable>>?>,
@@ -27,8 +29,9 @@ class CacheStoreBlockingWorker : CacheStoreWorker {
 
     /**
      * This method is a no-op. It simply returns a resolved future.
+     * @return a future which resolves when worker is terminated.
      */
     override fun terminate(): Future<Unit> {
-        return InlineFuture(Unit)
+        return ValueFuture(Unit)
     }
 }

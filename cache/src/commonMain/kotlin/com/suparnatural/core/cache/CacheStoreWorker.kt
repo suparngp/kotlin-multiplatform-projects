@@ -1,7 +1,7 @@
 package com.suparnatural.core.cache
 
 import com.suparnatural.core.fs.PathComponent
-import com.suparnatural.core.threading.Future
+import com.suparnatural.core.concurrency.Future
 
 /**
  * A [CacheStore] schedules its operations (controlled by [CacheStore.blocking] parameter)
@@ -33,6 +33,8 @@ interface CacheStoreWorker {
      * Invokes a strictly non-capturing lambda [task] with the [input] as an argument to persist [T].
      * The [task] must not access any state other than its arguments including
      * any immutable of frozen objects to guarantee thread safety.
+     *
+     * @param T the type of object being persisted
      */
     fun <T: Cacheable> persistObject(
             input: Triple<T, PathComponent, List<CacheStorePreprocessor<Cacheable, Cacheable, Cacheable>>?>,

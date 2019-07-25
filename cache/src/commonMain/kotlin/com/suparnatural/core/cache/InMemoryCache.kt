@@ -1,7 +1,7 @@
 package com.suparnatural.core.cache
 
-import com.suparnatural.core.threading.AtomicReference
-import com.suparnatural.core.threading.ReadWriteLock
+import com.suparnatural.core.concurrency.AtomicReference
+import com.suparnatural.core.concurrency.ReadWriteLock
 import kotlin.math.abs
 
 /**
@@ -66,6 +66,7 @@ abstract class InMemoryCache(
     /**
      * Removes the item from persistent stores.
      * Assumes that lock is already obtained.
+     * @param T the type of object being removed.
      */
     fun <T : Cacheable> removeObject(obj: CacheableContainer): Pair<T?, Boolean> {
         persistentStores.forEach { storage ->

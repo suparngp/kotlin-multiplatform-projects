@@ -2,7 +2,7 @@ package com.suparnatural.core.cache
 
 import com.suparnatural.core.cache.CacheManager.cache
 import com.suparnatural.core.cache.CacheManager.initialize
-import com.suparnatural.core.threading.ImmutableValue
+import com.suparnatural.core.concurrency.Immutability
 
 /**
  * A thread-safe object which manages the [cache] based on initialization parameters.
@@ -15,7 +15,7 @@ object CacheManager {
      * Cache object managed by the [CacheManager]. Ensure that the cache is initialized
      * before calling any methods on this object.
      */
-    var cache: Cache by ImmutableValue(PlaceholderCache())
+    var cache: Cache by Immutability(PlaceholderCache())
 
 
     /**

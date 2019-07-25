@@ -1,15 +1,15 @@
 package com.suparnatural.core.cache
 
-import com.suparnatural.core.threading.ImmutableValue
+import com.suparnatural.core.concurrency.Immutability
 
 /**
  * A cache replacement policy which evicts the oldest object from cache
  * to make space when cache is full.
  */
 class FifoCacheReplacementPolicy(override  val cacheSize: Int): CacheReplacementPolicy {
-    private var listHeadUnsafe by ImmutableValue<CacheableContainer?>(null)
-    private var listTailUnsafe by ImmutableValue<CacheableContainer?>(null)
-    private var currentSize by ImmutableValue(0)
+    private var listHeadUnsafe by Immutability<CacheableContainer?>(null)
+    private var listTailUnsafe by Immutability<CacheableContainer?>(null)
+    private var currentSize by Immutability(0)
 
     override fun registerObjectUnsafe(obj: CacheableContainer): CacheableContainer? {
 

@@ -99,6 +99,9 @@ class LinearProbingCache(
     }
 
 
+    /**
+     * @param T the type of object being removed by [key]
+     */
     override fun <T : Cacheable> removeObject(key: String): Pair<T?, Boolean> {
         try {
             lock.acquireWriteLock()

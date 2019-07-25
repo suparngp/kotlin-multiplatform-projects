@@ -1,0 +1,192 @@
+<HTML>
+<HEAD>
+<meta charset="UTF-8">
+<title>com.suparnatural.core.cache - suparnatural-cache</title>
+<link rel="stylesheet" href="../../style.css">
+</HEAD>
+<BODY>
+<a href="../index.html">suparnatural-cache</a>&nbsp;/&nbsp;<a href="./index.html">com.suparnatural.core.cache</a><br/>
+<br/>
+<h2>Package com.suparnatural.core.cache</h2>
+<h3>Types</h3>
+<table>
+<tbody>
+<tr>
+<td>
+<p><a href="-cache/index.html">Cache</a></p>
+</td>
+<td>
+<code><span class="keyword">interface </span><span class="identifier">Cache</span></code>
+<p>A generic Cache. A cache can be backed by persistent stores.
+The main different between cache and a persistent store is that
+the latter is considered to be slower than the former.
+Therefore, the APIs to access objects from a persistent store are not
+the same as that of a cache. For example, in <a href="-in-memory-cache/index.html">InMemoryCache</a> vs <a href="-disk-store/index.html">DiskStore</a>,
+the <a href="-in-memory-cache/index.html">InMemoryCache</a> is the primary data structure which other parts
+of the application should interact with while <a href="-disk-store/index.html">DiskStore</a> can be used
+to rehydrate the cache after a cold start.</p>
+</td>
+</tr>
+<tr>
+<td>
+<p><a href="-cacheable/index.html">Cacheable</a></p>
+</td>
+<td>
+<code><span class="keyword">interface </span><span class="identifier">Cacheable</span></code>
+<p>Any object which should be cached must be <a href="-cacheable/index.html">Cacheable</a>.
+Each cache object must have a unique identifier returned by <a href="-cacheable/cache-key.html">cacheKey</a>.
+If the object wishes to be persistable, then the <a href="-cacheable/serialize-for-persistence.html">serializeForPersistence</a>
+method can return a string which represents its serialized version.</p>
+</td>
+</tr>
+<tr>
+<td>
+<p><a href="-cacheable-container/index.html">CacheableContainer</a></p>
+</td>
+<td>
+<code><span class="keyword">data</span> <span class="keyword">class </span><span class="identifier">CacheableContainer</span></code>
+<p>A Container which holds <a href="-cacheable/index.html">Cacheable</a> objects which can identified by the <a href="-cacheable-container/key.html">key</a> derived from <a href="-cacheable/cache-key.html">Cacheable.cacheKey</a>.
+The cached object is converted to immutable before caching. So any updates to the same object will cause an error.</p>
+</td>
+</tr>
+<tr>
+<td>
+<p><a href="-cache-manager/index.html">CacheManager</a></p>
+</td>
+<td>
+<code><span class="keyword">object </span><span class="identifier">CacheManager</span></code>
+<p>A thread-safe object which manages the <a href="-cache-manager/cache.html">cache</a> based on initialization parameters.</p>
+</td>
+</tr>
+<tr>
+<td>
+<p><a href="-cache-replacement-policy/index.html">CacheReplacementPolicy</a></p>
+</td>
+<td>
+<code><span class="keyword">interface </span><span class="identifier">CacheReplacementPolicy</span></code>
+<p>A Cache Replacement policy maintains a registry of cached objects
+to free space when cache is full. The object removed when cache
+fills up depends on the implementation of <a href="-cache-replacement-policy/evict-unsafe.html">CacheReplacementPolicy.evictUnsafe</a> method.</p>
+</td>
+</tr>
+<tr>
+<td>
+<p><a href="-cache-store/index.html">CacheStore</a></p>
+</td>
+<td>
+<code><span class="keyword">interface </span><span class="identifier">CacheStore</span></code>
+<p>A persistent store to back a cache.
+This store is considered to be slow by default.
+Therefore, direct interaction with it to access cached objects
+should be avoided. The store is useful in certain scenarios.</p>
+</td>
+</tr>
+<tr>
+<td>
+<p><a href="-cache-store-blocking-worker/index.html">CacheStoreBlockingWorker</a></p>
+</td>
+<td>
+<code><span class="keyword">class </span><span class="identifier">CacheStoreBlockingWorker</span>&nbsp;<span class="symbol">:</span>&nbsp;<a href="-cache-store-worker/index.html"><span class="identifier">CacheStoreWorker</span></a></code>
+<p>A <a href="-cache-store-worker/index.html">CacheStoreWorker</a> which blocks the calling thread.</p>
+</td>
+</tr>
+<tr>
+<td>
+<p><a href="-cache-store-non-blocking-worker/index.html">CacheStoreNonBlockingWorker</a></p>
+</td>
+<td>
+<code><span class="keyword">class </span><span class="identifier">CacheStoreNonBlockingWorker</span>&nbsp;<span class="symbol">:</span>&nbsp;<a href="-cache-store-worker/index.html"><span class="identifier">CacheStoreWorker</span></a></code>
+<p>A background worker for the cache store which does not block the calling thread.
+The calling thread cannot wait for the result. Therefore, this worker is supposed
+to be used in a fire and forget scenario. Otherwise, use <a href="-cache-store-blocking-worker/index.html">CacheStoreBlockingWorker</a>.</p>
+</td>
+</tr>
+<tr>
+<td>
+<p><a href="-cache-store-preprocessor/index.html">CacheStorePreprocessor</a></p>
+</td>
+<td>
+<code><span class="keyword">interface </span><span class="identifier">CacheStorePreprocessor</span><span class="symbol">&lt;</span><span class="identifier">T</span>&nbsp;<span class="symbol">:</span>&nbsp;<a href="-cacheable/index.html"><span class="identifier">Cacheable</span></a><span class="symbol">, </span><span class="keyword">out</span>&nbsp;<span class="identifier">R</span>&nbsp;<span class="symbol">:</span>&nbsp;<a href="-cacheable/index.html"><span class="identifier">Cacheable</span></a><span class="symbol">, </span><span class="keyword">in</span>&nbsp;<span class="identifier">V</span>&nbsp;<span class="symbol">:</span>&nbsp;<a href="-cacheable/index.html"><span class="identifier">Cacheable</span></a><span class="symbol">&gt;</span></code>
+<p>A <a href="-cache-store-preprocessor/index.html">CacheStorePreprocessor</a> processes <a href="-cacheable/index.html">Cacheable</a> objects before persisting them in the store
+and after they are read from the store.</p>
+</td>
+</tr>
+<tr>
+<td>
+<p><a href="-cache-store-worker/index.html">CacheStoreWorker</a></p>
+</td>
+<td>
+<code><span class="keyword">interface </span><span class="identifier">CacheStoreWorker</span></code>
+<p>A <a href="-cache-store/index.html">CacheStore</a> schedules its operations (controlled by <a href="-cache-store/blocking.html">CacheStore.blocking</a> parameter)
+on a <a href="-cache-store-worker/index.html">CacheStoreWorker</a>. Workers are expected to operate in a single mode (blocking/non-blocking).
+Therefore, each worker can assume the mode in which it will be invoked in and should schedule
+all of its tasks (with exceptions) in that mode forever.</p>
+</td>
+</tr>
+<tr>
+<td>
+<p><a href="-disk-store/index.html">DiskStore</a></p>
+</td>
+<td>
+<code><span class="keyword">class </span><span class="identifier">DiskStore</span>&nbsp;<span class="symbol">:</span>&nbsp;<a href="-cache-store/index.html"><span class="identifier">CacheStore</span></a></code>
+<p>A <a href="-cache-store/index.html">CacheStore</a> which persists <a href="-cacheable/index.html">Cacheable</a> objects on the disk.
+By default, the store blocks the calling thread for all its operations which can changed by
+setting <a href="-disk-store/blocking.html">blocking</a> to false.</p>
+</td>
+</tr>
+<tr>
+<td>
+<p><a href="-fifo-cache-replacement-policy/index.html">FifoCacheReplacementPolicy</a></p>
+</td>
+<td>
+<code><span class="keyword">class </span><span class="identifier">FifoCacheReplacementPolicy</span>&nbsp;<span class="symbol">:</span>&nbsp;<a href="-cache-replacement-policy/index.html"><span class="identifier">CacheReplacementPolicy</span></a></code>
+<p>A cache replacement policy which evicts the oldest object from cache
+to make space when cache is full.</p>
+</td>
+</tr>
+<tr>
+<td>
+<p><a href="-in-memory-cache/index.html">InMemoryCache</a></p>
+</td>
+<td>
+<code><span class="keyword">abstract</span> <span class="keyword">class </span><span class="identifier">InMemoryCache</span>&nbsp;<span class="symbol">:</span>&nbsp;<a href="-cache/index.html"><span class="identifier">Cache</span></a></code>
+<p>An abstract, thread-safe in-memory cache with a
+custom HashTable implementation backed by an array of atomic values.
+It guarantees consistency in both single and multi-threaded environment.</p>
+</td>
+</tr>
+<tr>
+<td>
+<p><a href="-linear-probing-cache/index.html">LinearProbingCache</a></p>
+</td>
+<td>
+<code><span class="keyword">class </span><span class="identifier">LinearProbingCache</span>&nbsp;<span class="symbol">:</span>&nbsp;<a href="-in-memory-cache/index.html"><span class="identifier">InMemoryCache</span></a></code>
+<p>A thread-safe <a href="-in-memory-cache/index.html">InMemoryCache</a> with a custom HashTable implementation based on Linear Probing.</p>
+</td>
+</tr>
+<tr>
+<td>
+<p><a href="-raw-cacheable/index.html">RawCacheable</a></p>
+</td>
+<td>
+<code><span class="keyword">data</span> <span class="keyword">class </span><span class="identifier">RawCacheable</span>&nbsp;<span class="symbol">:</span>&nbsp;<a href="-cacheable/index.html"><span class="identifier">Cacheable</span></a></code>
+<p>A container to hold raw version for a cached object read from a persistent store.
+For example, in case of a disk store, <a href="-raw-cacheable/key.html">key</a> is the file name and <a href="-raw-cacheable/value.html">value</a>
+is the file contents. This is the first Cacheable object passed to the
+preprocessor chain. Therefore, your first preprocessor should
+expect <a href="-raw-cacheable/index.html">RawCacheable</a> as the input to <a href="-cache-store-preprocessor/unarchive.html">CacheStorePreprocessor.unarchive</a> method.</p>
+</td>
+</tr>
+<tr>
+<td>
+<p><a href="-robin-hood-probing-cache/index.html">RobinHoodProbingCache</a></p>
+</td>
+<td>
+<code><span class="keyword">class </span><span class="identifier">RobinHoodProbingCache</span>&nbsp;<span class="symbol">:</span>&nbsp;<a href="-in-memory-cache/index.html"><span class="identifier">InMemoryCache</span></a></code>
+<p>A thread-safe <a href="-in-memory-cache/index.html">InMemoryCache</a> with a custom HashTable implementation using Robin Hood hashing.</p>
+</td>
+</tr>
+</tbody>
+</table>
+</BODY>
+</HTML>

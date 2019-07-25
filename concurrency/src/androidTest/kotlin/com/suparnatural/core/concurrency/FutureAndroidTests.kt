@@ -7,7 +7,7 @@ import kotlin.test.assertEquals
 
 class FutureAndroidTests {
     @Test
-    fun testBlockingFuture() {
+    fun testNativeFuture() {
         val futureTask = FutureTask{
             "Hello"
         }
