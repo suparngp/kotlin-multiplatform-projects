@@ -1,0 +1,35 @@
+<HTML>
+<HEAD>
+<meta charset="UTF-8">
+<title>Immutability.<init> - concurrency</title>
+<link rel="stylesheet" href="../../../style.css">
+</HEAD>
+<BODY>
+<a href="../../index.html">concurrency</a>&nbsp;/&nbsp;<a href="../index.html">com.suparnatural.core.concurrency</a>&nbsp;/&nbsp;<a href="index.html">Immutability</a>&nbsp;/&nbsp;<a href="./-init-.html">&lt;init&gt;</a><br/>
+<br/>
+<h1>&lt;init&gt;</h1>
+<a name="com.suparnatural.core.concurrency.Immutability$&lt;init&gt;(com.suparnatural.core.concurrency.Immutability.T)"></a>
+<code><span class="identifier">Immutability</span><span class="symbol">(</span><span class="identifier" id="com.suparnatural.core.concurrency.Immutability$<init>(com.suparnatural.core.concurrency.Immutability.T)/initialValue">initialValue</span><span class="symbol">:</span>&nbsp;<a href="index.html#T"><span class="identifier">T</span></a><span class="symbol">)</span></code>
+<p>A property delegate to create thread safe immutable frozen properties backed by <a href="../-atomic-reference/index.html">AtomicReference</a>.
+The property can be declared with <code>by [Immutability] (initialValue)</code> keyword.
+All get and set operations are then performed atomically.
+Note that the values are immutable once set.
+So any updates to the internal properties of the value will cause a failure.</p>
+<p>This is really useful if you want an immutable object so that it can be shared
+among different threads with some dynamic behavior (like lazy initialization)</p>
+<h3>Examples</h3>
+<pre><code>// Since top level objects are always immutable, they can be accessed from any thread.
+object SharedObject{
+
+ val person: Person? by ImmutableValue(null)
+
+ fun initialize(p: Person) { // any thread can now atomically update the person property.
+     person = p // will succeed
+
+     person.name = ""  // will cause error
+ }
+}
+
+</code></pre>
+</BODY>
+</HTML>

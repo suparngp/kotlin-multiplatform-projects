@@ -1,0 +1,21 @@
+<HTML>
+<HEAD>
+<meta charset="UTF-8">
+<title>Future.await - concurrency</title>
+<link rel="stylesheet" href="../../../style.css">
+</HEAD>
+<BODY>
+<a href="../../index.html">concurrency</a>&nbsp;/&nbsp;<a href="../index.html">com.suparnatural.core.concurrency</a>&nbsp;/&nbsp;<a href="index.html">Future</a>&nbsp;/&nbsp;<a href="./await.html">await</a><br/>
+<br/>
+<h1>await</h1>
+<a name="com.suparnatural.core.concurrency.Future$await()"></a>
+<code><span class="keyword">abstract</span> <span class="keyword">fun </span><span class="identifier">await</span><span class="symbol">(</span><span class="symbol">)</span><span class="symbol">: </span><a href="index.html#T"><span class="identifier">T</span></a></code>
+<p>Consume the future value in <code>code</code> as input.
+This method may or may not block the calling thread
+depending upon the implementation.</p>
+<h3>Examples</h3>
+<pre><code>val future: Future&lt;T&gt; = // some api which returns a Future&lt;T&gt;
+val value: R = future.await() // blocks until future completes
+</code></pre>
+</BODY>
+</HTML>

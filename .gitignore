@@ -27,7 +27,8 @@ hs_err_pid*
 # Ignore Gradle build output directory
 build
 .DS_Store
-.idea
+.idea/*
+!.idea/dictionaries
 Pods
 .project
 .settings

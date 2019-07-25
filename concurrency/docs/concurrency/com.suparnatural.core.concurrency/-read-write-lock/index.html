@@ -1,0 +1,119 @@
+<HTML>
+<HEAD>
+<meta charset="UTF-8">
+<title>ReadWriteLock - concurrency</title>
+<link rel="stylesheet" href="../../../style.css">
+</HEAD>
+<BODY>
+<a href="../../index.html">concurrency</a>&nbsp;/&nbsp;<a href="../index.html">com.suparnatural.core.concurrency</a>&nbsp;/&nbsp;<a href="./index.html">ReadWriteLock</a><br/>
+<br/>
+<h1>ReadWriteLock</h1>
+<code><span class="keyword">expect</span> <span class="keyword">class </span><span class="identifier">ReadWriteLock</span></code>
+<p>A ReadWrite lock allows multiple readers to read a value
+and only one writer to update it. A read lock cannot be obtained until
+write lock is released. A write lock cannot be obtained until current
+readers don't release read lock.</p>
+<h3>Examples</h3>
+<pre><code>val lock = ReadWriteLock()
+
+// read from multiple threads simultaneously.
+lock.acquireReadLock() // call from as many threads
+
+// perform read ....
+
+lock.releaseReadLock()
+
+// to protect writes
+lock.acquireWriteLock() // only one thread will get lock, others will be blocked.
+
+// perform write ....
+
+lock.releaseWriteLock() // next thread will now unblock.
+
+</code></pre>
+<h3>Constructors</h3>
+<table>
+<tbody>
+<tr>
+<td>
+<p><a href="-init-.html">&lt;init&gt;</a></p>
+</td>
+<td>
+<code><span class="identifier">ReadWriteLock</span><span class="symbol">(</span><span class="symbol">)</span></code>
+<p>A ReadWrite lock allows multiple readers to read a value
+and only one writer to update it. A read lock cannot be obtained until
+write lock is released. A write lock cannot be obtained until current
+readers don't release read lock.</p>
+</td>
+</tr>
+</tbody>
+</table>
+<h3>Functions</h3>
+<table>
+<tbody>
+<tr>
+<td>
+<p><a href="acquire-read-lock.html">acquireReadLock</a></p>
+</td>
+<td>
+<code><span class="keyword">fun </span><span class="identifier">acquireReadLock</span><span class="symbol">(</span><span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html"><span class="identifier">Unit</span></a></code>
+<p>Acquire a read lock. This method will not return until the
+lock is acquired.</p>
+</td>
+</tr>
+<tr>
+<td>
+<p><a href="acquire-write-lock.html">acquireWriteLock</a></p>
+</td>
+<td>
+<code><span class="keyword">fun </span><span class="identifier">acquireWriteLock</span><span class="symbol">(</span><span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html"><span class="identifier">Unit</span></a></code>
+<p>Acquires the write lock. This method waits until all readers have
+released the read lock. It then acquires the write lock and returns.</p>
+</td>
+</tr>
+<tr>
+<td>
+<p><a href="destroy.html">destroy</a></p>
+</td>
+<td>
+<code><span class="keyword">fun </span><span class="identifier">destroy</span><span class="symbol">(</span><span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html"><span class="identifier">Unit</span></a></code>
+<p>Destroys the lock and frees up the memory.
+After calling this method, the instance can no longer be used.</p>
+</td>
+</tr>
+<tr>
+<td>
+<p><a href="release-read-lock.html">releaseReadLock</a></p>
+</td>
+<td>
+<code><span class="keyword">fun </span><span class="identifier">releaseReadLock</span><span class="symbol">(</span><span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html"><span class="identifier">Unit</span></a></code>
+<p>Releases the read lock</p>
+</td>
+</tr>
+<tr>
+<td>
+<p><a href="release-write-lock.html">releaseWriteLock</a></p>
+</td>
+<td>
+<code><span class="keyword">fun </span><span class="identifier">releaseWriteLock</span><span class="symbol">(</span><span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html"><span class="identifier">Unit</span></a></code>
+<p>Releases the write lock</p>
+</td>
+</tr>
+</tbody>
+</table>
+<h3>Extension Functions</h3>
+<table>
+<tbody>
+<tr>
+<td>
+<p><a href="../to-immutable.html">toImmutable</a></p>
+</td>
+<td>
+<code><span class="keyword">expect</span> <span class="keyword">fun </span><span class="symbol">&lt;</span><span class="identifier">T</span><span class="symbol">&gt;</span> <a href="../to-immutable.html#T"><span class="identifier">T</span></a><span class="symbol">.</span><span class="identifier">toImmutable</span><span class="symbol">(</span><span class="symbol">)</span><span class="symbol">: </span><a href="../to-immutable.html#T"><span class="identifier">T</span></a></code>
+<p>Returns an immutable instance of an object.</p>
+</td>
+</tr>
+</tbody>
+</table>
+</BODY>
+</HTML>

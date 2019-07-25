@@ -1,0 +1,77 @@
+<HTML>
+<HEAD>
+<meta charset="UTF-8">
+<title>Job - concurrency</title>
+<link rel="stylesheet" href="../../../style.css">
+</HEAD>
+<BODY>
+<a href="../../index.html">concurrency</a>&nbsp;/&nbsp;<a href="../index.html">com.suparnatural.core.concurrency</a>&nbsp;/&nbsp;<a href="./index.html">Job</a><br/>
+<br/>
+<h1>Job</h1>
+<code><span class="keyword">class </span><span class="identifier">Job</span><span class="symbol">&lt;</span><span class="identifier">Input</span><span class="symbol">, </span><span class="identifier">Output</span><span class="symbol">&gt;</span></code>
+<p>A data structure to pass a payload and a callback job safely between threads by freezing its contents.
+The <a href="payload.html">payload</a> of type <a href="index.html#Input">Input</a> can be used by the consumer of this object for processing.
+The result of the processing of type <a href="index.html#Output">Output</a> can then be posted on a non capturing lambda <a href="job.html">job</a> as argument.</p>
+<h3>Examples</h3>
+<pre><code>val safeJob = ThreadTransferableJob.create("Hello") {it: Int -&gt;
+     assertEquals("Hello".hashCode(), it)
+}
+
+// other thread which receives job as argument.
+
+safeJob.job(safeJob.payload.hashCode())
+
+</code></pre>
+<h3>Properties</h3>
+<table>
+<tbody>
+<tr>
+<td>
+<p><a href="job.html">job</a></p>
+</td>
+<td>
+<code><span class="keyword">val </span><span class="identifier">job</span><span class="symbol">: </span><span class="symbol">(</span><a href="index.html#Output"><span class="identifier">Output</span></a><span class="symbol">)</span>&nbsp;<span class="symbol">-&gt;</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html"><span class="identifier">Unit</span></a></code>
+<p>A job to be executed by the target thread</p>
+</td>
+</tr>
+<tr>
+<td>
+<p><a href="payload.html">payload</a></p>
+</td>
+<td>
+<code><span class="keyword">val </span><span class="identifier">payload</span><span class="symbol">: </span><a href="index.html#Input"><span class="identifier">Input</span></a></code>
+<p>A payload to be consumed by thread to which job is being transferred to.</p>
+</td>
+</tr>
+</tbody>
+</table>
+<h3>Companion Object Functions</h3>
+<table>
+<tbody>
+<tr>
+<td>
+<p><a href="create.html">create</a></p>
+</td>
+<td>
+<code><span class="keyword">fun </span><span class="symbol">&lt;</span><span class="identifier">I</span><span class="symbol">, </span><span class="identifier">O</span><span class="symbol">&gt;</span> <span class="identifier">create</span><span class="symbol">(</span><span class="identifier" id="com.suparnatural.core.concurrency.Job.Companion$create(com.suparnatural.core.concurrency.Job.Companion.create.I, kotlin.Function1((com.suparnatural.core.concurrency.Job.Companion.create.O, kotlin.Unit)))/payload">payload</span><span class="symbol">:</span>&nbsp;<a href="create.html#I"><span class="identifier">I</span></a><span class="symbol">, </span><span class="identifier" id="com.suparnatural.core.concurrency.Job.Companion$create(com.suparnatural.core.concurrency.Job.Companion.create.I, kotlin.Function1((com.suparnatural.core.concurrency.Job.Companion.create.O, kotlin.Unit)))/job">job</span><span class="symbol">:</span>&nbsp;<span class="symbol">(</span><a href="create.html#O"><span class="identifier">O</span></a><span class="symbol">)</span>&nbsp;<span class="symbol">-&gt;</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html"><span class="identifier">Unit</span></a><span class="symbol">)</span><span class="symbol">: </span><a href="./index.html"><span class="identifier">Job</span></a><span class="symbol">&lt;</span><a href="create.html#I"><span class="identifier">I</span></a><span class="symbol">,</span>&nbsp;<a href="create.html#O"><span class="identifier">O</span></a><span class="symbol">&gt;</span></code>
+<p>Create a new <a href="./index.html">Job</a></p>
+</td>
+</tr>
+</tbody>
+</table>
+<h3>Extension Functions</h3>
+<table>
+<tbody>
+<tr>
+<td>
+<p><a href="../to-immutable.html">toImmutable</a></p>
+</td>
+<td>
+<code><span class="keyword">expect</span> <span class="keyword">fun </span><span class="symbol">&lt;</span><span class="identifier">T</span><span class="symbol">&gt;</span> <a href="../to-immutable.html#T"><span class="identifier">T</span></a><span class="symbol">.</span><span class="identifier">toImmutable</span><span class="symbol">(</span><span class="symbol">)</span><span class="symbol">: </span><a href="../to-immutable.html#T"><span class="identifier">T</span></a></code>
+<p>Returns an immutable instance of an object.</p>
+</td>
+</tr>
+</tbody>
+</table>
+</BODY>
+</HTML>
