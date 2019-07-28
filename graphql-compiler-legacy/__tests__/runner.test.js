@@ -1,4 +1,4 @@
-import input from '../input-2.json';
+import input from '../input.json';
 
 import { processFragments, processTypes, processOperations } from '../src/processor/index.js';
 describe('runner', () => {

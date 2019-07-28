@@ -11,7 +11,9 @@ internal class TypeProcessorKtTest {
     fun processType() {
         val c = container("input.json")
         val types = processTypes(c.typesUsed, SuparnaturalGraphqlExtension)
-        types.writeTo(File("output.kt"))
+        val fragments = processFragments(c.fragments, SuparnaturalGraphqlExtension)
+        types.writeTo(File("output"))
+        fragments.writeTo(File("output"))
 //        assertNotNull(types)
 //
 
