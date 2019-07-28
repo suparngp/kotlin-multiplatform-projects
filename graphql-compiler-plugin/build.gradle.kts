@@ -5,13 +5,13 @@ plugins {
     kotlin("jvm") version "1.3.41"
     java
     application
-//    id("kotlinx-serialization") version "1.3.41"
+    id("kotlinx-serialization") version "1.3.41"
 }
 
 
 repositories {
-    mavenCentral()
     jcenter()
+    mavenCentral()
 }
 
 dependencies {

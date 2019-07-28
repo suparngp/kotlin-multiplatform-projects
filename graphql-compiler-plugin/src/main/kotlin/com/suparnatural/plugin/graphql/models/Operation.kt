@@ -15,10 +15,10 @@ data class Operation(
         val operationName: String,
         val operationType: OperationType,
         val rootType: String,
-        val variables: List<NameType>,
-        val fields: List<Field>,
-        val fragmentSpreads: List<String>,
-        val inlineFragments: List<InlineFragment>,
-        val fragmentsReferenced: List<String>
+        val variables: List<NameType> = emptyList(),
+        val fields: List<Field> = emptyList(),
+        val fragmentSpreads: List<String> = emptyList(),
+        val inlineFragments: List<InlineFragment> = emptyList(),
+        val fragmentsReferenced: List<String> = emptyList()
 
 )

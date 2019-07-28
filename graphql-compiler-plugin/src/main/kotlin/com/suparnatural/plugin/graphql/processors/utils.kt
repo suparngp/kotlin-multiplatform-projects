@@ -3,43 +3,22 @@ package com.suparnatural.plugin.graphql.processors
 import com.squareup.kotlinpoet.ClassName
 import com.squareup.kotlinpoet.TypeName
 import com.squareup.kotlinpoet.asTypeName
-import kotlin.reflect.full.createType
 import com.squareup.kotlinpoet.ParameterizedTypeName.Companion.parameterizedBy
+import java.lang.Exception
 
-fun propertySpecType(type: String): TypeName {
-    val input = type.trim()
-    val typeName = when {
-        input.startsWith('[') -> {
-            val inn = Regex("\\[(.+)]!?$")
-                    .matchEntire(input)!!
-                    .groups[1]!!
-                    .value
-            List::class.asTypeName().parameterizedBy(propertySpecType(inn))
-        }
-        else -> ClassName("", input.replace(Regex("!$"), ""))
+fun propertyTypeName(inputType: String, knownTypes: Map<String, TypeName>): TypeName {
+    val stripped = strippedType(inputType)
+    val typeName: TypeName = if (inputType.startsWith("[")) {
+        val innerType = Regex("\\[(.+)]!?$")
+                .matchEntire(inputType)!!
+                .groups[1]!!
+                .value
+        List::class.asTypeName().parameterizedBy(propertyTypeName(innerType, knownTypes))
+    } else {
+        knownTypes[stripped] ?: throw Exception("Unknown type $inputType")
     }
-
-    return typeName.copy(nullable = !input.endsWith("!"))
+    return typeName.copy(nullable = !inputType.endsWith("!"))
 }
-
-fun propertyType(type: String): String {
-    val input = type.trim()
-    val stripped = when {
-        input.startsWith('[') -> {
-            val inner = Regex("\\[(.+)]!?$")
-                    .matchEntire(input)!!
-                    .groups[1]!!
-                    .value
-            "List<${propertyType(inner)}>"
-        }
-        else -> input
-    }
-    return if (input.endsWith("!"))
-        stripped.replace(Regex("!$"), "")
-    else
-        "$stripped?"
-}
-
 
 fun snakeToPascal(input: String): String {
     return input
@@ -47,5 +26,5 @@ fun snakeToPascal(input: String): String {
             .split("_").joinToString("") { it.toLowerCase().capitalize() }
 }
 
-fun stripType(input: String): String = input.replace(Regex("[\\[\\]?!]"), "")
-fun className(input: String): String = snakeToPascal(stripType(input)).capitalize()
+fun strippedType(input: String): String = input.replace(Regex("[\\[\\]?!]"), "")
+fun typeName(input: String): String = snakeToPascal(strippedType(input)).capitalize()
