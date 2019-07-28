@@ -1,10 +1,15 @@
 package com.suparnatural.plugin.graphql.processors
 
-import com.squareup.kotlinpoet.ClassName
-import com.squareup.kotlinpoet.TypeName
-import com.squareup.kotlinpoet.asTypeName
+import com.squareup.kotlinpoet.*
 import com.squareup.kotlinpoet.ParameterizedTypeName.Companion.parameterizedBy
-import java.lang.Exception
+
+val KnownTypes = mutableMapOf(
+        "Int" to INT,
+        "Float" to FLOAT,
+        "String" to STRING,
+        "Boolean" to BOOLEAN,
+        "ID" to TypeAliasSpec.builder("ID", String::class).build().type
+)
 
 fun propertyTypeName(inputType: String, knownTypes: Map<String, TypeName>): TypeName {
     val stripped = strippedType(inputType)
@@ -27,4 +32,3 @@ fun snakeToPascal(input: String): String {
 }
 
 fun strippedType(input: String): String = input.replace(Regex("[\\[\\]?!]"), "")
-fun typeName(input: String): String = snakeToPascal(strippedType(input)).capitalize()
