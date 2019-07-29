@@ -49,8 +49,9 @@ actual object FileSystem {
     }
 
     actual fun readDir(path: String): List<StatResult>? {
-        val parent = File(path).canonicalFile
-        return parent.listFiles().map {
+        val parent = File(path).canonicalFile ?: return null
+        val fileList = parent.listFiles() ?: return null
+        return fileList.map {
             buildStats(it)
         }
     }
