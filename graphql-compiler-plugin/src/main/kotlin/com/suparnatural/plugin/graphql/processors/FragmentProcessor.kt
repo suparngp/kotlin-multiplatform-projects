@@ -41,6 +41,16 @@ fun addFieldsAsProperties(fields: List<Field>, interfaceSpec: TypeSpec.Builder?,
                         .addSuperinterface(ClassName("", typeName))
 
                 addFieldsAsProperties(field.fields, spec, implSpec)
+                val fragmentsWrapper = TypeSpec.classBuilder("FragmentsWrapper")
+                val wrapperSpec = TypeSpec.classBuilder("${typeName}Wrapper")
+                        .addProperty(PropertySpec.builder("delegate", ClassName("", typeName)).initializer("delegate").build())
+                        .addProperty(PropertySpec.builder("fragments", ClassName("", "FragmentsWrapper")).initializer("fragments").build())
+                val wrapperConstructor = FunSpec.constructorBuilder()
+                        .addParameter("delegate", ClassName("", typeName))
+                        .addParameter("fragments", ClassName("", "FragmentsWrapper"))
+                wrapperSpec.primaryConstructor(wrapperConstructor.build())
+                spec.addType(wrapperSpec.build())
+                spec.addType(fragmentsWrapper.build())
                 spec.addType(implSpec.build())
             }
             container.addType(spec.build())

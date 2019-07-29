@@ -52,3 +52,5 @@ node_modules
 /graphql-compiler/schema.json
 /graphql-compiler-plugin/.idea
 /graphql-compiler-plugin/src/main/resources/*
+/graphql-compiler-plugin/out/*
+/graphql-compiler-plugin/output/*
