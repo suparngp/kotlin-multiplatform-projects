@@ -7,10 +7,11 @@ data class Fragment(
         val fragmentName: String = "",
         val filePath: String = "",
         val source: String = "",
-        val fields: List<Field> = emptyList(),
-        val fragmentSpreads: List<String> = emptyList(),
-        val inlineFragments: List<InlineFragment> = emptyList()
-)
+        override val fields: List<Field> = emptyList(),
+        override val fragmentSpreads: List<String> = emptyList(),
+        override val inlineFragments: List<InlineFragment> = emptyList(),
+        override val typeName: String = fragmentName
+): FieldGroup
 
 data class InlineFragment(
         val typeCondition: String = "",

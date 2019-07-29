@@ -20,5 +20,6 @@ fun main(args: Array<String>) {
 //    println(all.operations)
 
     val x = kotlinx.serialization.json.Json.nonstrict.parse(Co.serializer(), "{\"test\": \"one\"}")
+
     println(x)
 }

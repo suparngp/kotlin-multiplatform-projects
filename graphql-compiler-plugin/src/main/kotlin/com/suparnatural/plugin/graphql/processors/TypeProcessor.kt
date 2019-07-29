@@ -23,7 +23,7 @@ fun processTypes(types: List<TypeUsed>, config: SuparnaturalGraphqlExtension): F
                 spec = TypeSpec.classBuilder(typeUsed.name)
                 val constructorSpec = FunSpec.constructorBuilder()
                 typeUsed.fields.forEach { field ->
-                    val type = propertyTypeName(field.type, KnownTypes)
+                    val type = propertyTypeName(field.type, KnownTypes, config)
                     constructorSpec.addParameter(field.name, type)
                     spec.addProperty(PropertySpec.builder(field.name, type).initializer(field.name).build())
                 }

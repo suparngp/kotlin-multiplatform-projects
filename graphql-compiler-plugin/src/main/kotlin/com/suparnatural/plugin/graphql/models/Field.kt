@@ -6,9 +6,10 @@ data class Field(
         val description: String = "",
         val type: String = "",
         val args: List<Arg> = emptyList(),
-        val fields: List<Field> = emptyList(),
         val isConditional: Boolean = false,
         val isDeprecated: Boolean = false,
-        val fragmentSpreads: List<String> = emptyList(),
-        val inlineFragments: List<InlineFragment> = emptyList()
-)
+        override val fields: List<Field> = emptyList(),
+        override val fragmentSpreads: List<String> = emptyList(),
+        override val inlineFragments: List<InlineFragment> = emptyList(),
+        override val typeName: String = type
+): FieldGroup

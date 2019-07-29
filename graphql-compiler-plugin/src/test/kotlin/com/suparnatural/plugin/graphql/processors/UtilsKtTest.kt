@@ -1,5 +1,6 @@
 package com.suparnatural.plugin.graphql.processors
 
+import com.suparnatural.plugin.graphql.config.SuparnaturalGraphqlExtension
 import org.junit.jupiter.api.Assertions
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.params.ParameterizedTest
@@ -29,6 +30,6 @@ class UtilsKtTest {
             "[String!], kotlin.collections.List<kotlin.String>?"
     )
     fun propertySpecType(input: String, expected: String) {
-        Assertions.assertEquals(expected, propertyTypeName(input, KnownTypes).toString())
+        Assertions.assertEquals(expected, propertyTypeName(input, KnownTypes, SuparnaturalGraphqlExtension).toString())
     }
 }
