@@ -16,9 +16,9 @@ data class Operation(
         val operationType: OperationType,
         val rootType: String,
         val variables: List<NameType> = emptyList(),
-        val fields: List<Field> = emptyList(),
-        val fragmentSpreads: List<String> = emptyList(),
-        val inlineFragments: List<InlineFragment> = emptyList(),
-        val fragmentsReferenced: List<String> = emptyList()
-
-)
+        val fragmentsReferenced: List<String> = emptyList(),
+        override val fields: List<Field> = emptyList(),
+        override val fragmentSpreads: List<String> = emptyList(),
+        override val inlineFragments: List<InlineFragment> = emptyList(),
+        override val typeName: String = operationName
+): FieldGroup
