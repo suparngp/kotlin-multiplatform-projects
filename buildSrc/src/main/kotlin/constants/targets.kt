@@ -13,7 +13,7 @@ object AndroidTarget {
     const val publishVariantRelease = "release"
     const val compileSdkVersion = 29
     const val targetSdkVersion = 29
-    const val minSdkVersion = 21
+    const val minSdkVersion = 19
     const val testRunnerName = "android.support.test.runner.AndroidJUnitRunner"
     const val testRunnerDependency = "com.android.support.test:runner:1.0.2"
     const val testRunnerConfigurationName = "androidTestImplementation"
