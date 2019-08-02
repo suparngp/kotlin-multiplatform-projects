@@ -1,2 +1,0 @@
-rootProject.name = 'graphql-core'
-enableFeaturePreview('GRADLE_METADATA')
