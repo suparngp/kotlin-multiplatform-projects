@@ -30,7 +30,7 @@
 │   └── resources
 │       └── .keep
 ```
-
+- Make sure you have good and meaningful unit test coverage. Any PRs lacking tests will not be merged.
 - Try to match the file structure with the existing targets so that it is easy for others to compare.
 - Check the notes of the Build Plugin to understand how to add a new target and dependencies.
 - Only the latest stable `kotlin` release is supported at the moment.
