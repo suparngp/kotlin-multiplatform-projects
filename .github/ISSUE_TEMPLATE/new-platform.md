@@ -2,7 +2,7 @@
 name: New Platform
 about: Add support for a new platform
 title: "[PLATFORM REQUEST]"
-labels: ''
+labels: platform
 assignees: ''
 
 ---
