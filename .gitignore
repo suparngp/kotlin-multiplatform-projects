@@ -50,3 +50,4 @@ API.swift
 node_modules
 /graphql-compiler/output.kt
 /graphql-compiler/schema.json
+graphql-compiler-plugin/.idea
