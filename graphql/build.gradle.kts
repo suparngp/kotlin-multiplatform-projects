@@ -41,7 +41,7 @@ suparnatural {
         dependencies {
             additional {
                 implementation("suparnatural-kotlin-multiplatform:concurrency-metadata:$version")
-                implementation("org.jetbrains.kotlinx:kotlinx-serialization-runtime-common:0.11.1")
+                implementation("org.jetbrains.kotlinx:kotlinx-serialization-runtime-common:0.13.0")
             }
         }
     }
@@ -50,7 +50,7 @@ suparnatural {
         dependencies {
             additional {
                 implementation("suparnatural-kotlin-multiplatform:concurrency-iosx64:$version")
-                implementation("org.jetbrains.kotlinx:kotlinx-serialization-runtime-native:0.11.1")
+                implementation("org.jetbrains.kotlinx:kotlinx-serialization-runtime-native:0.13.0")
             }
         }
     }
@@ -59,7 +59,7 @@ suparnatural {
         dependencies {
             additional {
                 implementation("suparnatural-kotlin-multiplatform:concurrency-iosarm64:$version")
-                implementation("org.jetbrains.kotlinx:kotlinx-serialization-runtime-native:0.11.1")
+                implementation("org.jetbrains.kotlinx:kotlinx-serialization-runtime-native:0.13.0")
             }
         }
     }
