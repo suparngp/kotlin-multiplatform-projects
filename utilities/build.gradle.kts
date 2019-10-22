@@ -4,7 +4,7 @@ plugins {
     id("suparnatural-project")
 }
 
-version = "1.0.5"
+version = "1.0.6"
 
 suparnatural {
     name = "suparnatural-utilities"
@@ -16,7 +16,7 @@ suparnatural {
     supportsCocoapods = true
     supportsIos = true
     supportsJvm = true
-    buildNumber = 5
+    buildNumber = 6
     bintray {
         publish = true
         repository = extra[ProjectConfig.Properties.bintrayRepository]!!.toString()
