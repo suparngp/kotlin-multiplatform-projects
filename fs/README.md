@@ -12,9 +12,9 @@ A Kotlin Multiplatform library for iOS and Android to provide file system access
         }
     }
     ```
-2. Add `implementation 'suparnatural-kotlin-multiplatform:fs-metadata:1.0.5'` to `commonMain`.
-3. Add `implementation 'suparnatural-kotlin-multiplatform:fs-iosx64(or iosarm64):1.0.5'` to `iosMain`
-4. Add `implementation 'suparnatural-kotlin-multiplatform:fs-android:1.0.5'` to `androidMain`
+2. Add `implementation 'suparnatural-kotlin-multiplatform:fs-metadata:1.0.6'` to `commonMain`.
+3. Add `implementation 'suparnatural-kotlin-multiplatform:fs-iosx64(or iosarm64):1.0.6'` to `iosMain`
+4. Add `implementation 'suparnatural-kotlin-multiplatform:fs-android:1.0.6'` to `androidMain`
 
 ### Usage
 
