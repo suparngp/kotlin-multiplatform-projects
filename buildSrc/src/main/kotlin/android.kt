@@ -8,6 +8,7 @@ import org.gradle.kotlin.dsl.getting
 fun Project.configureAndroid(config: SuparnaturalPluginExtension) {
     plugins.apply(Plugins.android.id)
     extensions.getByType(LibraryExtension::class.java).apply {
+        buildToolsVersion = "29.0.2"
         compileSdkVersion(AndroidTarget.compileSdkVersion)
         defaultConfig {
             minSdkVersion(AndroidTarget.minSdkVersion)

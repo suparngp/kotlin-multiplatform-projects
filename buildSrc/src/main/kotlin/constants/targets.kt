@@ -11,7 +11,7 @@ object TargetNames {
 
 object AndroidTarget {
     const val publishVariantRelease = "release"
-    const val compileSdkVersion = 28
+    const val compileSdkVersion = 29
     const val targetSdkVersion = 29
     const val minSdkVersion = 21
     const val testRunnerName = "android.support.test.runner.AndroidJUnitRunner"

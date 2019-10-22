@@ -1,6 +1,6 @@
 # Change Log
 
-## v1.0.5
+## v1.0.6
 1. Renamed `threading` module to `concurrency`.
 2. Introduced unified `Worker` api for all platforms.
 3. Jobs which can resume on a different thread.

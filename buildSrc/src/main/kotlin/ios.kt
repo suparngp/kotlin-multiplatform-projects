@@ -44,12 +44,28 @@ fun Project.configureIosTestTask(targetName: String) {
         val testBinary = target.binaries.getTest("DEBUG")
         dependsOn(testBinary.linkTaskName)
 
+        doFirst {
+            val device = findProperty(ProjectConfig.Properties.iosDevice)?.toString()
+                    ?: ProjectConfig.defaultIosSimulator
+            exec {
+                commandLine("xcrun", "simctl", "boot", device)
+            }
+        }
+
         doLast {
             val device = findProperty(ProjectConfig.Properties.iosDevice)?.toString()
                     ?: ProjectConfig.defaultIosSimulator
             val binary = testBinary.outputFile
             exec {
                 commandLine("xcrun", "simctl", "spawn", device, binary.absolutePath)
+            }
+        }
+
+        doLast {
+            val device = findProperty(ProjectConfig.Properties.iosDevice)?.toString()
+                    ?: ProjectConfig.defaultIosSimulator
+            exec {
+                commandLine("xcrun", "simctl", "shutdown", device)
             }
         }
     }
