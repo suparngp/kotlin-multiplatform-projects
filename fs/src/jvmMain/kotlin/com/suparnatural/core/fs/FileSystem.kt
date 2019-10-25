@@ -67,8 +67,11 @@ actual object FileSystem {
             }
         }()
         val reader = BufferedReader(InputStreamReader(FileInputStream(file), charset))
-        val content = reader.readLines().joinToString("\n")
 
+        var content: String? = null
+        reader.use {
+            content = it.readLines().joinToString("\n")
+        }
         if (encoding == ContentEncoding.Base64) {
             return String(Base64.getDecoder().decode(content), Charsets.UTF_8)
         }
@@ -108,10 +111,22 @@ actual object FileSystem {
                 else -> Charsets.UTF_8
             }
         }()
+
+        var result = true
         val bufferedWriter = BufferedWriter(OutputStreamWriter(FileOutputStream(file, appendToFile), charset))
-        bufferedWriter.write(finalContent)
-        bufferedWriter.close()
-        return true
+        try {
+            bufferedWriter.write(finalContent)
+        } catch (e: IOException) {
+            result = false
+        } finally {
+            try {
+                bufferedWriter.close()
+            } catch (e: IOException) {
+                result = false
+            }
+        }
+
+        return result
     }
 
 
