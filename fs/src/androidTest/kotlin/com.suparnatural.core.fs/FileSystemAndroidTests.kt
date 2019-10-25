@@ -4,6 +4,8 @@ import kotlin.test.Test
 import kotlin.test.assertEquals
 import kotlin.test.assertNotNull
 
+actual var testDirectory: Path = FileSystem.contentsDirectory
+
 class FileSystemAndroidTests {
     @Test
     fun testKnownPaths() {

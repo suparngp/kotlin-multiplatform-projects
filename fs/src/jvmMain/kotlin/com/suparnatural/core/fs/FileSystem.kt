@@ -1,30 +1,15 @@
 package com.suparnatural.core.fs
 
 import java.io.*
-import java.nio.file.Paths
 import java.util.*
 
 actual object FileSystem {
 
-    actual val contentsDirectory: Path
-        get() {
-            val path = Paths.get("./contents/").toAbsolutePath().toString()
-            File(path).mkdirs()
-            return Path.simplified(path)
-        }
+    actual val contentsDirectory: Path = Path(null, null)
 
+    actual val cachesDirectory: Path = Path(null, null)
 
-    actual val cachesDirectory: Path
-        get() {
-            val path = Paths.get("./caches/").toAbsolutePath().toString()
-            File(path).mkdirs()
-            return Path.simplified(path)
-        }
-
-
-    actual val temporaryDirectory: Path
-        get() = cachesDirectory
-
+    actual val temporaryDirectory: Path = Path(null, null)
 
     private fun buildStats(file: File): StatResult {
         val fileType = {
