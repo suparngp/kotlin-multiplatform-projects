@@ -2,50 +2,29 @@ package com.suparnatural.core.fs
 
 import kotlin.test.*
 
-var testPath = FileSystem.contentsDirectory
+expect var testDirectory: Path
 const val testFile = "test.txt"
-var testFilePath = testPath.absolutePath?.byAppending(testFile)!!
 const val testBase64String = "SGVsbG8="
 const val testString = "Hello"
-
 const val testString2 = "World"
-
 const val testJoinedBase64String = "SGVsbG9Xb3JsZA=="
 
-
 class FileSystemTests {
+
+    lateinit var testFilePath: PathComponent
+
     @BeforeTest
     fun prepare() {
-        FileSystem.unlink(FileSystem.contentsDirectory.absolutePath!!)
-        testPath = FileSystem.contentsDirectory
-        testFilePath = testPath.absolutePath?.byAppending(testFile)!!
+        FileSystem.unlink(testDirectory.absolutePath!!)
+        FileSystem.mkdir(testDirectory.absolutePath!!, true)
+        testFilePath = testDirectory.absolutePath?.byAppending(testFile)!!
         assertTrue(FileSystem.touch(testFilePath))
         assertTrue(FileSystem.writeFile(testFilePath, testString, true))
     }
 
-
-    @Test
-    fun testKnownPaths() {
-        assertNotNull(FileSystem.contentsDirectory)
-        val d = FileSystem.contentsDirectory
-        val c = FileSystem.cachesDirectory
-        val t = FileSystem.temporaryDirectory
-
-        val paths = listOf(d, c, t)
-        paths.forEach {
-            assertNotNull(it.absolutePath)
-            assertNotNull(it.relativePath)
-            assertTrue(it.absolutePath!!.component!!.isNotEmpty())
-            assertTrue(it.relativePath!!.component!!.isNotEmpty())
-        }
-
-
-
-    }
-
     @Test
     fun testReadDir() {
-        val path = FileSystem.contentsDirectory
+        val path = testDirectory
         val stats = FileSystem.readDir(path.absolutePath!!)
         assertNotNull(stats)
         assertEquals(1, stats.size)
@@ -54,7 +33,7 @@ class FileSystemTests {
 
     @Test
     fun testStat() {
-        val path = FileSystem.contentsDirectory
+        val path = testDirectory
         val stat = FileSystem.stat(testFilePath)
         assertNotNull(stat)
         assertNotNull(FileSystem.stat(path.absolutePath?.component!!))
@@ -132,7 +111,7 @@ class FileSystemTests {
         assertTrue(FileSystem.writeFile(testFilePath, "", false, ContentEncoding.Utf8))
         assertTrue(FileSystem.appendFile(testFilePath, testString, false, ContentEncoding.Base64))
         assertTrue(FileSystem.appendFile(testFilePath, testString2, false, ContentEncoding.Base64))
-        assertEquals("$testJoinedBase64String", FileSystem.readFile(testFilePath, ContentEncoding.Utf8))
+        assertEquals(testJoinedBase64String, FileSystem.readFile(testFilePath, ContentEncoding.Utf8))
     }
 
 
@@ -140,7 +119,7 @@ class FileSystemTests {
     fun testMkDir() {
         val paths = listOf(Triple("dir", second = false, third = true), Triple("dir1/dir2", second = true, third = true), Triple("dir4/dir5", second = false, third = false))
         paths.forEach {
-            val path = testPath.absolutePath?.byAppending(it.first)!!
+            val path = testDirectory.absolutePath?.byAppending(it.first)!!
             assertEquals(it.third, FileSystem.mkdir(path, it.second))
             assertEquals(it.third, FileSystem.exists(path))
         }
@@ -160,7 +139,7 @@ class FileSystemTests {
 
     @Test
     fun testMove1() {
-        val newPath = testPath.absolutePath!!.byAppending("file2.txt")!!
+        val newPath = testDirectory.absolutePath!!.byAppending("file2.txt")!!
         assertTrue(FileSystem.moveFile(testFilePath, newPath))
         assertTrue(FileSystem.exists(newPath))
         assertFalse(FileSystem.exists(testFilePath))
@@ -168,12 +147,12 @@ class FileSystemTests {
 
     @Test
     fun testMove2() {
-        assertFalse(FileSystem.moveFile(testFilePath, testPath.absolutePath?.byAppending("dir/file2.txt")!!))
+        assertFalse(FileSystem.moveFile(testFilePath, testDirectory.absolutePath?.byAppending("dir/file2.txt")!!))
     }
 
     @Test
     fun testCopy() {
-        val newPath = testPath.absolutePath!!.byAppending("file2.txt")!!
+        val newPath = testDirectory.absolutePath!!.byAppending("file2.txt")!!
         assertTrue(FileSystem.copyFile(testFilePath, newPath))
         assertTrue(FileSystem.exists(newPath))
         assertTrue(FileSystem.exists(testFilePath))

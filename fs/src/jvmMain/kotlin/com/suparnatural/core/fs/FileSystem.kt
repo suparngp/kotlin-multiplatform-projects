@@ -1,34 +1,15 @@
 package com.suparnatural.core.fs
 
-import android.content.Context
-import android.util.Base64
-import android.util.Log
 import java.io.*
-import java.util.concurrent.atomic.AtomicReference
+import java.util.*
 
 actual object FileSystem {
 
-    private var context = AtomicReference<Context>(null)
-    fun initialize(context: Context?) {
-        this.context.set(context)
-    }
+    actual val contentsDirectory: Path = Path(null, null)
 
-    actual val contentsDirectory: Path
-        get() {
-            val path = context.get().filesDir.absolutePath
-            File(path).mkdirs()
-            return Path.simplified(path)
+    actual val cachesDirectory: Path = Path(null, null)
 
-        }
-
-
-    actual val cachesDirectory: Path
-        get() = Path.simplified(context.get().cacheDir.absolutePath)
-
-
-    actual val temporaryDirectory: Path
-        get() = cachesDirectory
-
+    actual val temporaryDirectory: Path = Path(null, null)
 
     private fun buildStats(file: File): StatResult {
         val fileType = {
@@ -86,10 +67,13 @@ actual object FileSystem {
             }
         }()
         val reader = BufferedReader(InputStreamReader(FileInputStream(file), charset))
-        val content = reader.readLines().joinToString("\n")
 
+        var content: String? = null
+        reader.use {
+            content = it.readLines().joinToString("\n")
+        }
         if (encoding == ContentEncoding.Base64) {
-            return String(Base64.decode(content, Base64.DEFAULT), Charsets.UTF_8)
+            return String(Base64.getDecoder().decode(content), Charsets.UTF_8)
         }
         return content
     }
@@ -113,7 +97,7 @@ actual object FileSystem {
         if (encoding == ContentEncoding.Base64) {
             val sourceString = if (append) (readFile(path, ContentEncoding.Base64) ?: "") + contents else contents
 
-            finalContent = Base64.encodeToString(sourceString.toByteArray(Charsets.UTF_8), Base64.DEFAULT)
+            finalContent = Base64.getEncoder().encodeToString(sourceString.toByteArray(Charsets.UTF_8))
             appendToFile = false
 
         } else {
@@ -127,10 +111,22 @@ actual object FileSystem {
                 else -> Charsets.UTF_8
             }
         }()
+
+        var result = true
         val bufferedWriter = BufferedWriter(OutputStreamWriter(FileOutputStream(file, appendToFile), charset))
-        bufferedWriter.write(finalContent)
-        bufferedWriter.close()
-        return true
+        try {
+            bufferedWriter.write(finalContent)
+        } catch (e: IOException) {
+            result = false
+        } finally {
+            try {
+                bufferedWriter.close()
+            } catch (e: IOException) {
+                result = false
+            }
+        }
+
+        return result
     }
 
 
@@ -228,6 +224,5 @@ actual object FileSystem {
         val destPath = destPathComponent.component ?: return false
         return copyFile(srcPath, destPath)
     }
-
 
 }
