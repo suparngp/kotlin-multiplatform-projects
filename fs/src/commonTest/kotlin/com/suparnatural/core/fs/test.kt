@@ -120,7 +120,6 @@ class FileSystemTests {
         val paths = listOf(Triple("dir", second = false, third = true), Triple("dir1/dir2", second = true, third = true), Triple("dir4/dir5", second = false, third = false))
         paths.forEach {
             val path = testDirectory.absolutePath?.byAppending(it.first)!!
-            println(path)
             assertEquals(it.third, FileSystem.mkdir(path, it.second))
             assertEquals(it.third, FileSystem.exists(path))
         }
