@@ -26,11 +26,11 @@ Provides file system access for iOS and Android.
 A super fast, persistable, thread safe in-memory cache for iOS and Android
 
 
-| Project | iOS | Android |
-|---------|-----|---------|
-| [suparnatural-concurrency](concurrency/README.md) | Y | Y |
-| [suparnatural-fs](fs/README.md) | Y | Y |
-| [suparnatural-cache](cache/README.md) | Y | Y |
+| Project | iOS | Android | JVM |
+|---------|-----|---------|-----|
+| [suparnatural-concurrency](concurrency/README.md) | Y | Y | N |
+| [suparnatural-fs](fs/README.md) | Y | Y | Y |
+| [suparnatural-cache](cache/README.md) | Y | Y | N |
 
 ## A note about ios builds
 By default, KMP plugin cannot create universal binaries ( a single `klib` which works on both `X64` and `Arm64`). Each platform must be configured with a preset and a unique target name. However, the code base for each platform is same (at least, at the moment). So there is no reason to create different source sets for each of them. Therefore, a common source set `iosMain` and `iosTest` is configured (without any target preset) and the platform specific code targets simply used this common source set.

@@ -1,6 +1,10 @@
 # Change Log
 
-## v1.0.6
+## v1.0.7
+1. Support for JVM in fs module.
+2. Migrate GraphQL plugin from Node to Kotlin.
+
+## v1.0.7
 1. Renamed `threading` module to `concurrency`.
 2. Introduced unified `Worker` api for all platforms.
 3. Jobs which can resume on a different thread.

@@ -54,3 +54,7 @@ node_modules
 /graphql-compiler-plugin/src/main/resources/*
 /graphql-compiler-plugin/out/*
 /graphql-compiler-plugin/output/*
+/cache/docs/suparnatural-cache/index-outline.html
+/fs/docs/suparnatural-fs/index-outline.html
+/concurrency/docs/suparnatural-concurrency/index-outline.html
+/utilities/docs/suparnatural-utilities/index-outline.html

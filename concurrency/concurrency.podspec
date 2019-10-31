@@ -1,6 +1,6 @@
 Pod::Spec.new do |spec|
     spec.name                     = 'concurrency'
-    spec.version                  = '1.0.6'
+    spec.version                  = '1.0.7'
     spec.homepage                 = 'https://suparngp.github.io/kotlin-multiplatform-projects/concurrency/docs/concurrency/com.suparnatural.core.concurrency/index.html'
     spec.source                   = { :git => "Not Published", :tag => "Cocoapods/#{spec.name}/#{spec.version}" }
     spec.authors                  = 'suparnatural'

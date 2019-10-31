@@ -4,7 +4,7 @@ plugins {
     id("suparnatural-project")
 }
 
-version = "1.0.6"
+version = "1.0.7"
 
 suparnatural {
     name = "suparnatural-concurrency"
@@ -15,7 +15,7 @@ suparnatural {
     supportsAndroid = true
     supportsCocoapods = true
     supportsIos = true
-    buildNumber = 6
+    buildNumber = 7
     bintray {
         publish = true
         repository = extra[ProjectConfig.Properties.bintrayRepository]!!.toString()
