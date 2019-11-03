@@ -100,6 +100,16 @@ actual object FileSystem {
         return readFile(path, encoding)
     }
 
+    actual fun readFile(path: String): ByteArray? {
+        val file = File(path).canonicalFile
+        return file.readBytes()
+    }
+
+    actual fun readFile(pathComponent: PathComponent): ByteArray? {
+        val path = pathComponent.component ?: return null
+        return readFile(path)
+    }
+
     private fun writeFile(path: String, contents: String, create: Boolean, encoding: ContentEncoding, append: Boolean = false): Boolean {
         val file = File(path).canonicalFile
         if (!file.exists()) {
@@ -142,6 +152,22 @@ actual object FileSystem {
     actual fun writeFile(pathComponent: PathComponent, contents: String, create: Boolean, encoding: ContentEncoding): Boolean {
         val path = pathComponent.component ?: return false
         return writeFile(path, contents, create, encoding, false)
+    }
+
+    actual fun writeFile(path: String, contents: ByteArray, create: Boolean): Boolean {
+        val file = File(path).canonicalFile
+        if (!file.exists()) {
+            if (!create) return false
+            file.createNewFile()
+        }
+
+        FileOutputStream(file, false).write(contents)
+        return true
+    }
+
+    actual fun writeFile(pathComponent: PathComponent, contents: ByteArray, create: Boolean): Boolean {
+        val path = pathComponent.component ?: return false
+        return writeFile(path, contents, create)
     }
 
 

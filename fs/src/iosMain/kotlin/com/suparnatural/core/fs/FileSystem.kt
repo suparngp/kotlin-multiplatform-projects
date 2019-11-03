@@ -152,12 +152,22 @@ actual object FileSystem {
     actual fun readFile(path: String, encoding: ContentEncoding): String? = readFile(Path.urlFromString(path), encoding)
     actual fun readFile(pathComponent: PathComponent, encoding: ContentEncoding): String? = readFile(pathComponent.url, encoding)
 
+    actual fun readFile(path: String): ByteArray? {
+        val url = Path.urlFromString(path)
+        val pathFromUrl = url?.standardizedURL?.path ?: return null
+        val data = manager.contentsAtPath(pathFromUrl) ?: return null
+        return data.toByteArray()
+    }
+
+    actual fun readFile(pathComponent: PathComponent): ByteArray? {
+        val path = pathComponent.component ?: return null
+        return readFile(path)
+    }
 
     private fun toInterval(input: Any?): Double? {
         if (input == null || input !is NSDate) return null
         return input.timeIntervalSince1970()
     }
-
 
     private fun writeFile(url: NSURL?, contents: String, create: Boolean, encoding: ContentEncoding): Boolean {
         val path = url?.standardizedURL?.path ?: return false
@@ -171,6 +181,22 @@ actual object FileSystem {
 
     actual fun writeFile(path: String, contents: String, create: Boolean, encoding: ContentEncoding): Boolean = writeFile(Path.urlFromString(path), contents, create, encoding)
     actual fun writeFile(pathComponent: PathComponent, contents: String, create: Boolean, encoding: ContentEncoding): Boolean = writeFile(pathComponent.url, contents, create, encoding)
+
+    actual fun writeFile(path: String, contents: ByteArray, create: Boolean): Boolean {
+        val pathStandardized = Path.urlFromString(path)?.standardizedURL?.path ?: return false
+
+        if (!ensureFileExists(pathStandardized, create, false)) {
+            return false
+        }
+
+        val data = contents.toNSData() ?: return false
+        return data.writeToFile(pathStandardized, true)
+    }
+
+    actual fun writeFile(pathComponent: PathComponent, contents: ByteArray, create: Boolean): Boolean {
+        val path = pathComponent.component ?: return false
+        return writeFile(path, contents, create)
+    }
 
     private fun appendFile(url: NSURL?, contents: String, create: Boolean, encoding: ContentEncoding): Boolean {
         val path = url?.standardizedURL?.path ?: return false
