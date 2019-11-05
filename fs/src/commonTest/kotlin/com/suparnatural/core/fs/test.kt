@@ -65,6 +65,21 @@ class FileSystemTests {
         assertEquals(testBase64String, FileSystem.readFile(testFilePath, ContentEncoding.Utf8))
     }
 
+    @ExperimentalStdlibApi
+    @Test
+    fun testReadFileByteArray(){
+        val data = "HelloByteArray".encodeToByteArray()
+        assertTrue(FileSystem.writeFile(testFilePath.component!!,data, true))
+        assertTrue(data.contentEquals(FileSystem.readFile(testFilePath.component!!)!!))
+    }
+
+    @ExperimentalStdlibApi
+    @Test
+    fun testReadFileByteArrayWithPathComponent(){
+        val data = "HelloByteArray".encodeToByteArray()
+        assertTrue(FileSystem.writeFile(testFilePath.component!!,data, true))
+        assertTrue(data.contentEquals(FileSystem.readFile(testFilePath)!!))
+    }
 
     @Test
     fun testWriteFile() {
@@ -81,6 +96,20 @@ class FileSystemTests {
         assertTrue(FileSystem.writeFile(testFilePath, testString, false, ContentEncoding.Base64))
         assertEquals(testBase64String, FileSystem.readFile(testFilePath, ContentEncoding.Utf8))
 
+    }
+
+    @ExperimentalStdlibApi
+    @Test
+    fun testWriteFileByteArray(){
+        assertTrue(FileSystem.writeFile(testFilePath.component!!, "HelloByteArray".encodeToByteArray(), true))
+        assertEquals("HelloByteArray", FileSystem.readFile(testFilePath, ContentEncoding.Utf8))
+    }
+
+    @ExperimentalStdlibApi
+    @Test
+    fun testWriteFileByteArrayWithPathComponent(){
+        assertTrue(FileSystem.writeFile(testFilePath, "HelloByteArray".encodeToByteArray(), true))
+        assertEquals("HelloByteArray", FileSystem.readFile(testFilePath, ContentEncoding.Utf8))
     }
 
     @Test
