@@ -13,9 +13,9 @@ suparnatural {
     docsUrl = "https://suparngp.github.io/kotlin-multiplatform-projects/graphql/docs/suparnatural-graphql/index.html"
     vcsUrl = "https://github.com/suparngp/kotlin-multiplatform-projects/tree/master/graphql"
     versionLabel = project.version.toString()
-    supportsAndroid = false
+    supportsAndroid = true
     supportsCocoapods = true
-    supportsIos = false
+    supportsIos = true
     buildNumber = 5
     bintray {
         publish = true

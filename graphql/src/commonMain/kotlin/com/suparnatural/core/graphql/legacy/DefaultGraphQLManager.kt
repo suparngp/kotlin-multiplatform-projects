@@ -1,4 +1,4 @@
-package com.suparnatural.core.graphql
+package com.suparnatural.core.graphql.legacy
 
 import kotlinx.serialization.UnstableDefault
 import kotlinx.serialization.json.Json

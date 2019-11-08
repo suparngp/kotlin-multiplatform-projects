@@ -20,5 +20,5 @@ data class Operation(
         override val fields: List<Field> = emptyList(),
         override val fragmentSpreads: List<String> = emptyList(),
         override val inlineFragments: List<InlineFragment> = emptyList(),
-        override val typeName: String = operationName
+        override var typeName: String = operationName
 ): FieldGroup
