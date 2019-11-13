@@ -1,7 +1,10 @@
+import com.badoo.reaktive.observable.observableOf
 import com.fasterxml.jackson.databind.ObjectMapper
 import com.fasterxml.jackson.module.kotlin.readValue
 import com.fasterxml.jackson.module.kotlin.registerKotlinModule
 import com.suparnatural.core.graphql.GraphQlOperation
+import com.suparnatural.core.graphql.Link
+import com.suparnatural.core.graphql.concatLinks
 import com.suparnatural.plugin.graphql.config.SuparnaturalGraphqlExtension
 import com.suparnatural.plugin.graphql.models.Container
 import com.suparnatural.plugin.graphql.processors.processFragments
@@ -20,26 +23,44 @@ enum class Test {
     Two
 }
 
-class MyOp(override val query: String, override val variables: Map<String, Any>, override val operationName: String) : GraphQlOperation() {
-
-}
 
 @Serializable
 data class Co(val test: Test)
 fun main(args: Array<String>) {
-//    val json = ClassLoader.getSystemClassLoader().getResource("input.json").readText()
-//    val all = Json.readValue<Container>(json)
+    val json = ClassLoader.getSystemClassLoader().getResource("input.json").readText()
+    val all = Json.readValue<Container>(json)
 ////    println(all)
 //
 //    println(processTypes(all.typesUsed, SuparnaturalGraphqlExtension))
-//    processOperations(all.operations, SuparnaturalGraphqlExtension).writeTo(File("src/main/kotlin"))
-//    processFragments(all.fragments, SuparnaturalGraphqlExtension).writeTo(File("src/main/kotlin"))
+    processOperations(all.operations, SuparnaturalGraphqlExtension).writeTo(File("src/main/kotlin"))
+    processFragments(all.fragments, SuparnaturalGraphqlExtension).writeTo(File("src/main/kotlin"))
 //    val x = kotlinx.serialization.json.Json.nonstrict.parse(Co.serializer(), "{\"test\": \"one\"}")
 
 //    println(x)
-    val variables = mapOf<String, Any>("one" to 1, "two" to "2", "bool" to false )
-    val operationName = "name"
-    val source = "source"
-    val o = MyOp(source, variables, operationName)
-    println(o.serialize())
+//    val variables = mapOf<String, Any>("one" to 1, "two" to "2", "bool" to false )
+//    val operationName = "name"
+//    val source = "source"
+////    val o = MyOp(source, variables, operationName)
+//
+//
+//    val r = GraphQlOperation.Builder(source, variables, operationName, mapOf("inital" to "context"))
+//            .build()
+//
+//    val link1 = Link(false) {request, forward ->
+//        println("Link 1")
+//        val newRequest = GraphQlRequest.Builder(request).setContextValue("First", "value").build()
+//        forward?.invoke(newRequest) ?: observableOf(null)
+//    }
+//
+//    val link2 = Link(false) {request, forward ->
+//        println("link 2")
+//        println(request.getContext())
+//        forward?.invoke(request) ?: observableOf(null)
+//    }
+//
+//    val link = concatLinks(arrayOf(link1, link2))
+//    link.execute(r) {
+//        println("original forward")
+//        observableOf(null)
+//    }
 }

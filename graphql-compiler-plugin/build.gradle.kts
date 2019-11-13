@@ -12,6 +12,7 @@ plugins {
 repositories {
     jcenter()
     mavenCentral()
+    maven(url="https://dl.bintray.com/badoo/maven")
 }
 
 dependencies {
@@ -19,7 +20,8 @@ dependencies {
     implementation("com.fasterxml.jackson.module:jackson-module-kotlin:2.9.9")
     implementation("com.squareup:kotlinpoet:1.3.0")
     implementation("org.jetbrains.kotlinx:kotlinx-serialization-runtime:0.11.1")
-
+    implementation("com.badoo.reaktive:reaktive:1.0.2")
+    implementation("com.badoo.reaktive:reaktive-jvm:1.0.2")
 //    testImplementation(kotlin("test"))
 //    testImplementation(kotlin("test-junit5"))
     testImplementation("org.junit.jupiter:junit-jupiter:5.5.1")
