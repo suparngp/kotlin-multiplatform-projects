@@ -13,8 +13,8 @@ class Link(
     constructor(terminating: Boolean, link: Link) : this(terminating, link.execute)
 
     fun concat(nextLink: Link): Link {
-        return Link(nextLink.terminating) {request, forward ->
-            execute(request) {
+        return Link(nextLink.terminating) {operation, forward ->
+            execute(operation) {
                 nextLink.execute(it, if(nextLink.terminating) null else forward)
             }
         }
