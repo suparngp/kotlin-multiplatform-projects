@@ -15,6 +15,7 @@ suparnatural {
     supportsAndroid = true
     supportsCocoapods = true
     supportsIos = true
+    supportsJvm = true
     buildNumber = 7
     bintray {
         publish = true

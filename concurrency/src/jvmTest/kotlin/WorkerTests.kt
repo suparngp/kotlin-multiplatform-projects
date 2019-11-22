@@ -1,19 +1,29 @@
 import com.suparnatural.core.concurrency.WorkerFactory
+import java.util.concurrent.Callable
+import java.util.concurrent.Executors
 import kotlin.test.Test
 import kotlin.test.assertEquals
 
-class WorkerTests  {
+class JVMWorkerTests  {
     val INPUT = "input"
     val OUTPUT = "output"
     @Test
     fun testExecute() {
-        val worker = WorkerFactory.newBackgroundWorker()
-        val future = worker.execute(Pair(worker, INPUT)) {
-            assertEquals(INPUT, it.second)
-            assertEquals(WorkerFactory.current.id, it.first.id)
+//        val worker = WorkerFactory.newBackgroundWorker()
+//        val future = worker.execute(Pair(worker, INPUT)) {
+//            assertEquals(INPUT, it.second)
+//            assertEquals(WorkerFactory.current.id, it.first.id)
+//            OUTPUT
+//        }
+//        println(future.await())
+
+        val exec = Executors.newSingleThreadExecutor()
+        val submit = exec.submit(Callable {
             OUTPUT
-        }
-        println(future.await())
+        })
+
+        println(submit.get())
+
 
 //        assertEquals(OUTPUT, future.await())
     }
