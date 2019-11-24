@@ -27,13 +27,13 @@ enum class Test {
 @Serializable
 data class Co(val test: Test)
 fun main(args: Array<String>) {
-    val json = ClassLoader.getSystemClassLoader().getResource("input.json").readText()
-    val all = Json.readValue<Container>(json)
-////    println(all)
-//
-//    println(processTypes(all.typesUsed, SuparnaturalGraphqlExtension))
-    processOperations(all.operations, SuparnaturalGraphqlExtension).writeTo(File("src/main/kotlin"))
-    processFragments(all.fragments, SuparnaturalGraphqlExtension).writeTo(File("src/main/kotlin"))
+//    val json = ClassLoader.getSystemClassLoader().getResource("input.json").readText()
+//    val all = Json.readValue<Container>(json)
+//////    println(all)
+////
+////    println(processTypes(all.typesUsed, SuparnaturalGraphqlExtension))
+//    processOperations(all.operations, SuparnaturalGraphqlExtension).writeTo(File("src/main/kotlin"))
+//    processFragments(all.fragments, SuparnaturalGraphqlExtension).writeTo(File("src/main/kotlin"))
 //    val x = kotlinx.serialization.json.Json.nonstrict.parse(Co.serializer(), "{\"test\": \"one\"}")
 
 //    println(x)

@@ -1,26 +1,38 @@
 package com.suparnatural.core.graphql
 
 import com.badoo.reaktive.observable.Observable
-import com.badoo.reaktive.observable.subscribe
-import com.badoo.reaktive.subject.behavior.BehaviorSubject
 import com.badoo.reaktive.subject.behavior.behaviorSubject
-import com.badoo.reaktive.subject.publish.publishSubject
+import kotlinx.serialization.UnstableDefault
 
 typealias JsonBody = String
 
 
-interface GraphQlTransport {
+interface GraphQlHttpFetcher {
 
     data class Response(val isSuccess: Boolean, val httpStatusCode: Int, val httpStatusMessage: String, val body: JsonBody? = null, val headers: Map<String, String>? = null)
-    fun transport(request: GraphQlOperation.Request, responseHandler: (Response) -> Void)
+    fun transport(request: GraphQlRequest, responseHandler: (Response) -> Void)
+
+    fun fetch(url: String, request: GraphQlRequest, headers: Map<String, String>?, handler: (Response) -> Void)
 }
 
-class GraphQlClient(private val linkChain: Link) {
+data class GraphQlHttpFetcherOptions(val headers: Map<String, String>?)
 
-    fun <T: GraphQlOperation> execute(operation: T): Observable<T> {
-        val subject = publishSubject<T>()
-        linkChain.execute(operation, null).subscribe { result: Any? ->
+interface GraphQlClient {
+    fun <T: GraphQlOperation> execute(operation: T, linkChain: Link): Observable<T>
+}
 
+class GraphQlHttpLink(val url: String, val httpFetcher: GraphQlHttpFetcher, val defaultHeaders: Map<String, String>? = null): Link {
+    override val isTerminating = true
+
+    @UnstableDefault
+    override fun <T> execute(operation: GraphQlOperation, next: ((GraphQlOperation) -> Observable<T?>)?): Observable<T?> {
+        val subject = behaviorSubject<T?>(null)
+
+        val request = operation.request
+        val requestBody = request.serialize()
+
+        httpFetcher.fetch(url, request, defaultHeaders) {
+            subject.onNext(it)
         }
 
         return subject
