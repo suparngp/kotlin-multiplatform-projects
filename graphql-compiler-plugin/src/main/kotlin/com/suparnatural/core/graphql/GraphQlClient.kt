@@ -1,40 +1,52 @@
 package com.suparnatural.core.graphql
 
 import com.badoo.reaktive.observable.Observable
+import com.badoo.reaktive.observable.map
 import com.badoo.reaktive.subject.behavior.behaviorSubject
+import kotlinx.serialization.KSerializer
+import kotlinx.serialization.Mapper
 import kotlinx.serialization.UnstableDefault
+import kotlinx.serialization.json.Json
+import kotlinx.serialization.json.JsonObject
+import java.lang.Exception
 
-typealias JsonBody = String
-
-
-interface GraphQlHttpFetcher {
-
-    data class Response(val isSuccess: Boolean, val httpStatusCode: Int, val httpStatusMessage: String, val body: JsonBody? = null, val headers: Map<String, String>? = null)
-    fun transport(request: GraphQlRequest, responseHandler: (Response) -> Void)
-
-    fun fetch(url: String, request: GraphQlRequest, headers: Map<String, String>?, handler: (Response) -> Void)
+interface Fetcher<T, V> {
+    fun fetch(url: String, request: T, headers: Map<String, String>?, handler: (V) -> Unit)
 }
 
-data class GraphQlHttpFetcherOptions(val headers: Map<String, String>?)
 
-interface GraphQlClient {
-    fun <T: GraphQlOperation> execute(operation: T, linkChain: Link): Observable<T>
+interface GraphQlFetcher<T: GraphQlFetcher.Response>: Fetcher<GraphQlOperation, T> {
+    interface Response {
+        val body: String?
+    }
 }
 
-class GraphQlHttpLink(val url: String, val httpFetcher: GraphQlHttpFetcher, val defaultHeaders: Map<String, String>? = null): Link {
-    override val isTerminating = true
+class GraphQlClient(private val chain: Link<GraphQlOperation, *, GraphQlFetcher.Response>) {
 
     @UnstableDefault
-    override fun <T> execute(operation: GraphQlOperation, next: ((GraphQlOperation) -> Observable<T?>)?): Observable<T?> {
-        val subject = behaviorSubject<T?>(null)
+    fun <T> execute(operation: GraphQlOperation, serializer: KSerializer<T>): Observable<GraphQlResponse<T>> {
+        return chain.execute(operation).map {fetchResponse ->
+            val body = fetchResponse.body
 
-        val request = operation.request
-        val requestBody = request.serialize()
+            if (body == null || body.isEmpty()) throw Exception()
 
-        httpFetcher.fetch(url, request, defaultHeaders) {
-            subject.onNext(it)
+            val json  = Json.parse(JsonObject.serializer(), body)
+            val response = MutableGraphQlResponse<T>()
+            val data = json.getObjectOrNull("data")
+            val errors = json.getArrayOrNull("errors")
+
+            if(data == null && errors == null) throw Exception()
+
+            if(data != null) {
+                response.data = Mapper.unmap(serializer, data.content)
+            }
+
+            if(errors != null) {
+                response.errors = errors.jsonArray.map {
+                    Mapper.unmap(GraphQlResponseError.serializer(), it.jsonObject.content)
+                }
+            }
+            response
         }
-
-        return subject
     }
 }

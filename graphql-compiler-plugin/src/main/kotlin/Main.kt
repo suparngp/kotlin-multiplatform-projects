@@ -1,10 +1,9 @@
 import com.badoo.reaktive.observable.observableOf
+import com.badoo.reaktive.observable.subscribe
 import com.fasterxml.jackson.databind.ObjectMapper
 import com.fasterxml.jackson.module.kotlin.readValue
 import com.fasterxml.jackson.module.kotlin.registerKotlinModule
-import com.suparnatural.core.graphql.GraphQlOperation
-import com.suparnatural.core.graphql.Link
-import com.suparnatural.core.graphql.concatLinks
+import com.suparnatural.core.graphql.*
 import com.suparnatural.plugin.graphql.config.SuparnaturalGraphqlExtension
 import com.suparnatural.plugin.graphql.models.Container
 import com.suparnatural.plugin.graphql.processors.processFragments
@@ -13,6 +12,7 @@ import com.suparnatural.plugin.graphql.processors.processTypes
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 import java.io.File
+import java.lang.annotation.Native
 
 val Json = ObjectMapper().registerKotlinModule()
 
@@ -63,4 +63,16 @@ fun main(args: Array<String>) {
 //        println("original forward")
 //        observableOf(null)
 //    }
+
+//    val firstLink = StringGeneratorLink()
+//    val secondLink = StringToIntLink()
+//    val thirdLink = EvenOddLink();
+//    val finalLink = thirdLink.concat(secondLink.concat(firstLink))
+//    finalLink.execute(Unit, null).subscribe {
+//        println(it)
+//    }
+
+
+    val link = GraphQlHttpLink(NativeFetcher(), GraphQlHttpLink.Options(""))
+    val client = GraphQlClient(link)
 }
