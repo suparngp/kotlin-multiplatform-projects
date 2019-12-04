@@ -22,7 +22,7 @@ interface GraphQlClient {
     fun <T> execute(operation: GraphQlOperation<T>): Observable<GraphQlResponse<T>>
 }
 
-class DefaultGraphQlClient(private val chain: Link<GraphQlOperation<*>, *, GraphQlFetcher.Response>): GraphQlClient {
+class DefaultGraphQlClient(private val chain: Link<GraphQlOperation<*>, *, GraphQlFetcher.Response>) : GraphQlClient {
 
     @UnstableDefault
     override fun <T> execute(operation: GraphQlOperation<T>): Observable<GraphQlResponse<T>> {
@@ -32,26 +32,21 @@ class DefaultGraphQlClient(private val chain: Link<GraphQlOperation<*>, *, Graph
             if (body == null || body.isEmpty()) throw Exception()
 
             val json = Json.parse(JsonObject.serializer(), body)
-
-            val response = object : GraphQlResponse<T> {
-                override var data: T? = null
-                override var errors: List<GraphQlResponseError>? = null
-            }
             val data = json.getObjectOrNull("data")
             val errors = json.getArrayOrNull("errors")
 
+            // set raw response in the context
+            operation.context["rawResponse"] = json
+
             if (data == null && errors == null) throw Exception()
 
-            if (data != null) {
-                response.data = Mapper.unmap(operation.responseSerializer, data.content)
+            val responseData = if (data != null) Mapper.unmap(operation.responseSerializer, data.content) else null
+
+            val responseErrors = errors?.jsonArray?.map {
+                Mapper.unmap(GraphQlResponseError.serializer(), it.jsonObject.content)
             }
 
-            if (errors != null) {
-                response.errors = errors.jsonArray.map {
-                    Mapper.unmap(GraphQlResponseError.serializer(), it.jsonObject.content)
-                }
-            }
-            response
+            GraphQlResponse(responseData, responseErrors)
         }
     }
 }

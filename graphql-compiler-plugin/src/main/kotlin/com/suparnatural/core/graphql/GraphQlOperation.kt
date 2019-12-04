@@ -18,10 +18,7 @@ data class GraphQlResponseError(val message: String, val path: List<String>, val
 /**
  * Represents GraphQl response
  */
-interface GraphQlResponse<T>{
-    val data: T?
-    val errors: List<GraphQlResponseError>?
-}
+data class GraphQlResponse<T>(val data: T?, val errors: List<GraphQlResponseError>?)
 
 /**
  * A GraphQl operation consists of a request and the corresponding response.
