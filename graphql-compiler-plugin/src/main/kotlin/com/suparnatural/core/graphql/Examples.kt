@@ -37,7 +37,7 @@ class EvenOddLink: Link<Unit, Int, Boolean> {
 
 
 class NativeFetcher: GraphQlFetcher<GraphQlHttpResponse> {
-    override fun fetch(url: String, request: GraphQlOperation, headers: Map<String, String>?, handler: (GraphQlHttpResponse) -> Unit) {
+    override fun fetch(url: String, body: String, headers: Map<String, String>?, handler: (GraphQlHttpResponse) -> Unit) {
         handler(GraphQlHttpResponse(null, 200))
     }
 }

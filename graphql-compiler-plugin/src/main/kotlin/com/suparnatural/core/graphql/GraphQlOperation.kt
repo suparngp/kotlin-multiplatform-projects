@@ -1,16 +1,10 @@
 package com.suparnatural.core.graphql
 
-import kotlinx.serialization.*
-import kotlinx.serialization.json.*
-
-/**
- * Provides query information about an operation
- */
-interface QueryProvider {
-    val query: String
-    val name: String
-}
-
+import kotlinx.serialization.ContextualSerialization
+import kotlinx.serialization.KSerializer
+import kotlinx.serialization.Serializable
+import kotlinx.serialization.UnstableDefault
+import kotlinx.serialization.json.Json
 
 /**
  * Represents a GraphQl response error.
@@ -29,13 +23,14 @@ interface GraphQlResponse<T>{
     val errors: List<GraphQlResponseError>?
 }
 
-data class MutableGraphQlResponse<T>(override var data: T? = null, override var errors: List<GraphQlResponseError>? = null) : GraphQlResponse<T>
-
 /**
  * A GraphQl operation consists of a request and the corresponding response.
  */
-open class GraphQlOperation(private val queryProvider: QueryProvider, private val variables: Map<String, Any>, val context: Map<String, Any> = emptyMap()) {
-
+abstract class GraphQlOperation<T> {
+    abstract val source: String
+    abstract val name: String
+    abstract val variables: MutableMap<String, Any>
+    val context: MutableMap<String, Any> = mutableMapOf()
     @UnstableDefault
     val serializedString: String
         get() {
@@ -45,6 +40,7 @@ open class GraphQlOperation(private val queryProvider: QueryProvider, private va
                     val query: String,
                     val variables: Map<String, @ContextualSerialization Any>
             )
-            return Json.stringify(GraphQlRequest.serializer(), GraphQlRequest(queryProvider.name, queryProvider.query, variables))
+            return Json.stringify(GraphQlRequest.serializer(), GraphQlRequest(name, source, variables))
         }
+    abstract val responseSerializer: KSerializer<T>
 }
