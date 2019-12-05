@@ -20,6 +20,14 @@ data class GraphQlResponseError(val message: String, val path: List<String>, val
  */
 data class GraphQlResponse<T>(val data: T?, val errors: List<GraphQlResponseError>?)
 
+// Serializable GraphQlRequest
+@Serializable
+data class GraphQlRequest(
+        val operationName: String,
+        val query: String,
+        val variables: Map<String, @ContextualSerialization Any>
+)
+
 /**
  * A GraphQl operation consists of a request and the corresponding response.
  */
@@ -28,15 +36,10 @@ abstract class GraphQlOperation<T> {
     abstract val name: String
     abstract val variables: MutableMap<String, Any>
     val context: MutableMap<String, Any> = mutableMapOf()
+
     @UnstableDefault
     val serializedString: String
         get() {
-            @Serializable
-            data class GraphQlRequest(
-                    val operationName: String,
-                    val query: String,
-                    val variables: Map<String, @ContextualSerialization Any>
-            )
             return Json.stringify(GraphQlRequest.serializer(), GraphQlRequest(name, source, variables))
         }
     abstract val responseSerializer: KSerializer<T>
