@@ -25,7 +25,7 @@ data class GraphQlResponse<T>(val data: T?, val errors: List<GraphQlResponseErro
 data class GraphQlRequest(
         val operationName: String,
         val query: String,
-        val variables: Map<String, @ContextualSerialization Any>
+        val variables: Map<String, @ContextualSerialization Any?>
 )
 
 /**
@@ -34,7 +34,7 @@ data class GraphQlRequest(
 abstract class GraphQlOperation<T> {
     abstract val source: String
     abstract val name: String
-    abstract val variables: MutableMap<String, Any>
+    abstract val variables: MutableMap<String, Any?>
     val context: MutableMap<String, Any> = mutableMapOf()
 
     @UnstableDefault
