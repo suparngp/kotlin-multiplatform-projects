@@ -1,9 +1,9 @@
-package com.suparnatural.plugin.graphql.processors
+package com.suparnatural.plugins.graphql.processors
 
 import com.squareup.kotlinpoet.*
 import com.squareup.kotlinpoet.ParameterizedTypeName.Companion.parameterizedBy
-import com.suparnatural.plugin.graphql.config.SuparnaturalGraphqlExtension
-import com.suparnatural.plugin.graphql.models.FieldGroup
+import com.suparnatural.plugins.graphql.config.SuparnaturalGraphqlExtension
+import com.suparnatural.plugins.graphql.models.FieldGroup
 import kotlinx.serialization.*
 import kotlinx.serialization.internal.StringDescriptor
 import kotlinx.serialization.json.*
@@ -51,7 +51,8 @@ fun processFieldGroup(fieldGroup: FieldGroup, container: TypeSpec.Builder, confi
             val fragmentsGroupConstructorSpec = FunSpec.constructorBuilder()
             fieldGroup.fragmentSpreads.forEach {
                 val propertyName = it.decapitalize()
-                val propertyTypeName = ClassName(config.packageName, FragmentsContainer, it).copy(nullable = true)
+                val propertyTypeName = ClassName(config.packageName,
+                    FragmentsContainer, it).copy(nullable = true)
                 fragmentsGroupConstructorSpec.addParameter(
                         ParameterSpec
                                 .builder(propertyName, propertyTypeName)
@@ -72,14 +73,21 @@ fun processFieldGroup(fieldGroup: FieldGroup, container: TypeSpec.Builder, confi
                     .addModifiers(KModifier.DATA)
                     .addAnnotation(Serializable::class)
                     .addSuperinterface(rootClassName, CodeBlock.of(FragmentsAdapterDelegateProperty))
-                    .addProperty(PropertySpec.builder(FragmentsAdapterDelegateProperty, rootClassName).initializer(FragmentsAdapterDelegateProperty).build())
-                    .addProperty(PropertySpec.builder(FragmentsAdapterFragmentsProperty, fragmentsGroupClassName).initializer(FragmentsAdapterFragmentsProperty).build())
+                    .addProperty(PropertySpec.builder(FragmentsAdapterDelegateProperty, rootClassName).initializer(
+                        FragmentsAdapterDelegateProperty
+                    ).build())
+                    .addProperty(PropertySpec.builder(FragmentsAdapterFragmentsProperty, fragmentsGroupClassName).initializer(
+                        FragmentsAdapterFragmentsProperty
+                    ).build())
 
             val fragmentsAdapterConstructorSpec = FunSpec.constructorBuilder()
                     .addParameter(FragmentsAdapterDelegateProperty, rootClassName)
                     .addParameter(
                             ParameterSpec
-                                    .builder(FragmentsAdapterFragmentsProperty, ClassName("", FragmentsGroup))
+                                    .builder(
+                                        FragmentsAdapterFragmentsProperty, ClassName("",
+                                            FragmentsGroup
+                                        ))
                                     .defaultValue("$FragmentsGroup()").build()
                     )
             fragmentsAdapterClassSpec.primaryConstructor(fragmentsAdapterConstructorSpec.build())
@@ -106,7 +114,8 @@ fun processFieldGroup(fieldGroup: FieldGroup, container: TypeSpec.Builder, confi
                     .addStatement("val jsonObjects = mutableListOf<%T>(%T.nonstrict.toJson(%T.serializer(), adapter.delegate as %T).jsonObject)", JsonElement::class.asClassName(), Json::class.asClassName(), rootImplClassName, rootImplClassName)
             fieldGroup.fragmentSpreads.forEach {
                 val fragmentSpreadPropertyName = it.decapitalize()
-                val fragmentSpreadClassName = ClassName(config.packageName, FragmentsContainer, it)
+                val fragmentSpreadClassName = ClassName(config.packageName,
+                    FragmentsContainer, it)
 
                 // change from json to fromJsonOrNull
                 deserializeFunSpec.addStatement("val $fragmentSpreadPropertyName = %T.nonstrict.fromJson(%T.Companion, json)", Json::class.asClassName(), fragmentSpreadClassName)

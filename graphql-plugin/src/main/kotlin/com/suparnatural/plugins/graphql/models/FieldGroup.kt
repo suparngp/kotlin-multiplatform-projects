@@ -1,4 +1,4 @@
-package com.suparnatural.plugin.graphql.models
+package com.suparnatural.plugins.graphql.models
 
 interface FieldGroup {
     val fields: List<Field>

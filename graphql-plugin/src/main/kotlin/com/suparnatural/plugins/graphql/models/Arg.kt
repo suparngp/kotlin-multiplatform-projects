@@ -1,4 +1,4 @@
-package com.suparnatural.plugin.graphql.models
+package com.suparnatural.plugins.graphql.models
 
 data class Arg (
         val name: String = "",

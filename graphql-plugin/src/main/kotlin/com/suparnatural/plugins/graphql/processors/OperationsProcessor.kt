@@ -1,9 +1,9 @@
-package com.suparnatural.plugin.graphql.processors
+package com.suparnatural.plugins.graphql.processors
 
 import com.squareup.kotlinpoet.*
 import com.squareup.kotlinpoet.ParameterizedTypeName.Companion.parameterizedBy
-import com.suparnatural.plugin.graphql.config.SuparnaturalGraphqlExtension
-import com.suparnatural.plugin.graphql.models.Operation
+import com.suparnatural.plugins.graphql.config.SuparnaturalGraphqlExtension
+import com.suparnatural.plugins.graphql.models.Operation
 
 const val OperationsContainer = "Operations"
 
@@ -21,7 +21,11 @@ fun processOperations(operations: List<Operation>, config: SuparnaturalGraphqlEx
         val constructorSpec = FunSpec.constructorBuilder()
         val variableMapList = mutableListOf<String>()
         it.variables.forEach {v ->
-            val type = propertyTypeName(v.type, KnownTypes, config)
+            val type = propertyTypeName(
+                v.type,
+                KnownTypes,
+                config
+            )
             constructorSpec.addParameter(v.name, type)
             operationContainer.addProperty(PropertySpec.builder(v.name, type).initializer(v.name).build())
             variableMapList.add("\"${v.name}\" to ${v.name}")

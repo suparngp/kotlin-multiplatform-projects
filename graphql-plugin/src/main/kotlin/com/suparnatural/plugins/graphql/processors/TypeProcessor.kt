@@ -1,9 +1,9 @@
-package com.suparnatural.plugin.graphql.processors
+package com.suparnatural.plugins.graphql.processors
 
 import com.squareup.kotlinpoet.*
-import com.suparnatural.plugin.graphql.config.SuparnaturalGraphqlExtension
-import com.suparnatural.plugin.graphql.models.TypeUsed
-import com.suparnatural.plugin.graphql.models.TypeUsedKind
+import com.suparnatural.plugins.graphql.config.SuparnaturalGraphqlExtension
+import com.suparnatural.plugins.graphql.models.TypeUsed
+import com.suparnatural.plugins.graphql.models.TypeUsedKind
 import kotlinx.serialization.Serializable
 
 fun processTypes(types: List<TypeUsed>, config: SuparnaturalGraphqlExtension): FileSpec {
@@ -23,7 +23,11 @@ fun processTypes(types: List<TypeUsed>, config: SuparnaturalGraphqlExtension): F
                 spec = TypeSpec.classBuilder(typeUsed.name)
                 val constructorSpec = FunSpec.constructorBuilder()
                 typeUsed.fields.forEach { field ->
-                    val type = propertyTypeName(field.type, KnownTypes, config)
+                    val type = propertyTypeName(
+                        field.type,
+                        KnownTypes,
+                        config
+                    )
                     constructorSpec.addParameter(field.name, type)
                     spec.addProperty(PropertySpec.builder(field.name, type).initializer(field.name).build())
                 }

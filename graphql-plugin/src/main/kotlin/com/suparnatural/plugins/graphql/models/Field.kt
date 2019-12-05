@@ -1,4 +1,4 @@
-package com.suparnatural.plugin.graphql.models
+package com.suparnatural.plugins.graphql.models
 
 data class Field(
         val responseName: String = "",
