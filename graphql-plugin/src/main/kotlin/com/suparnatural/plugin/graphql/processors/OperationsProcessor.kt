@@ -1,11 +1,9 @@
 package com.suparnatural.plugin.graphql.processors
 
 import com.squareup.kotlinpoet.*
+import com.squareup.kotlinpoet.ParameterizedTypeName.Companion.parameterizedBy
 import com.suparnatural.plugin.graphql.config.SuparnaturalGraphqlExtension
 import com.suparnatural.plugin.graphql.models.Operation
-import java.util.*
-import kotlin.collections.HashMap
-import com.squareup.kotlinpoet.ParameterizedTypeName.Companion.parameterizedBy
 
 const val OperationsContainer = "Operations"
 

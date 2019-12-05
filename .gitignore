@@ -60,3 +60,4 @@ node_modules
 /utilities/docs/suparnatural-utilities/index-outline.html
 /graphql-compiler-plugin/gradle
 /graphql/.idea
+.idea
