@@ -45,4 +45,13 @@ fun Project.configureAndroid(config: SuparnaturalPluginExtension) {
     }
     configureKmpSourceSet(SourceSetNames.androidMain, config.androidMain)
     configureKmpSourceSet(SourceSetNames.androidTest, config.androidTest)
+
+    // variant specific configurations
+    configureKmpSourceSet(SourceSetNames.androidAndroidTest, config.androidAndroidTest)
+    configureKmpSourceSet(SourceSetNames.androidAndroidTestDebug, config.androidAndroidTestDebug)
+    configureKmpSourceSet(SourceSetNames.androidDebug, config.androidDebug)
+    configureKmpSourceSet(SourceSetNames.androidRelease, config.androidRelease)
+    configureKmpSourceSet(SourceSetNames.androidTestDebug, config.androidTestDebug)
+    configureKmpSourceSet(SourceSetNames.androidTestRelease, config.androidTestRelease)
+
 }

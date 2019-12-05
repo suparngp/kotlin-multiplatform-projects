@@ -1,2 +1,2 @@
-rootProject.name = 'utilities'
-enableFeaturePreview('GRADLE_METADATA')
+rootProject.name = "utilities"
+enableFeaturePreview("GRADLE_METADATA")

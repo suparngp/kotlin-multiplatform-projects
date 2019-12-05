@@ -31,7 +31,6 @@ suparnatural {
     androidMain {
         dependencies {
             additional {
-                implementation("com.badoo.reaktive:reaktive-android:1.1.0")
                 implementation("org.jetbrains.kotlinx:kotlinx-serialization-runtime:0.13.0")
             }
         }
@@ -39,8 +38,21 @@ suparnatural {
     androidTest {
         dependencies {
             additional {
-                implementation("com.badoo.reaktive:reaktive-android:1.1.0")
                 implementation("org.jetbrains.kotlinx:kotlinx-serialization-runtime:0.13.0")
+            }
+        }
+    }
+    androidRelease {
+        dependencies {
+            additional {
+                implementation("com.badoo.reaktive:reaktive-android:1.1.0")
+            }
+        }
+    }
+    androidDebug {
+        dependencies {
+            additional {
+                implementation("com.badoo.reaktive:reaktive-android-debug:1.1.0")
             }
         }
     }

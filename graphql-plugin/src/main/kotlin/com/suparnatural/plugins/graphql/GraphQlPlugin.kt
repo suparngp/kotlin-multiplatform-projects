@@ -35,7 +35,6 @@ class GraphQlPlugin : Plugin<Project> {
                 processTypes(json.typesUsed, extension).writeTo(outputDirectory)
                 processOperations(json.operations, extension).writeTo(outputDirectory)
                 processFragments(json.fragments, extension).writeTo(outputDirectory)
-                println("Executing task hello>>>>>>> ${extension.packageName} ${outputDirectory.absolutePath}")
             }
         }
     }
