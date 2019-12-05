@@ -2,7 +2,7 @@ package com.suparnatural.plugins.graphql.processors
 
 import com.squareup.kotlinpoet.*
 import com.squareup.kotlinpoet.ParameterizedTypeName.Companion.parameterizedBy
-import com.suparnatural.plugins.graphql.config.SuparnaturalGraphqlExtension
+import com.suparnatural.plugins.graphql.GraphQlPluginExtension
 import com.suparnatural.plugins.graphql.models.FieldGroup
 import kotlinx.serialization.*
 import kotlinx.serialization.internal.StringDescriptor
@@ -14,7 +14,7 @@ const val FragmentsContainer = "Fragments"
 const val FragmentsAdapterDelegateProperty = "delegate"
 const val FragmentsAdapterFragmentsProperty = "fragments"
 
-fun processFieldGroup(fieldGroup: FieldGroup, container: TypeSpec.Builder, config: SuparnaturalGraphqlExtension, top: Boolean = false) {
+fun processFieldGroup(fieldGroup: FieldGroup, container: TypeSpec.Builder, config: GraphQlPluginExtension, top: Boolean = false) {
 
     val rootSpecTypeName = strippedType(fieldGroup.typeName)
     val rootClassName = ClassName("", rootSpecTypeName)

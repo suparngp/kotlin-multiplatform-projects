@@ -1,12 +1,12 @@
 package com.suparnatural.plugins.graphql.processors
 
 import com.squareup.kotlinpoet.*
-import com.suparnatural.plugins.graphql.config.SuparnaturalGraphqlExtension
+import com.suparnatural.plugins.graphql.GraphQlPluginExtension
 import com.suparnatural.plugins.graphql.models.TypeUsed
 import com.suparnatural.plugins.graphql.models.TypeUsedKind
 import kotlinx.serialization.Serializable
 
-fun processTypes(types: List<TypeUsed>, config: SuparnaturalGraphqlExtension): FileSpec {
+fun processTypes(types: List<TypeUsed>, config: GraphQlPluginExtension): FileSpec {
     val fileSpec = FileSpec
             .builder(config.packageName, "Types")
     // add all types to known types

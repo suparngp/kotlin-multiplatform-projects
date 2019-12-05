@@ -2,12 +2,12 @@ package com.suparnatural.plugins.graphql.processors
 
 import com.squareup.kotlinpoet.*
 import com.squareup.kotlinpoet.ParameterizedTypeName.Companion.parameterizedBy
-import com.suparnatural.plugins.graphql.config.SuparnaturalGraphqlExtension
+import com.suparnatural.plugins.graphql.GraphQlPluginExtension
 import com.suparnatural.plugins.graphql.models.Operation
 
 const val OperationsContainer = "Operations"
 
-fun processOperations(operations: List<Operation>, config: SuparnaturalGraphqlExtension): FileSpec {
+fun processOperations(operations: List<Operation>, config: GraphQlPluginExtension): FileSpec {
     val fileSpec = FileSpec.builder(config.packageName, "Operations")
     val container = TypeSpec.classBuilder(OperationsContainer)
 

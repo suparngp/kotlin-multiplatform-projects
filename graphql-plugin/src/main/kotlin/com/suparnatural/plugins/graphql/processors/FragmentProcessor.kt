@@ -1,11 +1,11 @@
 package com.suparnatural.plugins.graphql.processors
 
 import com.squareup.kotlinpoet.*
-import com.suparnatural.plugins.graphql.config.SuparnaturalGraphqlExtension
+import com.suparnatural.plugins.graphql.GraphQlPluginExtension
 import com.suparnatural.plugins.graphql.models.Fragment
 
 
-fun processFragments(fragments: List<Fragment>, config: SuparnaturalGraphqlExtension): FileSpec {
+fun processFragments(fragments: List<Fragment>, config: GraphQlPluginExtension): FileSpec {
     val fileSpec = FileSpec.builder(config.packageName, FragmentsContainer)
 
     val containerInterface = TypeSpec.interfaceBuilder(ClassName(config.packageName,

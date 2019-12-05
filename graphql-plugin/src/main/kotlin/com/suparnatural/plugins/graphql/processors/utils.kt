@@ -2,7 +2,7 @@ package com.suparnatural.plugins.graphql.processors
 
 import com.squareup.kotlinpoet.*
 import com.squareup.kotlinpoet.ParameterizedTypeName.Companion.parameterizedBy
-import com.suparnatural.plugins.graphql.config.SuparnaturalGraphqlExtension
+import com.suparnatural.plugins.graphql.GraphQlPluginExtension
 import com.suparnatural.plugins.graphql.models.Field
 
 val KnownTypes = mutableMapOf(
@@ -13,7 +13,7 @@ val KnownTypes = mutableMapOf(
         "ID" to TypeAliasSpec.builder("ID", String::class).build().type
 )
 
-fun propertyTypeName(inputType: String, knownTypes: Map<String, TypeName>, config: SuparnaturalGraphqlExtension?): TypeName {
+fun propertyTypeName(inputType: String, knownTypes: Map<String, TypeName>, config: GraphQlPluginExtension?): TypeName {
     val stripped = strippedType(inputType)
     val typeName: TypeName = if (inputType.startsWith("[")) {
         val innerType = Regex("\\[(.+)]!?$")
@@ -41,7 +41,7 @@ fun snakeToPascal(input: String): String {
 
 fun strippedType(input: String): String = input.replace(Regex("[\\[\\]?!]"), "")
 
-fun addPropertiesMutating(fields: List<Field>, interfaceSpec: TypeSpec.Builder?, classSpec: TypeSpec.Builder, config: SuparnaturalGraphqlExtension? = null) {
+fun addPropertiesMutating(fields: List<Field>, interfaceSpec: TypeSpec.Builder?, classSpec: TypeSpec.Builder, config: GraphQlPluginExtension? = null) {
     val constructorSpec = FunSpec.constructorBuilder()
     fields.forEach {
         val propertyType = propertyTypeName(
