@@ -105,11 +105,15 @@ fun processFieldGroup(
             // adapter serializer
             val decoder = parameterSpec("decoder", Decoder::class).build()
             val encoder = parameterSpec("encoder", Encoder::class).build()
-            val obj = parameterSpec("obj", fragmentsAdapterClassName).build()
+            val adapterObj = parameterSpec("obj", fragmentsAdapterClassName).build()
             val serializerSpec = TypeSpec.companionObjectBuilder()
                 .addSuperinterface(KSerializer::class.asTypeName().parameterizedBy(fragmentsAdapterClassName))
 
+            val unstableAnnotation =
+                AnnotationSpec.builder(ClassName("kotlinx.serialization", "UnstableDefault")).build()
+
             val deserializeFunSpec = FunSpec.builder("deserialize")
+                .addAnnotation(unstableAnnotation)
                 .addModifiers(KModifier.OVERRIDE)
                 .addParameter(decoder)
                 .returns(fragmentsAdapterClassName)
@@ -120,13 +124,14 @@ fun processFieldGroup(
                     rootImplClassName
                 )
 
+
             val serializeFunSpec = FunSpec.builder("serialize")
                 .addModifiers(KModifier.OVERRIDE)
+                .addAnnotation(unstableAnnotation)
                 .addParameter(encoder)
-                .addParameter(obj)
-                .addStatement("val adapter = obj as %T", fragmentsAdapterClassName)
+                .addParameter(adapterObj)
                 .addStatement(
-                    "val jsonObjects = mutableListOf<%T>(%T.nonstrict.toJson(%T.serializer(), adapter.delegate as %T).jsonObject)",
+                    "val jsonObjects = mutableListOf<%T>(%T.nonstrict.toJson(%T.serializer(), obj.delegate as %T).jsonObject)",
                     JsonElement::class.asClassName(),
                     Json::class.asClassName(),
                     rootImplClassName,
@@ -145,9 +150,9 @@ fun processFieldGroup(
                     Json::class.asClassName(),
                     fragmentSpreadClassName
                 )
-                serializeFunSpec.addStatement("if (adapter.fragments.$fragmentSpreadPropertyName != null) {")
+                serializeFunSpec.addStatement("if (obj.fragments.$fragmentSpreadPropertyName != null) {")
                     .addStatement(
-                        "jsonObjects.add(%T.nonstrict.toJson(%T.Companion, adapter.fragments.$fragmentSpreadPropertyName).jsonObject)",
+                        "jsonObjects.add(%T.nonstrict.toJson(%T.Companion, obj.fragments.$fragmentSpreadPropertyName).jsonObject)",
                         Json::class.asClassName(),
                         fragmentSpreadClassName
                     )
