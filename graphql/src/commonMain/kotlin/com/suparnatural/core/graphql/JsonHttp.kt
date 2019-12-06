@@ -56,12 +56,12 @@ class JsonHttpGraphQlClient(chain: Link<GraphQlOperation<*>, *, JsonHttpFetchRes
                 val body = it.body ?: "{}"
                 val json = Json.parse(GraphQlResponse.serializer(operation.responseSerializer), body)
                 if (it.isFailure) {
-                    return@map Result.Failure(FailureResponse(Error.INVALID_RESPONSE, json))
+                    return@map Result.Failure<GraphQlResponse<T>, FailureResponse<T>>(FailureResponse(Error.INVALID_RESPONSE, json))
                 }
 
-                Result.Success(json)
+                Result.Success<GraphQlResponse<T>, FailureResponse<T>>(json)
             } catch (e: Exception) {
-                Result.Failure(FailureResponse(Error.MALFORMED_BODY, null), e)
+                Result.Failure<GraphQlResponse<T>, FailureResponse<T>>(FailureResponse(Error.MALFORMED_BODY, null), e)
             }
         }
     }
@@ -97,7 +97,7 @@ open class JsonHttpGraphQlLink(
             next: Link<GraphQlOperation<*>, *, Unit>?
     ): Observable<JsonHttpFetchResponse> {
         val subject = publishSubject<JsonHttpFetchResponse>()
-        val headers = defaultHeaders?.toMutableMap() ?: emptyMap()
+        val headers = defaultHeaders?.toMutableMap() ?: mutableMapOf()
         if (operation.context.containsKey(contextKeyHeaders)) {
             val overrides = operation.context[contextKeyHeaders]
             if (overrides is Map<*, *>) {
