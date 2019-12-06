@@ -5,5 +5,5 @@ package com.suparnatural.core.graphql
  */
 sealed class Result<T, V> {
     data class Success<T, V>(val value: T) : Result<T, V>()
-    data class Failure<T, V>(val error: V, val cause: Throwable? = null) : Result<T, V>()
+    data class Failure<T, V>(val value: V, val cause: Throwable? = null) : Result<T, V>()
 }

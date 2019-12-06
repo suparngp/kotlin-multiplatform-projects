@@ -10,25 +10,28 @@ interface GraphQlClient {
     fun <T> execute(operation: GraphQlOperation<T>): Observable<Result<GraphQlResponse<T>, *>>
 }
 
-enum class JsonHttpGraphQlClientError(val message: String) {
-    INVALID_RESPONSE("Invalid http response"),
-    MALFORMED_BODY("Malformed response body. Unable to parse")
-}
-
-
 class JsonHttpGraphQlClient(private val chain: Link<GraphQlOperation<*>, *, JsonHttpFetchResponse>) : GraphQlClient {
+
+    enum class Error(val message: String) {
+        INVALID_RESPONSE("Invalid http response"),
+        MALFORMED_BODY("Malformed response body. Unable to parse")
+    }
+
+    data class FailureResponse<T>(val error: Error, val response: T)
+
     @UnstableDefault
-    override fun <T> execute(operation: GraphQlOperation<T>): Observable<Result<GraphQlResponse<T>, JsonHttpGraphQlClientError>> {
+    override fun <T> execute(operation: GraphQlOperation<T>): Observable<Result<GraphQlResponse<T>, FailureResponse<GraphQlResponse<T>?>>> {
         return chain.execute(operation).map {
             try {
-                if (it.isFailure) {
-                    return@map Result.Failure<GraphQlResponse<T>, JsonHttpGraphQlClientError>(JsonHttpGraphQlClientError.INVALID_RESPONSE)
-                }
-                val body = it.body!!
+                val body = it.body ?: "{}"
                 val json = Json.parse(GraphQlResponse.serializer(operation.responseSerializer), body)
-                Result.Success<GraphQlResponse<T>, JsonHttpGraphQlClientError>(json)
+                if (it.isFailure) {
+                    return@map Result.Failure<GraphQlResponse<T>, FailureResponse<GraphQlResponse<T>?>>(FailureResponse(Error.INVALID_RESPONSE, json))
+                }
+
+                Result.Success<GraphQlResponse<T>, FailureResponse<GraphQlResponse<T>?>>(json)
             } catch (e: Exception) {
-                Result.Failure<GraphQlResponse<T>, JsonHttpGraphQlClientError>(JsonHttpGraphQlClientError.MALFORMED_BODY, e)
+                Result.Failure<GraphQlResponse<T>, FailureResponse<GraphQlResponse<T>?>>(FailureResponse(Error.MALFORMED_BODY, null), e)
             }
         }
     }

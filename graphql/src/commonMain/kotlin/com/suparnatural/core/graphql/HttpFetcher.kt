@@ -16,7 +16,7 @@ interface HttpFetchResponse<T> {
 
 // Fetches a result of type V from a url by sending body type T
 interface HttpFetcher<T : HttpFetchRequest<*>, V : HttpFetchResponse<*>> {
-    fun fetch(url: String, body: T, headers: Map<String, String>?, handler: (V) -> Unit)
+    fun fetch(url: String, request: T, headers: Map<String, String>?, handler: (V) -> Unit)
 }
 
 // Encapsulates an http fetch request with plain JSON body

@@ -5,21 +5,31 @@ import kotlinx.serialization.KSerializer
 import kotlinx.serialization.Serializable
 import kotlinx.serialization.UnstableDefault
 import kotlinx.serialization.json.Json
+import kotlinx.serialization.json.JsonElement
+import kotlinx.serialization.json.JsonObject
 
 /**
  * Represents a GraphQl response error.
  */
 @Serializable
-data class GraphQlResponseError(val message: String, val path: List<String>, val locations: List<Location>) {
+data class GraphQlResponseError(
+        val message: String? = null,
+        val path: List<String>? = null,
+        val locations: List<Location>? = null,
+        val extensions: JsonObject? = null) {
     @Serializable
-    data class Location(val line: Int, val number: Int)
+    data class Location(val line: Int? = null, val column: Int? = null)
 }
 
 /**
  * Represents GraphQl response
  */
 @Serializable
-data class GraphQlResponse<T>(val data: T? = null, val errors: List<GraphQlResponseError>? = null)
+data class GraphQlResponse<T>(
+        val data: T? = null,
+        val errors: List<GraphQlResponseError>? = null,
+        val extensions: JsonObject? = null
+)
 
 // Serializable GraphQlRequest
 @Serializable
