@@ -22,13 +22,13 @@ class JsonHttpGraphQlClient(private val chain: Link<GraphQlOperation<*>, *, Json
         return chain.execute(operation).map {
             try {
                 if (it.isFailure) {
-                    return@map Result.Failure(JsonHttpGraphQlClientError.INVALID_RESPONSE)
+                    return@map Result.Failure<GraphQlResponse<T>, JsonHttpGraphQlClientError>(JsonHttpGraphQlClientError.INVALID_RESPONSE)
                 }
                 val body = it.body!!
                 val json = Json.parse(GraphQlResponse.serializer(operation.responseSerializer), body)
-                Result.Success(json)
+                Result.Success<GraphQlResponse<T>, JsonHttpGraphQlClientError>(json)
             } catch (e: Exception) {
-                Result.Failure(JsonHttpGraphQlClientError.MALFORMED_BODY, e)
+                Result.Failure<GraphQlResponse<T>, JsonHttpGraphQlClientError>(JsonHttpGraphQlClientError.MALFORMED_BODY, e)
             }
         }
     }
