@@ -1,35 +1,59 @@
 package com.suparnatural.core.graphql
 
-// encapsulates request of an HttpFetcher
+/**
+ * A request for HTTP fetcher.
+ */
+
 interface HttpFetchRequest<T> {
+
+    /**
+     * body of the http request.
+     */
     val body: T?
+
+    /**
+     * Http request headers
+     */
+    val headers: Map<String, String>?
 }
 
-// Encapsulates the response of an HttpFetcher
+/**
+ * A response for Http request
+ */
 interface HttpFetchResponse<T> {
+
+    /**
+     * Http response body
+     */
     val body: T?
+
+    /**
+     * Http status code
+     */
     val statusCode: Int
+
+    /**
+     * Http status message. It can be used to store failure messages
+     */
     val statusMessage: String?
-    val isFailure: Boolean
-    val failureCause: String?
 }
 
-// Fetches a result of type V from a url by sending body type T
+val <T> HttpFetchResponse<T>.isFailure: Boolean
+    get() = this.statusCode != 200
+
+/**
+ * An HttpFetcher fetches an [HttpFetchResponse] for a given [HttpFetchRequest]
+ * from an http server.
+ */
 interface HttpFetcher<T : HttpFetchRequest<*>, V : HttpFetchResponse<*>> {
-    fun fetch(url: String, request: T, headers: Map<String, String>?, handler: (V) -> Unit)
+
+    /**
+     * Fetches the response of type `V` from a given url with request body
+     * of type `T`.
+     *
+     * @param url the endpoint
+     * @param request the request object
+     * @param handler the result handler
+     */
+    fun fetch(url: String, request: T, handler: (V) -> Unit)
 }
-
-// Encapsulates an http fetch request with plain JSON body
-open class JsonHttpFetchRequest(override val body: String?) : HttpFetchRequest<String>
-
-// Encapsulates an http fetch response with plain JSON body
-open class JsonHttpFetchResponse(
-        override val body: String?,
-        override val statusCode: Int,
-        override val statusMessage: String? = null,
-        override val isFailure: Boolean = false,
-        override val failureCause: String? = null
-) : HttpFetchResponse<String>
-
-// Handles Http Requests with String request and response body
-interface JsonHttpFetcher : HttpFetcher<JsonHttpFetchRequest, JsonHttpFetchResponse>

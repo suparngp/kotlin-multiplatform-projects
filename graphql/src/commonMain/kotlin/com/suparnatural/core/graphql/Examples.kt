@@ -37,7 +37,7 @@ class EvenOddLink : Link<Unit, Int, Boolean> {
 
 
 class NativeFetcher : JsonHttpFetcher {
-    override fun fetch(url: String, body: JsonHttpFetchRequest, headers: Map<String, String>?, handler: (JsonHttpFetchResponse) -> Unit) {
+    override fun fetch(url: String, request: JsonHttpFetchRequest, handler: (JsonHttpFetchResponse) -> Unit) {
         handler(JsonHttpFetchResponse("", 200))
     }
 }

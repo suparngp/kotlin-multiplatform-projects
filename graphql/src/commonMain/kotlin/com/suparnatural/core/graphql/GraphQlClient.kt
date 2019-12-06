@@ -1,38 +1,26 @@
 package com.suparnatural.core.graphql
 
 import com.badoo.reaktive.observable.Observable
-import com.badoo.reaktive.observable.map
-import kotlinx.serialization.UnstableDefault
-import kotlinx.serialization.json.Json
 
+/**
+ * A client which executes operations against a GraphQl server.
+ * It accepts a chain of [Link] which emits the final response of type `T`.
+ *
+ * The client should not concern itself with how to make a network request.
+ * Rather, it should rely on the last [Link] of the [chain] as terminating
+ * link which fetches the response from the server. [JsonHttpGraphQlLink] is
+ * one such link. The client should then take the response as input
+ * and transform it into the correct response type based on the operation.
+ *
+ * @see JsonHttpGraphQlClient
+ */
+abstract class GraphQlClient<T>(val chain: Link<GraphQlOperation<*>, *, T>) {
 
-interface GraphQlClient {
-    fun <T> execute(operation: GraphQlOperation<T>): Observable<Result<GraphQlResponse<T>, *>>
-}
-
-class JsonHttpGraphQlClient(private val chain: Link<GraphQlOperation<*>, *, JsonHttpFetchResponse>) : GraphQlClient {
-
-    enum class Error(val message: String) {
-        INVALID_RESPONSE("Invalid http response"),
-        MALFORMED_BODY("Malformed response body. Unable to parse")
-    }
-
-    data class FailureResponse<T>(val error: Error, val response: T)
-
-    @UnstableDefault
-    override fun <T> execute(operation: GraphQlOperation<T>): Observable<Result<GraphQlResponse<T>, FailureResponse<GraphQlResponse<T>?>>> {
-        return chain.execute(operation).map {
-            try {
-                val body = it.body ?: "{}"
-                val json = Json.parse(GraphQlResponse.serializer(operation.responseSerializer), body)
-                if (it.isFailure) {
-                    return@map Result.Failure<GraphQlResponse<T>, FailureResponse<GraphQlResponse<T>?>>(FailureResponse(Error.INVALID_RESPONSE, json))
-                }
-
-                Result.Success<GraphQlResponse<T>, FailureResponse<GraphQlResponse<T>?>>(json)
-            } catch (e: Exception) {
-                Result.Failure<GraphQlResponse<T>, FailureResponse<GraphQlResponse<T>?>>(FailureResponse(Error.MALFORMED_BODY, null), e)
-            }
-        }
-    }
+    /**
+     * Execute a [GraphQlOperation] with response type `V` and return the result
+     * as an observable. The implementation of this method should first process
+     * the [operation] via [chain]. The last link in the [chain] will return an observable
+     * of type `T` which can then be mapped into a [Result] instance.
+     */
+    abstract fun <V> execute(operation: GraphQlOperation<V>): Observable<Result<GraphQlResponse<V>, *>>
 }
