@@ -5,14 +5,14 @@ import com.badoo.reaktive.observable.map
 import com.badoo.reaktive.observable.observableOf
 
 
-class StringGeneratorLink: Link<Unit, Unit, String> {
+class StringGeneratorLink : Link<Unit, Unit, String> {
     override fun execute(operation: Unit, next: Link<Unit, *, Unit>?): Observable<String> {
         println("Inside string generator")
         return observableOf("Hello", "World")
     }
 }
 
-class StringToIntLink: Link<Unit, String, Int> {
+class StringToIntLink : Link<Unit, String, Int> {
     override fun execute(operation: Unit, next: Link<Unit, *, String>?): Observable<Int> {
         // modify the operation
         println("inside string to int")
@@ -23,7 +23,7 @@ class StringToIntLink: Link<Unit, String, Int> {
     }
 }
 
-class EvenOddLink: Link<Unit, Int, Boolean> {
+class EvenOddLink : Link<Unit, Int, Boolean> {
     override fun execute(operation: Unit, next: Link<Unit, *, Int>?): Observable<Boolean> {
         // modify the operation
 
@@ -36,8 +36,8 @@ class EvenOddLink: Link<Unit, Int, Boolean> {
 }
 
 
-class NativeFetcher: GraphQlFetcher<GraphQlHttpResponse> {
-    override fun fetch(url: String, body: String, headers: Map<String, String>?, handler: (GraphQlHttpResponse) -> Unit) {
-        handler(GraphQlHttpResponse(null, 200))
+class NativeFetcher : JsonHttpFetcher {
+    override fun fetch(url: String, body: JsonHttpFetchRequest, headers: Map<String, String>?, handler: (JsonHttpFetchResponse) -> Unit) {
+        handler(JsonHttpFetchResponse("", 200))
     }
 }

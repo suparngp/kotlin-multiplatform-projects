@@ -18,7 +18,8 @@ data class GraphQlResponseError(val message: String, val path: List<String>, val
 /**
  * Represents GraphQl response
  */
-data class GraphQlResponse<T>(val data: T?, val errors: List<GraphQlResponseError>?)
+@Serializable
+data class GraphQlResponse<T>(val data: T? = null, val errors: List<GraphQlResponseError>? = null)
 
 // Serializable GraphQlRequest
 @Serializable
