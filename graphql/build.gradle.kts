@@ -1,3 +1,4 @@
+import com.android.build.gradle.LibraryExtension
 import constants.Plugins
 import constants.ProjectConfig
 
@@ -29,13 +30,6 @@ suparnatural {
         apiKey = extra[ProjectConfig.Properties.bintrayApiKey]!!.toString()
     }
     androidMain {
-        dependencies {
-            additional {
-                implementation("org.jetbrains.kotlinx:kotlinx-serialization-runtime:0.13.0")
-            }
-        }
-    }
-    androidTest {
         dependencies {
             additional {
                 implementation("org.jetbrains.kotlinx:kotlinx-serialization-runtime:0.13.0")
@@ -91,12 +85,10 @@ suparnatural {
             }
         }
     }
-    jvmTest {
-        dependencies {
-            additional {
-                implementation("com.badoo.reaktive:reaktive-jvm:1.1.0")
-                implementation("org.jetbrains.kotlinx:kotlinx-serialization-runtime:0.13.0")
-            }
-        }
+}
+
+extensions.getByType(LibraryExtension::class).apply {
+    packagingOptions {
+        pickFirst("META-INF/kotlinx-serialization-runtime.kotlin_module")
     }
 }
