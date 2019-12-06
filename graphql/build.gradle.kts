@@ -10,7 +10,7 @@ repositories {
     maven(url="https://dl.bintray.com/badoo/maven")
 }
 
-version = "1.0.5"
+version = "1.0.7"
 suparnatural {
     name = "suparnatural-graphql"
     description = "Graphql type safe models for Kotlin Multiplatform."

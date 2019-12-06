@@ -3,7 +3,7 @@ package com.suparnatural.core.graphql
 import com.badoo.reaktive.observable.Observable
 
 /**
- * A client which executes operations against a GraphQl server.
+ * A client executes operations against a GraphQl server.
  * It accepts a chain of [Link] which emits the final response of type `T`.
  *
  * The client should not concern itself with how to make a network request.

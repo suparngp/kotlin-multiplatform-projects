@@ -49,7 +49,10 @@ interface HttpFetcher<T : HttpFetchRequest<*>, V : HttpFetchResponse<*>> {
 
     /**
      * Fetches the response of type `V` from a given url with request body
-     * of type `T`.
+     * of type `T`. The implementation of this method must be async or otherwise,
+     * it may block the caller and response may not be handled properly.
+     * The thread used for making the request can still be the main thread. It just
+     * has to be async.
      *
      * @param url the endpoint
      * @param request the request object

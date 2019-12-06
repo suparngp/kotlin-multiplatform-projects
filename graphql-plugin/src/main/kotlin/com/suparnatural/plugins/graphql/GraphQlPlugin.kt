@@ -13,7 +13,7 @@ import java.lang.Exception
 
 open class GraphQlPluginExtension {
     var packageName: String = ""
-    var schemaJsonFilePath: String = ""
+    var typesJsonFilePath: String = ""
     var outputDirectoryPath: String = ""
 }
 
@@ -25,7 +25,7 @@ class GraphQlPlugin : Plugin<Project> {
 
         target.task("hello") {
             doLast {
-                val schemaFile = target.file(extension.schemaJsonFilePath)
+                val schemaFile = target.file(extension.typesJsonFilePath)
                 if (!schemaFile.exists()) {
                     throw Exception("SuparnaturalGraphQlPlugin: Schema file not found at path ${schemaFile.absolutePath}")
                 }

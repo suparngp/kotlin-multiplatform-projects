@@ -22,7 +22,8 @@ open class JsonHttpFetchResponse(
 
 
 /**
- * An [HttpFetcher] which can handle a Json request and a Json response
+ * An [HttpFetcher] which can handle a Json request and a Json response. Implement this interface
+ * if only JSON payloads are handled.
  */
 interface JsonHttpFetcher : HttpFetcher<JsonHttpFetchRequest, JsonHttpFetchResponse>
 
