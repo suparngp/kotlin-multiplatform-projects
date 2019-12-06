@@ -17,6 +17,14 @@ open class SuparnaturalPluginExtension {
     val androidMain = SourceSetExtension(AndroidMainDefaultDependencies::class)
     val androidTest = SourceSetExtension(AndroidTestDefaultDependencies::class)
 
+    // used for variant specific dependencies
+    var androidAndroidTest = SourceSetExtension(AndroidVariantDefaultDependencies::class)
+    var androidAndroidTestDebug = SourceSetExtension(AndroidVariantDefaultDependencies::class)
+    var androidDebug = SourceSetExtension(AndroidVariantDefaultDependencies::class)
+    var androidRelease = SourceSetExtension(AndroidVariantDefaultDependencies::class)
+    var androidTestDebug = SourceSetExtension(AndroidVariantDefaultDependencies::class)
+    var androidTestRelease = SourceSetExtension(AndroidVariantDefaultDependencies::class)
+
     val commonMain = SourceSetExtension(CommonMainDefaultDependencies::class)
     val commonTest = SourceSetExtension(CommonTestDefaultDependencies::class)
 

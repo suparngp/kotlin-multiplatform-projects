@@ -1,3 +1,4 @@
+import com.android.build.gradle.LibraryExtension
 import constants.Plugins
 import constants.ProjectConfig
 
@@ -6,16 +7,21 @@ plugins {
     id("kotlinx-serialization")
 }
 
-version = "1.0.5"
+repositories {
+    maven(url="https://dl.bintray.com/badoo/maven")
+}
+
+version = "1.0.7"
 suparnatural {
     name = "suparnatural-graphql"
     description = "Graphql type safe models for Kotlin Multiplatform."
     docsUrl = "https://suparngp.github.io/kotlin-multiplatform-projects/graphql/docs/suparnatural-graphql/index.html"
     vcsUrl = "https://github.com/suparngp/kotlin-multiplatform-projects/tree/master/graphql"
     versionLabel = project.version.toString()
-    supportsAndroid = false
+    supportsAndroid = true
     supportsCocoapods = true
-    supportsIos = false
+    supportsIos = true
+    supportsJvm = true
     buildNumber = 5
     bintray {
         publish = true
@@ -26,21 +32,28 @@ suparnatural {
     androidMain {
         dependencies {
             additional {
-                implementation("suparnatural-kotlin-multiplatform:concurrency-android:$version")
+                implementation("org.jetbrains.kotlinx:kotlinx-serialization-runtime:0.13.0")
             }
         }
     }
-    androidTest {
+    androidRelease {
         dependencies {
             additional {
-                implementation("suparnatural-kotlin-multiplatform:concurrency-android:$version")
+                implementation("com.badoo.reaktive:reaktive-android:1.1.0")
+            }
+        }
+    }
+    androidDebug {
+        dependencies {
+            additional {
+                implementation("com.badoo.reaktive:reaktive-android-debug:1.1.0")
             }
         }
     }
     commonMain {
         dependencies {
             additional {
-                implementation("suparnatural-kotlin-multiplatform:concurrency-metadata:$version")
+                implementation("com.badoo.reaktive:reaktive:1.1.0")
                 implementation("org.jetbrains.kotlinx:kotlinx-serialization-runtime-common:0.13.0")
             }
         }
@@ -49,7 +62,7 @@ suparnatural {
     iosX64Main {
         dependencies {
             additional {
-                implementation("suparnatural-kotlin-multiplatform:concurrency-iosx64:$version")
+                implementation("com.badoo.reaktive:reaktive-iossim:1.1.0")
                 implementation("org.jetbrains.kotlinx:kotlinx-serialization-runtime-native:0.13.0")
             }
         }
@@ -58,9 +71,24 @@ suparnatural {
     iosArm64Main {
         dependencies {
             additional {
-                implementation("suparnatural-kotlin-multiplatform:concurrency-iosarm64:$version")
+                implementation("com.badoo.reaktive:reaktive-ios64:1.1.0")
                 implementation("org.jetbrains.kotlinx:kotlinx-serialization-runtime-native:0.13.0")
             }
         }
+    }
+
+    jvmMain {
+        dependencies {
+            additional {
+                implementation("com.badoo.reaktive:reaktive-jvm:1.1.0")
+                implementation("org.jetbrains.kotlinx:kotlinx-serialization-runtime:0.13.0")
+            }
+        }
+    }
+}
+
+extensions.getByType(LibraryExtension::class).apply {
+    packagingOptions {
+        pickFirst("META-INF/kotlinx-serialization-runtime.kotlin_module")
     }
 }

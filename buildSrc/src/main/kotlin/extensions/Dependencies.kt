@@ -4,6 +4,8 @@ import org.jetbrains.kotlin.gradle.plugin.KotlinDependencyHandler
 import kotlin.reflect.KClass
 import kotlin.reflect.full.createInstance
 
+// represents a dependencies block
+// acts as a pass through for KotlinDependencyHandler
 abstract class Dependencies {
     open var closure: (KotlinDependencyHandler.() -> Unit)? = null
     fun apply(dependencyHandler: KotlinDependencyHandler) {
@@ -13,23 +15,19 @@ abstract class Dependencies {
     }
 }
 
+// dependencies with some default values controlled by variables.
+// defaults can be disabled
 abstract class DefaultDependencies: Dependencies() {
     abstract fun disable()
 }
 
+// additional dependencies without any control variables
 class AdditionalDependencies: Dependencies() {
     operator fun invoke(closure: KotlinDependencyHandler.() -> Unit) {
         this.closure = closure
     }
 }
 
-class DependencyGroups<T: DefaultDependencies>(DefaultsClass: KClass<T>) {
-    val defaults: T = DefaultsClass.createInstance()
-    val additional = AdditionalDependencies()
-    operator fun invoke(closure: DependencyGroups<T>.() -> Unit) {
-        apply(closure)
-    }
-}
 
 class AndroidMainDefaultDependencies : DefaultDependencies() {
 
@@ -71,6 +69,11 @@ class AndroidTestDefaultDependencies : DefaultDependencies() {
     operator fun invoke(closure: AndroidTestDefaultDependencies.() -> Unit) {
         apply(closure)
     }
+}
+
+class AndroidVariantDefaultDependencies: DefaultDependencies() {
+    // a no op
+    override fun disable() {}
 }
 
 class CommonMainDefaultDependencies : DefaultDependencies() {
@@ -199,6 +202,17 @@ class JvmTestDefaultDependencies: DefaultDependencies() {
     }
 
     operator fun invoke(closure: JvmTestDefaultDependencies.() -> Unit) {
+        apply(closure)
+    }
+}
+
+// a group of default and additional dependencies.
+// accepts a type of default dependencies. e.g. android can have its own default dependencies
+// an instance of additional dependencies is created.
+class DependencyGroups<T: DefaultDependencies>(DefaultsClass: KClass<T>) {
+    val defaults: T = DefaultsClass.createInstance()
+    val additional = AdditionalDependencies()
+    operator fun invoke(closure: DependencyGroups<T>.() -> Unit) {
         apply(closure)
     }
 }

@@ -36,6 +36,13 @@ object SourceSetNames {
     const val commonTest = "commonTest"
     const val androidMain = "androidMain"
     const val androidTest = "androidTest"
+    const val androidAndroidTest = "androidAndroidTest"
+    const val androidAndroidTestDebug = "androidAndroidTestDebug"
+    const val androidDebug = "androidDebug"
+    const val androidRelease = "androidRelease"
+    const val androidTestDebug = "androidTestDebug"
+    const val androidTestRelease = "androidTestRelease"
+
     const val iosCommonMain = "iosMain"
     const val iosCommonTest = "iosTest"
     const val iosX64Main = "iosX64Main"

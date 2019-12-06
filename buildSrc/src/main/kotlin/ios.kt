@@ -1,9 +1,12 @@
-import constants.*
+import constants.ProjectConfig
+import constants.TargetNames
+import constants.TaskNames
 import extensions.SourceSetExtension
 import extensions.SuparnaturalPluginExtension
 import org.gradle.api.Project
 import org.gradle.api.plugins.JavaBasePlugin
 import org.gradle.api.tasks.Copy
+import org.jetbrains.kotlin.gradle.plugin.mpp.KotlinNativeCompilation
 
 enum class IosPlatform {
     X64,
@@ -17,20 +20,32 @@ fun Project.configureIosTarget(name: String, platform: IosPlatform, dependsOnTar
             IosPlatform.X64 -> iosX64(name)
             IosPlatform.Arm64 -> iosArm64(name)
         }
-        val mainTargetName = sourceSetName(name, SourceSetType.Main)
-        val testTargetName = sourceSetName(name, SourceSetType.Test)
+        val mainSourceSetName = sourceSetName(name, SourceSetType.Main)
+        val testSourceSetName = sourceSetName(name, SourceSetType.Test)
 
         sourceSets.apply {
-            getByName(mainTargetName) {
+            getByName(mainSourceSetName) {
                 if (dependsOnTarget != null) dependsOn(getByName(sourceSetName(dependsOnTarget, SourceSetType.Main)))
             }
-            getByName(testTargetName) {
+            getByName(testSourceSetName) {
                 if (dependsOnTarget != null) dependsOn(getByName(sourceSetName(dependsOnTarget, SourceSetType.Test)))
             }
         }
     }
 }
 
+// enable generics support for ios
+fun Project.configureIosGenerics() {
+    kmpKotlin.apply {
+        val allIosTargetNames = listOf(TargetNames.ios, TargetNames.iosX64, TargetNames.iosArm64)
+        targets.filter { allIosTargetNames.contains(it.name) }
+                .forEach { target ->
+                    target.compilations.forEach { compilation ->
+                        (compilation as KotlinNativeCompilation).extraOpts.add("-Xobjc-generics")
+                    }
+                }
+    }
+}
 
 fun Project.configureIosTestTask(targetName: String) {
     tasks.create(TaskNames.iosTest) {
@@ -100,9 +115,12 @@ fun Project.configureIos(config: SuparnaturalPluginExtension, release: Boolean =
     } else {
         val platform = if (System.getenv("SDK_NAME")?.startsWith("iphoneos") == true) IosPlatform.Arm64 else IosPlatform.X64
         configureIosTarget(TargetNames.ios, platform)
-        sourceSets.add(Pair(sourceSetName(TargetNames.ios, SourceSetType.Main), if(platform == IosPlatform.X64) config.iosX64Main else config.iosArm64Main))
-        sourceSets.add(Pair(sourceSetName(TargetNames.ios, SourceSetType.Test), if(platform == IosPlatform.X64) config.iosX64Test else config.iosArm64Test))
+        sourceSets.add(Pair(sourceSetName(TargetNames.ios, SourceSetType.Main), if (platform == IosPlatform.X64) config.iosX64Main else config.iosArm64Main))
+        sourceSets.add(Pair(sourceSetName(TargetNames.ios, SourceSetType.Test), if (platform == IosPlatform.X64) config.iosX64Test else config.iosArm64Test))
     }
+
+    // turn on generics
+    configureIosGenerics()
 
     sourceSets.forEach {
         configureKmpSourceSet(it.first, it.second)
