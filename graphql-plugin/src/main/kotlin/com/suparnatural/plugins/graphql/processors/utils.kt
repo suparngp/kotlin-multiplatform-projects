@@ -51,8 +51,15 @@ fun addPropertiesMutating(
 ) {
     val constructorSpec = FunSpec.constructorBuilder()
     fields.forEach {
+        var fieldType = it.type
+        if(it.fragmentSpreads.isNotEmpty()) {
+            val stripped = strippedType(it.type)
+            fieldType = it.type.replace(stripped, "$stripped.${stripped}FragmentsAdapter")
+        }
+
+
         val propertyType = propertyTypeName(
-            it.type,
+            fieldType,
             KnownTypes,
             config
         )

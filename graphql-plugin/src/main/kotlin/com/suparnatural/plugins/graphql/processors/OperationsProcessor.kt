@@ -28,13 +28,6 @@ fun processOperations(operations: List<Operation>, config: GraphQlPluginExtensio
             operationContainer.addProperty(PropertySpec.builder(v.name, type).initializer(v.name).build())
             variableMapList.add("\"${v.name}\" to ${v.name}")
         }
-//        operationContainer.addInitializerBlock(
-//            CodeBlock.of(
-//                """
-//            variables = mutableMapOf(${variableMapList.joinToString(", ")})
-//        """.trimIndent()
-//            )
-//        )
         operationContainer.primaryConstructor(constructorSpec.build())
 
         // root response type suffixed with Response
@@ -57,7 +50,7 @@ fun processOperations(operations: List<Operation>, config: GraphQlPluginExtensio
             .addProperty(
                 PropertySpec
                     .builder("source", String::class.asTypeName(), KModifier.OVERRIDE)
-                    .initializer("\"\"\"${it.sourceWithFragments}\"\"\"".trimIndent())
+                    .initializer("\"\"\"${it.sourceWithFragments.replace("$", "\${\"$\"}")}\"\"\"".trimIndent())
                     .build()
             )
             .addProperty(

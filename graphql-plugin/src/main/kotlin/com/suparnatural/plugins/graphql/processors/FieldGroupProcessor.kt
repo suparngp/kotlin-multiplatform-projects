@@ -74,10 +74,15 @@ fun processFieldGroup(
             fragmentsGroupClassSpec.primaryConstructor(fragmentsGroupConstructorSpec.build())
 
             // adapter
-            val fragmentsAdapterClassName = ClassName("", "$rootSpecTypeName$FragmentsAdapter")
+            val fragmentsAdapterClassNameString = "$rootSpecTypeName$FragmentsAdapter"
+            val fragmentsAdapterClassName = ClassName("", fragmentsAdapterClassNameString)
             val fragmentsAdapterClassSpec = TypeSpec.classBuilder(fragmentsAdapterClassName)
                 .addModifiers(KModifier.DATA)
-                .addAnnotation(Serializable::class)
+                .addAnnotation(
+                    AnnotationSpec.builder(Serializable::class)
+                        .addMember("with=$fragmentsAdapterClassNameString.Companion::class")
+                        .build()
+                )
                 .addSuperinterface(rootClassName, CodeBlock.of(FragmentsAdapterDelegateProperty))
                 .addProperty(
                     PropertySpec.builder(FragmentsAdapterDelegateProperty, rootClassName).initializer(
