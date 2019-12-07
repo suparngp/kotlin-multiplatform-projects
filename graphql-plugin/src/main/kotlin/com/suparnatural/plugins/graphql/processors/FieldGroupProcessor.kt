@@ -31,7 +31,7 @@ fun processFieldGroup(
         rootSpec = TypeSpec.classBuilder(rootClassName)
             .addModifiers(KModifier.DATA)
             .addAnnotation(Serializable::class)
-        addPropertiesMutating(fieldGroup.fields, null, rootSpec)
+        addPropertiesMutating(fieldGroup.fields, null, rootSpec, config)
     } else {
         rootSpec = TypeSpec.interfaceBuilder(rootClassName)
         val rootImplClassName = ClassName("", "${rootSpecTypeName}Impl")
@@ -39,7 +39,7 @@ fun processFieldGroup(
             .addModifiers(KModifier.DATA)
             .addAnnotation(Serializable::class)
             .addSuperinterface(rootClassName)
-        addPropertiesMutating(fieldGroup.fields, rootSpec, rootImplSpec)
+        addPropertiesMutating(fieldGroup.fields, rootSpec, rootImplSpec, config)
 
         // always add the root impl spec
         rootSpec.addType(rootImplSpec.build())
