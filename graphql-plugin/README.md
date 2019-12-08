@@ -6,16 +6,6 @@ framework. Currently, the plugin is tested with `JVM`, `android` and `iOS`.
 
 This plugin uses on the [suparnatural-graphql]() package. Make sure you set that up as well.
 
-### NOTE
-At the moment, this plugin relies on the [apollo-tooling](https://github.com/apollographql/apollo-tooling)
-to pull `schema` and generate an intermediate `JSON` structure which can then be translated
-to type safe classes.
-
-### Do this first
-1. Install [apollo-tooling](https://github.com/apollographql/apollo-tooling) using `npm install -g apollo`
-2. Run the command `apollo client:codegen --target=json ...otheroptions... types.json` with other options as needed. For example
-`apollo client:codegen --target=json --includes="documents/*.graphql" --localSchemaFile="schema.json" types.json`
-
 
 ### Setting up the plugin
 
@@ -50,3 +40,8 @@ to type safe classes.
        outputDirectoryPath = "src/kotlin/main" //Path to directory where classes will be generated
    }
    ```
+
+#### NOTE
+This plugin is inspired by [apollo-ios](https://github.com/apollographql/apollo-ios) and uses [apollo-tooling](https://github.com/apollographql/apollo-tooling)
+to pull `schema` and generate an intermediate `JSON` structure which can then be translated
+to type safe classes.
