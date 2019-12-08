@@ -51,11 +51,28 @@ fun addPropertiesMutating(
 ) {
     val constructorSpec = FunSpec.constructorBuilder()
     fields.forEach {
-        val propertyType = propertyTypeName(
-            it.type,
-            KnownTypes,
-            config
-        )
+
+        // by default, the field's type is chosen what is specified in the
+        // schema without the package name because we don't want package name
+        // to be a part of the type as it will break nested classes.
+        // if the field has fragments, then the type is replaced with Fragments Adapter
+        // nested within the raw type. In that case, we do pass the package name
+        // to avoid adding import statement.
+        val propertyType = if (it.fragmentSpreads.isNotEmpty()) {
+            val stripped = strippedType(it.type)
+            val fieldType = it.type.replace(stripped, "$stripped.${stripped}FragmentsAdapter")
+            propertyTypeName(
+                fieldType,
+                KnownTypes,
+                config
+            )
+        } else {
+            propertyTypeName(
+                it.type,
+                KnownTypes,
+                null
+            )
+        }
 
         val serializable = isSerializable(classSpec)
 
@@ -102,4 +119,4 @@ fun isSerializable(spec: TypeSpec.Builder): Boolean {
     return spec.annotationSpecs.any { it.className.simpleName == "Serializable" }
 }
 
-fun serializedName(name: String, serializable: Boolean = false) = if(serializable) name.decapitalize() else name
+fun serializedName(name: String, serializable: Boolean = false) = if (serializable) name.decapitalize() else name

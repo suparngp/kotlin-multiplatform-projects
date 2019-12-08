@@ -23,7 +23,9 @@ class GraphQlPlugin : Plugin<Project> {
     override fun apply(target: Project) {
         val extension = target.extensions.create("suparnaturalGraphQl", GraphQlPluginExtension::class.java)
 
-        target.task("hello") {
+        target.task("graphQlCodeGen") {
+            group = "suparnatural"
+            description = "Generate type safe classes from GraphQL documents"
             doLast {
                 val schemaFile = target.file(extension.typesJsonFilePath)
                 if (!schemaFile.exists()) {
