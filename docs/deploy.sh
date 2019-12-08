@@ -16,5 +16,5 @@ git init
 git add -A
 git commit -m 'deploy'
 
-git push -f git@github.com:suparngp/site-kmp-docs.git master:gh-pages
+git push -f git@github.com:suparngp/kotlin-multiplatform-projects-site.git master:gh-pages
 cd -
