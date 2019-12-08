@@ -9,6 +9,10 @@
         :href="feature.link">
         <h2>{{ feature.title }}</h2>
         <p>{{ feature.details }}</p>
+        <div class="badges">
+          <i v-if="feature.ios" class="fab fa-apple ios"></i> 
+          <i v-if="feature.android" class="fab fa-android android"></i> 
+          <i v-if="feature.jvm" class="fab fa-java jvm"></i></div>
       </a>
     </div>
   </div>
@@ -19,10 +23,10 @@ module.exports = {
   data: function () {
     return {
       features: [
-        {title: 'GraphQL', details: 'Type safe GraphQL client', link: '/graphql/'},
-        {title: 'FS', details: 'File System I/O', link: '/fs/'},
-        {title: 'Cache', details: 'Thread safe, persistent cache', link: '/cache/'},
-        {title: 'Concurrency', details: 'Multithreading made easy', link: '/concurrency/'}, 
+        {title: 'GraphQL', android: true, ios: true, jvm: true, details: 'Type safe GraphQL client', link: '/graphql/'},
+        {title: 'FS', android: true, ios: true, jvm: true, details: 'File System I/O', link: '/fs/'},
+        {title: 'Cache', android: true, ios: true, details: 'Thread safe, persistent cache', link: '/cache/'},
+        {title: 'Concurrency', android: true, ios: true, details: 'Multithreading made easy', link: '/concurrency/'}, 
       ]
     }
   }
@@ -80,4 +84,19 @@ module.exports = {
       padding 0
       color lighten($textColor, 40%)
       font-weight 400
+
+  .badges
+    display flex
+    justify-content flex-end
+
+    i 
+      margin-left 6px
+  .ios
+    color #FF3852
+
+  .jvm
+    color #007FFF
+  
+  .android 
+    color #6CC551
 </style>
