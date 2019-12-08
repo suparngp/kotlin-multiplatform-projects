@@ -61,3 +61,7 @@ node_modules
 /graphql-compiler-plugin/gradle
 /graphql/.idea
 .idea
+
+node_modules
+docs/.vuepress/dist
+.DS_Store
