@@ -13,6 +13,10 @@ cd docs/.vuepress/dist
 echo 'kmpdocs.suparnatural.com' > CNAME
 
 git init
+
+git config --local user.email "suparngupta+developer@icloud.com"
+git config --local user.username "suparngp"
+
 git add -A
 git commit -m 'deploy'
 
