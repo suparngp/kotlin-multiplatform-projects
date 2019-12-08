@@ -1,20 +1,17 @@
 <template>
-<div>
-  <h2 class="title">Projects</h2>
-    <a
-    v-if="features && features.length"
-    class="features"
-  >
-    <div
-      v-for="(feature, index) in features"
-      :key="index"
-      class="feature"
-    >
-      <h2>{{ feature.title }}</h2>
-      <p>{{ feature.details }}</p>
+  <div>
+    <hr />
+    <h2 class="title">Get Started</h2>
+    <div v-if="features && features.length" class="features">
+      <a v-for="(feature, index) in features"
+        :key="index"
+        class="feature"
+        :href="feature.link">
+        <h2>{{ feature.title }}</h2>
+        <p>{{ feature.details }}</p>
+      </a>
     </div>
-  </a>
-</div>
+  </div>
 </template>
 
 <script>
@@ -22,10 +19,10 @@ module.exports = {
   data: function () {
     return {
       features: [
-        {title: 'GraphQL', details: 'Details'},
-        {title: 'FS', details: 'Details'},
-        {title: 'Cache', details: 'Details'},
-        {title: 'Concurrency', details: 'Details'}, 
+        {title: 'GraphQL', details: 'Type safe GraphQL client', link: '/graphql/'},
+        {title: 'FS', details: 'File System I/O', link: '/fs/'},
+        {title: 'Cache', details: 'Thread safe, persistent cache', link: '/cache/'},
+        {title: 'Concurrency', details: 'Multithreading made easy', link: '/concurrency/'}, 
       ]
     }
   }
@@ -35,7 +32,8 @@ module.exports = {
 <style scoped lang="stylus">
 .title 
   border none 
-  border-top 1px solid $borderColor
+  margin-top 36px !important
+  margin-bottom 24px
 .features 
   border none
   padding 1.2rem 0
@@ -64,6 +62,8 @@ module.exports = {
 
     &:hover 
       border-color: $accentColor
+      h2
+        color: $accentColor
 
     h2
       margin 0
@@ -73,11 +73,11 @@ module.exports = {
       border-bottom none
       padding-bottom 0
       color lighten($textColor, 10%)
-      &:hover 
-        color: $accentColor
+      transition all 0.2s ease-in
     p
       margin 0
       margin-top 8px
       padding 0
-      color lighten($textColor, 25%)
+      color lighten($textColor, 40%)
+      font-weight 400
 </style>

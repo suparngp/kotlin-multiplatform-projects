@@ -1,1 +1,3 @@
-## GraphQL
+# GraphQL
+
+## Introduction
