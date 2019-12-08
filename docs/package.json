@@ -1,0 +1,16 @@
+{
+  "name": "kotlin-multiplatform-projects-docs",
+  "version": "1.0.0",
+  "description": "Docs for suparnatural kotlin multiplatform projects",
+  "main": " ",
+  "repository": "git@github.com:suparngp/kotlin-multiplatform-projects-docs.git",
+  "author": "suparngupta+developer@icloud.com",
+  "license": "MIT",
+  "dependencies": {
+    "vuepress": "^1.2.0"
+  },
+  "scripts": {
+    "start": "vuepress dev docs",
+    "build": "vuepress build docs"
+  }
+}
