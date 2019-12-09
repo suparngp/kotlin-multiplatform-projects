@@ -53,6 +53,13 @@ class GraphQlPlugin : Plugin<Project> {
                 stream.reader(Charset.forName("UTF-8")).use {
                     val script = it.readText()
                     logger.info("loaded code gen script")
+
+                    // ensure build directory exists
+                    if (!target.buildDir.exists()) {
+                        logger.info("build directory not found, creating now")
+                        target.buildDir.mkdir()
+                    }
+
                     val writer = FileWriter(scriptFile)
                     writer.use {
                         // write script to build directory
