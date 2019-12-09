@@ -43,6 +43,7 @@ This plugin uses on the [suparnatural-graphql]() package. Make sure you set that
        outputDirectoryPath = "src/main/kotlin"
    }
    ```
+4. Run the gradle task `graphQlCodeGen` to create graphQl classes.
 
 ## NOTE
 This plugin is inspired by [apollo-ios](https://github.com/apollographql/apollo-ios) and uses [apollo-tooling](https://github.com/apollographql/apollo-tooling)
