@@ -73,7 +73,7 @@ abstract class GraphQlOperation<T> {
     @UnstableDefault
     val jsonString: String
         get() {
-            return Json.stringify(GraphQlRequest.serializer(), GraphQlRequest(name, source, variables))
+            return Json.stringify(GraphQlRequest.serializer(), GraphQlRequest(name, source, variables)).trim()
         }
 
     /**
