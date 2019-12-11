@@ -17,7 +17,7 @@ class StringToIntLink : Link<Unit, String, Int> {
         // modify the operation
         println("inside string to int")
         return (next?.execute(operation) ?: observableOf(null)).map {
-            println("found string ${it}")
+            println("found string $it")
             it?.length ?: 0
         }
     }
@@ -37,7 +37,7 @@ class EvenOddLink : Link<Unit, Int, Boolean> {
 
 
 class NativeFetcher : JsonHttpFetcher {
-    override fun fetch(url: String, request: JsonHttpFetchRequest, handler: (JsonHttpFetchResponse) -> Unit) {
+    override fun fetch(request: JsonHttpFetchRequest, handler: (JsonHttpFetchResponse) -> Unit) {
         handler(JsonHttpFetchResponse("", 200))
     }
 }

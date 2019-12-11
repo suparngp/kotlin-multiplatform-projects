@@ -1,7 +1,5 @@
 # Introduction
-`suparnatural-graphql` is a strongly-typed GraphQL client for `Android`, `iOS` and `JVM` applications written in [Kotlin Multiplatform](). It generates
-type safe model classes from operations so that you don't have to deal with parsing JSON or raw data structures. It provides extensibility via Links inspired 
-by [Apollo-Link]() project and makes no assumptions about the network transport.
+`suparnatural-graphql` is a strongly-typed GraphQL client for `Android`, `iOS` and `JVM` applications written in [Kotlin Multiplatform](). It generates type safe model classes from operations so that you don't have to deal with parsing JSON or raw data structures.
 
 For example, the following query
 
@@ -59,9 +57,7 @@ Another downside of such an approach is that your application may even end up wi
 client like `Alamofire` or `OkHttp` which deal with other `REST` endpoints (`OAuth` for example). And, they both may not even have the same level of customization.
 Of course it is a personal opinion whether you consider it as a good or a bad thing.
 
-`suparnatural-graphql` aims to solve these problems. It generates strictly type safe `Kotlin` classes by deriving information from the `GraphQL` schema and
-the operations used in the client application. It uses [kotlinx.serialization]() to parse `JSON`. However, the implementation of various parts of this library
-can be customized to support other protocols like `ProtoBuf` if needed. You are also free to implement your own network transport however way you see fit.
+`suparnatural-graphql` aims to solve these problems. It generates strictly type safe `Kotlin` classes by deriving information from the `GraphQL` schema and the operations used in the client application. It uses [kotlinx.serialization]() to parse `JSON`. You are also free to implement your own network transport however way you see fit.
 
 ## Features
 
@@ -70,14 +66,24 @@ can be customized to support other protocols like `ProtoBuf` if needed. You are 
 3. Use your own transport to make network requests. For example, use multiplatform client like [ktor-client]() or a native client like [Alamofire]() and [OkHttp]().
 4. Customize / Extend default implementations of various parts of the library.
 
-## Architecture
+## Parts of package
 
 `suparnatural-graphql` is comprised of two parts and **cannot** be used without each other.
 
 1. A `Gradle plugin` which generates strictly typed model classes from `GraphQL` operations.
-2. A library which provides API and implementations for `GraphQL` client, `Link` and other things.
+2. A client library which provides API and implementations for `GraphQL` client, `Link` and other things.
 
-The plugin is inspired by the build script part of integrating [apollo-ios](https://github.com/apollographql/apollo-ios) 
-and also uses the same [apollo-tooling](https://github.com/apollographql/apollo-tooling) to pull `schema` and generate an intermediate
-`JSON` structure which can then be translated to type safe classes.
+## Limitations
 
+**Inline Fragments** and **conditional fields** are not yet supported as far as type generation is concerned.
+
+Currently, **only query operations are supported**.
+
+## Inspiration & Credits
+
+This library is very much inspired by [apollo-ios](https://www.apollographql.com/docs/ios/) and [apollo-link](https://www.apollographql.com/docs/link/) by [Apollo GraphQL team](). In many
+ways, it tries to achieve the same level of parity with the mentioned packages. For example,
+The gradle plugin uses the script from build phases of [apollo-ios](https://www.apollographql.com/docs/ios/) and also uses the same [apollo-tooling](https://github.com/apollographql/apollo-tooling) to pull `schema` and generate an intermediate `JSON` structure which can then be translated to type safe classes. 
+
+[kotlinx.serialization](https://github.com/Kotlin/kotlinx.serialization) is also used to deserialize
+raw data into strict types.

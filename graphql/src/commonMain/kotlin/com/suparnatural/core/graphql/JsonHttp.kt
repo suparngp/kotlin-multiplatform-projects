@@ -5,20 +5,25 @@ import com.badoo.reaktive.observable.map
 import com.badoo.reaktive.subject.publish.publishSubject
 import kotlinx.serialization.UnstableDefault
 import kotlinx.serialization.json.Json
+import kotlinx.serialization.protobuf.ProtoBuf
 
 /**
  * A Json based Http request where body is a plain Json string.
  */
-open class JsonHttpFetchRequest(override val body: String?, override val headers: Map<String, String>? = null) : HttpFetchRequest<String>
+open class JsonHttpFetchRequest(
+        url: String,
+        body: String? = null,
+        headers: Map<String, String>? = null
+) : HttpFetchRequest<String>(url, body, headers)
 
 /**
  * A Json based Http response where response body is a plain Json string
  */
 open class JsonHttpFetchResponse(
-        override val body: String?,
-        override val statusCode: Int,
-        override val statusMessage: String? = null
-) : HttpFetchResponse<String>
+        body: String?,
+        statusCode: Int,
+        statusMessage: String? = null
+) : HttpFetchResponse<String>(body, statusCode, statusMessage)
 
 
 /**
@@ -106,7 +111,7 @@ open class JsonHttpGraphQlLink(
                 }
             }
         }
-        fetcher.fetch(url, JsonHttpFetchRequest(operation.jsonString, headers)) {
+        fetcher.fetch(JsonHttpFetchRequest(url, operation.jsonString, headers)) {
             subject.onNext(it)
             subject.onComplete()
         }

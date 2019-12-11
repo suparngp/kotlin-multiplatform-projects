@@ -40,6 +40,21 @@ fun <A, T, V> Link<A, T, V>.concat(nextLink: Link<A, *, T>): Link<A, T, V> {
 }
 
 /**
+ * Splits the link chain into two branches left and right based on a test.
+ * If the test returns true, leftLink chain is followed, otherwise right link chain is followed.
+ */
+fun <A, T, V> Link<A, T, V>.split(test: (A) -> Boolean, leftLink: Link<A, *, T>, rightLink: Link<A, *, T>): Link<A, T, V> {
+    val firstLink = this;
+    return object : Link<A, T, V> {
+        override fun execute(operation: A, next: Link<A, *, T>?): Observable<V> {
+            val nextLink = if (test(operation)) leftLink else rightLink
+            return firstLink.execute(operation, nextLink)
+        }
+    }
+}
+
+
+/**
  * A link which accepts [GraphQlOperation] as operations.
  */
 interface GraphQlLink<T, V> : Link<GraphQlOperation<*>, T, V>
