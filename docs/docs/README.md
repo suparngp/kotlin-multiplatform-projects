@@ -4,7 +4,7 @@ heroImage: /assets/hero.jpeg
 heroText: 
 tagline: K O T L I N - M U L T I P L A T F O R M
 actionText: "View Source on Github"
-actionLink: /
+actionLink: "https://github.com/suparngp/kotlin-multiplatform-projects"
 footer: MIT Licensed | Copyright © 2018-present Suparn Gupta
 ---
 

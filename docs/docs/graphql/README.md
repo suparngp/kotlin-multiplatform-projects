@@ -1,118 +1,40 @@
-# suparnatural-graphql
+# Introduction
+`suparnatural-graphql` is a strongly-typed GraphQL client for `Android`, `iOS` and `JVM` applications written in [Kotlin Multiplatform](). It generates
+type safe model classes from operations so that you don't have to deal with parsing JSON or raw data structures. It provides extensibility via Links inspired 
+by [Apollo-Link]() project and makes no assumptions about the network transport.
 
-## Introduction
-A Kotlin Multiplatform library for JVM, iOS and Android to interact with GraphQl.
+## Motivation
+`GraphQL` provides a powerful and flexible way of fetching data from your server. The exact structure of a query response is known ahead of time as the expected
+fields are a part of the query and the field types are defined in the `schema`. However, rich API data models can be complex and are hard to manage on a client
+without type safety. For example, without strict types, you may end up parsing a JSON into a map and then access the values without any type checking. This is 
+both very risky and not developer friendly. This is not a new problem as far as APIs are concerned and there are many solutions which solve such a problem elegantly
+by generating a strictly typed data model and then mapping a raw `JSON` response over to that model. 
 
+Next, a common pattern found across many API clients is to bundle a network transport in the library. It is a good way to get started. However, it becomes
+very limiting if you are building complex applications which require features like `Certificate Pinning` where you must control the transport layer of API call stack.
+Another downside of such an approach is that your application may even end up with two clients for making network requests where one takes care of `GraphQL` and another
+client like `Alamofire` or `OkHttp` which deal with other `REST` endpoints (`OAuth` for example). And, they both may not even have the same level of customization.
+Of course it is a personal opinion whether you consider it as a good or a bad thing.
 
-## Setup
+`suparnatural-graphql` aims to solve these problems. It generates strictly type safe `Kotlin` classes by deriving information from the `GraphQL` schema and
+the operations used in the client application. It uses [kotlinx.serialization]() to parse `JSON`. However, the implementation of various parts of this library
+can be customized to support other protocols like `ProtoBuf` if needed. You are also free to implement your own network transport however way you see fit.
 
-1. Add the repository to your project.
-    ```groovy
-    repositories {
-        maven {
-            url  "https://dl.bintray.com/suparnatural/kotlin-multiplatform"
-        }
-    }
-    ```
-2. Add `implementation 'suparnatural-kotlin-multiplatform:graphql-metadata:1.0.7'` to `commonMain`.
-3. Add `implementation 'suparnatural-kotlin-multiplatform:graphql-iosx64(or iosarm64):1.0.7'` to `iosMain`
-4. Add `implementation 'suparnatural-kotlin-multiplatform:graphql-android:1.0.7'` to `androidMain`
-4. Add `implementation 'suparnatural-kotlin-multiplatform:graphql-jvm:1.0.7'` to `jvmMain`
+## Features
 
-## Concepts
+1. Generates strictly typed classes for all your `GraphQL` operations.
+2. Build reusable steps to process an operation before it goes over the wire by using a `chain` of `Link` instances.
+3. Use your own transport to make network requests. For example, use multiplatform client like [ktor-client]() or a native client like [Alamofire]() and [OkHttp]().
+4. Customize / Extend default implementations of various parts of the library.
 
-This library borrows a lot of concepts from [Apollo](https://www.apollographql.com/docs).
+## Architecture
 
-### HttpFetcher
-This library doesn't make any assumptions on how you implement your transport as long as your implementation
-conforms with the `HttpFetcher` interface. A `JsonHttpFetcher` is an `HttpFetcher` works with `JSON` payloads only 
-and you can provide an implementation if you are using `JSON`. 
+`suparnatural-graphql` is comprised of two parts and **cannot** be used without each other.
 
-For other protocols like `protobuf`, use `HttpFetcher` directly.
- 
-For example, below is JSON fetcher based on [ktor](https://ktor.io/clients/index.html).
+1. A `Gradle plugin` which generates strictly typed model classes from `GraphQL` operations.
+2. A library which provides API and implementations for `GraphQL` client, `Link` and other things.
 
-```kotlin
-class KtorFetcher : JsonHttpFetcher {
-    override fun fetch(
-        url: String,
-        request: JsonHttpFetchRequest,
-        headers: Map<String, String>?,
-        handler: (JsonHttpFetchResponse) -> Unit
-    ) {
-        // launch fetch in background
-        GlobalScope.launch {
-            val client = HttpClient()
-            try {
-                val response = client.post<HttpResponse>(url) {
-                    this.body = TextContent(request.body ?: "{}", contentType = ContentType.Application.Json)
-                }
-                handler(JsonHttpFetchResponse(response.readText(), response.status.value, "", response.status.value != 200, null))
-            } catch (e: ClientRequestException) {
-                val body = e.response.readText(Charset.forName("UTF-8"))
-                
-                handler(JsonHttpFetchResponse(body, e.response.status.value, e.localizedMessage, true, e.localizedMessage))
-            } catch (e: Exception) {
-                handler(JsonHttpFetchResponse(null, 0, e.localizedMessage, true, e.localizedMessage))
-            }
-        }
-    }
-}
-```
+The plugin is inspired by the build script part of integrating [apollo-ios](https://github.com/apollographql/apollo-ios) 
+and also uses the same [apollo-tooling](https://github.com/apollographql/apollo-tooling) to pull `schema` and generate an intermediate
+`JSON` structure which can then be translated to type safe classes.
 
-### Link
-
-A link takes an operation and returns an observable.
-Links are a way to compose subsets of actions to handle
-data. Links can be concatenated with each other to form
-a chain to carry out an even complex data handling workflow. Conceptually,
-it is identical to [Apollo-Link](https://www.apollographql.com/docs/link/overview/).
-
-A link has only one method `execute` which accepts an operation of
-type `A` and the next link in the chain. The next link can be `null` if
-the current link is a terminating link. For example, the last link
-can start a network request and return its response as an observable.
-
-`JsonHttpGraphQlLink` provides a default implementation of a terminating link
-which sends a JSON request using the provided `JsonHttpFetcher` implementation.
-
-### Client
-A client executes operations against a GraphQl server.
-It accepts a chain of `Link` which emits the final response of type `T`.
-
-The client should not concern itself with how to make a network request.
-Rather, it should rely on the last `Link` of the `chain` as terminating
-link which fetches the response from the server. `JsonHttpGraphQlLink` is
-one such link. The client should then take the response as input
-and transform it into the correct response type based on the operation.
-
-### Example
-
-```kotlin
-fun main() {
-    val ktorFetcher = KtorFetcher()
-    val httpLink = JsonHttpGraphQlLink(ktorFetcher, "https://countries.trevorblades.com")
-    val client = JsonHttpGraphQlClient(httpLink)
-    val operation = Operations.Countries() // generated by plugin
-
-    client.execute(operation)
-        .subscribe {
-            when(it) {
-                is Result.Success -> {
-                    println(" Successful ${it.value.data}")
-                }
-                is Result.Failure -> {
-                    println("Failed ${it.value.error} ${it.value.response} ${it.cause}")
-                }
-            }
-        }
-
-    runBlocking {
-        kotlinx.coroutines.delay(10000)
-    }
-}
-```
-
-## NOTE
-This library is supposed to be used with the [suparnatural-graphql-plugin]() which generates
-type safe classes for GraphQl operations.

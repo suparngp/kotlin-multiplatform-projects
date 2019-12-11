@@ -1,14 +1,36 @@
 module.exports = {
-  title: '',
-  description: 'Suparnatural Projects',
+  title: 'Suparnatural Kotlin Multiplatform',
+  description: 'Suparnatural Projects for Kotlin Multiplatform apps',
   themeConfig: {
     logo: '/assets/logo.png',
     sidebar: {
-      '/graphql/': ['/graphql/', '/graphql/concepts/'],
+      '/graphql/': [
+        {
+          title: 'suparnatural-graphql',
+          collapsable: false,
+          children: []
+        },
+        {
+          title: 'Guide',
+          collapsable: false,
+          children: [
+            '',
+            'installation',
+          ]
+        },
+        {
+          title: 'Concepts',
+          collapsable: false,
+          children: [
+            'concepts'
+          ]
+        }
+      ],
       '/fs/': ['/fs/'],
       '/cache/': ['/cache/'],
       '/concurrency/': ['/concurrency/']
     },
+    displayAllHeaders: true,
     sidebarDepth: 3
   },
   markdown: {
