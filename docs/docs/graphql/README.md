@@ -3,6 +3,49 @@
 type safe model classes from operations so that you don't have to deal with parsing JSON or raw data structures. It provides extensibility via Links inspired 
 by [Apollo-Link]() project and makes no assumptions about the network transport.
 
+For example, the following query
+
+```graphql{5,13,20}
+# Write your query or mutation here
+query CountryCodeQuery($code: String!) {
+  country(code: $code) {
+    __typename
+    code
+    ...CountryDetails
+    continent {
+      ...ContinentDetails
+    }
+  }
+}
+
+fragment ContinentDetails on Continent {
+  name
+  countries {
+    ...CountryDetails
+  }
+}
+
+fragment CountryDetails on Country {
+  name
+}
+```
+can be used as 
+
+```kotlin{5-7}
+val operation = Operations.CountryCodeQuery("AD")
+client.execute(operation).subscribe {
+    when(it) {
+        is Result.Success -> {
+            println(it.value.data?.country?.code)
+            println(it.value.data?.country?.fragments.continentDetails)
+            println(it.value.data?.country?.fragments.continentDetails?.countries?.fragments.countryDetails)
+        }
+    }
+}
+```
+
+
+
 ## Motivation
 `GraphQL` provides a powerful and flexible way of fetching data from your server. The exact structure of a query response is known ahead of time as the expected
 fields are a part of the query and the field types are defined in the `schema`. However, rich API data models can be complex and are hard to manage on a client
