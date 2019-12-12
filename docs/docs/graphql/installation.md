@@ -1,7 +1,5 @@
 # Installation
 
-
-
 Below is an overall list of steps which we'd take to integration `suparnatural-graphql` in a `Kotlin Multiplatform` project.
 
 1. Add [kotlinx.serialization](https://github.com/Kotlin/kotlinx.serialization#setup) to your project as it is a required dependency.
@@ -10,6 +8,10 @@ Below is an overall list of steps which we'd take to integration `suparnatural-g
 4. Apply the `graphql-plugin`.
 5. Configure the plugin with options like `GraphQL` server `endpoint` to fetch `schema`.
 6. Add common and platform specific `graphql` dependencies to the project.
+
+## Prerequisites
+1. The generated types use [kotlinx.serialization](https://github.com/Kotlin/kotlinx.serialization) for serialization. Add it as a project dependency by following this [guide](https://github.com/Kotlin/kotlinx.serialization).
+2. For observable runtime library, use
 
 ## Apply Gradle Plugin
 
