@@ -81,7 +81,7 @@ open class JsonHttpGraphQlLink(
             operation: GraphQlOperation<*>,
             next: Link<GraphQlOperation<*>, *, Unit>?
     ): Observable<JsonHttpFetchResponse> {
-        val subject = DefaultPublishSubjectFactory.create<JsonHttpFetchResponse>()
+        val subject = RxRuntimeProvider.publishSubjectFactory.create<JsonHttpFetchResponse>()
         val headers = defaultHeaders?.toMutableMap() ?: mutableMapOf()
         if (operation.context.containsKey(contextKeyHeaders)) {
             val overrides = operation.context[contextKeyHeaders]

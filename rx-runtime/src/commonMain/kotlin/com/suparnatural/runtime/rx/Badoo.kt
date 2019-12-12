@@ -1,15 +1,20 @@
-package com.suparnatural.core.graphql
+package com.suparnatural.runtime.rx
 
 import com.badoo.reaktive.maybe.asObservable
 import com.badoo.reaktive.observable.*
 import com.badoo.reaktive.subject.publish.publishSubject
+import com.suparnatural.core.rx.Observable
+import com.suparnatural.core.rx.ObservableFactory
+import com.suparnatural.core.rx.PublishSubject
+import com.suparnatural.core.rx.PublishSubjectFactory
+
 
 class BadooObservable<T>(private val observable: com.badoo.reaktive.observable.Observable<T>) : Observable<T> {
     override fun <V> map(project: (value: T) -> V): Observable<V> {
         return BadooObservable(observable.map(project))
     }
 
-    override fun filter(predicate: (value: T) -> Boolean): com.suparnatural.core.graphql.Observable<T> {
+    override fun filter(predicate: (value: T) -> Boolean): Observable<T> {
         return BadooObservable(observable.filter(predicate))
     }
 
@@ -22,7 +27,7 @@ class BadooObservable<T>(private val observable: com.badoo.reaktive.observable.O
     }
 }
 
-class BadooPublishSubject<T>(private val subject: com.badoo.reaktive.subject.publish.PublishSubject<T>): PublishSubject<T> {
+class BadooPublishSubject<T>(private val subject: com.badoo.reaktive.subject.publish.PublishSubject<T>) : PublishSubject<T> {
     override fun asObservable(): Observable<T> {
         return BadooObservable(subject)
     }
@@ -40,17 +45,14 @@ class BadooPublishSubject<T>(private val subject: com.badoo.reaktive.subject.pub
     }
 }
 
-class BadooObservableFactory: ObservableFactory {
+class BadooObservableFactory : ObservableFactory {
     override fun <T> of(vararg values: T): Observable<T> {
         return BadooObservable(observableOf(*values))
     }
 }
 
-class BadooPublishSubjectFactory: PublishSubjectFactory {
+class BadooPublishSubjectFactory : PublishSubjectFactory {
     override fun <T> create(): PublishSubject<T> {
         return BadooPublishSubject(publishSubject())
     }
 }
-
-val DefaultObservableFactory = BadooObservableFactory()
-val DefaultPublishSubjectFactory = BadooPublishSubjectFactory()
