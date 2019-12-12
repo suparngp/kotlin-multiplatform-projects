@@ -11,6 +11,7 @@ object TargetNames {
 
 object AndroidTarget {
     const val publishVariantRelease = "release"
+    const val publishVariantDebug = "debug"
     const val compileSdkVersion = 29
     const val targetSdkVersion = 29
     const val minSdkVersion = 21

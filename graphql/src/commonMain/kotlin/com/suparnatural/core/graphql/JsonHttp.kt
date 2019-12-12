@@ -1,11 +1,7 @@
 package com.suparnatural.core.graphql
 
-import com.badoo.reaktive.observable.Observable
-import com.badoo.reaktive.observable.map
-import com.badoo.reaktive.subject.publish.publishSubject
 import kotlinx.serialization.UnstableDefault
 import kotlinx.serialization.json.Json
-import kotlinx.serialization.protobuf.ProtoBuf
 
 /**
  * A Json based Http request where body is a plain Json string.
@@ -38,35 +34,19 @@ interface JsonHttpFetcher : HttpFetcher<JsonHttpFetchRequest, JsonHttpFetchRespo
  */
 class JsonHttpGraphQlClient(chain: Link<GraphQlOperation<*>, *, JsonHttpFetchResponse>) : GraphQlClient<JsonHttpFetchResponse>(chain) {
 
-    /**
-     * Error codes
-     */
-    enum class Error(val message: String) {
-        INVALID_RESPONSE("Invalid http response"),
-        MALFORMED_BODY("Malformed response body. Unable to parse")
-    }
-
-    /**
-     * Encapsulates a failed response where [response] may contain the
-     * GraphQl response with [GraphQlResponse.errors] property set.
-     * If the error is not a standard GraphQl error (e.g. network errors),
-     * the [response] will be null.
-     */
-    data class FailureResponse<T>(val error: Error, val response: GraphQlResponse<T>?)
-
     @UnstableDefault
-    override fun <T> execute(operation: GraphQlOperation<T>): Observable<Result<GraphQlResponse<T>, FailureResponse<T>>> {
+    override fun <T> execute(operation: GraphQlOperation<T>): Observable<Result<GraphQlResponse<T>, GraphQlClientFailureResponse<T>>> {
         return chain.execute(operation).map {
             try {
                 val body = it.body ?: "{}"
                 val json = Json.parse(GraphQlResponse.serializer(operation.responseSerializer), body)
                 if (it.isFailure) {
-                    return@map Result.Failure<GraphQlResponse<T>, FailureResponse<T>>(FailureResponse(Error.INVALID_RESPONSE, json))
+                    return@map Result.Failure<GraphQlResponse<T>, GraphQlClientFailureResponse<T>>(GraphQlClientFailureResponse(GraphQlClientError.INVALID_RESPONSE, json))
                 }
 
-                Result.Success<GraphQlResponse<T>, FailureResponse<T>>(json)
+                Result.Success<GraphQlResponse<T>, GraphQlClientFailureResponse<T>>(json)
             } catch (e: Exception) {
-                Result.Failure<GraphQlResponse<T>, FailureResponse<T>>(FailureResponse(Error.MALFORMED_BODY, null), e)
+                Result.Failure<GraphQlResponse<T>, GraphQlClientFailureResponse<T>>(GraphQlClientFailureResponse(GraphQlClientError.MALFORMED_BODY, null), e)
             }
         }
     }
@@ -101,7 +81,7 @@ open class JsonHttpGraphQlLink(
             operation: GraphQlOperation<*>,
             next: Link<GraphQlOperation<*>, *, Unit>?
     ): Observable<JsonHttpFetchResponse> {
-        val subject = publishSubject<JsonHttpFetchResponse>()
+        val subject = DefaultPublishSubjectFactory.create<JsonHttpFetchResponse>()
         val headers = defaultHeaders?.toMutableMap() ?: mutableMapOf()
         if (operation.context.containsKey(contextKeyHeaders)) {
             val overrides = operation.context[contextKeyHeaders]
@@ -115,7 +95,7 @@ open class JsonHttpGraphQlLink(
             subject.onNext(it)
             subject.onComplete()
         }
-        return subject
+        return subject.asObservable()
     }
 
 }

@@ -40,7 +40,7 @@ fun Project.configureAndroid(config: SuparnaturalPluginExtension) {
 
     kmpKotlin.apply {
         android(TargetNames.android) {
-            publishLibraryVariants(AndroidTarget.publishVariantRelease)
+            publishLibraryVariants(AndroidTarget.publishVariantRelease, AndroidTarget.publishVariantDebug)
         }
     }
     configureKmpSourceSet(SourceSetNames.androidMain, config.androidMain)

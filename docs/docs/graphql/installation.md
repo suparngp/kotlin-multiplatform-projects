@@ -4,7 +4,7 @@
 
 Below is an overall list of steps which we'd take to integration `suparnatural-graphql` in a `Kotlin Multiplatform` project.
 
-1. Add [kotlinx.serialization]() to your project as it is a required dependency.
+1. Add [kotlinx.serialization](https://github.com/Kotlin/kotlinx.serialization#setup) to your project as it is a required dependency.
 2. Add `suparnatural` bintray repository to gradle.
 3. Add `graphql-plugin` as a `buildscript` dependency.
 4. Apply the `graphql-plugin`.
@@ -21,7 +21,7 @@ buildscript {
         maven(url="https://dl.bintray.com/suparnatural/kotlin-multiplatform")
     }
     dependencies {
-        classpath("com.suparnatural.plugins:graphql:1.0.0")
+        classpath("com.suparnatural.plugins:graphql-plugin:1.0.0")
     }
 }
 
@@ -36,7 +36,7 @@ buildscript {
         }
     }
     dependencies {
-        classpath "com.suparnatural.plugins:graphql:1.0.0"
+        classpath "com.suparnatural.plugins:graphql-plugin:1.0.0"
     }
 }
 
@@ -75,6 +75,23 @@ suparnaturalGraphQl {
 
 
 ## Add Library
+
+Add the maven repository to `repositories` block.
+
+```kotlin
+repositories {
+    maven(url="https://dl.bintray.com/suparnatural/kotlin-multiplatform")
+}
+```
+
+```groovy
+repositories {
+    maven{
+        url "https://dl.bintray.com/suparnatural/kotlin-multiplatform"
+    }
+}
+```
+
 
 Add the following to your commonMain target.
 
@@ -120,3 +137,6 @@ jvmMain {
 | iOS-Arm64 | suparnatural-kotlin-multiplatform:graphql-iosarm64:version |
 | iOS-X64   | suparnatural-kotlin-multiplatform:graphql-iosx64:version   |
 | JVM       | suparnatural-kotlin-multiplatform:graphql-jvm:version      |
+
+
+Finally, run the gradle task `graphQlCodeGen` under group `suparnatural`.
