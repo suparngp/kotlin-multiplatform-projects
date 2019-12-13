@@ -1,5 +1,10 @@
 package com.suparnatural.core.graphql
 
+import com.suparnatural.core.rx.Observable
+import com.suparnatural.core.rx.ObservableFactory
+import com.suparnatural.core.rx.PublishSubject
+import com.suparnatural.core.rx.PublishSubjectFactory
+
 internal class EmptyObservableFactory : ObservableFactory {
     override fun <T> of(vararg values: T): Observable<T> {
         throw Exception("Missing rx-runtime")

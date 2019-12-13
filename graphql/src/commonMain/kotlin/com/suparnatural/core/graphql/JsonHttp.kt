@@ -1,5 +1,6 @@
 package com.suparnatural.core.graphql
 
+import com.suparnatural.core.rx.Observable
 import kotlinx.serialization.UnstableDefault
 import kotlinx.serialization.json.Json
 

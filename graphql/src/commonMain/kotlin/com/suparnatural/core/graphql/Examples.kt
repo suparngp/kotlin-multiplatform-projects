@@ -1,5 +1,7 @@
 package com.suparnatural.core.graphql
 
+import com.suparnatural.core.rx.Observable
+
 class StringGeneratorLink : Link<Unit, Unit, String> {
     override fun execute(operation: Unit, next: Link<Unit, *, Unit>?): Observable<String> {
         println("Inside string generator")

@@ -1,5 +1,7 @@
 package com.suparnatural.core.graphql
 
+import com.suparnatural.core.rx.Observable
+
 /**
  * A client executes operations against a GraphQl server.
  * It accepts a chain of [Link] which emits the final response of type `T`.

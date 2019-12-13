@@ -1,5 +1,7 @@
 package com.suparnatural.core.graphql
 
+import com.suparnatural.core.rx.Observable
+
 /**
  * A link takes an operation and returns an observable.
  * Links are a way to compose subsets of actions to handle

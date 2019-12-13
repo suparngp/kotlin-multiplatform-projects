@@ -35,21 +35,21 @@ suparnatural {
     androidRelease {
         dependencies {
             additional {
-                implementation("suparnatural-kotlin-multiplatform:rx-android:$version")
+                api("suparnatural-kotlin-multiplatform:rx-android:$version")
             }
         }
     }
     androidDebug {
         dependencies {
             additional {
-                implementation("suparnatural-kotlin-multiplatform:rx-android-debug:$version")
+                api("suparnatural-kotlin-multiplatform:rx-android-debug:$version")
             }
         }
     }
     commonMain {
         dependencies {
             additional {
-                implementation("suparnatural-kotlin-multiplatform:rx-metadata:$version")
+                api("suparnatural-kotlin-multiplatform:rx-metadata:$version")
                 implementation("org.jetbrains.kotlinx:kotlinx-serialization-runtime-common:0.13.0")
             }
         }
@@ -58,7 +58,7 @@ suparnatural {
     iosX64Main {
         dependencies {
             additional {
-                implementation("suparnatural-kotlin-multiplatform:rx-iosx64:$version")
+                api("suparnatural-kotlin-multiplatform:rx-iosx64:$version")
                 implementation("org.jetbrains.kotlinx:kotlinx-serialization-runtime-native:0.13.0")
             }
         }
@@ -67,7 +67,7 @@ suparnatural {
     iosArm64Main {
         dependencies {
             additional {
-                implementation("suparnatural-kotlin-multiplatform:rx-iosarm64:$version")
+                api("suparnatural-kotlin-multiplatform:rx-iosarm64:$version")
                 implementation("org.jetbrains.kotlinx:kotlinx-serialization-runtime-native:0.13.0")
             }
         }
@@ -76,7 +76,7 @@ suparnatural {
     jvmMain {
         dependencies {
             additional {
-                implementation("suparnatural-kotlin-multiplatform:rx-jvm:$version")
+                api("suparnatural-kotlin-multiplatform:rx-jvm:$version")
                 implementation("org.jetbrains.kotlinx:kotlinx-serialization-runtime:0.13.0")
             }
         }
