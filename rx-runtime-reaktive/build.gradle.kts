@@ -1,5 +1,3 @@
-import com.android.build.gradle.LibraryExtension
-import constants.Plugins
 import constants.ProjectConfig
 
 plugins {
@@ -7,16 +5,16 @@ plugins {
 }
 
 repositories {
-    maven(url="https://dl.bintray.com/badoo/maven")
+    maven(url = "https://dl.bintray.com/badoo/maven")
 }
 
 val buildNum = 7
 version = "1.0.$buildNum"
 suparnatural {
-    name = "suparnatural-rx-runtime"
-    description = "rx-runtime."
-    docsUrl = "https://suparngp.github.io/kotlin-multiplatform-projects/rx-runtime/docs/suparnatural-rx-runtime/index.html"
-    vcsUrl = "https://github.com/suparngp/kotlin-multiplatform-projects/tree/master/rx-runtime"
+    name = "suparnatural-rx-runtime-reaktive"
+    description = "rx-runtime-reaktive"
+    docsUrl = "https://suparngp.github.io/kotlin-multiplatform-projects/rx-runtime-reaktive/docs/suparnatural-rx-runtime-reaktive/index.html"
+    vcsUrl = "https://github.com/suparngp/kotlin-multiplatform-projects/tree/master/rx-runtime-reaktive"
     versionLabel = project.version.toString()
     supportsAndroid = true
     supportsCocoapods = true

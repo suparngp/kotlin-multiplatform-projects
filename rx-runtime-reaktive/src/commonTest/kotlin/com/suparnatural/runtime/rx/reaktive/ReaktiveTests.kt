@@ -1,8 +1,8 @@
-package com.suparnatural.runtime.rx
+package com.suparnatural.runtime.rx.reaktive
 
 import kotlin.test.Test
 
-class RxRuntimeTests {
+class ReaktiveTests {
     @Test
     fun testRxRuntime() {
     }
