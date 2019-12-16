@@ -2,7 +2,7 @@ import com.jfrog.bintray.gradle.BintrayExtension
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 
 plugins {
-    kotlin("jvm") version "1.3.41"
+    kotlin("jvm") version "1.3.61"
     `maven-publish`
     `kotlin-dsl`
     id ("com.jfrog.bintray") version "1.8.4"
@@ -14,7 +14,7 @@ buildscript {
     }
 }
 
-val versionLabel = "1.0.0"
+val versionLabel = "1.0.8"
 group = "com.suparnatural.plugins"
 version = versionLabel
 

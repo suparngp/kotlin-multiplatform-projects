@@ -1,6 +1,6 @@
 # Installation
 
-Below is an overall list of steps which we'd take to integration `suparnatural-graphql` in a `Kotlin Multiplatform` project.
+Below is an overall list of steps which we'd take to integrate `suparnatural-graphql` in a `Kotlin Multiplatform` project.
 
 1. Configure [kotlinx.serialization](https://github.com/Kotlin/kotlinx.serialization#setup)
 1. Apply the `graphql-plugin`.

@@ -66,7 +66,7 @@ Of course it is a personal opinion whether you consider it as a good or a bad th
 3. Use your own transport to make network requests. For example, use multiplatform client like [ktor-client]() or a native client like [Alamofire]() and [OkHttp]().
 4. Customize / Extend default implementations of various parts of the library.
 
-## Parts of package
+## Components
 
 `suparnatural-graphql` is comprised of two parts and **cannot** be used without each other.
 

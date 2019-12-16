@@ -9,8 +9,8 @@ repositories {
 }
 
 val reaktiveVersion = "1.1.5"
-val buildNum = 7
-version = "1.0.$buildNum"
+
+version = ProjectConfig.version
 suparnatural {
     name = "suparnatural-rx-runtime-reaktive"
     description = "rx-runtime-reaktive"
@@ -21,7 +21,7 @@ suparnatural {
     supportsCocoapods = true
     supportsIos = true
     supportsJvm = true
-    buildNumber = buildNum
+    buildNumber = ProjectConfig.buildNumber
     bintray {
         publish = true
         repository = extra[ProjectConfig.Properties.bintrayRepository]!!.toString()
