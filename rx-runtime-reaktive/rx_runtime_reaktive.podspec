@@ -1,11 +1,11 @@
 Pod::Spec.new do |spec|
-    spec.name                     = 'utilities'
+    spec.name                     = 'rx_runtime_reaktive'
     spec.version                  = '1.0.8'
-    spec.homepage                 = 'https://suparngp.github.io/kotlin-multiplatform-projects/utilities/docs/suparnatural-utilities/index.html'
+    spec.homepage                 = 'https://suparngp.github.io/kotlin-multiplatform-projects/rx-runtime-reaktive/docs/suparnatural-rx-runtime-reaktive/index.html'
     spec.source                   = { :git => "Not Published", :tag => "Cocoapods/#{spec.name}/#{spec.version}" }
     spec.authors                  = 'suparnatural'
     spec.license                  = 'MIT'
-    spec.summary                  = 'Utilities shared across all suparnatural projects.'
+    spec.summary                  = 'rx-runtime-reaktive'
 
     spec.static_framework         = true
     spec.vendored_frameworks      = "build/cocoapods/framework/#{spec.name}.framework"
@@ -26,13 +26,13 @@ Pod::Spec.new do |spec|
 
     spec.script_phases = [
         {
-            :name => 'Build utilities',
+            :name => 'Build rx_runtime_reaktive',
             :execution_position => :before_compile,
             :shell_path => '/bin/sh',
             :script => <<-SCRIPT
                 set -ev
                 REPO_ROOT="$PODS_TARGET_SRCROOT"
-                "$REPO_ROOT/../gradlew" -p "$REPO_ROOT" :utilities:syncFramework \
+                "$REPO_ROOT/../gradlew" -p "$REPO_ROOT" :rx-runtime-reaktive:syncFramework \
                     -Pkotlin.native.cocoapods.target=$KOTLIN_TARGET \
                     -Pkotlin.native.cocoapods.configuration=$CONFIGURATION \
                     -Pkotlin.native.cocoapods.cflags="$OTHER_CFLAGS" \
