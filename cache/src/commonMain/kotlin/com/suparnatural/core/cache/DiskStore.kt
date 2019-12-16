@@ -3,6 +3,7 @@ package com.suparnatural.core.cache
 import com.suparnatural.core.fs.FileSystem
 import com.suparnatural.core.fs.PathComponent
 import com.suparnatural.core.concurrency.Future
+import com.suparnatural.core.fs.ContentEncoding
 
 /**
  * A [CacheStore] which persists [Cacheable] objects on the disk.
@@ -45,7 +46,7 @@ class DiskStore constructor(
                 (preprocessor).archive(prev)
             } ?: it.first
             val content = processed.serializeForPersistence()
-            FileSystem.writeFile(it.second, content, true)
+            FileSystem.writeFile(it.second, content, true, ContentEncoding.Utf8)
         }
     }
 
@@ -70,7 +71,7 @@ class DiskStore constructor(
             else
                 Pair(it.name, path)
         }.mapNotNull {
-            val contents = FileSystem.readFile(it.second)
+            val contents = FileSystem.readFile(it.second, ContentEncoding.Utf8)
             if (contents == null || contents.isEmpty())
                 null
             else RawCacheable(it.first, contents)
