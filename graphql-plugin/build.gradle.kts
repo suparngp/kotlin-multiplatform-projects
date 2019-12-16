@@ -54,7 +54,7 @@ bintray.apply {
     setPublications("graphql-plugin")
     pkg(delegateClosureOf<BintrayExtension.PackageConfig> {
         repo = "kotlin-multiplatform"
-        name = "suparnatural-graphql-plugin"
+        name = "graphql-plugin"
         vcsUrl = "https://github.com/suparngp/kotlin-multiplatform-projects/tree/master/graphql-plugin"
         setLicenses("MIT")
         version(delegateClosureOf<BintrayExtension.VersionConfig> {
