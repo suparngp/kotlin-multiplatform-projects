@@ -1,6 +1,6 @@
 package com.suparnatural.core.graphql
 
-import com.badoo.reaktive.observable.Observable
+import com.suparnatural.core.rx.Observable
 
 /**
  * A client executes operations against a GraphQl server.
@@ -22,5 +22,21 @@ abstract class GraphQlClient<T>(val chain: Link<GraphQlOperation<*>, *, T>) {
      * the [operation] via [chain]. The last link in the [chain] will return an observable
      * of type `T` which can then be mapped into a [Result] instance.
      */
-    abstract fun <V> execute(operation: GraphQlOperation<V>): Observable<Result<GraphQlResponse<V>, *>>
+    abstract fun <V> execute(operation: GraphQlOperation<V>): Observable<Result<GraphQlResponse<V>, GraphQlClientFailureResponse<V>>>
 }
+
+/**
+ * Error codes
+ */
+enum class GraphQlClientError(val message: String) {
+    INVALID_RESPONSE("Invalid response"),
+    MALFORMED_BODY("Malformed response body. Unable to parse")
+}
+
+/**
+ * Encapsulates a failed response where [response] may contain the
+ * GraphQl response with [GraphQlResponse.errors] property set.
+ * If the error is not a standard GraphQl error (e.g. network errors),
+ * the [response] will be null.
+ */
+data class GraphQlClientFailureResponse<T>(val error: GraphQlClientError, val response: GraphQlResponse<T>?)

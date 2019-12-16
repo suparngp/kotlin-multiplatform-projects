@@ -9,4 +9,6 @@ object ProjectConfig {
         const val bintrayApiKey = "bintrayApiKey"
 
     }
+    const val buildNumber = 8
+    const val version = "1.0.$buildNumber"
 }

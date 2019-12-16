@@ -1,6 +1,6 @@
 package com.suparnatural.core.graphql
 
-import com.badoo.reaktive.observable.Observable
+import com.suparnatural.core.rx.Observable
 
 /**
  * A link takes an operation and returns an observable.

@@ -2,7 +2,7 @@ package constants
 
 data class Plugin(val id: String, val version: String? = null, val group: String? = null, val name: String? = null)
 
-const val kotlinVersion = "1.3.60"
+const val kotlinVersion = "1.3.61"
 object Plugins {
     val java = Plugin("java")
     val kotlinDsl = Plugin("kotlin-dsl")

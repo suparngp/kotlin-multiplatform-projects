@@ -16,9 +16,9 @@ Check the API documentation for details.
         }
     }
     ```
-2. Add `implementation 'suparnatural-kotlin-multiplatform:cache-metadata:1.0.7'` to `commonMain`.
-3. Add `implementation 'suparnatural-kotlin-multiplatform:cache-iosx64(or iosarm64):1.0.7'` to `iosMain`.
-4. Add `implementation 'suparnatural-kotlin-multiplatform:cache-android:1.0.7'` to `iosMain`.
+2. Add `implementation 'suparnatural-kotlin-multiplatform:cache-metadata:version'` to `commonMain`.
+3. Add `implementation 'suparnatural-kotlin-multiplatform:cache-iosx64(or iosarm64):version'` to `iosMain`.
+4. Add `implementation 'suparnatural-kotlin-multiplatform:cache-android:version'` to `iosMain`.
 
 
 ## Concepts

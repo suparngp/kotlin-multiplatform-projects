@@ -32,8 +32,10 @@ Generally, client libraries come bundled with a fetcher implementation. For exam
 3. Your project / company / clients only trusts one networking library for security.
 
 That is why, the default `JsonHttp` implementation of client doesn't make any assumption on how you implement the network transport as long as your implementation conforms with the `JsonHttpFetcher` interface. You can apply the same concept to your custom client implementations.
- 
-For example, below is JSON fetcher based on [ktor](https://ktor.io/clients/index.html).
+
+Below are some examples of how fetcher can be implemented on different platforms 
+
+### [Ktor](https://ktor.io/clients/index.html) Fetcher
 
 ```kotlin
 class KtorFetcher : JsonHttpFetcher {
@@ -58,6 +60,97 @@ class KtorFetcher : JsonHttpFetcher {
                 handler(JsonHttpFetchResponse(null, 0, e.localizedMessage))
             }
         }
+    }
+}
+```
+
+### OkHttp Fetcher
+
+```kotlin
+class OkHttpFetcher : JsonHttpFetcher {
+    override fun fetch(request: JsonHttpFetchRequest, handler: (JsonHttpFetchResponse) -> Unit) {
+        val client = OkHttpClient()
+        val body = (request.body ?: "").toRequestBody("application/json; charset=utf-8".toMediaType())
+        val r = Request.Builder().url(request.url).post(body).build()
+        val thread = HandlerThread("okhttp")
+        thread.start()
+        val h = Handler(thread.looper)
+        h.post {
+            client.newCall(r).execute().use {
+                val responseBody = it.body?.string()
+                handler(JsonHttpFetchResponse(responseBody, it.code, it.message))
+            }
+        }
+    }
+}
+```
+
+### NSURLSession Fetcher
+
+```kotlin
+class IOSFetcher : JsonHttpFetcher {
+    override fun fetch(request: JsonHttpFetchRequest, handler: (JsonHttpFetchResponse) -> Unit) {
+        NsUrlSessionFetcher(handler).fetch(request)
+    }
+}
+
+// convert MutableData to NSData
+private fun MutableData.asNSData() = this.withPointerLocked { it, size ->
+    val result = NSMutableData.create(length = size.convert())!!
+    memcpy(result.mutableBytes, it, size.convert())
+    result
+}
+
+// NSURLSession based fetch which operates on a background queue
+internal class NsUrlSessionFetcher(val handler: (JsonHttpFetchResponse) -> Unit) : NSObject(),
+    NSURLSessionDataDelegateProtocol {
+    private val asyncQueue = NSOperationQueue()
+    private val receivedData = MutableData()
+
+    init {
+        freeze()
+    }
+
+    fun fetch(request: JsonHttpFetchRequest) {
+        receivedData.reset()
+        val session = NSURLSession.sessionWithConfiguration(
+            NSURLSessionConfiguration.defaultSessionConfiguration(),
+            this,
+            delegateQueue = asyncQueue
+        )
+        val url = NSURL.URLWithString(request.url)!!
+        val r = NSMutableURLRequest.requestWithURL(url)
+        r.HTTPMethod = "POST"
+        r.setValue("application/json", "Accept")
+        r.setValue("application/json", "Content-Type")
+        request.headers?.entries?.forEach {
+            r.setValue(it.value, it.key)
+        }
+        r.HTTPBody = ((request.body ?: "") as NSString).dataUsingEncoding(NSUTF8StringEncoding)
+        session.dataTaskWithRequest(r).resume()
+    }
+
+
+    override fun URLSession(session: NSURLSession, dataTask: NSURLSessionDataTask, didReceiveData: NSData) {
+        initRuntimeIfNeeded()
+        receivedData.append(didReceiveData.bytes, didReceiveData.length.convert())
+    }
+
+    override fun URLSession(session: NSURLSession, task: NSURLSessionTask, didCompleteWithError: NSError?) {
+        initRuntimeIfNeeded()
+
+        val response = task.response as? NSHTTPURLResponse
+        // process error.  Of course, handling should be better. :)
+        if (didCompleteWithError != null) {
+            handler(JsonHttpFetchResponse(null, -1, didCompleteWithError.localizedDescription))
+            return
+        }
+
+        // process response. Of course, handling should be better. :)
+        val statusCode = if (response != null) (response as NSHTTPURLResponse).statusCode.toInt() else -2
+        val statusMessage = ""
+        val body = if (receivedData.size > 0) NSString.create(receivedData.asNSData(), NSUTF8StringEncoding).toString() else null
+        handler(JsonHttpFetchResponse(body, statusCode, statusMessage))
     }
 }
 ```
