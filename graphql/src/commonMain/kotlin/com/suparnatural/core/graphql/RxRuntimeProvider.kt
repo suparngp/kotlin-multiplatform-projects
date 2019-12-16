@@ -19,7 +19,7 @@ internal class EmptyPublishSubjectFactory : PublishSubjectFactory {
 
 }
 
-object RxRuntimeProvider {
-    var observableFactory: ObservableFactory = EmptyObservableFactory()
-    var publishSubjectFactory: PublishSubjectFactory = EmptyPublishSubjectFactory()
+expect object RxRuntimeProvider {
+    var observableFactory: ObservableFactory
+    var publishSubjectFactory: PublishSubjectFactory
 }
