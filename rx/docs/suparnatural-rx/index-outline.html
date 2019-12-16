@@ -1,0 +1,161 @@
+<HTML>
+<HEAD>
+<meta charset="UTF-8">
+<title>Module Contents</title>
+<link rel="stylesheet" href="../style.css">
+</HEAD>
+<BODY>
+<a href="/Volumes/Data/Code/kotlin-multiplatform-projects/rx/docs/suparnatural-rx/index"><a href="./index"><span class="identifier">suparnatural-rx</span></a></a><br/>
+<ul>
+<HTML>
+<HEAD>
+<meta charset="UTF-8">
+<title>Module Contents</title>
+<link rel="stylesheet" href="../style.css">
+</HEAD>
+<BODY>
+<a href="/Volumes/Data/Code/kotlin-multiplatform-projects/rx/docs/suparnatural-rx/index"><a href="alltypes/index.html"><span class="identifier">alltypes</span></a></a><br/>
+<ul>
+<HTML>
+<HEAD>
+<meta charset="UTF-8">
+<title>Module Contents</title>
+<link rel="stylesheet" href="../style.css">
+</HEAD>
+<BODY>
+<a href="/Volumes/Data/Code/kotlin-multiplatform-projects/rx/docs/suparnatural-rx/index"><a href="com.suparnatural.core.rx/-observable/index.html"><span class="keyword">interface </span><span class="identifier">Observable</span><span class="symbol">&lt;</span><span class="identifier">T</span><span class="symbol">&gt;</span></a></a><br/>
+<ul>
+<HTML>
+<HEAD>
+<meta charset="UTF-8">
+<title>Module Contents</title>
+<link rel="stylesheet" href="../style.css">
+</HEAD>
+<BODY>
+<a href="/Volumes/Data/Code/kotlin-multiplatform-projects/rx/docs/suparnatural-rx/index"><a href="com.suparnatural.core.rx/-observable/filter.html"><span class="keyword">abstract</span> <span class="keyword">fun </span><span class="identifier">filter</span><span class="symbol">(</span><span class="identifier" id="com.suparnatural.core.rx.Observable$filter(kotlin.Function1((com.suparnatural.core.rx.Observable.T, kotlin.Boolean)))/predicate">predicate</span><span class="symbol">:</span>&nbsp;<span class="symbol">(</span><span class="identifier">value</span><span class="symbol">:</span>&nbsp;<a href="com.suparnatural.core.rx/-observable/index.html#T"><span class="identifier">T</span></a><span class="symbol">)</span>&nbsp;<span class="symbol">-&gt;</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html"><span class="identifier">Boolean</span></a><span class="symbol">)</span><span class="symbol">: </span><a href="com.suparnatural.core.rx/-observable/index.html"><span class="identifier">Observable</span></a><span class="symbol">&lt;</span><a href="com.suparnatural.core.rx/-observable/index.html#T"><span class="identifier">T</span></a><span class="symbol">&gt;</span></a></a><br/>
+<a href="/Volumes/Data/Code/kotlin-multiplatform-projects/rx/docs/suparnatural-rx/index"><a href="com.suparnatural.core.rx/-observable/map.html"><span class="keyword">abstract</span> <span class="keyword">fun </span><span class="symbol">&lt;</span><span class="identifier">V</span><span class="symbol">&gt;</span> <span class="identifier">map</span><span class="symbol">(</span><span class="identifier" id="com.suparnatural.core.rx.Observable$map(kotlin.Function1((com.suparnatural.core.rx.Observable.T, com.suparnatural.core.rx.Observable.map.V)))/project">project</span><span class="symbol">:</span>&nbsp;<span class="symbol">(</span><span class="identifier">value</span><span class="symbol">:</span>&nbsp;<a href="com.suparnatural.core.rx/-observable/index.html#T"><span class="identifier">T</span></a><span class="symbol">)</span>&nbsp;<span class="symbol">-&gt;</span>&nbsp;<a href="com.suparnatural.core.rx/-observable/map.html#V"><span class="identifier">V</span></a><span class="symbol">)</span><span class="symbol">: </span><a href="com.suparnatural.core.rx/-observable/index.html"><span class="identifier">Observable</span></a><span class="symbol">&lt;</span><a href="com.suparnatural.core.rx/-observable/map.html#V"><span class="identifier">V</span></a><span class="symbol">&gt;</span></a></a><br/>
+<a href="/Volumes/Data/Code/kotlin-multiplatform-projects/rx/docs/suparnatural-rx/index"><a href="com.suparnatural.core.rx/-observable/reduce.html"><span class="keyword">abstract</span> <span class="keyword">fun </span><span class="identifier">reduce</span><span class="symbol">(</span><span class="identifier" id="com.suparnatural.core.rx.Observable$reduce(kotlin.Function2((com.suparnatural.core.rx.Observable.T, , )), com.suparnatural.core.rx.Observable.T)/accumulator">accumulator</span><span class="symbol">:</span>&nbsp;<span class="symbol">(</span><span class="identifier">acc</span><span class="symbol">:</span>&nbsp;<a href="com.suparnatural.core.rx/-observable/index.html#T"><span class="identifier">T</span></a><span class="symbol">,</span>&nbsp;<span class="identifier">value</span><span class="symbol">:</span>&nbsp;<a href="com.suparnatural.core.rx/-observable/index.html#T"><span class="identifier">T</span></a><span class="symbol">)</span>&nbsp;<span class="symbol">-&gt;</span>&nbsp;<a href="com.suparnatural.core.rx/-observable/index.html#T"><span class="identifier">T</span></a><span class="symbol">, </span><span class="identifier" id="com.suparnatural.core.rx.Observable$reduce(kotlin.Function2((com.suparnatural.core.rx.Observable.T, , )), com.suparnatural.core.rx.Observable.T)/seed">seed</span><span class="symbol">:</span>&nbsp;<a href="com.suparnatural.core.rx/-observable/index.html#T"><span class="identifier">T</span></a><span class="symbol">?</span><span class="symbol">)</span><span class="symbol">: </span><a href="com.suparnatural.core.rx/-observable/index.html"><span class="identifier">Observable</span></a><span class="symbol">&lt;</span><a href="com.suparnatural.core.rx/-observable/index.html#T"><span class="identifier">T</span></a><span class="symbol">&gt;</span></a></a><br/>
+<a href="/Volumes/Data/Code/kotlin-multiplatform-projects/rx/docs/suparnatural-rx/index"><a href="com.suparnatural.core.rx/-observable/subscribe.html"><span class="keyword">abstract</span> <span class="keyword">fun </span><span class="identifier">subscribe</span><span class="symbol">(</span><span class="identifier" id="com.suparnatural.core.rx.Observable$subscribe(kotlin.Function1((com.suparnatural.core.rx.Observable.T, kotlin.Unit)))/subscriber">subscriber</span><span class="symbol">:</span>&nbsp;<span class="symbol">(</span><span class="identifier">value</span><span class="symbol">:</span>&nbsp;<a href="com.suparnatural.core.rx/-observable/index.html#T"><span class="identifier">T</span></a><span class="symbol">)</span>&nbsp;<span class="symbol">-&gt;</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html"><span class="identifier">Unit</span></a><span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html"><span class="identifier">Unit</span></a></a></a><br/>
+</BODY>
+</HTML>
+</ul>
+<a href="/Volumes/Data/Code/kotlin-multiplatform-projects/rx/docs/suparnatural-rx/index"><a href="com.suparnatural.core.rx/-observable-factory/index.html"><span class="keyword">interface </span><span class="identifier">ObservableFactory</span></a></a><br/>
+<ul>
+<HTML>
+<HEAD>
+<meta charset="UTF-8">
+<title>Module Contents</title>
+<link rel="stylesheet" href="../style.css">
+</HEAD>
+<BODY>
+<a href="/Volumes/Data/Code/kotlin-multiplatform-projects/rx/docs/suparnatural-rx/index"><a href="com.suparnatural.core.rx/-observable-factory/of.html"><span class="keyword">abstract</span> <span class="keyword">fun </span><span class="symbol">&lt;</span><span class="identifier">T</span><span class="symbol">&gt;</span> <span class="identifier">of</span><span class="symbol">(</span><span class="keyword">vararg</span> <span class="identifier" id="com.suparnatural.core.rx.ObservableFactory$of(kotlin.Array((com.suparnatural.core.rx.ObservableFactory.of.T)))/values">values</span><span class="symbol">:</span>&nbsp;<a href="com.suparnatural.core.rx/-observable-factory/of.html#T"><span class="identifier">T</span></a><span class="symbol">)</span><span class="symbol">: </span><a href="com.suparnatural.core.rx/-observable/index.html"><span class="identifier">Observable</span></a><span class="symbol">&lt;</span><a href="com.suparnatural.core.rx/-observable-factory/of.html#T"><span class="identifier">T</span></a><span class="symbol">&gt;</span></a></a><br/>
+</BODY>
+</HTML>
+</ul>
+<a href="/Volumes/Data/Code/kotlin-multiplatform-projects/rx/docs/suparnatural-rx/index"><a href="com.suparnatural.core.rx/-publish-subject/index.html"><span class="keyword">interface </span><span class="identifier">PublishSubject</span><span class="symbol">&lt;</span><span class="identifier">T</span><span class="symbol">&gt;</span></a></a><br/>
+<ul>
+<HTML>
+<HEAD>
+<meta charset="UTF-8">
+<title>Module Contents</title>
+<link rel="stylesheet" href="../style.css">
+</HEAD>
+<BODY>
+<a href="/Volumes/Data/Code/kotlin-multiplatform-projects/rx/docs/suparnatural-rx/index"><a href="com.suparnatural.core.rx/-publish-subject/as-observable.html"><span class="keyword">abstract</span> <span class="keyword">fun </span><span class="identifier">asObservable</span><span class="symbol">(</span><span class="symbol">)</span><span class="symbol">: </span><a href="com.suparnatural.core.rx/-observable/index.html"><span class="identifier">Observable</span></a><span class="symbol">&lt;</span><a href="com.suparnatural.core.rx/-publish-subject/index.html#T"><span class="identifier">T</span></a><span class="symbol">&gt;</span></a></a><br/>
+<a href="/Volumes/Data/Code/kotlin-multiplatform-projects/rx/docs/suparnatural-rx/index"><a href="com.suparnatural.core.rx/-publish-subject/on-complete.html"><span class="keyword">abstract</span> <span class="keyword">fun </span><span class="identifier">onComplete</span><span class="symbol">(</span><span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html"><span class="identifier">Unit</span></a></a></a><br/>
+<a href="/Volumes/Data/Code/kotlin-multiplatform-projects/rx/docs/suparnatural-rx/index"><a href="com.suparnatural.core.rx/-publish-subject/on-error.html"><span class="keyword">abstract</span> <span class="keyword">fun </span><span class="identifier">onError</span><span class="symbol">(</span><span class="identifier" id="com.suparnatural.core.rx.PublishSubject$onError(kotlin.Throwable)/error">error</span><span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-throwable/index.html"><span class="identifier">Throwable</span></a><span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html"><span class="identifier">Unit</span></a></a></a><br/>
+<a href="/Volumes/Data/Code/kotlin-multiplatform-projects/rx/docs/suparnatural-rx/index"><a href="com.suparnatural.core.rx/-publish-subject/on-next.html"><span class="keyword">abstract</span> <span class="keyword">fun </span><span class="identifier">onNext</span><span class="symbol">(</span><span class="identifier" id="com.suparnatural.core.rx.PublishSubject$onNext(com.suparnatural.core.rx.PublishSubject.T)/value">value</span><span class="symbol">:</span>&nbsp;<a href="com.suparnatural.core.rx/-publish-subject/index.html#T"><span class="identifier">T</span></a><span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html"><span class="identifier">Unit</span></a></a></a><br/>
+</BODY>
+</HTML>
+</ul>
+<a href="/Volumes/Data/Code/kotlin-multiplatform-projects/rx/docs/suparnatural-rx/index"><a href="com.suparnatural.core.rx/-publish-subject-factory/index.html"><span class="keyword">interface </span><span class="identifier">PublishSubjectFactory</span></a></a><br/>
+<ul>
+<HTML>
+<HEAD>
+<meta charset="UTF-8">
+<title>Module Contents</title>
+<link rel="stylesheet" href="../style.css">
+</HEAD>
+<BODY>
+<a href="/Volumes/Data/Code/kotlin-multiplatform-projects/rx/docs/suparnatural-rx/index"><a href="com.suparnatural.core.rx/-publish-subject-factory/create.html"><span class="keyword">abstract</span> <span class="keyword">fun </span><span class="symbol">&lt;</span><span class="identifier">T</span><span class="symbol">&gt;</span> <span class="identifier">create</span><span class="symbol">(</span><span class="symbol">)</span><span class="symbol">: </span><a href="com.suparnatural.core.rx/-publish-subject/index.html"><span class="identifier">PublishSubject</span></a><span class="symbol">&lt;</span><a href="com.suparnatural.core.rx/-publish-subject-factory/create.html#T"><span class="identifier">T</span></a><span class="symbol">&gt;</span></a></a><br/>
+</BODY>
+</HTML>
+</ul>
+</BODY>
+</HTML>
+</ul>
+<a href="/Volumes/Data/Code/kotlin-multiplatform-projects/rx/docs/suparnatural-rx/index"><a href="com.suparnatural.core.rx/index.html"><span class="keyword">package</span>&nbsp;<span class="identifier">com.suparnatural.core.rx</span></a></a><br/>
+<ul>
+<HTML>
+<HEAD>
+<meta charset="UTF-8">
+<title>Module Contents</title>
+<link rel="stylesheet" href="../style.css">
+</HEAD>
+<BODY>
+<a href="/Volumes/Data/Code/kotlin-multiplatform-projects/rx/docs/suparnatural-rx/index"><a href="com.suparnatural.core.rx/-observable/index.html"><span class="keyword">interface </span><span class="identifier">Observable</span><span class="symbol">&lt;</span><span class="identifier">T</span><span class="symbol">&gt;</span></a></a><br/>
+<ul>
+<HTML>
+<HEAD>
+<meta charset="UTF-8">
+<title>Module Contents</title>
+<link rel="stylesheet" href="../style.css">
+</HEAD>
+<BODY>
+<a href="/Volumes/Data/Code/kotlin-multiplatform-projects/rx/docs/suparnatural-rx/index"><a href="com.suparnatural.core.rx/-observable/filter.html"><span class="keyword">abstract</span> <span class="keyword">fun </span><span class="identifier">filter</span><span class="symbol">(</span><span class="identifier" id="com.suparnatural.core.rx.Observable$filter(kotlin.Function1((com.suparnatural.core.rx.Observable.T, kotlin.Boolean)))/predicate">predicate</span><span class="symbol">:</span>&nbsp;<span class="symbol">(</span><span class="identifier">value</span><span class="symbol">:</span>&nbsp;<a href="com.suparnatural.core.rx/-observable/index.html#T"><span class="identifier">T</span></a><span class="symbol">)</span>&nbsp;<span class="symbol">-&gt;</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html"><span class="identifier">Boolean</span></a><span class="symbol">)</span><span class="symbol">: </span><a href="com.suparnatural.core.rx/-observable/index.html"><span class="identifier">Observable</span></a><span class="symbol">&lt;</span><a href="com.suparnatural.core.rx/-observable/index.html#T"><span class="identifier">T</span></a><span class="symbol">&gt;</span></a></a><br/>
+<a href="/Volumes/Data/Code/kotlin-multiplatform-projects/rx/docs/suparnatural-rx/index"><a href="com.suparnatural.core.rx/-observable/map.html"><span class="keyword">abstract</span> <span class="keyword">fun </span><span class="symbol">&lt;</span><span class="identifier">V</span><span class="symbol">&gt;</span> <span class="identifier">map</span><span class="symbol">(</span><span class="identifier" id="com.suparnatural.core.rx.Observable$map(kotlin.Function1((com.suparnatural.core.rx.Observable.T, com.suparnatural.core.rx.Observable.map.V)))/project">project</span><span class="symbol">:</span>&nbsp;<span class="symbol">(</span><span class="identifier">value</span><span class="symbol">:</span>&nbsp;<a href="com.suparnatural.core.rx/-observable/index.html#T"><span class="identifier">T</span></a><span class="symbol">)</span>&nbsp;<span class="symbol">-&gt;</span>&nbsp;<a href="com.suparnatural.core.rx/-observable/map.html#V"><span class="identifier">V</span></a><span class="symbol">)</span><span class="symbol">: </span><a href="com.suparnatural.core.rx/-observable/index.html"><span class="identifier">Observable</span></a><span class="symbol">&lt;</span><a href="com.suparnatural.core.rx/-observable/map.html#V"><span class="identifier">V</span></a><span class="symbol">&gt;</span></a></a><br/>
+<a href="/Volumes/Data/Code/kotlin-multiplatform-projects/rx/docs/suparnatural-rx/index"><a href="com.suparnatural.core.rx/-observable/reduce.html"><span class="keyword">abstract</span> <span class="keyword">fun </span><span class="identifier">reduce</span><span class="symbol">(</span><span class="identifier" id="com.suparnatural.core.rx.Observable$reduce(kotlin.Function2((com.suparnatural.core.rx.Observable.T, , )), com.suparnatural.core.rx.Observable.T)/accumulator">accumulator</span><span class="symbol">:</span>&nbsp;<span class="symbol">(</span><span class="identifier">acc</span><span class="symbol">:</span>&nbsp;<a href="com.suparnatural.core.rx/-observable/index.html#T"><span class="identifier">T</span></a><span class="symbol">,</span>&nbsp;<span class="identifier">value</span><span class="symbol">:</span>&nbsp;<a href="com.suparnatural.core.rx/-observable/index.html#T"><span class="identifier">T</span></a><span class="symbol">)</span>&nbsp;<span class="symbol">-&gt;</span>&nbsp;<a href="com.suparnatural.core.rx/-observable/index.html#T"><span class="identifier">T</span></a><span class="symbol">, </span><span class="identifier" id="com.suparnatural.core.rx.Observable$reduce(kotlin.Function2((com.suparnatural.core.rx.Observable.T, , )), com.suparnatural.core.rx.Observable.T)/seed">seed</span><span class="symbol">:</span>&nbsp;<a href="com.suparnatural.core.rx/-observable/index.html#T"><span class="identifier">T</span></a><span class="symbol">?</span><span class="symbol">)</span><span class="symbol">: </span><a href="com.suparnatural.core.rx/-observable/index.html"><span class="identifier">Observable</span></a><span class="symbol">&lt;</span><a href="com.suparnatural.core.rx/-observable/index.html#T"><span class="identifier">T</span></a><span class="symbol">&gt;</span></a></a><br/>
+<a href="/Volumes/Data/Code/kotlin-multiplatform-projects/rx/docs/suparnatural-rx/index"><a href="com.suparnatural.core.rx/-observable/subscribe.html"><span class="keyword">abstract</span> <span class="keyword">fun </span><span class="identifier">subscribe</span><span class="symbol">(</span><span class="identifier" id="com.suparnatural.core.rx.Observable$subscribe(kotlin.Function1((com.suparnatural.core.rx.Observable.T, kotlin.Unit)))/subscriber">subscriber</span><span class="symbol">:</span>&nbsp;<span class="symbol">(</span><span class="identifier">value</span><span class="symbol">:</span>&nbsp;<a href="com.suparnatural.core.rx/-observable/index.html#T"><span class="identifier">T</span></a><span class="symbol">)</span>&nbsp;<span class="symbol">-&gt;</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html"><span class="identifier">Unit</span></a><span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html"><span class="identifier">Unit</span></a></a></a><br/>
+</BODY>
+</HTML>
+</ul>
+<a href="/Volumes/Data/Code/kotlin-multiplatform-projects/rx/docs/suparnatural-rx/index"><a href="com.suparnatural.core.rx/-observable-factory/index.html"><span class="keyword">interface </span><span class="identifier">ObservableFactory</span></a></a><br/>
+<ul>
+<HTML>
+<HEAD>
+<meta charset="UTF-8">
+<title>Module Contents</title>
+<link rel="stylesheet" href="../style.css">
+</HEAD>
+<BODY>
+<a href="/Volumes/Data/Code/kotlin-multiplatform-projects/rx/docs/suparnatural-rx/index"><a href="com.suparnatural.core.rx/-observable-factory/of.html"><span class="keyword">abstract</span> <span class="keyword">fun </span><span class="symbol">&lt;</span><span class="identifier">T</span><span class="symbol">&gt;</span> <span class="identifier">of</span><span class="symbol">(</span><span class="keyword">vararg</span> <span class="identifier" id="com.suparnatural.core.rx.ObservableFactory$of(kotlin.Array((com.suparnatural.core.rx.ObservableFactory.of.T)))/values">values</span><span class="symbol">:</span>&nbsp;<a href="com.suparnatural.core.rx/-observable-factory/of.html#T"><span class="identifier">T</span></a><span class="symbol">)</span><span class="symbol">: </span><a href="com.suparnatural.core.rx/-observable/index.html"><span class="identifier">Observable</span></a><span class="symbol">&lt;</span><a href="com.suparnatural.core.rx/-observable-factory/of.html#T"><span class="identifier">T</span></a><span class="symbol">&gt;</span></a></a><br/>
+</BODY>
+</HTML>
+</ul>
+<a href="/Volumes/Data/Code/kotlin-multiplatform-projects/rx/docs/suparnatural-rx/index"><a href="com.suparnatural.core.rx/-publish-subject/index.html"><span class="keyword">interface </span><span class="identifier">PublishSubject</span><span class="symbol">&lt;</span><span class="identifier">T</span><span class="symbol">&gt;</span></a></a><br/>
+<ul>
+<HTML>
+<HEAD>
+<meta charset="UTF-8">
+<title>Module Contents</title>
+<link rel="stylesheet" href="../style.css">
+</HEAD>
+<BODY>
+<a href="/Volumes/Data/Code/kotlin-multiplatform-projects/rx/docs/suparnatural-rx/index"><a href="com.suparnatural.core.rx/-publish-subject/as-observable.html"><span class="keyword">abstract</span> <span class="keyword">fun </span><span class="identifier">asObservable</span><span class="symbol">(</span><span class="symbol">)</span><span class="symbol">: </span><a href="com.suparnatural.core.rx/-observable/index.html"><span class="identifier">Observable</span></a><span class="symbol">&lt;</span><a href="com.suparnatural.core.rx/-publish-subject/index.html#T"><span class="identifier">T</span></a><span class="symbol">&gt;</span></a></a><br/>
+<a href="/Volumes/Data/Code/kotlin-multiplatform-projects/rx/docs/suparnatural-rx/index"><a href="com.suparnatural.core.rx/-publish-subject/on-complete.html"><span class="keyword">abstract</span> <span class="keyword">fun </span><span class="identifier">onComplete</span><span class="symbol">(</span><span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html"><span class="identifier">Unit</span></a></a></a><br/>
+<a href="/Volumes/Data/Code/kotlin-multiplatform-projects/rx/docs/suparnatural-rx/index"><a href="com.suparnatural.core.rx/-publish-subject/on-error.html"><span class="keyword">abstract</span> <span class="keyword">fun </span><span class="identifier">onError</span><span class="symbol">(</span><span class="identifier" id="com.suparnatural.core.rx.PublishSubject$onError(kotlin.Throwable)/error">error</span><span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-throwable/index.html"><span class="identifier">Throwable</span></a><span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html"><span class="identifier">Unit</span></a></a></a><br/>
+<a href="/Volumes/Data/Code/kotlin-multiplatform-projects/rx/docs/suparnatural-rx/index"><a href="com.suparnatural.core.rx/-publish-subject/on-next.html"><span class="keyword">abstract</span> <span class="keyword">fun </span><span class="identifier">onNext</span><span class="symbol">(</span><span class="identifier" id="com.suparnatural.core.rx.PublishSubject$onNext(com.suparnatural.core.rx.PublishSubject.T)/value">value</span><span class="symbol">:</span>&nbsp;<a href="com.suparnatural.core.rx/-publish-subject/index.html#T"><span class="identifier">T</span></a><span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html"><span class="identifier">Unit</span></a></a></a><br/>
+</BODY>
+</HTML>
+</ul>
+<a href="/Volumes/Data/Code/kotlin-multiplatform-projects/rx/docs/suparnatural-rx/index"><a href="com.suparnatural.core.rx/-publish-subject-factory/index.html"><span class="keyword">interface </span><span class="identifier">PublishSubjectFactory</span></a></a><br/>
+<ul>
+<HTML>
+<HEAD>
+<meta charset="UTF-8">
+<title>Module Contents</title>
+<link rel="stylesheet" href="../style.css">
+</HEAD>
+<BODY>
+<a href="/Volumes/Data/Code/kotlin-multiplatform-projects/rx/docs/suparnatural-rx/index"><a href="com.suparnatural.core.rx/-publish-subject-factory/create.html"><span class="keyword">abstract</span> <span class="keyword">fun </span><span class="symbol">&lt;</span><span class="identifier">T</span><span class="symbol">&gt;</span> <span class="identifier">create</span><span class="symbol">(</span><span class="symbol">)</span><span class="symbol">: </span><a href="com.suparnatural.core.rx/-publish-subject/index.html"><span class="identifier">PublishSubject</span></a><span class="symbol">&lt;</span><a href="com.suparnatural.core.rx/-publish-subject-factory/create.html#T"><span class="identifier">T</span></a><span class="symbol">&gt;</span></a></a><br/>
+</BODY>
+</HTML>
+</ul>
+</BODY>
+</HTML>
+</ul>
+</BODY>
+</HTML>
+</ul>
+</BODY>
+</HTML>

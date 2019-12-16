@@ -1,0 +1,260 @@
+<HTML>
+<HEAD>
+<meta charset="UTF-8">
+<title>com.suparnatural.core.graphql - suparnatural-graphql</title>
+<link rel="stylesheet" href="../../style.css">
+</HEAD>
+<BODY>
+<a href="../index.html">suparnatural-graphql</a>&nbsp;/&nbsp;<a href="./index.html">com.suparnatural.core.graphql</a><br/>
+<br/>
+<h2>Package com.suparnatural.core.graphql</h2>
+<h3>Types</h3>
+<table>
+<tbody>
+<tr>
+<td>
+<p><a href="-even-odd-link/index.html">EvenOddLink</a></p>
+</td>
+<td>
+<code><span class="keyword">class </span><span class="identifier">EvenOddLink</span>&nbsp;<span class="symbol">:</span>&nbsp;<a href="-link/index.html"><span class="identifier">Link</span></a><span class="symbol">&lt;</span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html"><span class="identifier">Unit</span></a><span class="symbol">,</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html"><span class="identifier">Int</span></a><span class="symbol">,</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html"><span class="identifier">Boolean</span></a><span class="symbol">&gt;</span></code></td>
+</tr>
+<tr>
+<td>
+<p><a href="-fetcher/index.html">Fetcher</a></p>
+</td>
+<td>
+<code><span class="keyword">interface </span><span class="identifier">Fetcher</span><span class="symbol">&lt;</span><span class="identifier">T</span><span class="symbol">, </span><span class="identifier">V</span><span class="symbol">&gt;</span></code>
+<p>A Fetcher sends a request of type <code>T</code> to a server
+and fetches a response of type <code>V</code></p>
+</td>
+</tr>
+<tr>
+<td>
+<p><a href="-graph-ql-client/index.html">GraphQlClient</a></p>
+</td>
+<td>
+<code><span class="keyword">abstract</span> <span class="keyword">class </span><span class="identifier">GraphQlClient</span><span class="symbol">&lt;</span><span class="identifier">T</span><span class="symbol">&gt;</span></code>
+<p>A client executes operations against a GraphQl server.
+It accepts a chain of <a href="-link/index.html">Link</a> which emits the final response of type <code>T</code>.</p>
+</td>
+</tr>
+<tr>
+<td>
+<p><a href="-graph-ql-client-error/index.html">GraphQlClientError</a></p>
+</td>
+<td>
+<code><span class="keyword">enum</span> <span class="keyword">class </span><span class="identifier">GraphQlClientError</span></code>
+<p>Error codes</p>
+</td>
+</tr>
+<tr>
+<td>
+<p><a href="-graph-ql-client-failure-response/index.html">GraphQlClientFailureResponse</a></p>
+</td>
+<td>
+<code><span class="keyword">data</span> <span class="keyword">class </span><span class="identifier">GraphQlClientFailureResponse</span><span class="symbol">&lt;</span><span class="identifier">T</span><span class="symbol">&gt;</span></code>
+<p>Encapsulates a failed response where <a href="-graph-ql-client-failure-response/response.html">response</a> may contain the
+GraphQl response with <a href="-graph-ql-response/errors.html">GraphQlResponse.errors</a> property set.
+If the error is not a standard GraphQl error (e.g. network errors),
+the <a href="-graph-ql-client-failure-response/response.html">response</a> will be null.</p>
+</td>
+</tr>
+<tr>
+<td>
+<p><a href="-graph-ql-link.html">GraphQlLink</a></p>
+</td>
+<td>
+<code><span class="keyword">interface </span><span class="identifier">GraphQlLink</span><span class="symbol">&lt;</span><span class="identifier">T</span><span class="symbol">, </span><span class="identifier">V</span><span class="symbol">&gt;</span>&nbsp;<span class="symbol">:</span>&nbsp;<a href="-link/index.html"><span class="identifier">Link</span></a><span class="symbol">&lt;</span><a href="-graph-ql-operation/index.html"><span class="identifier">GraphQlOperation</span></a><span class="symbol">&lt;</span><span class="identifier">*</span><span class="symbol">&gt;</span><span class="symbol">,</span>&nbsp;<a href="-graph-ql-link.html#T"><span class="identifier">T</span></a><span class="symbol">,</span>&nbsp;<a href="-graph-ql-link.html#V"><span class="identifier">V</span></a><span class="symbol">&gt;</span></code>
+<p>A link which accepts <a href="-graph-ql-operation/index.html">GraphQlOperation</a> as operations.</p>
+</td>
+</tr>
+<tr>
+<td>
+<p><a href="-graph-ql-operation/index.html">GraphQlOperation</a></p>
+</td>
+<td>
+<code><span class="keyword">abstract</span> <span class="keyword">class </span><span class="identifier">GraphQlOperation</span><span class="symbol">&lt;</span><span class="identifier">T</span><span class="symbol">&gt;</span></code>
+<p>A GraphQl operation encapsulates the query / mutation
+and its corresponding response definition.</p>
+</td>
+</tr>
+<tr>
+<td>
+<p><a href="-graph-ql-request/index.html">GraphQlRequest</a></p>
+</td>
+<td>
+<code><span class="keyword">data</span> <span class="keyword">class </span><span class="identifier">GraphQlRequest</span></code>
+<p>A serializable GraphQl request as per the spec</p>
+</td>
+</tr>
+<tr>
+<td>
+<p><a href="-graph-ql-response/index.html">GraphQlResponse</a></p>
+</td>
+<td>
+<code><span class="keyword">data</span> <span class="keyword">class </span><span class="identifier">GraphQlResponse</span><span class="symbol">&lt;</span><span class="identifier">T</span><span class="symbol">&gt;</span></code>
+<p>A serializable GraphQl response as per the spec</p>
+</td>
+</tr>
+<tr>
+<td>
+<p><a href="-graph-ql-response-error/index.html">GraphQlResponseError</a></p>
+</td>
+<td>
+<code><span class="keyword">data</span> <span class="keyword">class </span><span class="identifier">GraphQlResponseError</span></code>
+<p>A serializable GraphQl error as per the spec</p>
+</td>
+</tr>
+<tr>
+<td>
+<p><a href="-http-fetcher.html">HttpFetcher</a></p>
+</td>
+<td>
+<code><span class="keyword">interface </span><span class="identifier">HttpFetcher</span><span class="symbol">&lt;</span><span class="identifier">T</span>&nbsp;<span class="symbol">:</span>&nbsp;<a href="-http-fetch-request/index.html"><span class="identifier">HttpFetchRequest</span></a><span class="symbol">&lt;</span><span class="identifier">*</span><span class="symbol">&gt;</span><span class="symbol">, </span><span class="identifier">V</span>&nbsp;<span class="symbol">:</span>&nbsp;<a href="-http-fetch-response/index.html"><span class="identifier">HttpFetchResponse</span></a><span class="symbol">&lt;</span><span class="identifier">*</span><span class="symbol">&gt;</span><span class="symbol">&gt;</span>&nbsp;<span class="symbol">:</span>&nbsp;<a href="-fetcher/index.html"><span class="identifier">Fetcher</span></a><span class="symbol">&lt;</span><a href="-http-fetcher.html#T"><span class="identifier">T</span></a><span class="symbol">,</span>&nbsp;<a href="-http-fetcher.html#V"><span class="identifier">V</span></a><span class="symbol">&gt;</span></code>
+<p>An HttpFetcher fetches an <a href="-http-fetch-response/index.html">HttpFetchResponse</a> for a given <a href="-http-fetch-request/index.html">HttpFetchRequest</a>
+from an http server.</p>
+</td>
+</tr>
+<tr>
+<td>
+<p><a href="-http-fetch-request/index.html">HttpFetchRequest</a></p>
+</td>
+<td>
+<code><span class="keyword">abstract</span> <span class="keyword">class </span><span class="identifier">HttpFetchRequest</span><span class="symbol">&lt;</span><span class="identifier">T</span><span class="symbol">&gt;</span></code>
+<p>A request for HTTP fetcher.</p>
+</td>
+</tr>
+<tr>
+<td>
+<p><a href="-http-fetch-response/index.html">HttpFetchResponse</a></p>
+</td>
+<td>
+<code><span class="keyword">abstract</span> <span class="keyword">class </span><span class="identifier">HttpFetchResponse</span><span class="symbol">&lt;</span><span class="identifier">T</span><span class="symbol">&gt;</span></code>
+<p>A response for Http request</p>
+</td>
+</tr>
+<tr>
+<td>
+<p><a href="-json-http-fetcher.html">JsonHttpFetcher</a></p>
+</td>
+<td>
+<code><span class="keyword">interface </span><span class="identifier">JsonHttpFetcher</span>&nbsp;<span class="symbol">:</span>&nbsp;<a href="-http-fetcher.html"><span class="identifier">HttpFetcher</span></a><span class="symbol">&lt;</span><a href="-json-http-fetch-request/index.html"><span class="identifier">JsonHttpFetchRequest</span></a><span class="symbol">,</span>&nbsp;<a href="-json-http-fetch-response/index.html"><span class="identifier">JsonHttpFetchResponse</span></a><span class="symbol">&gt;</span></code>
+<p>An <a href="-http-fetcher.html">HttpFetcher</a> which can handle a Json request and a Json response. Implement this interface
+if only JSON payloads are handled.</p>
+</td>
+</tr>
+<tr>
+<td>
+<p><a href="-json-http-fetch-request/index.html">JsonHttpFetchRequest</a></p>
+</td>
+<td>
+<code><span class="keyword">open</span> <span class="keyword">class </span><span class="identifier">JsonHttpFetchRequest</span>&nbsp;<span class="symbol">:</span>&nbsp;<a href="-http-fetch-request/index.html"><span class="identifier">HttpFetchRequest</span></a><span class="symbol">&lt;</span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html"><span class="identifier">String</span></a><span class="symbol">&gt;</span></code>
+<p>A Json based Http request where body is a plain Json string.</p>
+</td>
+</tr>
+<tr>
+<td>
+<p><a href="-json-http-fetch-response/index.html">JsonHttpFetchResponse</a></p>
+</td>
+<td>
+<code><span class="keyword">open</span> <span class="keyword">class </span><span class="identifier">JsonHttpFetchResponse</span>&nbsp;<span class="symbol">:</span>&nbsp;<a href="-http-fetch-response/index.html"><span class="identifier">HttpFetchResponse</span></a><span class="symbol">&lt;</span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html"><span class="identifier">String</span></a><span class="symbol">&gt;</span></code>
+<p>A Json based Http response where response body is a plain Json string</p>
+</td>
+</tr>
+<tr>
+<td>
+<p><a href="-json-http-graph-ql-client/index.html">JsonHttpGraphQlClient</a></p>
+</td>
+<td>
+<code><span class="keyword">class </span><span class="identifier">JsonHttpGraphQlClient</span>&nbsp;<span class="symbol">:</span>&nbsp;<a href="-graph-ql-client/index.html"><span class="identifier">GraphQlClient</span></a><span class="symbol">&lt;</span><a href="-json-http-fetch-response/index.html"><span class="identifier">JsonHttpFetchResponse</span></a><span class="symbol">&gt;</span></code>
+<p>A default implementation of a Json based GraphQl client which accepts
+Json as request body and emits a parsed object from a Json response</p>
+</td>
+</tr>
+<tr>
+<td>
+<p><a href="-json-http-graph-ql-link/index.html">JsonHttpGraphQlLink</a></p>
+</td>
+<td>
+<code><span class="keyword">open</span> <span class="keyword">class </span><span class="identifier">JsonHttpGraphQlLink</span>&nbsp;<span class="symbol">:</span>&nbsp;<a href="-link/index.html"><span class="identifier">Link</span></a><span class="symbol">&lt;</span><a href="-graph-ql-operation/index.html"><span class="identifier">GraphQlOperation</span></a><span class="symbol">&lt;</span><span class="identifier">*</span><span class="symbol">&gt;</span><span class="symbol">,</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html"><span class="identifier">Unit</span></a><span class="symbol">,</span>&nbsp;<a href="-json-http-fetch-response/index.html"><span class="identifier">JsonHttpFetchResponse</span></a><span class="symbol">&gt;</span></code>
+<p>A default implementation of a <a href="-link/index.html">Link</a> which fetches response from a GraphQl server
+in Json format by using a <a href="-json-http-fetcher.html">JsonHttpFetcher</a> instance.</p>
+</td>
+</tr>
+<tr>
+<td>
+<p><a href="-link/index.html">Link</a></p>
+</td>
+<td>
+<code><span class="keyword">interface </span><span class="identifier">Link</span><span class="symbol">&lt;</span><span class="identifier">A</span><span class="symbol">, </span><span class="identifier">T</span><span class="symbol">, </span><span class="identifier">V</span><span class="symbol">&gt;</span></code>
+<p>A link takes an operation and returns an observable.
+Links are a way to compose subsets of actions to handle
+data. Links can be concatenated with each other to form
+a chain to carry out an even complex data handling workflow.</p>
+</td>
+</tr>
+<tr>
+<td>
+<p><a href="-native-fetcher/index.html">NativeFetcher</a></p>
+</td>
+<td>
+<code><span class="keyword">class </span><span class="identifier">NativeFetcher</span>&nbsp;<span class="symbol">:</span>&nbsp;<a href="-json-http-fetcher.html"><span class="identifier">JsonHttpFetcher</span></a></code></td>
+</tr>
+<tr>
+<td>
+<p><a href="-result/index.html">Result</a></p>
+</td>
+<td>
+<code><span class="keyword">sealed</span> <span class="keyword">class </span><span class="identifier">Result</span><span class="symbol">&lt;</span><span class="identifier">T</span><span class="symbol">, </span><span class="identifier">V</span><span class="symbol">&gt;</span></code>
+<p>Encapsulates a successful result of type T or a Failure of type V with an arbitrary throwable.</p>
+</td>
+</tr>
+<tr>
+<td>
+<p><a href="-rx-runtime-provider/index.html">RxRuntimeProvider</a></p>
+</td>
+<td>
+<code><span class="keyword">expect</span> <span class="keyword">object </span><span class="identifier">RxRuntimeProvider</span></code></td>
+</tr>
+<tr>
+<td>
+<p><a href="-string-generator-link/index.html">StringGeneratorLink</a></p>
+</td>
+<td>
+<code><span class="keyword">class </span><span class="identifier">StringGeneratorLink</span>&nbsp;<span class="symbol">:</span>&nbsp;<a href="-link/index.html"><span class="identifier">Link</span></a><span class="symbol">&lt;</span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html"><span class="identifier">Unit</span></a><span class="symbol">,</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html"><span class="identifier">Unit</span></a><span class="symbol">,</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html"><span class="identifier">String</span></a><span class="symbol">&gt;</span></code></td>
+</tr>
+<tr>
+<td>
+<p><a href="-string-to-int-link/index.html">StringToIntLink</a></p>
+</td>
+<td>
+<code><span class="keyword">class </span><span class="identifier">StringToIntLink</span>&nbsp;<span class="symbol">:</span>&nbsp;<a href="-link/index.html"><span class="identifier">Link</span></a><span class="symbol">&lt;</span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html"><span class="identifier">Unit</span></a><span class="symbol">,</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html"><span class="identifier">String</span></a><span class="symbol">,</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html"><span class="identifier">Int</span></a><span class="symbol">&gt;</span></code></td>
+</tr>
+</tbody>
+</table>
+<h3>Functions</h3>
+<table>
+<tbody>
+<tr>
+<td>
+<p><a href="concat.html">concat</a></p>
+</td>
+<td>
+<code><span class="keyword">fun </span><span class="symbol">&lt;</span><span class="identifier">A</span><span class="symbol">, </span><span class="identifier">T</span><span class="symbol">, </span><span class="identifier">V</span><span class="symbol">&gt;</span> <a href="-link/index.html"><span class="identifier">Link</span></a><span class="symbol">&lt;</span><a href="concat.html#A"><span class="identifier">A</span></a><span class="symbol">,</span>&nbsp;<a href="concat.html#T"><span class="identifier">T</span></a><span class="symbol">,</span>&nbsp;<a href="concat.html#V"><span class="identifier">V</span></a><span class="symbol">&gt;</span><span class="symbol">.</span><span class="identifier">concat</span><span class="symbol">(</span><span class="identifier" id="com.suparnatural.core.graphql$concat(com.suparnatural.core.graphql.Link((com.suparnatural.core.graphql.concat.A, com.suparnatural.core.graphql.concat.T, com.suparnatural.core.graphql.concat.V)), com.suparnatural.core.graphql.Link((com.suparnatural.core.graphql.concat.A, kotlin.Any, com.suparnatural.core.graphql.concat.T)))/nextLink">nextLink</span><span class="symbol">:</span>&nbsp;<a href="-link/index.html"><span class="identifier">Link</span></a><span class="symbol">&lt;</span><a href="concat.html#A"><span class="identifier">A</span></a><span class="symbol">,</span>&nbsp;<span class="identifier">*</span><span class="symbol">,</span>&nbsp;<a href="concat.html#T"><span class="identifier">T</span></a><span class="symbol">&gt;</span><span class="symbol">)</span><span class="symbol">: </span><a href="-link/index.html"><span class="identifier">Link</span></a><span class="symbol">&lt;</span><a href="concat.html#A"><span class="identifier">A</span></a><span class="symbol">,</span>&nbsp;<a href="concat.html#T"><span class="identifier">T</span></a><span class="symbol">,</span>&nbsp;<a href="concat.html#V"><span class="identifier">V</span></a><span class="symbol">&gt;</span></code>
+<p>Concatenates a link with another to form a chain</p>
+</td>
+</tr>
+<tr>
+<td>
+<p><a href="split.html">split</a></p>
+</td>
+<td>
+<code><span class="keyword">fun </span><span class="symbol">&lt;</span><span class="identifier">A</span><span class="symbol">, </span><span class="identifier">T</span><span class="symbol">, </span><span class="identifier">V</span><span class="symbol">&gt;</span> <a href="-link/index.html"><span class="identifier">Link</span></a><span class="symbol">&lt;</span><a href="split.html#A"><span class="identifier">A</span></a><span class="symbol">,</span>&nbsp;<a href="split.html#T"><span class="identifier">T</span></a><span class="symbol">,</span>&nbsp;<a href="split.html#V"><span class="identifier">V</span></a><span class="symbol">&gt;</span><span class="symbol">.</span><span class="identifier">split</span><span class="symbol">(</span><span class="identifier" id="com.suparnatural.core.graphql$split(com.suparnatural.core.graphql.Link((com.suparnatural.core.graphql.split.A, com.suparnatural.core.graphql.split.T, com.suparnatural.core.graphql.split.V)), kotlin.Function1((com.suparnatural.core.graphql.split.A, kotlin.Boolean)), com.suparnatural.core.graphql.Link((com.suparnatural.core.graphql.split.A, kotlin.Any, com.suparnatural.core.graphql.split.T)), com.suparnatural.core.graphql.Link((com.suparnatural.core.graphql.split.A, kotlin.Any, com.suparnatural.core.graphql.split.T)))/test">test</span><span class="symbol">:</span>&nbsp;<span class="symbol">(</span><a href="split.html#A"><span class="identifier">A</span></a><span class="symbol">)</span>&nbsp;<span class="symbol">-&gt;</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html"><span class="identifier">Boolean</span></a><span class="symbol">, </span><span class="identifier" id="com.suparnatural.core.graphql$split(com.suparnatural.core.graphql.Link((com.suparnatural.core.graphql.split.A, com.suparnatural.core.graphql.split.T, com.suparnatural.core.graphql.split.V)), kotlin.Function1((com.suparnatural.core.graphql.split.A, kotlin.Boolean)), com.suparnatural.core.graphql.Link((com.suparnatural.core.graphql.split.A, kotlin.Any, com.suparnatural.core.graphql.split.T)), com.suparnatural.core.graphql.Link((com.suparnatural.core.graphql.split.A, kotlin.Any, com.suparnatural.core.graphql.split.T)))/leftLink">leftLink</span><span class="symbol">:</span>&nbsp;<a href="-link/index.html"><span class="identifier">Link</span></a><span class="symbol">&lt;</span><a href="split.html#A"><span class="identifier">A</span></a><span class="symbol">,</span>&nbsp;<span class="identifier">*</span><span class="symbol">,</span>&nbsp;<a href="split.html#T"><span class="identifier">T</span></a><span class="symbol">&gt;</span><span class="symbol">, </span><span class="identifier" id="com.suparnatural.core.graphql$split(com.suparnatural.core.graphql.Link((com.suparnatural.core.graphql.split.A, com.suparnatural.core.graphql.split.T, com.suparnatural.core.graphql.split.V)), kotlin.Function1((com.suparnatural.core.graphql.split.A, kotlin.Boolean)), com.suparnatural.core.graphql.Link((com.suparnatural.core.graphql.split.A, kotlin.Any, com.suparnatural.core.graphql.split.T)), com.suparnatural.core.graphql.Link((com.suparnatural.core.graphql.split.A, kotlin.Any, com.suparnatural.core.graphql.split.T)))/rightLink">rightLink</span><span class="symbol">:</span>&nbsp;<a href="-link/index.html"><span class="identifier">Link</span></a><span class="symbol">&lt;</span><a href="split.html#A"><span class="identifier">A</span></a><span class="symbol">,</span>&nbsp;<span class="identifier">*</span><span class="symbol">,</span>&nbsp;<a href="split.html#T"><span class="identifier">T</span></a><span class="symbol">&gt;</span><span class="symbol">)</span><span class="symbol">: </span><a href="-link/index.html"><span class="identifier">Link</span></a><span class="symbol">&lt;</span><a href="split.html#A"><span class="identifier">A</span></a><span class="symbol">,</span>&nbsp;<a href="split.html#T"><span class="identifier">T</span></a><span class="symbol">,</span>&nbsp;<a href="split.html#V"><span class="identifier">V</span></a><span class="symbol">&gt;</span></code>
+<p>Splits the link chain into two branches left and right based on a test.
+If the test returns true, leftLink chain is followed, otherwise right link chain is followed.</p>
+</td>
+</tr>
+</tbody>
+</table>
+</BODY>
+</HTML>

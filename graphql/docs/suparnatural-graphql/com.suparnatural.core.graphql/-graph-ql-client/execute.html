@@ -1,0 +1,18 @@
+<HTML>
+<HEAD>
+<meta charset="UTF-8">
+<title>GraphQlClient.execute - suparnatural-graphql</title>
+<link rel="stylesheet" href="../../../style.css">
+</HEAD>
+<BODY>
+<a href="../../index.html">suparnatural-graphql</a>&nbsp;/&nbsp;<a href="../index.html">com.suparnatural.core.graphql</a>&nbsp;/&nbsp;<a href="index.html">GraphQlClient</a>&nbsp;/&nbsp;<a href="./execute.html">execute</a><br/>
+<br/>
+<h1>execute</h1>
+<a name="com.suparnatural.core.graphql.GraphQlClient$execute(com.suparnatural.core.graphql.GraphQlOperation((com.suparnatural.core.graphql.GraphQlClient.execute.V)))"></a>
+<code><span class="keyword">abstract</span> <span class="keyword">fun </span><span class="symbol">&lt;</span><span class="identifier">V</span><span class="symbol">&gt;</span> <span class="identifier">execute</span><span class="symbol">(</span><span class="identifier" id="com.suparnatural.core.graphql.GraphQlClient$execute(com.suparnatural.core.graphql.GraphQlOperation((com.suparnatural.core.graphql.GraphQlClient.execute.V)))/operation">operation</span><span class="symbol">:</span>&nbsp;<a href="../-graph-ql-operation/index.html"><span class="identifier">GraphQlOperation</span></a><span class="symbol">&lt;</span><a href="execute.html#V"><span class="identifier">V</span></a><span class="symbol">&gt;</span><span class="symbol">)</span><span class="symbol">: </span><span class="identifier">&lt;ERROR CLASS&gt;</span><span class="symbol">&lt;</span><a href="../-result/index.html"><span class="identifier">Result</span></a><span class="symbol">&lt;</span><a href="../-graph-ql-response/index.html"><span class="identifier">GraphQlResponse</span></a><span class="symbol">&lt;</span><a href="execute.html#V"><span class="identifier">V</span></a><span class="symbol">&gt;</span><span class="symbol">,</span>&nbsp;<a href="../-graph-ql-client-failure-response/index.html"><span class="identifier">GraphQlClientFailureResponse</span></a><span class="symbol">&lt;</span><a href="execute.html#V"><span class="identifier">V</span></a><span class="symbol">&gt;</span><span class="symbol">&gt;</span><span class="symbol">&gt;</span></code>
+<p>Execute a <a href="../-graph-ql-operation/index.html">GraphQlOperation</a> with response type <code>V</code> and return the result
+as an observable. The implementation of this method should first process
+the <a href="execute.html#com.suparnatural.core.graphql.GraphQlClient$execute(com.suparnatural.core.graphql.GraphQlOperation((com.suparnatural.core.graphql.GraphQlClient.execute.V)))/operation">operation</a> via <a href="chain.html">chain</a>. The last link in the <a href="chain.html">chain</a> will return an observable
+of type <code>T</code> which can then be mapped into a <a href="../-result/index.html">Result</a> instance.</p>
+</BODY>
+</HTML>

@@ -1,0 +1,81 @@
+<HTML>
+<HEAD>
+<meta charset="UTF-8">
+<title>HttpFetchResponse - suparnatural-graphql</title>
+<link rel="stylesheet" href="../../../style.css">
+</HEAD>
+<BODY>
+<a href="../../index.html">suparnatural-graphql</a>&nbsp;/&nbsp;<a href="../index.html">com.suparnatural.core.graphql</a>&nbsp;/&nbsp;<a href="./index.html">HttpFetchResponse</a><br/>
+<br/>
+<h1>HttpFetchResponse</h1>
+<code><span class="keyword">abstract</span> <span class="keyword">class </span><span class="identifier">HttpFetchResponse</span><span class="symbol">&lt;</span><span class="identifier">T</span><span class="symbol">&gt;</span></code>
+<p>A response for Http request</p>
+<h3>Constructors</h3>
+<table>
+<tbody>
+<tr>
+<td>
+<p><a href="-init-.html">&lt;init&gt;</a></p>
+</td>
+<td>
+<code><span class="identifier">HttpFetchResponse</span><span class="symbol">(</span><span class="identifier" id="com.suparnatural.core.graphql.HttpFetchResponse$<init>(com.suparnatural.core.graphql.HttpFetchResponse.T, kotlin.Int, kotlin.String)/body">body</span><span class="symbol">:</span>&nbsp;<a href="index.html#T"><span class="identifier">T</span></a><span class="symbol">?</span><span class="symbol">, </span><span class="identifier" id="com.suparnatural.core.graphql.HttpFetchResponse$<init>(com.suparnatural.core.graphql.HttpFetchResponse.T, kotlin.Int, kotlin.String)/statusCode">statusCode</span><span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html"><span class="identifier">Int</span></a><span class="symbol">, </span><span class="identifier" id="com.suparnatural.core.graphql.HttpFetchResponse$<init>(com.suparnatural.core.graphql.HttpFetchResponse.T, kotlin.Int, kotlin.String)/statusMessage">statusMessage</span><span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html"><span class="identifier">String</span></a><span class="symbol">?</span><span class="symbol">)</span></code>
+<p>A response for Http request</p>
+</td>
+</tr>
+</tbody>
+</table>
+<h3>Properties</h3>
+<table>
+<tbody>
+<tr>
+<td>
+<p><a href="body.html">body</a></p>
+</td>
+<td>
+<code><span class="keyword">val </span><span class="identifier">body</span><span class="symbol">: </span><a href="index.html#T"><span class="identifier">T</span></a><span class="symbol">?</span></code>
+<p>Http response body</p>
+</td>
+</tr>
+<tr>
+<td>
+<p><a href="is-failure.html">isFailure</a></p>
+</td>
+<td>
+<code><span class="keyword">val </span><span class="identifier">isFailure</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html"><span class="identifier">Boolean</span></a></code></td>
+</tr>
+<tr>
+<td>
+<p><a href="status-code.html">statusCode</a></p>
+</td>
+<td>
+<code><span class="keyword">val </span><span class="identifier">statusCode</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html"><span class="identifier">Int</span></a></code>
+<p>Http status code</p>
+</td>
+</tr>
+<tr>
+<td>
+<p><a href="status-message.html">statusMessage</a></p>
+</td>
+<td>
+<code><span class="keyword">val </span><span class="identifier">statusMessage</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html"><span class="identifier">String</span></a><span class="symbol">?</span></code>
+<p>Http status message. It can be used to store failure messages</p>
+</td>
+</tr>
+</tbody>
+</table>
+<h3>Inheritors</h3>
+<table>
+<tbody>
+<tr>
+<td>
+<p><a href="../-json-http-fetch-response/index.html">JsonHttpFetchResponse</a></p>
+</td>
+<td>
+<code><span class="keyword">open</span> <span class="keyword">class </span><span class="identifier">JsonHttpFetchResponse</span>&nbsp;<span class="symbol">:</span>&nbsp;<a href="./index.html"><span class="identifier">HttpFetchResponse</span></a><span class="symbol">&lt;</span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html"><span class="identifier">String</span></a><span class="symbol">&gt;</span></code>
+<p>A Json based Http response where response body is a plain Json string</p>
+</td>
+</tr>
+</tbody>
+</table>
+</BODY>
+</HTML>

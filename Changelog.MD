@@ -2,7 +2,8 @@
 
 ## v1.0.8
 1. Support for byte read in fs.
-1. First release of graphql
+1. First release of graphql and graphql-plugin
+1. rx, rx-runtime packages introduced
 1. 1.3.61 update
 1. New docs site
 

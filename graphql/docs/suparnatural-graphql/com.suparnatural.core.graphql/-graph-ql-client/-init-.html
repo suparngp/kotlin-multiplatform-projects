@@ -1,0 +1,24 @@
+<HTML>
+<HEAD>
+<meta charset="UTF-8">
+<title>GraphQlClient.<init> - suparnatural-graphql</title>
+<link rel="stylesheet" href="../../../style.css">
+</HEAD>
+<BODY>
+<a href="../../index.html">suparnatural-graphql</a>&nbsp;/&nbsp;<a href="../index.html">com.suparnatural.core.graphql</a>&nbsp;/&nbsp;<a href="index.html">GraphQlClient</a>&nbsp;/&nbsp;<a href="./-init-.html">&lt;init&gt;</a><br/>
+<br/>
+<h1>&lt;init&gt;</h1>
+<a name="com.suparnatural.core.graphql.GraphQlClient$&lt;init&gt;(com.suparnatural.core.graphql.Link((com.suparnatural.core.graphql.GraphQlOperation((kotlin.Any)), , com.suparnatural.core.graphql.GraphQlClient.T)))"></a>
+<code><span class="identifier">GraphQlClient</span><span class="symbol">(</span><span class="identifier" id="com.suparnatural.core.graphql.GraphQlClient$<init>(com.suparnatural.core.graphql.Link((com.suparnatural.core.graphql.GraphQlOperation((kotlin.Any)), , com.suparnatural.core.graphql.GraphQlClient.T)))/chain">chain</span><span class="symbol">:</span>&nbsp;<a href="../-link/index.html"><span class="identifier">Link</span></a><span class="symbol">&lt;</span><a href="../-graph-ql-operation/index.html"><span class="identifier">GraphQlOperation</span></a><span class="symbol">&lt;</span><span class="identifier">*</span><span class="symbol">&gt;</span><span class="symbol">,</span>&nbsp;<span class="identifier">*</span><span class="symbol">,</span>&nbsp;<a href="index.html#T"><span class="identifier">T</span></a><span class="symbol">&gt;</span><span class="symbol">)</span></code>
+<p>A client executes operations against a GraphQl server.
+It accepts a chain of <a href="../-link/index.html">Link</a> which emits the final response of type <code>T</code>.</p>
+<p>The client should not concern itself with how to make a network request.
+Rather, it should rely on the last <a href="../-link/index.html">Link</a> of the <a href="chain.html">chain</a> as terminating
+link which fetches the response from the server. <a href="../-json-http-graph-ql-link/index.html">JsonHttpGraphQlLink</a> is
+one such link. The client should then take the response as input
+and transform it into the correct response type based on the operation.</p>
+<p><strong>See Also</strong><br/>
+<p><a href="../-json-http-graph-ql-client/index.html">JsonHttpGraphQlClient</a></p>
+</p>
+</BODY>
+</HTML>

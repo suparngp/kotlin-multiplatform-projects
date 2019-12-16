@@ -1,0 +1,82 @@
+<HTML>
+<HEAD>
+<meta charset="UTF-8">
+<title>GraphQlClient - suparnatural-graphql</title>
+<link rel="stylesheet" href="../../../style.css">
+</HEAD>
+<BODY>
+<a href="../../index.html">suparnatural-graphql</a>&nbsp;/&nbsp;<a href="../index.html">com.suparnatural.core.graphql</a>&nbsp;/&nbsp;<a href="./index.html">GraphQlClient</a><br/>
+<br/>
+<h1>GraphQlClient</h1>
+<code><span class="keyword">abstract</span> <span class="keyword">class </span><span class="identifier">GraphQlClient</span><span class="symbol">&lt;</span><span class="identifier">T</span><span class="symbol">&gt;</span></code>
+<p>A client executes operations against a GraphQl server.
+It accepts a chain of <a href="../-link/index.html">Link</a> which emits the final response of type <code>T</code>.</p>
+<p>The client should not concern itself with how to make a network request.
+Rather, it should rely on the last <a href="../-link/index.html">Link</a> of the <a href="chain.html">chain</a> as terminating
+link which fetches the response from the server. <a href="../-json-http-graph-ql-link/index.html">JsonHttpGraphQlLink</a> is
+one such link. The client should then take the response as input
+and transform it into the correct response type based on the operation.</p>
+<p><strong>See Also</strong><br/>
+<p><a href="../-json-http-graph-ql-client/index.html">JsonHttpGraphQlClient</a></p>
+</p>
+<h3>Constructors</h3>
+<table>
+<tbody>
+<tr>
+<td>
+<p><a href="-init-.html">&lt;init&gt;</a></p>
+</td>
+<td>
+<code><span class="identifier">GraphQlClient</span><span class="symbol">(</span><span class="identifier" id="com.suparnatural.core.graphql.GraphQlClient$<init>(com.suparnatural.core.graphql.Link((com.suparnatural.core.graphql.GraphQlOperation((kotlin.Any)), , com.suparnatural.core.graphql.GraphQlClient.T)))/chain">chain</span><span class="symbol">:</span>&nbsp;<a href="../-link/index.html"><span class="identifier">Link</span></a><span class="symbol">&lt;</span><a href="../-graph-ql-operation/index.html"><span class="identifier">GraphQlOperation</span></a><span class="symbol">&lt;</span><span class="identifier">*</span><span class="symbol">&gt;</span><span class="symbol">,</span>&nbsp;<span class="identifier">*</span><span class="symbol">,</span>&nbsp;<a href="index.html#T"><span class="identifier">T</span></a><span class="symbol">&gt;</span><span class="symbol">)</span></code>
+<p>A client executes operations against a GraphQl server.
+It accepts a chain of <a href="../-link/index.html">Link</a> which emits the final response of type <code>T</code>.</p>
+</td>
+</tr>
+</tbody>
+</table>
+<h3>Properties</h3>
+<table>
+<tbody>
+<tr>
+<td>
+<p><a href="chain.html">chain</a></p>
+</td>
+<td>
+<code><span class="keyword">val </span><span class="identifier">chain</span><span class="symbol">: </span><a href="../-link/index.html"><span class="identifier">Link</span></a><span class="symbol">&lt;</span><a href="../-graph-ql-operation/index.html"><span class="identifier">GraphQlOperation</span></a><span class="symbol">&lt;</span><span class="identifier">*</span><span class="symbol">&gt;</span><span class="symbol">,</span>&nbsp;<span class="identifier">*</span><span class="symbol">,</span>&nbsp;<a href="index.html#T"><span class="identifier">T</span></a><span class="symbol">&gt;</span></code></td>
+</tr>
+</tbody>
+</table>
+<h3>Functions</h3>
+<table>
+<tbody>
+<tr>
+<td>
+<p><a href="execute.html">execute</a></p>
+</td>
+<td>
+<code><span class="keyword">abstract</span> <span class="keyword">fun </span><span class="symbol">&lt;</span><span class="identifier">V</span><span class="symbol">&gt;</span> <span class="identifier">execute</span><span class="symbol">(</span><span class="identifier" id="com.suparnatural.core.graphql.GraphQlClient$execute(com.suparnatural.core.graphql.GraphQlOperation((com.suparnatural.core.graphql.GraphQlClient.execute.V)))/operation">operation</span><span class="symbol">:</span>&nbsp;<a href="../-graph-ql-operation/index.html"><span class="identifier">GraphQlOperation</span></a><span class="symbol">&lt;</span><a href="execute.html#V"><span class="identifier">V</span></a><span class="symbol">&gt;</span><span class="symbol">)</span><span class="symbol">: </span><span class="identifier">&lt;ERROR CLASS&gt;</span><span class="symbol">&lt;</span><a href="../-result/index.html"><span class="identifier">Result</span></a><span class="symbol">&lt;</span><a href="../-graph-ql-response/index.html"><span class="identifier">GraphQlResponse</span></a><span class="symbol">&lt;</span><a href="execute.html#V"><span class="identifier">V</span></a><span class="symbol">&gt;</span><span class="symbol">,</span>&nbsp;<a href="../-graph-ql-client-failure-response/index.html"><span class="identifier">GraphQlClientFailureResponse</span></a><span class="symbol">&lt;</span><a href="execute.html#V"><span class="identifier">V</span></a><span class="symbol">&gt;</span><span class="symbol">&gt;</span><span class="symbol">&gt;</span></code>
+<p>Execute a <a href="../-graph-ql-operation/index.html">GraphQlOperation</a> with response type <code>V</code> and return the result
+as an observable. The implementation of this method should first process
+the <a href="execute.html#com.suparnatural.core.graphql.GraphQlClient$execute(com.suparnatural.core.graphql.GraphQlOperation((com.suparnatural.core.graphql.GraphQlClient.execute.V)))/operation">operation</a> via <a href="chain.html">chain</a>. The last link in the <a href="chain.html">chain</a> will return an observable
+of type <code>T</code> which can then be mapped into a <a href="../-result/index.html">Result</a> instance.</p>
+</td>
+</tr>
+</tbody>
+</table>
+<h3>Inheritors</h3>
+<table>
+<tbody>
+<tr>
+<td>
+<p><a href="../-json-http-graph-ql-client/index.html">JsonHttpGraphQlClient</a></p>
+</td>
+<td>
+<code><span class="keyword">class </span><span class="identifier">JsonHttpGraphQlClient</span>&nbsp;<span class="symbol">:</span>&nbsp;<a href="./index.html"><span class="identifier">GraphQlClient</span></a><span class="symbol">&lt;</span><a href="../-json-http-fetch-response/index.html"><span class="identifier">JsonHttpFetchResponse</span></a><span class="symbol">&gt;</span></code>
+<p>A default implementation of a Json based GraphQl client which accepts
+Json as request body and emits a parsed object from a Json response</p>
+</td>
+</tr>
+</tbody>
+</table>
+</BODY>
+</HTML>

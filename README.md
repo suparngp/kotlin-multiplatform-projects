@@ -9,28 +9,35 @@ targeting `iOS` and `Android`.
 Each project has a read me which shows how to add it to your project.
 API docs are also available for every module.
 
+## NOTE
+
+All docs are being moved to the new [docs website](https://kmpdocs.suparnatural.com/).
+
 ## Projects
 
-### [suparnatural-concurrency](concurrency/README.md)
+### [suparnatural-graphql](https://kmpdocs.suparnatural.com/graphql/)
+
+### [suparnatural-concurrency](https://kmpdocs.suparnatural.com/concurrency/)
 
 This library provides convenient methods and common implementations to simplify
 concurrency/multi-threading in Kotlin Multiplatform projects for `iOS` and `Android`.
 
-### [suparnatural-fs](fs/README.md)
+### [suparnatural-fs](fs/https://kmpdocs.suparnatural.com/fs/)
 
 Provides file system access for iOS and Android.
 
 
-### [suparnatural-cache](cache/README.md)
+### [suparnatural-cache](https://kmpdocs.suparnatural.com/cache/)
 
 A super fast, persistable, thread safe in-memory cache for iOS and Android
 
 
 | Project | iOS | Android | JVM |
 |---------|-----|---------|-----|
-| [suparnatural-concurrency](concurrency/README.md) | Y | Y | N |
-| [suparnatural-fs](fs/README.md) | Y | Y | Y |
-| [suparnatural-cache](cache/README.md) | Y | Y | N |
+| [suparnatural-graphql](https://kmpdocs.suparnatural.com/graphql/) | Y | Y | Y |
+| [suparnatural-concurrency](https://kmpdocs.suparnatural.com/concurrency/) | Y | Y | N |
+| [suparnatural-fs](https://kmpdocs.suparnatural.com/fs/) | Y | Y | Y |
+| [suparnatural-cache](https://kmpdocs.suparnatural.com/cache/) | Y | Y | N |
 
 ## A note about ios builds
 By default, KMP plugin cannot create universal binaries ( a single `klib` which works on both `X64` and `Arm64`). Each platform must be configured with a preset and a unique target name. However, the code base for each platform is same (at least, at the moment). So there is no reason to create different source sets for each of them. Therefore, a common source set `iosMain` and `iosTest` is configured (without any target preset) and the platform specific code targets simply used this common source set.
