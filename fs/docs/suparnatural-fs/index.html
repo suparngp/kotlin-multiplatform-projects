@@ -8,28 +8,7 @@
 <a href="./index.html">suparnatural-fs</a><br/>
 <br/>
 <p>A Kotlin Multiplatform library for iOS and Android to provide file system access.</p>
-<h3>Setup</h3>
-<ol><li>
-<p>Add the repository to your project.</p>
-   <pre><code> repositories {
-        maven {
-            url  "https://dl.bintray.com/suparnatural/kotlin-multiplatform"
-        }
-    }
-</code></pre></li>
-<li>Add <code>implementation 'suparnatural-kotlin-multiplatform:fs-metadata:version'</code> to <code>commonMain</code>.</li>
-<li>Add <code>implementation 'suparnatural-kotlin-multiplatform:fs-iosx64(or iosarm64):version'</code> to <code>iosMain</code></li>
-<li>Add <code>implementation 'suparnatural-kotlin-multiplatform:fs-android:version'</code> to <code>androidMain</code></li>
-<li>Add <code>implementation 'suparnatural-kotlin-multiplatform:fs-jvm:version'</code> to <code>jvmMain</code></li>
-</ol>
-<h3>Usage</h3>
-<p>Check out the <a href="https://suparngp.github.io/kotlin-multiplatform-projects/fs/docs/suparnatural-fs/index.html">API Docs</a>.
-They are always up to date with code examples.</p>
-<p>All APIs are accessible via thread-safe singleton <a href="https://suparngp.github.io/kotlin-multiplatform-projects/fs/docs/suparnatural-fs/com.suparnatural.core.fs/-file-system/index.html"><code>FileSystem</code></a>.</p>
-<p>On <code>Android</code>, the <code>FileSystem</code> singleton requires a <code>context</code>. However, it is automatically initialized with the application context when the library loads. Therefore, you can just start using it.</p>
-<pre><code>FileSystem.exists("/var/file")
-FileSystem.mkdir("/var/dir", recursive=true)
-</code></pre>
+<p><a href="https://kmpdocs.suparnatural.com/fs/">View Docs</a></p>
 <h3>Packages</h3>
 <table>
 <tbody>

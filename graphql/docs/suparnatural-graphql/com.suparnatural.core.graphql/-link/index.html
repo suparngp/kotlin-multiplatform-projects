@@ -1,0 +1,110 @@
+<HTML>
+<HEAD>
+<meta charset="UTF-8">
+<title>Link - suparnatural-graphql</title>
+<link rel="stylesheet" href="../../../style.css">
+</HEAD>
+<BODY>
+<a href="../../index.html">suparnatural-graphql</a>&nbsp;/&nbsp;<a href="../index.html">com.suparnatural.core.graphql</a>&nbsp;/&nbsp;<a href="./index.html">Link</a><br/>
+<br/>
+<h1>Link</h1>
+<code><span class="keyword">interface </span><span class="identifier">Link</span><span class="symbol">&lt;</span><span class="identifier">A</span><span class="symbol">, </span><span class="identifier">T</span><span class="symbol">, </span><span class="identifier">V</span><span class="symbol">&gt;</span></code>
+<p>A link takes an operation and returns an observable.
+Links are a way to compose subsets of actions to handle
+data. Links can be concatenated with each other to form
+a chain to carry out an even complex data handling workflow.</p>
+<p>A link has only one method <a href="execute.html">execute</a> which accepts an operation of
+type <code>A</code> and the next link in the chain. The next link can be null if
+the current link is a terminating link. For example, the last link
+can start a network request and return its response as an observable.</p>
+<p>To guarantee type safety, a Link has two type parameters <code>T</code> and <code>V</code>.
+A link always returns an observable which emits a value of type <code>V</code>.
+It can accept a link as the next link in the chain if and only if
+the next link produces the observable of type <code>T</code>. In other words,
+a link subscribe to an observable of type <code>T</code>, maps the values
+into type <code>V</code> and returns an observable of those mapped values.</p>
+<p><strong>Link</strong><br/>
+https://www.apollographql.com/docs/link/overview/</p>
+<h3>Functions</h3>
+<table>
+<tbody>
+<tr>
+<td>
+<p><a href="execute.html">execute</a></p>
+</td>
+<td>
+<code><span class="keyword">abstract</span> <span class="keyword">fun </span><span class="identifier">execute</span><span class="symbol">(</span><span class="identifier" id="com.suparnatural.core.graphql.Link$execute(com.suparnatural.core.graphql.Link.A, com.suparnatural.core.graphql.Link((com.suparnatural.core.graphql.Link.A, kotlin.Any, com.suparnatural.core.graphql.Link.T)))/operation">operation</span><span class="symbol">:</span>&nbsp;<a href="index.html#A"><span class="identifier">A</span></a><span class="symbol">, </span><span class="identifier" id="com.suparnatural.core.graphql.Link$execute(com.suparnatural.core.graphql.Link.A, com.suparnatural.core.graphql.Link((com.suparnatural.core.graphql.Link.A, kotlin.Any, com.suparnatural.core.graphql.Link.T)))/next">next</span><span class="symbol">:</span>&nbsp;<a href="./index.html"><span class="identifier">Link</span></a><span class="symbol">&lt;</span><a href="index.html#A"><span class="identifier">A</span></a><span class="symbol">,</span>&nbsp;<span class="identifier">*</span><span class="symbol">,</span>&nbsp;<a href="index.html#T"><span class="identifier">T</span></a><span class="symbol">&gt;</span><span class="symbol">?</span>&nbsp;<span class="symbol">=</span>&nbsp;null<span class="symbol">)</span><span class="symbol">: </span><span class="identifier">&lt;ERROR CLASS&gt;</span><span class="symbol">&lt;</span><a href="index.html#V"><span class="identifier">V</span></a><span class="symbol">&gt;</span></code></td>
+</tr>
+</tbody>
+</table>
+<h3>Extension Functions</h3>
+<table>
+<tbody>
+<tr>
+<td>
+<p><a href="../concat.html">concat</a></p>
+</td>
+<td>
+<code><span class="keyword">fun </span><span class="symbol">&lt;</span><span class="identifier">A</span><span class="symbol">, </span><span class="identifier">T</span><span class="symbol">, </span><span class="identifier">V</span><span class="symbol">&gt;</span> <a href="./index.html"><span class="identifier">Link</span></a><span class="symbol">&lt;</span><a href="../concat.html#A"><span class="identifier">A</span></a><span class="symbol">,</span>&nbsp;<a href="../concat.html#T"><span class="identifier">T</span></a><span class="symbol">,</span>&nbsp;<a href="../concat.html#V"><span class="identifier">V</span></a><span class="symbol">&gt;</span><span class="symbol">.</span><span class="identifier">concat</span><span class="symbol">(</span><span class="identifier" id="com.suparnatural.core.graphql$concat(com.suparnatural.core.graphql.Link((com.suparnatural.core.graphql.concat.A, com.suparnatural.core.graphql.concat.T, com.suparnatural.core.graphql.concat.V)), com.suparnatural.core.graphql.Link((com.suparnatural.core.graphql.concat.A, kotlin.Any, com.suparnatural.core.graphql.concat.T)))/nextLink">nextLink</span><span class="symbol">:</span>&nbsp;<a href="./index.html"><span class="identifier">Link</span></a><span class="symbol">&lt;</span><a href="../concat.html#A"><span class="identifier">A</span></a><span class="symbol">,</span>&nbsp;<span class="identifier">*</span><span class="symbol">,</span>&nbsp;<a href="../concat.html#T"><span class="identifier">T</span></a><span class="symbol">&gt;</span><span class="symbol">)</span><span class="symbol">: </span><a href="./index.html"><span class="identifier">Link</span></a><span class="symbol">&lt;</span><a href="../concat.html#A"><span class="identifier">A</span></a><span class="symbol">,</span>&nbsp;<a href="../concat.html#T"><span class="identifier">T</span></a><span class="symbol">,</span>&nbsp;<a href="../concat.html#V"><span class="identifier">V</span></a><span class="symbol">&gt;</span></code>
+<p>Concatenates a link with another to form a chain</p>
+</td>
+</tr>
+<tr>
+<td>
+<p><a href="../split.html">split</a></p>
+</td>
+<td>
+<code><span class="keyword">fun </span><span class="symbol">&lt;</span><span class="identifier">A</span><span class="symbol">, </span><span class="identifier">T</span><span class="symbol">, </span><span class="identifier">V</span><span class="symbol">&gt;</span> <a href="./index.html"><span class="identifier">Link</span></a><span class="symbol">&lt;</span><a href="../split.html#A"><span class="identifier">A</span></a><span class="symbol">,</span>&nbsp;<a href="../split.html#T"><span class="identifier">T</span></a><span class="symbol">,</span>&nbsp;<a href="../split.html#V"><span class="identifier">V</span></a><span class="symbol">&gt;</span><span class="symbol">.</span><span class="identifier">split</span><span class="symbol">(</span><span class="identifier" id="com.suparnatural.core.graphql$split(com.suparnatural.core.graphql.Link((com.suparnatural.core.graphql.split.A, com.suparnatural.core.graphql.split.T, com.suparnatural.core.graphql.split.V)), kotlin.Function1((com.suparnatural.core.graphql.split.A, kotlin.Boolean)), com.suparnatural.core.graphql.Link((com.suparnatural.core.graphql.split.A, kotlin.Any, com.suparnatural.core.graphql.split.T)), com.suparnatural.core.graphql.Link((com.suparnatural.core.graphql.split.A, kotlin.Any, com.suparnatural.core.graphql.split.T)))/test">test</span><span class="symbol">:</span>&nbsp;<span class="symbol">(</span><a href="../split.html#A"><span class="identifier">A</span></a><span class="symbol">)</span>&nbsp;<span class="symbol">-&gt;</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html"><span class="identifier">Boolean</span></a><span class="symbol">, </span><span class="identifier" id="com.suparnatural.core.graphql$split(com.suparnatural.core.graphql.Link((com.suparnatural.core.graphql.split.A, com.suparnatural.core.graphql.split.T, com.suparnatural.core.graphql.split.V)), kotlin.Function1((com.suparnatural.core.graphql.split.A, kotlin.Boolean)), com.suparnatural.core.graphql.Link((com.suparnatural.core.graphql.split.A, kotlin.Any, com.suparnatural.core.graphql.split.T)), com.suparnatural.core.graphql.Link((com.suparnatural.core.graphql.split.A, kotlin.Any, com.suparnatural.core.graphql.split.T)))/leftLink">leftLink</span><span class="symbol">:</span>&nbsp;<a href="./index.html"><span class="identifier">Link</span></a><span class="symbol">&lt;</span><a href="../split.html#A"><span class="identifier">A</span></a><span class="symbol">,</span>&nbsp;<span class="identifier">*</span><span class="symbol">,</span>&nbsp;<a href="../split.html#T"><span class="identifier">T</span></a><span class="symbol">&gt;</span><span class="symbol">, </span><span class="identifier" id="com.suparnatural.core.graphql$split(com.suparnatural.core.graphql.Link((com.suparnatural.core.graphql.split.A, com.suparnatural.core.graphql.split.T, com.suparnatural.core.graphql.split.V)), kotlin.Function1((com.suparnatural.core.graphql.split.A, kotlin.Boolean)), com.suparnatural.core.graphql.Link((com.suparnatural.core.graphql.split.A, kotlin.Any, com.suparnatural.core.graphql.split.T)), com.suparnatural.core.graphql.Link((com.suparnatural.core.graphql.split.A, kotlin.Any, com.suparnatural.core.graphql.split.T)))/rightLink">rightLink</span><span class="symbol">:</span>&nbsp;<a href="./index.html"><span class="identifier">Link</span></a><span class="symbol">&lt;</span><a href="../split.html#A"><span class="identifier">A</span></a><span class="symbol">,</span>&nbsp;<span class="identifier">*</span><span class="symbol">,</span>&nbsp;<a href="../split.html#T"><span class="identifier">T</span></a><span class="symbol">&gt;</span><span class="symbol">)</span><span class="symbol">: </span><a href="./index.html"><span class="identifier">Link</span></a><span class="symbol">&lt;</span><a href="../split.html#A"><span class="identifier">A</span></a><span class="symbol">,</span>&nbsp;<a href="../split.html#T"><span class="identifier">T</span></a><span class="symbol">,</span>&nbsp;<a href="../split.html#V"><span class="identifier">V</span></a><span class="symbol">&gt;</span></code>
+<p>Splits the link chain into two branches left and right based on a test.
+If the test returns true, leftLink chain is followed, otherwise right link chain is followed.</p>
+</td>
+</tr>
+</tbody>
+</table>
+<h3>Inheritors</h3>
+<table>
+<tbody>
+<tr>
+<td>
+<p><a href="../-even-odd-link/index.html">EvenOddLink</a></p>
+</td>
+<td>
+<code><span class="keyword">class </span><span class="identifier">EvenOddLink</span>&nbsp;<span class="symbol">:</span>&nbsp;<a href="./index.html"><span class="identifier">Link</span></a><span class="symbol">&lt;</span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html"><span class="identifier">Unit</span></a><span class="symbol">,</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html"><span class="identifier">Int</span></a><span class="symbol">,</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html"><span class="identifier">Boolean</span></a><span class="symbol">&gt;</span></code></td>
+</tr>
+<tr>
+<td>
+<p><a href="../-graph-ql-link.html">GraphQlLink</a></p>
+</td>
+<td>
+<code><span class="keyword">interface </span><span class="identifier">GraphQlLink</span><span class="symbol">&lt;</span><span class="identifier">T</span><span class="symbol">, </span><span class="identifier">V</span><span class="symbol">&gt;</span>&nbsp;<span class="symbol">:</span>&nbsp;<a href="./index.html"><span class="identifier">Link</span></a><span class="symbol">&lt;</span><a href="../-graph-ql-operation/index.html"><span class="identifier">GraphQlOperation</span></a><span class="symbol">&lt;</span><span class="identifier">*</span><span class="symbol">&gt;</span><span class="symbol">,</span>&nbsp;<a href="../-graph-ql-link.html#T"><span class="identifier">T</span></a><span class="symbol">,</span>&nbsp;<a href="../-graph-ql-link.html#V"><span class="identifier">V</span></a><span class="symbol">&gt;</span></code>
+<p>A link which accepts <a href="../-graph-ql-operation/index.html">GraphQlOperation</a> as operations.</p>
+</td>
+</tr>
+<tr>
+<td>
+<p><a href="../-json-http-graph-ql-link/index.html">JsonHttpGraphQlLink</a></p>
+</td>
+<td>
+<code><span class="keyword">open</span> <span class="keyword">class </span><span class="identifier">JsonHttpGraphQlLink</span>&nbsp;<span class="symbol">:</span>&nbsp;<a href="./index.html"><span class="identifier">Link</span></a><span class="symbol">&lt;</span><a href="../-graph-ql-operation/index.html"><span class="identifier">GraphQlOperation</span></a><span class="symbol">&lt;</span><span class="identifier">*</span><span class="symbol">&gt;</span><span class="symbol">,</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html"><span class="identifier">Unit</span></a><span class="symbol">,</span>&nbsp;<a href="../-json-http-fetch-response/index.html"><span class="identifier">JsonHttpFetchResponse</span></a><span class="symbol">&gt;</span></code>
+<p>A default implementation of a <a href="./index.html">Link</a> which fetches response from a GraphQl server
+in Json format by using a <a href="../-json-http-fetcher.html">JsonHttpFetcher</a> instance.</p>
+</td>
+</tr>
+<tr>
+<td>
+<p><a href="../-string-generator-link/index.html">StringGeneratorLink</a></p>
+</td>
+<td>
+<code><span class="keyword">class </span><span class="identifier">StringGeneratorLink</span>&nbsp;<span class="symbol">:</span>&nbsp;<a href="./index.html"><span class="identifier">Link</span></a><span class="symbol">&lt;</span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html"><span class="identifier">Unit</span></a><span class="symbol">,</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html"><span class="identifier">Unit</span></a><span class="symbol">,</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html"><span class="identifier">String</span></a><span class="symbol">&gt;</span></code></td>
+</tr>
+<tr>
+<td>
+<p><a href="../-string-to-int-link/index.html">StringToIntLink</a></p>
+</td>
+<td>
+<code><span class="keyword">class </span><span class="identifier">StringToIntLink</span>&nbsp;<span class="symbol">:</span>&nbsp;<a href="./index.html"><span class="identifier">Link</span></a><span class="symbol">&lt;</span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html"><span class="identifier">Unit</span></a><span class="symbol">,</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html"><span class="identifier">String</span></a><span class="symbol">,</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html"><span class="identifier">Int</span></a><span class="symbol">&gt;</span></code></td>
+</tr>
+</tbody>
+</table>
+</BODY>
+</HTML>

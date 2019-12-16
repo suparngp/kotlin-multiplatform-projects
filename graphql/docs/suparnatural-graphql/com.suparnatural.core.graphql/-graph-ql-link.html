@@ -1,0 +1,50 @@
+<HTML>
+<HEAD>
+<meta charset="UTF-8">
+<title>GraphQlLink - suparnatural-graphql</title>
+<link rel="stylesheet" href="../../style.css">
+</HEAD>
+<BODY>
+<a href="../index.html">suparnatural-graphql</a>&nbsp;/&nbsp;<a href="index.html">com.suparnatural.core.graphql</a>&nbsp;/&nbsp;<a href="./-graph-ql-link.html">GraphQlLink</a><br/>
+<br/>
+<h1>GraphQlLink</h1>
+<code><span class="keyword">interface </span><span class="identifier">GraphQlLink</span><span class="symbol">&lt;</span><span class="identifier">T</span><span class="symbol">, </span><span class="identifier">V</span><span class="symbol">&gt;</span>&nbsp;<span class="symbol">:</span>&nbsp;<a href="-link/index.html"><span class="identifier">Link</span></a><span class="symbol">&lt;</span><a href="-graph-ql-operation/index.html"><span class="identifier">GraphQlOperation</span></a><span class="symbol">&lt;</span><span class="identifier">*</span><span class="symbol">&gt;</span><span class="symbol">,</span>&nbsp;<a href="-graph-ql-link.html#T"><span class="identifier">T</span></a><span class="symbol">,</span>&nbsp;<a href="-graph-ql-link.html#V"><span class="identifier">V</span></a><span class="symbol">&gt;</span></code>
+<p>A link which accepts <a href="-graph-ql-operation/index.html">GraphQlOperation</a> as operations.</p>
+<h3>Inherited Functions</h3>
+<table>
+<tbody>
+<tr>
+<td>
+<p><a href="-link/execute.html">execute</a></p>
+</td>
+<td>
+<code><span class="keyword">abstract</span> <span class="keyword">fun </span><span class="identifier">execute</span><span class="symbol">(</span><span class="identifier" id="com.suparnatural.core.graphql.Link$execute(com.suparnatural.core.graphql.Link.A, com.suparnatural.core.graphql.Link((com.suparnatural.core.graphql.Link.A, kotlin.Any, com.suparnatural.core.graphql.Link.T)))/operation">operation</span><span class="symbol">:</span>&nbsp;<a href="-link/index.html#A"><span class="identifier">A</span></a><span class="symbol">, </span><span class="identifier" id="com.suparnatural.core.graphql.Link$execute(com.suparnatural.core.graphql.Link.A, com.suparnatural.core.graphql.Link((com.suparnatural.core.graphql.Link.A, kotlin.Any, com.suparnatural.core.graphql.Link.T)))/next">next</span><span class="symbol">:</span>&nbsp;<a href="-link/index.html"><span class="identifier">Link</span></a><span class="symbol">&lt;</span><a href="-link/index.html#A"><span class="identifier">A</span></a><span class="symbol">,</span>&nbsp;<span class="identifier">*</span><span class="symbol">,</span>&nbsp;<a href="-link/index.html#T"><span class="identifier">T</span></a><span class="symbol">&gt;</span><span class="symbol">?</span>&nbsp;<span class="symbol">=</span>&nbsp;null<span class="symbol">)</span><span class="symbol">: </span><span class="identifier">&lt;ERROR CLASS&gt;</span><span class="symbol">&lt;</span><a href="-link/index.html#V"><span class="identifier">V</span></a><span class="symbol">&gt;</span></code></td>
+</tr>
+</tbody>
+</table>
+<h3>Extension Functions</h3>
+<table>
+<tbody>
+<tr>
+<td>
+<p><a href="concat.html">concat</a></p>
+</td>
+<td>
+<code><span class="keyword">fun </span><span class="symbol">&lt;</span><span class="identifier">A</span><span class="symbol">, </span><span class="identifier">T</span><span class="symbol">, </span><span class="identifier">V</span><span class="symbol">&gt;</span> <a href="-link/index.html"><span class="identifier">Link</span></a><span class="symbol">&lt;</span><a href="concat.html#A"><span class="identifier">A</span></a><span class="symbol">,</span>&nbsp;<a href="concat.html#T"><span class="identifier">T</span></a><span class="symbol">,</span>&nbsp;<a href="concat.html#V"><span class="identifier">V</span></a><span class="symbol">&gt;</span><span class="symbol">.</span><span class="identifier">concat</span><span class="symbol">(</span><span class="identifier" id="com.suparnatural.core.graphql$concat(com.suparnatural.core.graphql.Link((com.suparnatural.core.graphql.concat.A, com.suparnatural.core.graphql.concat.T, com.suparnatural.core.graphql.concat.V)), com.suparnatural.core.graphql.Link((com.suparnatural.core.graphql.concat.A, kotlin.Any, com.suparnatural.core.graphql.concat.T)))/nextLink">nextLink</span><span class="symbol">:</span>&nbsp;<a href="-link/index.html"><span class="identifier">Link</span></a><span class="symbol">&lt;</span><a href="concat.html#A"><span class="identifier">A</span></a><span class="symbol">,</span>&nbsp;<span class="identifier">*</span><span class="symbol">,</span>&nbsp;<a href="concat.html#T"><span class="identifier">T</span></a><span class="symbol">&gt;</span><span class="symbol">)</span><span class="symbol">: </span><a href="-link/index.html"><span class="identifier">Link</span></a><span class="symbol">&lt;</span><a href="concat.html#A"><span class="identifier">A</span></a><span class="symbol">,</span>&nbsp;<a href="concat.html#T"><span class="identifier">T</span></a><span class="symbol">,</span>&nbsp;<a href="concat.html#V"><span class="identifier">V</span></a><span class="symbol">&gt;</span></code>
+<p>Concatenates a link with another to form a chain</p>
+</td>
+</tr>
+<tr>
+<td>
+<p><a href="split.html">split</a></p>
+</td>
+<td>
+<code><span class="keyword">fun </span><span class="symbol">&lt;</span><span class="identifier">A</span><span class="symbol">, </span><span class="identifier">T</span><span class="symbol">, </span><span class="identifier">V</span><span class="symbol">&gt;</span> <a href="-link/index.html"><span class="identifier">Link</span></a><span class="symbol">&lt;</span><a href="split.html#A"><span class="identifier">A</span></a><span class="symbol">,</span>&nbsp;<a href="split.html#T"><span class="identifier">T</span></a><span class="symbol">,</span>&nbsp;<a href="split.html#V"><span class="identifier">V</span></a><span class="symbol">&gt;</span><span class="symbol">.</span><span class="identifier">split</span><span class="symbol">(</span><span class="identifier" id="com.suparnatural.core.graphql$split(com.suparnatural.core.graphql.Link((com.suparnatural.core.graphql.split.A, com.suparnatural.core.graphql.split.T, com.suparnatural.core.graphql.split.V)), kotlin.Function1((com.suparnatural.core.graphql.split.A, kotlin.Boolean)), com.suparnatural.core.graphql.Link((com.suparnatural.core.graphql.split.A, kotlin.Any, com.suparnatural.core.graphql.split.T)), com.suparnatural.core.graphql.Link((com.suparnatural.core.graphql.split.A, kotlin.Any, com.suparnatural.core.graphql.split.T)))/test">test</span><span class="symbol">:</span>&nbsp;<span class="symbol">(</span><a href="split.html#A"><span class="identifier">A</span></a><span class="symbol">)</span>&nbsp;<span class="symbol">-&gt;</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html"><span class="identifier">Boolean</span></a><span class="symbol">, </span><span class="identifier" id="com.suparnatural.core.graphql$split(com.suparnatural.core.graphql.Link((com.suparnatural.core.graphql.split.A, com.suparnatural.core.graphql.split.T, com.suparnatural.core.graphql.split.V)), kotlin.Function1((com.suparnatural.core.graphql.split.A, kotlin.Boolean)), com.suparnatural.core.graphql.Link((com.suparnatural.core.graphql.split.A, kotlin.Any, com.suparnatural.core.graphql.split.T)), com.suparnatural.core.graphql.Link((com.suparnatural.core.graphql.split.A, kotlin.Any, com.suparnatural.core.graphql.split.T)))/leftLink">leftLink</span><span class="symbol">:</span>&nbsp;<a href="-link/index.html"><span class="identifier">Link</span></a><span class="symbol">&lt;</span><a href="split.html#A"><span class="identifier">A</span></a><span class="symbol">,</span>&nbsp;<span class="identifier">*</span><span class="symbol">,</span>&nbsp;<a href="split.html#T"><span class="identifier">T</span></a><span class="symbol">&gt;</span><span class="symbol">, </span><span class="identifier" id="com.suparnatural.core.graphql$split(com.suparnatural.core.graphql.Link((com.suparnatural.core.graphql.split.A, com.suparnatural.core.graphql.split.T, com.suparnatural.core.graphql.split.V)), kotlin.Function1((com.suparnatural.core.graphql.split.A, kotlin.Boolean)), com.suparnatural.core.graphql.Link((com.suparnatural.core.graphql.split.A, kotlin.Any, com.suparnatural.core.graphql.split.T)), com.suparnatural.core.graphql.Link((com.suparnatural.core.graphql.split.A, kotlin.Any, com.suparnatural.core.graphql.split.T)))/rightLink">rightLink</span><span class="symbol">:</span>&nbsp;<a href="-link/index.html"><span class="identifier">Link</span></a><span class="symbol">&lt;</span><a href="split.html#A"><span class="identifier">A</span></a><span class="symbol">,</span>&nbsp;<span class="identifier">*</span><span class="symbol">,</span>&nbsp;<a href="split.html#T"><span class="identifier">T</span></a><span class="symbol">&gt;</span><span class="symbol">)</span><span class="symbol">: </span><a href="-link/index.html"><span class="identifier">Link</span></a><span class="symbol">&lt;</span><a href="split.html#A"><span class="identifier">A</span></a><span class="symbol">,</span>&nbsp;<a href="split.html#T"><span class="identifier">T</span></a><span class="symbol">,</span>&nbsp;<a href="split.html#V"><span class="identifier">V</span></a><span class="symbol">&gt;</span></code>
+<p>Splits the link chain into two branches left and right based on a test.
+If the test returns true, leftLink chain is followed, otherwise right link chain is followed.</p>
+</td>
+</tr>
+</tbody>
+</table>
+</BODY>
+</HTML>

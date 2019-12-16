@@ -1,0 +1,191 @@
+<HTML>
+<HEAD>
+<meta charset="UTF-8">
+<title>alltypes - suparnatural-graphql</title>
+<link rel="stylesheet" href="../../style.css">
+</HEAD>
+<BODY>
+<p>A Kotlin Multiplatform library for JVM, iOS and Android to interact with GraphQl.</p>
+<h3>All Types</h3>
+<table>
+<tbody>
+<tr>
+<td>
+<a href="../com.suparnatural.core.graphql/-even-odd-link/index.html">com.suparnatural.core.graphql.EvenOddLink</a></td>
+<td>
+</td>
+</tr>
+<tr>
+<td>
+<a href="../com.suparnatural.core.graphql/-fetcher/index.html">com.suparnatural.core.graphql.Fetcher</a></td>
+<td>
+<p>A Fetcher sends a request of type <code>T</code> to a server
+and fetches a response of type <code>V</code></p>
+</td>
+</tr>
+<tr>
+<td>
+<a href="../com.suparnatural.core.graphql/-graph-ql-client/index.html">com.suparnatural.core.graphql.GraphQlClient</a></td>
+<td>
+<p>A client executes operations against a GraphQl server.
+It accepts a chain of <a href="../com.suparnatural.core.graphql/-link/index.html">Link</a> which emits the final response of type <code>T</code>.</p>
+</td>
+</tr>
+<tr>
+<td>
+<a href="../com.suparnatural.core.graphql/-graph-ql-client-error/index.html">com.suparnatural.core.graphql.GraphQlClientError</a></td>
+<td>
+<p>Error codes</p>
+</td>
+</tr>
+<tr>
+<td>
+<a href="../com.suparnatural.core.graphql/-graph-ql-client-failure-response/index.html">com.suparnatural.core.graphql.GraphQlClientFailureResponse</a></td>
+<td>
+<p>Encapsulates a failed response where <a href="../com.suparnatural.core.graphql/-graph-ql-client-failure-response/response.html">response</a> may contain the
+GraphQl response with <a href="../com.suparnatural.core.graphql/-graph-ql-response/errors.html">GraphQlResponse.errors</a> property set.
+If the error is not a standard GraphQl error (e.g. network errors),
+the <a href="../com.suparnatural.core.graphql/-graph-ql-client-failure-response/response.html">response</a> will be null.</p>
+</td>
+</tr>
+<tr>
+<td>
+<a href="../com.suparnatural.core.graphql/-graph-ql-link.html">com.suparnatural.core.graphql.GraphQlLink</a></td>
+<td>
+<p>A link which accepts <a href="../com.suparnatural.core.graphql/-graph-ql-operation/index.html">GraphQlOperation</a> as operations.</p>
+</td>
+</tr>
+<tr>
+<td>
+<a href="../com.suparnatural.core.graphql/-graph-ql-operation/index.html">com.suparnatural.core.graphql.GraphQlOperation</a></td>
+<td>
+<p>A GraphQl operation encapsulates the query / mutation
+and its corresponding response definition.</p>
+</td>
+</tr>
+<tr>
+<td>
+<a href="../com.suparnatural.core.graphql/-graph-ql-request/index.html">com.suparnatural.core.graphql.GraphQlRequest</a></td>
+<td>
+<p>A serializable GraphQl request as per the spec</p>
+</td>
+</tr>
+<tr>
+<td>
+<a href="../com.suparnatural.core.graphql/-graph-ql-response/index.html">com.suparnatural.core.graphql.GraphQlResponse</a></td>
+<td>
+<p>A serializable GraphQl response as per the spec</p>
+</td>
+</tr>
+<tr>
+<td>
+<a href="../com.suparnatural.core.graphql/-graph-ql-response-error/index.html">com.suparnatural.core.graphql.GraphQlResponseError</a></td>
+<td>
+<p>A serializable GraphQl error as per the spec</p>
+</td>
+</tr>
+<tr>
+<td>
+<a href="../com.suparnatural.core.graphql/-http-fetcher.html">com.suparnatural.core.graphql.HttpFetcher</a></td>
+<td>
+<p>An HttpFetcher fetches an <a href="../com.suparnatural.core.graphql/-http-fetch-response/index.html">HttpFetchResponse</a> for a given <a href="../com.suparnatural.core.graphql/-http-fetch-request/index.html">HttpFetchRequest</a>
+from an http server.</p>
+</td>
+</tr>
+<tr>
+<td>
+<a href="../com.suparnatural.core.graphql/-http-fetch-request/index.html">com.suparnatural.core.graphql.HttpFetchRequest</a></td>
+<td>
+<p>A request for HTTP fetcher.</p>
+</td>
+</tr>
+<tr>
+<td>
+<a href="../com.suparnatural.core.graphql/-http-fetch-response/index.html">com.suparnatural.core.graphql.HttpFetchResponse</a></td>
+<td>
+<p>A response for Http request</p>
+</td>
+</tr>
+<tr>
+<td>
+<a href="../com.suparnatural.core.graphql/-json-http-fetcher.html">com.suparnatural.core.graphql.JsonHttpFetcher</a></td>
+<td>
+<p>An <a href="../com.suparnatural.core.graphql/-http-fetcher.html">HttpFetcher</a> which can handle a Json request and a Json response. Implement this interface
+if only JSON payloads are handled.</p>
+</td>
+</tr>
+<tr>
+<td>
+<a href="../com.suparnatural.core.graphql/-json-http-fetch-request/index.html">com.suparnatural.core.graphql.JsonHttpFetchRequest</a></td>
+<td>
+<p>A Json based Http request where body is a plain Json string.</p>
+</td>
+</tr>
+<tr>
+<td>
+<a href="../com.suparnatural.core.graphql/-json-http-fetch-response/index.html">com.suparnatural.core.graphql.JsonHttpFetchResponse</a></td>
+<td>
+<p>A Json based Http response where response body is a plain Json string</p>
+</td>
+</tr>
+<tr>
+<td>
+<a href="../com.suparnatural.core.graphql/-json-http-graph-ql-client/index.html">com.suparnatural.core.graphql.JsonHttpGraphQlClient</a></td>
+<td>
+<p>A default implementation of a Json based GraphQl client which accepts
+Json as request body and emits a parsed object from a Json response</p>
+</td>
+</tr>
+<tr>
+<td>
+<a href="../com.suparnatural.core.graphql/-json-http-graph-ql-link/index.html">com.suparnatural.core.graphql.JsonHttpGraphQlLink</a></td>
+<td>
+<p>A default implementation of a <a href="../com.suparnatural.core.graphql/-link/index.html">Link</a> which fetches response from a GraphQl server
+in Json format by using a <a href="../com.suparnatural.core.graphql/-json-http-fetcher.html">JsonHttpFetcher</a> instance.</p>
+</td>
+</tr>
+<tr>
+<td>
+<a href="../com.suparnatural.core.graphql/-link/index.html">com.suparnatural.core.graphql.Link</a></td>
+<td>
+<p>A link takes an operation and returns an observable.
+Links are a way to compose subsets of actions to handle
+data. Links can be concatenated with each other to form
+a chain to carry out an even complex data handling workflow.</p>
+</td>
+</tr>
+<tr>
+<td>
+<a href="../com.suparnatural.core.graphql/-native-fetcher/index.html">com.suparnatural.core.graphql.NativeFetcher</a></td>
+<td>
+</td>
+</tr>
+<tr>
+<td>
+<a href="../com.suparnatural.core.graphql/-result/index.html">com.suparnatural.core.graphql.Result</a></td>
+<td>
+<p>Encapsulates a successful result of type T or a Failure of type V with an arbitrary throwable.</p>
+</td>
+</tr>
+<tr>
+<td>
+<a href="../com.suparnatural.core.graphql/-rx-runtime-provider/index.html">com.suparnatural.core.graphql.RxRuntimeProvider</a></td>
+<td>
+</td>
+</tr>
+<tr>
+<td>
+<a href="../com.suparnatural.core.graphql/-string-generator-link/index.html">com.suparnatural.core.graphql.StringGeneratorLink</a></td>
+<td>
+</td>
+</tr>
+<tr>
+<td>
+<a href="../com.suparnatural.core.graphql/-string-to-int-link/index.html">com.suparnatural.core.graphql.StringToIntLink</a></td>
+<td>
+</td>
+</tr>
+</tbody>
+</table>
+</BODY>
+</HTML>
