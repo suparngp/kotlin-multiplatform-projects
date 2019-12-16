@@ -16,10 +16,10 @@ type safe classes for GraphQl operations.
         }
     }
     ```
-2. Add `implementation 'suparnatural-kotlin-multiplatform:graphql-metadata:1.0.7'` to `commonMain`.
-3. Add `implementation 'suparnatural-kotlin-multiplatform:graphql-iosx64(or iosarm64):1.0.7'` to `iosMain`
-4. Add `implementation 'suparnatural-kotlin-multiplatform:graphql-android:1.0.7'` to `androidMain`
-4. Add `implementation 'suparnatural-kotlin-multiplatform:graphql-jvm:1.0.7'` to `jvmMain`
+2. Add `implementation 'suparnatural-kotlin-multiplatform:graphql-metadata:version'` to `commonMain`.
+3. Add `implementation 'suparnatural-kotlin-multiplatform:graphql-iosx64(or iosarm64):version'` to `iosMain`
+4. Add `implementation 'suparnatural-kotlin-multiplatform:graphql-android:version'` to `androidMain`
+4. Add `implementation 'suparnatural-kotlin-multiplatform:graphql-jvm:version'` to `jvmMain`
 
 ## Concepts
 

@@ -4,7 +4,7 @@ plugins {
     id("suparnatural-project")
 }
 
-version = "1.0.7"
+version = ProjectConfig.version
 suparnatural {
     name = "suparnatural-rx"
     description = "Graphql type safe models for Kotlin Multiplatform."
@@ -15,7 +15,7 @@ suparnatural {
     supportsCocoapods = true
     supportsIos = true
     supportsJvm = true
-    buildNumber = 7
+    buildNumber = ProjectConfig.buildNumber
     bintray {
         publish = true
         repository = extra[ProjectConfig.Properties.bintrayRepository]!!.toString()

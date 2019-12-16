@@ -28,8 +28,8 @@ This plugin uses on the [suparnatural-graphql]() package. Make sure you set that
    dependencies {
        implementation("org.jetbrains.kotlinx:kotlinx-serialization-runtime-common:0.13.0")
        implementation("org.jetbrains.kotlinx:kotlinx-serialization-runtime:0.13.0")
-       implementation("suparnatural-kotlin-multiplatform:graphql:1.0.7")
-       implementation("suparnatural-kotlin-multiplatform:graphql-jvm:1.0.7")
+       implementation("suparnatural-kotlin-multiplatform:graphql:version")
+       implementation("suparnatural-kotlin-multiplatform:graphql-jvm:version")
    }
    ```
 3. Configure the plugin

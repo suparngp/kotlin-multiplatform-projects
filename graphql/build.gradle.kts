@@ -8,7 +8,7 @@ plugins {
 }
 
 val serializationVersion = "0.14.0"
-version = "1.0.7"
+version = ProjectConfig.version
 suparnatural {
     name = "suparnatural-graphql"
     description = "Graphql type safe models for Kotlin Multiplatform."
@@ -19,7 +19,7 @@ suparnatural {
     supportsCocoapods = true
     supportsIos = true
     supportsJvm = true
-    buildNumber = 5
+    buildNumber = ProjectConfig.buildNumber
     bintray {
         publish = true
         repository = extra[ProjectConfig.Properties.bintrayRepository]!!.toString()
