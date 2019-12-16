@@ -7,6 +7,7 @@ plugins {
     id("kotlinx-serialization")
 }
 
+val serializationVersion = "0.14.0"
 version = "1.0.7"
 suparnatural {
     name = "suparnatural-graphql"
@@ -28,7 +29,7 @@ suparnatural {
     androidMain {
         dependencies {
             additional {
-                implementation("org.jetbrains.kotlinx:kotlinx-serialization-runtime:0.13.0")
+                implementation("org.jetbrains.kotlinx:kotlinx-serialization-runtime:$serializationVersion")
             }
         }
     }
@@ -50,7 +51,7 @@ suparnatural {
         dependencies {
             additional {
                 api("suparnatural-kotlin-multiplatform:rx-metadata:$version")
-                implementation("org.jetbrains.kotlinx:kotlinx-serialization-runtime-common:0.13.0")
+                implementation("org.jetbrains.kotlinx:kotlinx-serialization-runtime-common:$serializationVersion")
             }
         }
     }
@@ -59,7 +60,7 @@ suparnatural {
         dependencies {
             additional {
                 api("suparnatural-kotlin-multiplatform:rx-iosx64:$version")
-                implementation("org.jetbrains.kotlinx:kotlinx-serialization-runtime-native:0.13.0")
+                implementation("org.jetbrains.kotlinx:kotlinx-serialization-runtime-native:$serializationVersion")
             }
         }
     }
@@ -68,7 +69,7 @@ suparnatural {
         dependencies {
             additional {
                 api("suparnatural-kotlin-multiplatform:rx-iosarm64:$version")
-                implementation("org.jetbrains.kotlinx:kotlinx-serialization-runtime-native:0.13.0")
+                implementation("org.jetbrains.kotlinx:kotlinx-serialization-runtime-native:$serializationVersion")
             }
         }
     }
@@ -77,7 +78,7 @@ suparnatural {
         dependencies {
             additional {
                 api("suparnatural-kotlin-multiplatform:rx-jvm:$version")
-                implementation("org.jetbrains.kotlinx:kotlinx-serialization-runtime:0.13.0")
+                implementation("org.jetbrains.kotlinx:kotlinx-serialization-runtime:$serializationVersion")
             }
         }
     }

@@ -8,6 +8,7 @@ repositories {
     maven(url = "https://dl.bintray.com/badoo/maven")
 }
 
+val reaktiveVersion = "1.1.5"
 val buildNum = 7
 version = "1.0.$buildNum"
 suparnatural {
@@ -31,7 +32,7 @@ suparnatural {
         dependencies {
             additional {
                 implementation("suparnatural-kotlin-multiplatform:rx-android:$version")
-                implementation("com.badoo.reaktive:reaktive-android:1.1.0")
+                implementation("com.badoo.reaktive:reaktive-android:$reaktiveVersion")
             }
         }
     }
@@ -39,7 +40,7 @@ suparnatural {
         dependencies {
             additional {
                 implementation("suparnatural-kotlin-multiplatform:rx-android-debug:$version")
-                implementation("com.badoo.reaktive:reaktive-android-debug:1.1.0")
+                implementation("com.badoo.reaktive:reaktive-android-debug:$reaktiveVersion")
             }
         }
     }
@@ -47,7 +48,7 @@ suparnatural {
         dependencies {
             additional {
                 implementation("suparnatural-kotlin-multiplatform:rx-metadata:$version")
-                implementation("com.badoo.reaktive:reaktive:1.1.0")
+                implementation("com.badoo.reaktive:reaktive:$reaktiveVersion")
             }
         }
     }
@@ -56,7 +57,7 @@ suparnatural {
         dependencies {
             additional {
                 implementation("suparnatural-kotlin-multiplatform:rx-iosx64:$version")
-                implementation("com.badoo.reaktive:reaktive-iossim:1.1.0")
+                implementation("com.badoo.reaktive:reaktive-iossim:$reaktiveVersion")
             }
         }
     }
@@ -65,7 +66,7 @@ suparnatural {
         dependencies {
             additional {
                 implementation("suparnatural-kotlin-multiplatform:rx-iosarm64:$version")
-                implementation("com.badoo.reaktive:reaktive-ios64:1.1.0")
+                implementation("com.badoo.reaktive:reaktive-ios64:$reaktiveVersion")
             }
         }
     }
@@ -74,7 +75,7 @@ suparnatural {
         dependencies {
             additional {
                 implementation("suparnatural-kotlin-multiplatform:rx-jvm:$version")
-                implementation("com.badoo.reaktive:reaktive-jvm:1.1.0")
+                implementation("com.badoo.reaktive:reaktive-jvm:$reaktiveVersion")
             }
         }
     }
