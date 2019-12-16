@@ -41,7 +41,7 @@ fun Project.configureIosGenerics() {
         targets.filter { allIosTargetNames.contains(it.name) }
                 .forEach { target ->
                     target.compilations.forEach { compilation ->
-                        (compilation as KotlinNativeCompilation).extraOpts.add("-Xobjc-generics")
+                        (compilation as KotlinNativeCompilation).kotlinOptions.freeCompilerArgs = listOf("-Xobjc-generics")
                     }
                 }
     }
