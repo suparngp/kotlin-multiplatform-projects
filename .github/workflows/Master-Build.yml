@@ -10,7 +10,9 @@ jobs:
         
     steps:
     - uses: actions/checkout@v1
-    - name: Build
+    - name: Kotlin
       run: brew install kotlin
     - name: Clean
       run: ./gradlew clean
+    - name: Build Utilties
+      run: ./gradlew :utilities:build -x test
