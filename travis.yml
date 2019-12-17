@@ -1,0 +1,10 @@
+language: java
+install: true
+
+os: osx
+osx_image: xcode11.2
+
+install:
+  - brew install kotlinc
+script:
+  - ./gradlew clean
