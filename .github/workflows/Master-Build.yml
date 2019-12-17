@@ -11,6 +11,6 @@ jobs:
     steps:
     - uses: actions/checkout@v1
     - name: Build
-      run: brew install kotlinc
+      run: brew install kotlin
     - name: Clean
       run: ./gradlew clean
