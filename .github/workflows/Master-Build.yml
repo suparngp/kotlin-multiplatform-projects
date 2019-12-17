@@ -1,0 +1,16 @@
+name: Master-Build
+
+on: [push]
+
+
+jobs:
+  build:
+    runs-on: macos-latest
+    
+        
+    steps:
+    - uses: actions/checkout@v1
+    - name: Build
+      run: brew install kotlinc
+    - name: Clean
+      run: ./gradlew clean
