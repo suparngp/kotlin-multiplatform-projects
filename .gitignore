@@ -36,7 +36,6 @@ Pods
 *.iml
 
 /build.sh
-.local.gradle.kts
 *.hprof
 /local.properties
 /gradle.properties
