@@ -1,19 +1,52 @@
 name: Master-Build
 
-on: [push]
+on:
+  push:
+    # Sequence of patterns matched against refs/heads
+    branches:    
+      - actions 
 
 
 jobs:
   build:
     runs-on: macos-latest
     
-        
     steps:
     - uses: actions/checkout@v1
-    - name: Kotlin
+    - name: Install
       run: brew install kotlin
-    - name: build utilities
+    - name: Utilities
       uses: reactivecircus/android-emulator-runner@v2
       with:
         api-level: 28
         script: ./gradlew :utilities:release -x bintrayUpload
+    - name: FS
+      uses: reactivecircus/android-emulator-runner@v2
+      with:
+        api-level: 28
+        script: ./gradlew :fs:release -x bintrayUpload
+    - name: Concurrency
+      uses: reactivecircus/android-emulator-runner@v2
+      with:
+        api-level: 28
+        script: ./gradlew :concurrency:release -x bintrayUpload
+    - name: Cache
+      uses: reactivecircus/android-emulator-runner@v2
+      with:
+        api-level: 28
+        script: ./gradlew :cache:release -x bintrayUpload
+    - name: RX
+      uses: reactivecircus/android-emulator-runner@v2
+      with:
+        api-level: 28
+        script: ./gradlew :rx:release -x bintrayUpload
+    - name: RX-Runtime-Reaktive
+      uses: reactivecircus/android-emulator-runner@v2
+      with:
+        api-level: 28
+        script: ./gradlew :rx-runtime-reaktive:release -x bintrayUpload
+    - name: GraphQL
+      uses: reactivecircus/android-emulator-runner@v2
+      with:
+        api-level: 28
+        script: ./gradlew :graphql:release -x bintrayUpload
