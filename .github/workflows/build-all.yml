@@ -1,0 +1,34 @@
+# Builds all projects without publishing to bintray.
+name: Build-All
+
+on: [push]
+
+jobs:
+  build:
+    runs-on: macos-latest
+    
+    steps:
+    - uses: actions/checkout@v1
+    - name: Install
+      run: brew install kotlin
+    - name: Android Emulator
+      uses: suparngp/android-emulator-runner@release/v3
+      with:
+        api-level: 28
+        keep: true
+    - name: Build utilities
+      run: ./gradlew :utilities:release -x bintrayUpload
+    - name: Build fs
+      run: ./gradlew :fs:release -x bintrayUpload
+    - name: Build concurrency
+      run: ./gradlew :concurrency:release -x bintrayUpload
+    - name: Build cache
+      run: ./gradlew :cache:release -x bintrayUpload
+    - name: Build rx
+      run: ./gradlew :rx:release -x bintrayUpload
+    - name: Build rx-runtime-reaktive
+      run: ./gradlew :rx-runtime-reaktive:release -x bintrayUpload 
+    - name: Build graphql
+      run: ./gradlew :graphql:release -x bintrayUpload           
+    - name: Kill emulator
+      run: $ANDROID_HOME/platform-tools/adb -s emulator-5554 emu kill
