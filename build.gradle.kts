@@ -1,4 +1,4 @@
-apply(".local.gradle.kts")
+apply("credentials.gradle.kts")
 plugins {
     base
     java
