@@ -16,7 +16,7 @@ jobs:
     - name: Install
       run: brew install kotlin
     - name: Utilities
-      uses: suparngp/android-emulator-runner@v3
+      uses: suparngp/android-emulator-runner@v2
       with:
         api-level: 28
         keep: true
