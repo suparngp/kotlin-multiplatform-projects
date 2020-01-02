@@ -1,5 +1,8 @@
 # Change Log
 
+## v1.0.9
+1. `[fs]` Replaced `NSURL.URLWithString` with `NSURL.fileURLWithPath` 
+
 ## v1.0.8
 1. Support for byte read in fs.
 1. First release of graphql and graphql-plugin
