@@ -1,7 +1,10 @@
 # Builds all projects without publishing to bintray.
 name: Build-All
 
-on: [push]
+on:
+  push:
+    branches:
+      - master
 
 jobs:
   build:

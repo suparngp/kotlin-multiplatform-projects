@@ -18,9 +18,8 @@ actual class Path actual constructor() {
 
 
     actual companion object {
-        val Empty = Path()
-        fun urlFromString(urlString: String?) = if (urlString != null) NSURL.URLWithString(urlString) else null
-        fun fromUrl(url: NSURL?) = Path(url?.absoluteString, url?.relativeString)
+        fun urlFromString(urlString: String?) = if (urlString != null) NSURL.fileURLWithPath(urlString).standardizedURL else null
+        fun fromUrl(url: NSURL?) = Path(url?.path, url?.relativePath)
         fun fromUrlString(urlString: String) = fromUrl(urlFromString(urlString))
         actual fun simplified(path: String): Path = Path(path, path)
     }
@@ -32,7 +31,7 @@ actual class Path actual constructor() {
 
 actual class PathComponent actual constructor(actual val component: String?) {
 
-    val url = if(component != null) NSURL.URLWithString(component) else null
+    val url = if(component != null) NSURL.fileURLWithPath(component).standardizedURL else null
 
     actual fun byAppending(component: String): PathComponent? {
         if( url == null) return null
