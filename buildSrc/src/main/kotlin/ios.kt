@@ -1,3 +1,4 @@
+import constants.IosTarget
 import constants.ProjectConfig
 import constants.TargetNames
 import constants.TaskNames
@@ -47,54 +48,18 @@ fun Project.configureIosGenerics() {
     }
 }
 
-fun Project.configureIosTestTask(targetName: String) {
-    tasks.create(TaskNames.iosTest) {
-        group = JavaBasePlugin.VERIFICATION_GROUP
-        description = "Runs tests for target ios on an iOS simulator"
-        val copyIosTestPlistTask = tasks.getByName(TaskNames.copyIosTestPlist)
-        dependsOn(copyIosTestPlistTask)
-
-        val target = getNativeTarget(targetName)
-
-        val testBinary = target.binaries.getTest("DEBUG")
-        dependsOn(testBinary.linkTaskName)
-
+fun Project.configureIosTestTask(testTargetName: String, srcIosTargetName: String, testTaskName: String) {
+    tasks.getByName(testTaskName).apply {
         doFirst {
-            val device = findProperty(ProjectConfig.Properties.iosDevice)?.toString()
-                    ?: ProjectConfig.defaultIosSimulator
-            exec {
-                commandLine("xcrun", "simctl", "boot", device)
+            copy {
+                val testSourceSetName = sourceSetName(srcIosTargetName, SourceSetType.Test)
+                val binary = getNativeTarget(testTargetName).binaries.getTest("DEBUG")
+                val infoPlistSrc = file("${project.projectDir}/${resourcesPath(testSourceSetName)}/Info.plist")
+                val infoPlistDest = file(binary.outputDirectory)
+                println("MARK:// infoPlistSrc: $infoPlistSrc \n infoPlistDest:$infoPlistDest")
+                from(infoPlistSrc)
+                into(infoPlistDest)
             }
-        }
-
-        doLast {
-            val device = findProperty(ProjectConfig.Properties.iosDevice)?.toString()
-                    ?: ProjectConfig.defaultIosSimulator
-            val binary = testBinary.outputFile
-            exec {
-                commandLine("xcrun", "simctl", "spawn", device, binary.absolutePath)
-            }
-        }
-
-        doLast {
-            val device = findProperty(ProjectConfig.Properties.iosDevice)?.toString()
-                    ?: ProjectConfig.defaultIosSimulator
-            exec {
-                commandLine("xcrun", "simctl", "shutdown", device)
-            }
-        }
-    }
-}
-
-fun Project.configureCopyPlistTask(testTargetName: String, srcIosTargetName: String) {
-    tasks.create(TaskNames.copyIosTestPlist, Copy::class.java) {
-        doLast {
-            val testSourceSetName = sourceSetName(srcIosTargetName, SourceSetType.Test)
-            val binary = getNativeTarget(testTargetName).binaries.getTest("DEBUG")
-            val infoPlistSrc = file("$rootProject.projectDir/${resourcesPath(testSourceSetName)}/Info.plist")
-            val infoPlistDest = file(binary.outputDirectory)
-            from(infoPlistSrc)
-            into(infoPlistDest)
         }
     }
 }
@@ -127,7 +92,7 @@ fun Project.configureIos(config: SuparnaturalPluginExtension, release: Boolean =
     }
 
     val testTargetName = if (release) TargetNames.iosX64 else TargetNames.ios
-    configureCopyPlistTask(testTargetName, TargetNames.ios)
-    configureIosTestTask(testTargetName)
+    val sourceSetName = if (release) sourceSetName(TargetNames.iosX64, SourceSetType.Test) else sourceSetName(TargetNames.ios, SourceSetType.Test)
+    configureIosTestTask(testTargetName, sourceSetName, if (release) TaskNames.iosX64Test else TaskNames.iosTest)
 }
 

@@ -20,7 +20,7 @@ fun Project.configureReleaseTask() {
             val clean = tasks.getByName(TaskNames.clean)
             val build = tasks.getByName(TaskNames.build)
             val androidTest = tasks.getByName(TaskNames.androidTest)
-            val iosTest = tasks.getByName(TaskNames.iosTest)
+            val iosTest = tasks.getByName(if (isRelease) TaskNames.iosX64Test else TaskNames.iosTest)
             val publishToMavenLocal = tasks.getByName(TaskNames.publishToMavenLocal)
             val bintrayUpload = tasks.getByName(TaskNames.bintrayUpload)
 

@@ -1,6 +1,6 @@
 Pod::Spec.new do |spec|
     spec.name                     = 'rx_runtime_reaktive'
-    spec.version                  = '1.0.8'
+    spec.version                  = '1.0.10'
     spec.homepage                 = 'https://suparngp.github.io/kotlin-multiplatform-projects/rx-runtime-reaktive/docs/suparnatural-rx-runtime-reaktive/index.html'
     spec.source                   = { :git => "Not Published", :tag => "Cocoapods/#{spec.name}/#{spec.version}" }
     spec.authors                  = 'suparnatural'
@@ -8,7 +8,7 @@ Pod::Spec.new do |spec|
     spec.summary                  = 'rx-runtime-reaktive'
 
     spec.static_framework         = true
-    spec.vendored_frameworks      = "build/cocoapods/framework/#{spec.name}.framework"
+    spec.vendored_frameworks      = "build/cocoapods/framework/rx_runtime_reaktive.framework"
     spec.libraries                = "c++"
     spec.module_name              = "#{spec.name}_umbrella"
 

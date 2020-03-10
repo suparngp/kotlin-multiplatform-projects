@@ -5,7 +5,6 @@ import com.squareup.kotlinpoet.ParameterizedTypeName.Companion.parameterizedBy
 import com.suparnatural.plugins.graphql.GraphQlPluginExtension
 import com.suparnatural.plugins.graphql.models.FieldGroup
 import kotlinx.serialization.*
-import kotlinx.serialization.internal.StringDescriptor
 import kotlinx.serialization.json.*
 
 const val FragmentsGroup = "FragmentsGroup"
@@ -186,17 +185,15 @@ fun processFieldGroup(
 
             // build serializer object spec
             serializerSpec.addProperty(
-                PropertySpec.builder("descriptor", SerialDescriptor::class, KModifier.OVERRIDE)
-                    .initializer(
-                        CodeBlock.builder().addStatement(
-                            "%T.%M(\"$rootSpecTypeName\")",
-                            StringDescriptor::class.asClassName(),
-                            MemberName("kotlinx.serialization", "withName")
-                        ).build()
-                    )
-                    .build()
+                    PropertySpec.builder("descriptor", SerialDescriptor::class, KModifier.OVERRIDE)
+                        .initializer(
+                            CodeBlock.builder().addStatement(
+                                "kotlinx.serialization.PrimitiveDescriptor(\"$rootSpecTypeName\", kotlinx.serialization.PrimitiveKind.STRING)"
+                            ).build()
+                        )
+                        .build()
 
-            )
+                )
                 .addFunction(serializeFunSpec.build())
                 .addFunction(deserializeFunSpec.build())
 

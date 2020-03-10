@@ -1,5 +1,9 @@
 # Change Log
 
+## v1.0.10
+1. Update Kotlin to 1.3.70 
+
+
 ## v1.0.9
 1. `[fs]` Replaced `NSURL.URLWithString` with `NSURL.fileURLWithPath` 
 

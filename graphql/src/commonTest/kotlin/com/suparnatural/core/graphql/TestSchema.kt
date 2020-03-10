@@ -1,7 +1,6 @@
 package com.suparnatural.core.graphql
 
 import kotlinx.serialization.*
-import kotlinx.serialization.internal.StringDescriptor
 import kotlinx.serialization.json.*
 import kotlin.collections.set
 
@@ -47,7 +46,8 @@ interface Fragments {
                     val fragments: FragmentsGroup = FragmentsGroup()
             ) : Country by delegate {
                 companion object : KSerializer<CountryFragmentsAdapter> {
-                    override val descriptor: SerialDescriptor = StringDescriptor.withName("Country")
+                    @InternalSerializationApi
+                    override val descriptor: SerialDescriptor = PrimitiveDescriptor("Country", PrimitiveKind.STRING)
 
 
                     @UnstableDefault
@@ -210,7 +210,7 @@ class Operations {
                         val fragments: FragmentsGroup = FragmentsGroup()
                 ) : Country by delegate {
                     companion object : KSerializer<CountryFragmentsAdapter> {
-                        override val descriptor: SerialDescriptor = StringDescriptor.withName("Country")
+                        override val descriptor: SerialDescriptor = PrimitiveDescriptor("Country", PrimitiveKind.STRING)
 
 
                         @UnstableDefault
@@ -274,7 +274,7 @@ class Operations {
                             val fragments: FragmentsGroup = FragmentsGroup()
                     ) : Continent by delegate {
                         companion object : KSerializer<ContinentFragmentsAdapter> {
-                            override val descriptor: SerialDescriptor = StringDescriptor.withName("Continent")
+                            override val descriptor: SerialDescriptor = PrimitiveDescriptor("Continent", PrimitiveKind.STRING)
 
 
                             @UnstableDefault
