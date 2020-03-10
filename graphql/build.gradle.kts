@@ -7,7 +7,7 @@ plugins {
     id("kotlinx-serialization")
 }
 
-val serializationVersion = "0.14.0"
+val serializationVersion = "0.20.0"
 version = ProjectConfig.version
 suparnatural {
     name = "suparnatural-graphql"
@@ -51,6 +51,14 @@ suparnatural {
         dependencies {
             additional {
                 api("suparnatural-kotlin-multiplatform:rx-metadata:$version")
+                implementation("org.jetbrains.kotlinx:kotlinx-serialization-runtime-common:$serializationVersion")
+            }
+        }
+    }
+
+    commonTest {
+        dependencies {
+            additional {
                 implementation("org.jetbrains.kotlinx:kotlinx-serialization-runtime-common:$serializationVersion")
             }
         }

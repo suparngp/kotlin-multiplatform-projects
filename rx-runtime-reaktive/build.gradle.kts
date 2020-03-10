@@ -8,7 +8,7 @@ repositories {
     maven(url = "https://dl.bintray.com/badoo/maven")
 }
 
-val reaktiveVersion = "1.1.5"
+val reaktiveVersion = "1.1.11"
 
 version = ProjectConfig.version
 suparnatural {
