@@ -9,6 +9,7 @@ Below is an overall list of steps which we'd take to integrate `suparnatural-gra
 1. Add `rx` runtime provider.
 
 ## Kotlinx Serialization
+
 To parse `JSON`, this library depends on [kotlinx.serialization](https://github.com/Kotlin/kotlinx.serialization). Follow this [guide](https://github.com/Kotlin/kotlinx.serialization#setup) to configure it.
 
 ## Apply Gradle Plugin
@@ -53,6 +54,7 @@ suparnaturalGraphQl {
     endpointUrl = "https://countries.trevorblades.com"
     documentsPath = "operations/*.gql"
     outputDirectoryPath = "src/main/kotlin"
+    headers = listOf("Authorization: abc")
 }
 ```
 
@@ -62,17 +64,18 @@ suparnaturalGraphQl {
     endpointUrl = "https://countries.trevorblades.com"
     documentsPath = "operations/*.gql"
     outputDirectoryPath = "src/main/kotlin"
+    headers = ["Authorization: abc"]
 }
 ```
 
-| Property            | Description                                                                                |
-|---------------------|--------------------------------------------------------------------------------------------|
+| Property              | Description                                                                                |
+| --------------------- | ------------------------------------------------------------------------------------------ |
 | `packageName`         | Generated type files will have this as the package name                                    |
 | `endpointUrl`         | GraphQL endpoint URL to pull schema from. This takes precedence over `localSchemaFilePath` |
 | `localSchemaFilePath` | Path to local schema file if `endpointUrl` is not used                                     |
 | `documentsPath`       | Glob pattern to the directory which contains graphql query files                           |
 | `outputDirectoryPath` | Generated types will be placed under this directory                                        |
-
+| `headers`             | Additional headers to be passed while downloading schema                                   |
 
 ## Add Library
 
@@ -91,7 +94,6 @@ repositories {
     }
 }
 ```
-
 
 Add the following to your commonMain target.
 
@@ -132,14 +134,13 @@ jvmMain {
 ```
 
 | Platform        | Depdendency                                                     |
-|-----------------|-----------------------------------------------------------------|
+| --------------- | --------------------------------------------------------------- |
 | Common          | suparnatural-kotlin-multiplatform:graphql-metadata:version      |
 | Android-Debug   | suparnatural-kotlin-multiplatform:graphql-android-debug:version |
 | Android-Release | suparnatural-kotlin-multiplatform:graphql-android:version       |
 | iOS-Arm64       | suparnatural-kotlin-multiplatform:graphql-iosarm64:version      |
 | iOS-X64         | suparnatural-kotlin-multiplatform:graphql-iosx64:version        |
 | JVM             | suparnatural-kotlin-multiplatform:graphql-jvm:version           |
-
 
 Finally, run the gradle task `graphQlCodeGen` under group `suparnatural`.
 
@@ -166,7 +167,7 @@ repositories {
 Next, configure each source set with the appropriate dependency
 
 | Platform        | Depdendency                                                                 |
-|-----------------|-----------------------------------------------------------------------------|
+| --------------- | --------------------------------------------------------------------------- |
 | Common          | suparnatural-kotlin-multiplatform:rx-runtime-reaktive-metadata:version      |
 | Android-Debug   | suparnatural-kotlin-multiplatform:rx-runtime-reaktive-android-debug:version |
 | Android-Release | suparnatural-kotlin-multiplatform:rx-runtime-reaktive-android:version       |
@@ -204,7 +205,7 @@ commonMain {
 ```
 
 | Platform        | Depdendency                                                |
-|-----------------|------------------------------------------------------------|
+| --------------- | ---------------------------------------------------------- |
 | Common          | suparnatural-kotlin-multiplatform:rx-metadata:version      |
 | Android-Debug   | suparnatural-kotlin-multiplatform:rx-android-debug:version |
 | Android-Release | suparnatural-kotlin-multiplatform:rx-android:version       |
