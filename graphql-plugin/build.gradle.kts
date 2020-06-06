@@ -14,7 +14,7 @@ buildscript {
     }
 }
 
-val versionLabel = "1.0.10"
+val versionLabel = "1.0.11"
 group = "com.suparnatural.plugins"
 version = versionLabel
 

@@ -19,6 +19,7 @@ open class GraphQlPluginExtension {
     var localSchemaFilePath: String? = null
     var endpointUrl: String? = null
     var documentsPath: String? = null
+    var headers: List<String>? = null
 }
 
 val Json = ObjectMapper().registerKotlinModule()
@@ -70,6 +71,10 @@ class GraphQlPlugin : Plugin<Project> {
 
                 logger.info("executing code gen script")
                 val arguments = mutableListOf("sh", scriptFile.absolutePath, "client:codegen", "--target=json")
+                extension.headers?.forEach {
+                    arguments.add("--header")
+                    arguments.add(it)
+                }
                 if (!localSchemaFilePath.isNullOrEmpty()) {
                     val localSchemaFile = target.file(extension.localSchemaFilePath!!).absolutePath
                     arguments.add("--localSchemaFile=$localSchemaFile")
