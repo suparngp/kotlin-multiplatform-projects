@@ -5,8 +5,11 @@ plugins {
     id("maven-publish")
     id("org.jetbrains.dokka") version "1.4.10"
 }
+val buildNumber = 12
+val versionLabel = "1.0"
+
 group = "suparnatural-kotlin-multiplatform"
-version = "1.0.12"
+version = "$versionLabel.$buildNumber"
 
 repositories {
     gradlePluginPortal()
@@ -20,25 +23,38 @@ android {
     defaultConfig {
         minSdkVersion(24)
         targetSdkVersion(29)
-        versionCode = 1
-        versionName = "1.0"
+        versionCode = buildNumber
+        versionName = versionLabel
+
+        testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
+
     }
     buildTypes {
-        getByName("release") {
+        val release by getting {
             isMinifyEnabled = false
         }
-        getByName("debug") {
+        val debug by getting {
             isDebuggable = true
+        }
+    }
+
+    sourceSets {
+        val main by getting {
+            java.srcDirs("src/androidMain/kotlin")
+            res.srcDirs("src/androidMain/res")
+        }
+        val androidTest by getting {
+            java.srcDirs("src/androidTest/kotlin")
+            res.srcDirs("src/androidTest/res")
         }
     }
 }
 
 kotlin {
-    android() {
+    android {
         publishLibraryVariants("release", "debug")
-//        publishAllLibraryVariants()
     }
-    ios() {
+    ios {
         val name = this.name
         binaries {
             framework {
@@ -61,18 +77,28 @@ kotlin {
                 implementation("androidx.core:core-ktx:1.3.1")
             }
         }
-        val androidTest by getting
-//        val iosMain by getting
-//        val iosTest by getting
-    }
+        val androidTest by getting {
+            dependencies {
+                implementation(kotlin("test"))
+                implementation(kotlin("test-junit"))
+            }
+        }
 
-    targets.all {
-        val n = name
-        compilations.all {
-            println("compilation $n $name")
+        val jvmTest by getting {
+            dependencies {
+                implementation(kotlin("test-junit"))
+            }
         }
     }
+
 }
+
+dependencies {
+    androidTestImplementation("androidx.test:runner:1.3.0")
+    androidTestImplementation("androidx.test:rules:1.3.0")
+    androidTestUtil("androidx.test:orchestrator:1.3.0")
+}
+
 publishing {
     repositories {
         maven {
@@ -92,7 +118,6 @@ publishing {
 }
 
 tasks.withType<org.jetbrains.dokka.gradle.DokkaTask>().configureEach {
-    // custom output directory
     outputDirectory.set(projectDir.resolve("docs"))
     moduleName.set("suparnatural-utilities")
 }
