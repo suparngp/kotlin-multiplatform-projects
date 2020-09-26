@@ -15,4 +15,4 @@ pluginManagement {
 }
 
 rootProject.name = "kotlin-multiplatform-projects"
-include("utilities", "fs")
+include("utilities", "fs", "concurrency")

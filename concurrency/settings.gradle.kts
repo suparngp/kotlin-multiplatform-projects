@@ -13,5 +13,5 @@ pluginManagement {
         }
     }
 }
-rootProject.name = "fs"
+rootProject.name = "concurrency"
 
