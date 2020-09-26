@@ -105,7 +105,7 @@ publishing {
             val user = "suparnatural"
             val repo = "kotlin-multiplatform"
             val name = "utilities"
-            url = uri("https://api.bintray.com/maven/$user/$repo/$name;publish=0;override=1")
+            url = uri("https://api.bintray.com/maven/$user/$repo/$name/;publish=1;override=1")
 
             credentials {
                 username = if (project.hasProperty("bintray.username")) project.property("bintray.username")
