@@ -8,14 +8,22 @@ plugins {
 val buildNumber = 12
 val versionLabel = "1.0"
 
+
 group = "suparnatural-kotlin-multiplatform"
 version = "$versionLabel.$buildNumber"
+
+object DependencyVersion {
+    const val utilities = "1.0.12"
+}
 
 repositories {
     gradlePluginPortal()
     google()
     jcenter()
     mavenCentral()
+    maven {
+        url = uri("https://dl.bintray.com/suparnatural/kotlin-multiplatform")
+    }
 }
 
 android {
@@ -58,14 +66,18 @@ kotlin {
         val name = this.name
         binaries {
             framework {
-                baseName = "$name-utilities"
+                baseName = "$name-fs"
             }
         }
     }
     jvm()
 
     sourceSets {
-        val commonMain by getting
+        val commonMain by getting {
+            dependencies {
+                implementation("suparnatural-kotlin-multiplatform:utilities:${DependencyVersion.utilities}")
+            }
+        }
         val commonTest by getting {
             dependencies {
                 implementation(kotlin("test-common"))
@@ -89,6 +101,11 @@ kotlin {
                 implementation(kotlin("test-junit"))
             }
         }
+
+        all {
+            languageSettings.useExperimentalAnnotation("kotlin.RequiresOptIn")
+        }
+
     }
 
 }
@@ -104,7 +121,7 @@ publishing {
         maven {
             val user = "suparnatural"
             val repo = "kotlin-multiplatform"
-            val name = "utilities"
+            val name = "fs"
             url = uri("https://api.bintray.com/maven/$user/$repo/$name/;publish=1;override=1")
 
             credentials {
@@ -119,5 +136,9 @@ publishing {
 
 tasks.withType<org.jetbrains.dokka.gradle.DokkaTask>().configureEach {
     outputDirectory.set(projectDir.resolve("docs"))
-    moduleName.set("suparnatural-utilities")
+    moduleName.set("suparnatural-fs")
+}
+
+tasks.withType<org.jetbrains.kotlin.gradle.tasks.KotlinCompile>().all {
+    kotlinOptions.freeCompilerArgs += "-Xopt-in=kotlin.RequiresOptIn"
 }
