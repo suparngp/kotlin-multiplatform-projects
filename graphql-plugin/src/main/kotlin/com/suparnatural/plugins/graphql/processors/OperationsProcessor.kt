@@ -5,6 +5,10 @@ import com.squareup.kotlinpoet.ParameterizedTypeName.Companion.parameterizedBy
 import com.suparnatural.plugins.graphql.GraphQlPluginExtension
 import com.suparnatural.plugins.graphql.models.Operation
 import kotlinx.serialization.KSerializer
+import kotlinx.serialization.decodeFromString
+import kotlinx.serialization.encodeToString
+import kotlinx.serialization.json.Json
+import kotlinx.serialization.json.JsonElement
 
 const val OperationsContainer = "Operations"
 
@@ -26,7 +30,7 @@ fun processOperations(operations: List<Operation>, config: GraphQlPluginExtensio
             )
             constructorSpec.addParameter(v.name, type)
             operationContainer.addProperty(PropertySpec.builder(v.name, type).initializer(v.name).build())
-            variableMapList.add("\"${v.name}\" to ${v.name}")
+            variableMapList.add("\"${v.name}\" to Json.decodeFromString(Json.encodeToString(${v.name}))")
         }
         operationContainer.primaryConstructor(constructorSpec.build())
 
@@ -60,7 +64,7 @@ fun processOperations(operations: List<Operation>, config: GraphQlPluginExtensio
                         ClassName("kotlin.collections", "MutableMap")
                             .parameterizedBy(
                                 String::class.asTypeName(),
-                                Any::class.asTypeName().copy(true)
+                                JsonElement::class.asTypeName().copy(true)
                             ),
                         KModifier.OVERRIDE
                     )
