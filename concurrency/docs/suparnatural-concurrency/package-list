@@ -1,4 +1,5 @@
-$dokka.format:html
+$dokka.format:html-v1
 $dokka.linkExtension:html
 
 com.suparnatural.core.concurrency
+

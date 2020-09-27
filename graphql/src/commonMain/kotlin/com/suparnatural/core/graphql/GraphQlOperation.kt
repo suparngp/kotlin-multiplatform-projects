@@ -1,10 +1,10 @@
 package com.suparnatural.core.graphql
 
-import kotlinx.serialization.ContextualSerialization
+import kotlinx.serialization.Contextual
 import kotlinx.serialization.KSerializer
 import kotlinx.serialization.Serializable
-import kotlinx.serialization.UnstableDefault
 import kotlinx.serialization.json.Json
+import kotlinx.serialization.json.JsonElement
 import kotlinx.serialization.json.JsonObject
 
 /**
@@ -37,7 +37,7 @@ data class GraphQlResponse<T>(
 data class GraphQlRequest(
         val operationName: String,
         val query: String,
-        val variables: Map<String, @ContextualSerialization Any?>
+        val variables: Map<String, @Contextual JsonElement?>
 )
 
 /**
@@ -59,7 +59,7 @@ abstract class GraphQlOperation<T> {
     /**
      * A map of operation variables
      */
-    abstract val variables: MutableMap<String, Any?>
+    abstract val variables: MutableMap<String, JsonElement?>
 
     /**
      * A mutable map which holds context of the operation
@@ -70,10 +70,9 @@ abstract class GraphQlOperation<T> {
     /**
      * A serialized json string of the GraphQl operation
      */
-    @UnstableDefault
     val jsonString: String
         get() {
-            return Json.stringify(GraphQlRequest.serializer(), GraphQlRequest(name, source, variables)).trim()
+            return Json.encodeToString(GraphQlRequest.serializer(), GraphQlRequest(name, source, variables)).trim()
         }
 
     /**

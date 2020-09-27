@@ -1,11 +1,7 @@
-apply("credentials.gradle.kts")
 plugins {
-    base
-    java
+    id("com.android.library") apply false
+    kotlin("multiplatform") version "1.4.10" apply false
+    id("kotlin-android-extensions") apply false
+    id("org.jetbrains.dokka") version "1.4.10" apply false
 }
-
 group = "com.suparnatural"
-java {
-    sourceCompatibility = JavaVersion.VERSION_1_8
-    targetCompatibility = JavaVersion.VERSION_1_8
-}

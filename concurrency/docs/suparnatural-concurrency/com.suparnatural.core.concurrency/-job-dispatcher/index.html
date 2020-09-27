@@ -1,86 +1,265 @@
-<HTML>
-<HEAD>
-<meta charset="UTF-8">
-<title>JobDispatcher - suparnatural-concurrency</title>
-<link rel="stylesheet" href="../../../style.css">
-</HEAD>
-<BODY>
-<a href="../../index.html">suparnatural-concurrency</a>&nbsp;/&nbsp;<a href="../index.html">com.suparnatural.core.concurrency</a>&nbsp;/&nbsp;<a href="./index.html">JobDispatcher</a><br/>
-<br/>
-<h1>JobDispatcher</h1>
-<code><span class="keyword">object </span><span class="identifier">JobDispatcher</span></code>
-<p>Dispatches a given job on a particular thread.</p>
-<h3>Examples</h3>
-<pre><code>val future = JobDispatcher.dispatchOnMainThread("Hello") {it: String -&gt;
-    assertEquals("Hello", it) // runs on main thread
-}
-future.await()
+<html>
+  <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1" charset="UTF-8">
+    <title>JobDispatcher</title>
+    <link href="../../../images/logo-icon.svg" rel="icon" type="image/svg">
+    <link href="../../../styles/style.css" rel="Stylesheet">
+    <script type="text/javascript" src="../../../scripts/navigationLoader.js" async="async"></script>
+    <script type="text/javascript" src="../../../scripts/platformContentHandler.js" async="async"></script>
+    <script type="text/javascript" src="../../../scripts/sourceset_dependencies.js" async="async"></script>
+    <script type="text/javascript" src="../../../scripts/clipboard.js" async="async"></script>
+    <link href="../../../styles/jetbrains-mono.css" rel="Stylesheet">
+    <script>var pathToRoot = "../../../";</script>
+  </head>
+  <body>
+    <div id="container">
+      <div id="leftColumn">
+        <div id="logo"></div>
+        <div id="paneSearch"></div>
+        <div id="sideMenu"></div>
+      </div>
+      <div id="main">
+        <div id="leftToggler"><span class="icon-toggler"></span></div>
+        <div id="searchBar"></div>
+        <script type="text/javascript" src="../../../scripts/pages.js"></script>
+        <script type="text/javascript" src="../../../scripts/main.js"></script>
+        <div id="content" pageIds="com.suparnatural.core.concurrency/JobDispatcher///PointingToDeclaration/">
+          <div class="breadcrumbs"><a href="../../index.html">suparnatural-concurrency</a>/<a href="../index.html">com.suparnatural.core.concurrency</a>/<a href="index.html">JobDispatcher</a></div>
+          <div class="cover ">
+            <div class="filter-section" id="filter-section"><button class="platform-tag platform-selector common-like" data-active="" data-filter=":concurrency:dokkaHtml/commonMain">common</button></div>
+            <h1 class="cover"><a data-name="jobdispatcher"></a><span>Job</span><wbr></wbr><span>Dispatcher</span></h1>
+            <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-depenent-content" data-active="" data-togglable=":concurrency:dokkaHtml/commonMain"><p class="paragraph"><p class="paragraph">Dispatches a given job on a particular thread.</p><h3 class=""><a></a> Examples</h3><div class="sample-container"><code class="" theme="idea"><pre>val future = JobDispatcher.dispatchOnMainThread(&quot;Hello&quot;) {it: String -&gt;<br>    assertEquals(&quot;Hello&quot;, it) // runs on main thread<br>}<br>future.await()<br><br>val future = JobDispatcher.dispatchOnBackgroundThread(&quot;Hello&quot;) {it: String -&gt;<br>    assertEquals(&quot;Hello&quot;, it) // runs on background thread<br>}<br>future.await()</pre></code></div></p><div class="symbol monospace">object <a href="index.html">JobDispatcher</a><span class="top-right-position"><span class="copy-icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path fill-rule="evenodd" clip-rule="evenodd" d="M5 4H15V16H5V4ZM17 7H19V18V20H17H8V18H17V7Z" fill="black"/>
+                       </svg></span><div class="copy-popup-wrapper popup-to-left"><svg width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <path d="M18 9C18 14 14 18 9 18C4 18 0 14 0 9C0 4 4 0 9 0C14 0 18 4 18 9ZM14.2 6.2L12.8 4.8L7.5 10.1L5.3 7.8L3.8 9.2L7.5 13L14.2 6.2Z" fill="#4DBB5F"/>
+</svg><span>Content copied to clipboard</span></div></span></div></div></div>
+          </div>
+          <div class="tabbedcontent">
+            <div class="tabs-section" tabs-section="tabs-section"><button class="section-tab" data-active="" data-togglable="Functions">Functions</button></div>
+            <div class="tabs-section-body">
+              <h2 class=""><a data-name="functions"></a>Functions</h2>
+              <div class="table" data-togglable="Functions"><a data-name="com.suparnatural.core.concurrency/JobDispatcher/dispatchOnCurrentThread/#TypeParam(bounds=[kotlin.Any?])#kotlin.Function1[TypeParam(bounds=[kotlin.Any?]),TypeParam(bounds=[kotlin.Any?])]/PointingToDeclaration/"></a>
+                <div class="table-row" data-filterable-current=":concurrency:dokkaHtml/commonMain" data-filterable-set=":concurrency:dokkaHtml/commonMain">
+                  <div class="main-subrow "><span><a href="dispatch-on-current-thread.html">dispatchOnCurrentThread</a><span class="anchor-wrapper"><span class="anchor-icon" pointing-to="com.suparnatural.core.concurrency/JobDispatcher/dispatchOnCurrentThread/#TypeParam(bounds=[kotlin.Any?])#kotlin.Function1[TypeParam(bounds=[kotlin.Any?]),TypeParam(bounds=[kotlin.Any?])]/PointingToDeclaration/"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <path d="M21.2496 5.3C20.3496 4.5 19.2496 4 18.0496 4C16.8496 4 15.6496 4.5 14.8496 5.3L10.3496 9.8L11.7496 11.2L16.2496 6.7C17.2496 5.7 18.8496 5.7 19.8496 6.7C20.8496 7.7 20.8496 9.3 19.8496 10.3L15.3496 14.8L16.7496 16.2L21.2496 11.7C22.1496 10.8 22.5496 9.7 22.5496 8.5C22.5496 7.3 22.1496 6.2 21.2496 5.3Z"/>
+    <path d="M8.35 16.7998C7.35 17.7998 5.75 17.7998 4.75 16.7998C3.75 15.7998 3.75 14.1998 4.75 13.1998L9.25 8.6998L7.85 7.2998L3.35 11.7998C1.55 13.5998 1.55 16.3998 3.35 18.1998C4.25 19.0998 5.35 19.4998 6.55 19.4998C7.75 19.4998 8.85 19.0998 9.75 18.1998L14.25 13.6998L12.85 12.2998L8.35 16.7998Z"/>
+</svg></span>
+                        <div class="copy-popup-wrapper "><svg width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <path d="M18 9C18 14 14 18 9 18C4 18 0 14 0 9C0 4 4 0 9 0C14 0 18 4 18 9ZM14.2 6.2L12.8 4.8L7.5 10.1L5.3 7.8L3.8 9.2L7.5 13L14.2 6.2Z" fill="#4DBB5F"/>
+</svg><span>Link copied to clipboard</span></div>
+                      </span></span>
+                    <div class="platform-tags">
+                      <div class="platform-tag common-like">common</div>
+                    </div>
+                  </div>
+                  <div class="platform-dependent-row keyValue">
+                    <div></div>
+                    <div class="title"><div class="divergent-group" data-filterable-current=":concurrency:dokkaHtml/commonMain" data-filterable-set=":concurrency:dokkaHtml/commonMain"><div class="brief-with-platform-tags"><div class="inner-brief-with-platform-tags"><div class="brief "><p class="paragraph">Dispatches a non-capturing lambda <span data-unresolved-link="com.suparnatural.core.concurrency/JobDispatcher/job/#/PointingToCallableParameters(-1)/">job</span> with <span data-unresolved-link="com.suparnatural.core.concurrency/JobDispatcher/jobInput/#/PointingToCallableParameters(-1)/">jobInput</span> as its input on the current thread. The <span data-unresolved-link="com.suparnatural.core.concurrency/JobDispatcher/jobInput/#/PointingToCallableParameters(-1)/">jobInput</span> is converted to an immutable object and then passed to the job as argument.</p></div></div>
+<span class="pull-right"></span></div>
 
-val future = JobDispatcher.dispatchOnBackgroundThread("Hello") {it: String -&gt;
-    assertEquals("Hello", it) // runs on background thread
-}
-future.await()
-</code></pre>
-<h3>Functions</h3>
-<table>
-<tbody>
-<tr>
-<td>
-<p><a href="dispatch-on-current-thread.html">dispatchOnCurrentThread</a></p>
-</td>
-<td>
-<code><span class="keyword">fun </span><span class="symbol">&lt;</span><span class="identifier">T</span><span class="symbol">, </span><span class="identifier">V</span><span class="symbol">&gt;</span> <span class="identifier">dispatchOnCurrentThread</span><span class="symbol">(</span><span class="identifier" id="com.suparnatural.core.concurrency.JobDispatcher$dispatchOnCurrentThread(com.suparnatural.core.concurrency.JobDispatcher.dispatchOnCurrentThread.T, kotlin.Function1((com.suparnatural.core.concurrency.JobDispatcher.dispatchOnCurrentThread.T, com.suparnatural.core.concurrency.JobDispatcher.dispatchOnCurrentThread.V)))/jobInput">jobInput</span><span class="symbol">:</span>&nbsp;<a href="dispatch-on-current-thread.html#T"><span class="identifier">T</span></a><span class="symbol">, </span><span class="identifier" id="com.suparnatural.core.concurrency.JobDispatcher$dispatchOnCurrentThread(com.suparnatural.core.concurrency.JobDispatcher.dispatchOnCurrentThread.T, kotlin.Function1((com.suparnatural.core.concurrency.JobDispatcher.dispatchOnCurrentThread.T, com.suparnatural.core.concurrency.JobDispatcher.dispatchOnCurrentThread.V)))/job">job</span><span class="symbol">:</span>&nbsp;<span class="symbol">(</span><a href="dispatch-on-current-thread.html#T"><span class="identifier">T</span></a><span class="symbol">)</span>&nbsp;<span class="symbol">-&gt;</span>&nbsp;<a href="dispatch-on-current-thread.html#V"><span class="identifier">V</span></a><span class="symbol">)</span><span class="symbol">: </span><a href="../-future/index.html"><span class="identifier">Future</span></a><span class="symbol">&lt;</span><a href="dispatch-on-current-thread.html#V"><span class="identifier">V</span></a><span class="symbol">&gt;</span></code>
-<p>Dispatches a non-capturing lambda <a href="dispatch-on-current-thread.html#com.suparnatural.core.concurrency.JobDispatcher$dispatchOnCurrentThread(com.suparnatural.core.concurrency.JobDispatcher.dispatchOnCurrentThread.T, kotlin.Function1((com.suparnatural.core.concurrency.JobDispatcher.dispatchOnCurrentThread.T, com.suparnatural.core.concurrency.JobDispatcher.dispatchOnCurrentThread.V)))/job">job</a> with <a href="dispatch-on-current-thread.html#com.suparnatural.core.concurrency.JobDispatcher$dispatchOnCurrentThread(com.suparnatural.core.concurrency.JobDispatcher.dispatchOnCurrentThread.T, kotlin.Function1((com.suparnatural.core.concurrency.JobDispatcher.dispatchOnCurrentThread.T, com.suparnatural.core.concurrency.JobDispatcher.dispatchOnCurrentThread.V)))/jobInput">jobInput</a> as its input on
-the current thread. The <a href="dispatch-on-current-thread.html#com.suparnatural.core.concurrency.JobDispatcher$dispatchOnCurrentThread(com.suparnatural.core.concurrency.JobDispatcher.dispatchOnCurrentThread.T, kotlin.Function1((com.suparnatural.core.concurrency.JobDispatcher.dispatchOnCurrentThread.T, com.suparnatural.core.concurrency.JobDispatcher.dispatchOnCurrentThread.V)))/jobInput">jobInput</a> is converted to an immutable object and then
-passed to the job as argument.</p>
-</td>
-</tr>
-<tr>
-<td>
-<p><a href="dispatch-on-main-thread.html">dispatchOnMainThread</a></p>
-</td>
-<td>
-<code><span class="keyword">fun </span><span class="symbol">&lt;</span><span class="identifier">T</span><span class="symbol">, </span><span class="identifier">V</span><span class="symbol">&gt;</span> <span class="identifier">dispatchOnMainThread</span><span class="symbol">(</span><span class="identifier" id="com.suparnatural.core.concurrency.JobDispatcher$dispatchOnMainThread(com.suparnatural.core.concurrency.JobDispatcher.dispatchOnMainThread.T, kotlin.Function1((com.suparnatural.core.concurrency.JobDispatcher.dispatchOnMainThread.T, com.suparnatural.core.concurrency.JobDispatcher.dispatchOnMainThread.V)))/jobInput">jobInput</span><span class="symbol">:</span>&nbsp;<a href="dispatch-on-main-thread.html#T"><span class="identifier">T</span></a><span class="symbol">, </span><span class="identifier" id="com.suparnatural.core.concurrency.JobDispatcher$dispatchOnMainThread(com.suparnatural.core.concurrency.JobDispatcher.dispatchOnMainThread.T, kotlin.Function1((com.suparnatural.core.concurrency.JobDispatcher.dispatchOnMainThread.T, com.suparnatural.core.concurrency.JobDispatcher.dispatchOnMainThread.V)))/job">job</span><span class="symbol">:</span>&nbsp;<span class="symbol">(</span><a href="dispatch-on-main-thread.html#T"><span class="identifier">T</span></a><span class="symbol">)</span>&nbsp;<span class="symbol">-&gt;</span>&nbsp;<a href="dispatch-on-main-thread.html#V"><span class="identifier">V</span></a><span class="symbol">)</span><span class="symbol">: </span><a href="../-future/index.html"><span class="identifier">Future</span></a><span class="symbol">&lt;</span><a href="dispatch-on-main-thread.html#V"><span class="identifier">V</span></a><span class="symbol">&gt;</span></code>
-<p>Dispatches a non-capturing lambda <a href="dispatch-on-main-thread.html#com.suparnatural.core.concurrency.JobDispatcher$dispatchOnMainThread(com.suparnatural.core.concurrency.JobDispatcher.dispatchOnMainThread.T, kotlin.Function1((com.suparnatural.core.concurrency.JobDispatcher.dispatchOnMainThread.T, com.suparnatural.core.concurrency.JobDispatcher.dispatchOnMainThread.V)))/job">job</a> with <a href="dispatch-on-main-thread.html#com.suparnatural.core.concurrency.JobDispatcher$dispatchOnMainThread(com.suparnatural.core.concurrency.JobDispatcher.dispatchOnMainThread.T, kotlin.Function1((com.suparnatural.core.concurrency.JobDispatcher.dispatchOnMainThread.T, com.suparnatural.core.concurrency.JobDispatcher.dispatchOnMainThread.V)))/jobInput">jobInput</a> as its input on
-the main thread. The <a href="dispatch-on-main-thread.html#com.suparnatural.core.concurrency.JobDispatcher$dispatchOnMainThread(com.suparnatural.core.concurrency.JobDispatcher.dispatchOnMainThread.T, kotlin.Function1((com.suparnatural.core.concurrency.JobDispatcher.dispatchOnMainThread.T, com.suparnatural.core.concurrency.JobDispatcher.dispatchOnMainThread.V)))/jobInput">jobInput</a> is converted to an immutable object and then
-passed to the job as argument.</p>
-</td>
-</tr>
-<tr>
-<td>
-<p><a href="dispatch-on-new-background-thread.html">dispatchOnNewBackgroundThread</a></p>
-</td>
-<td>
-<code><span class="keyword">fun </span><span class="symbol">&lt;</span><span class="identifier">T</span><span class="symbol">, </span><span class="identifier">V</span><span class="symbol">&gt;</span> <span class="identifier">dispatchOnNewBackgroundThread</span><span class="symbol">(</span><span class="identifier" id="com.suparnatural.core.concurrency.JobDispatcher$dispatchOnNewBackgroundThread(com.suparnatural.core.concurrency.JobDispatcher.dispatchOnNewBackgroundThread.T, kotlin.Function1((com.suparnatural.core.concurrency.JobDispatcher.dispatchOnNewBackgroundThread.T, com.suparnatural.core.concurrency.JobDispatcher.dispatchOnNewBackgroundThread.V)))/jobInput">jobInput</span><span class="symbol">:</span>&nbsp;<a href="dispatch-on-new-background-thread.html#T"><span class="identifier">T</span></a><span class="symbol">, </span><span class="identifier" id="com.suparnatural.core.concurrency.JobDispatcher$dispatchOnNewBackgroundThread(com.suparnatural.core.concurrency.JobDispatcher.dispatchOnNewBackgroundThread.T, kotlin.Function1((com.suparnatural.core.concurrency.JobDispatcher.dispatchOnNewBackgroundThread.T, com.suparnatural.core.concurrency.JobDispatcher.dispatchOnNewBackgroundThread.V)))/job">job</span><span class="symbol">:</span>&nbsp;<span class="symbol">(</span><a href="dispatch-on-new-background-thread.html#T"><span class="identifier">T</span></a><span class="symbol">)</span>&nbsp;<span class="symbol">-&gt;</span>&nbsp;<a href="dispatch-on-new-background-thread.html#V"><span class="identifier">V</span></a><span class="symbol">)</span><span class="symbol">: </span><a href="../-future/index.html"><span class="identifier">Future</span></a><span class="symbol">&lt;</span><a href="dispatch-on-new-background-thread.html#V"><span class="identifier">V</span></a><span class="symbol">&gt;</span></code>
-<p>Dispatches a non-capturing lambda <a href="dispatch-on-new-background-thread.html#com.suparnatural.core.concurrency.JobDispatcher$dispatchOnNewBackgroundThread(com.suparnatural.core.concurrency.JobDispatcher.dispatchOnNewBackgroundThread.T, kotlin.Function1((com.suparnatural.core.concurrency.JobDispatcher.dispatchOnNewBackgroundThread.T, com.suparnatural.core.concurrency.JobDispatcher.dispatchOnNewBackgroundThread.V)))/job">job</a> with <a href="dispatch-on-new-background-thread.html#com.suparnatural.core.concurrency.JobDispatcher$dispatchOnNewBackgroundThread(com.suparnatural.core.concurrency.JobDispatcher.dispatchOnNewBackgroundThread.T, kotlin.Function1((com.suparnatural.core.concurrency.JobDispatcher.dispatchOnNewBackgroundThread.T, com.suparnatural.core.concurrency.JobDispatcher.dispatchOnNewBackgroundThread.V)))/jobInput">jobInput</a> as its input on
-a background thread. The <a href="dispatch-on-new-background-thread.html#com.suparnatural.core.concurrency.JobDispatcher$dispatchOnNewBackgroundThread(com.suparnatural.core.concurrency.JobDispatcher.dispatchOnNewBackgroundThread.T, kotlin.Function1((com.suparnatural.core.concurrency.JobDispatcher.dispatchOnNewBackgroundThread.T, com.suparnatural.core.concurrency.JobDispatcher.dispatchOnNewBackgroundThread.V)))/jobInput">jobInput</a> is converted to an immutable object and then
-passed to the job as argument.</p>
-</td>
-</tr>
-<tr>
-<td>
-<p><a href="dispatch-on-worker.html">dispatchOnWorker</a></p>
-</td>
-<td>
-<code><span class="keyword">fun </span><span class="symbol">&lt;</span><span class="identifier">T</span><span class="symbol">, </span><span class="identifier">V</span><span class="symbol">&gt;</span> <span class="identifier">dispatchOnWorker</span><span class="symbol">(</span><span class="identifier" id="com.suparnatural.core.concurrency.JobDispatcher$dispatchOnWorker(com.suparnatural.core.concurrency.Worker, com.suparnatural.core.concurrency.JobDispatcher.dispatchOnWorker.T, kotlin.Function1((com.suparnatural.core.concurrency.JobDispatcher.dispatchOnWorker.T, com.suparnatural.core.concurrency.JobDispatcher.dispatchOnWorker.V)))/worker">worker</span><span class="symbol">:</span>&nbsp;<a href="../-worker/index.html"><span class="identifier">Worker</span></a><span class="symbol">, </span><span class="identifier" id="com.suparnatural.core.concurrency.JobDispatcher$dispatchOnWorker(com.suparnatural.core.concurrency.Worker, com.suparnatural.core.concurrency.JobDispatcher.dispatchOnWorker.T, kotlin.Function1((com.suparnatural.core.concurrency.JobDispatcher.dispatchOnWorker.T, com.suparnatural.core.concurrency.JobDispatcher.dispatchOnWorker.V)))/jobInput">jobInput</span><span class="symbol">:</span>&nbsp;<a href="dispatch-on-worker.html#T"><span class="identifier">T</span></a><span class="symbol">, </span><span class="identifier" id="com.suparnatural.core.concurrency.JobDispatcher$dispatchOnWorker(com.suparnatural.core.concurrency.Worker, com.suparnatural.core.concurrency.JobDispatcher.dispatchOnWorker.T, kotlin.Function1((com.suparnatural.core.concurrency.JobDispatcher.dispatchOnWorker.T, com.suparnatural.core.concurrency.JobDispatcher.dispatchOnWorker.V)))/job">job</span><span class="symbol">:</span>&nbsp;<span class="symbol">(</span><a href="dispatch-on-worker.html#T"><span class="identifier">T</span></a><span class="symbol">)</span>&nbsp;<span class="symbol">-&gt;</span>&nbsp;<a href="dispatch-on-worker.html#V"><span class="identifier">V</span></a><span class="symbol">)</span><span class="symbol">: </span><a href="../-future/index.html"><span class="identifier">Future</span></a><span class="symbol">&lt;</span><a href="dispatch-on-worker.html#V"><span class="identifier">V</span></a><span class="symbol">&gt;</span></code>
-<p>Dispatches <a href="dispatch-on-worker.html#com.suparnatural.core.concurrency.JobDispatcher$dispatchOnWorker(com.suparnatural.core.concurrency.Worker, com.suparnatural.core.concurrency.JobDispatcher.dispatchOnWorker.T, kotlin.Function1((com.suparnatural.core.concurrency.JobDispatcher.dispatchOnWorker.T, com.suparnatural.core.concurrency.JobDispatcher.dispatchOnWorker.V)))/job">job</a> with <a href="dispatch-on-worker.html#com.suparnatural.core.concurrency.JobDispatcher$dispatchOnWorker(com.suparnatural.core.concurrency.Worker, com.suparnatural.core.concurrency.JobDispatcher.dispatchOnWorker.T, kotlin.Function1((com.suparnatural.core.concurrency.JobDispatcher.dispatchOnWorker.T, com.suparnatural.core.concurrency.JobDispatcher.dispatchOnWorker.V)))/jobInput">jobInput</a> on the <a href="dispatch-on-worker.html#com.suparnatural.core.concurrency.JobDispatcher$dispatchOnWorker(com.suparnatural.core.concurrency.Worker, com.suparnatural.core.concurrency.JobDispatcher.dispatchOnWorker.T, kotlin.Function1((com.suparnatural.core.concurrency.JobDispatcher.dispatchOnWorker.T, com.suparnatural.core.concurrency.JobDispatcher.dispatchOnWorker.V)))/worker">worker</a> instance</p>
-</td>
-</tr>
-</tbody>
-</table>
-<h3>Extension Functions</h3>
-<table>
-<tbody>
-<tr>
-<td>
-<p><a href="../to-immutable.html">toImmutable</a></p>
-</td>
-<td>
-<code><span class="keyword">expect</span> <span class="keyword">fun </span><span class="symbol">&lt;</span><span class="identifier">T</span><span class="symbol">&gt;</span> <a href="../to-immutable.html#T"><span class="identifier">T</span></a><span class="symbol">.</span><span class="identifier">toImmutable</span><span class="symbol">(</span><span class="symbol">)</span><span class="symbol">: </span><a href="../to-immutable.html#T"><span class="identifier">T</span></a></code>
-<p>Returns an immutable instance of an object.</p>
-</td>
-</tr>
-</tbody>
-</table>
-</BODY>
-</HTML>
+  <div class="main-subrow">
+    <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-depenent-content" data-active="" data-togglable=":concurrency:dokkaHtml/commonMain"><div class="symbol monospace">fun &lt;<a href="dispatch-on-current-thread.html">T</a>, <a href="dispatch-on-current-thread.html">V</a>&gt; <a href="dispatch-on-current-thread.html">dispatchOnCurrentThread</a>(jobInput: <a href="dispatch-on-current-thread.html">T</a>, job: (<a href="dispatch-on-current-thread.html">T</a>) -&gt; <a href="dispatch-on-current-thread.html">V</a>): <a href="../-future/index.html">Future</a>&lt;<a href="dispatch-on-current-thread.html">V</a>&gt;<span class="top-right-position"><span class="copy-icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path fill-rule="evenodd" clip-rule="evenodd" d="M5 4H15V16H5V4ZM17 7H19V18V20H17H8V18H17V7Z" fill="black"/>
+                       </svg></span><div class="copy-popup-wrapper popup-to-left"><svg width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <path d="M18 9C18 14 14 18 9 18C4 18 0 14 0 9C0 4 4 0 9 0C14 0 18 4 18 9ZM14.2 6.2L12.8 4.8L7.5 10.1L5.3 7.8L3.8 9.2L7.5 13L14.2 6.2Z" fill="#4DBB5F"/>
+</svg><span>Content copied to clipboard</span></div></span></div></div></div>
+  </div>
+</div>
+</div>
+                  </div>
+                </div>
+<a data-name="com.suparnatural.core.concurrency/JobDispatcher/dispatchOnMainThread/#TypeParam(bounds=[kotlin.Any?])#kotlin.Function1[TypeParam(bounds=[kotlin.Any?]),TypeParam(bounds=[kotlin.Any?])]/PointingToDeclaration/"></a>
+                <div class="table-row" data-filterable-current=":concurrency:dokkaHtml/commonMain" data-filterable-set=":concurrency:dokkaHtml/commonMain">
+                  <div class="main-subrow "><span><a href="dispatch-on-main-thread.html">dispatchOnMainThread</a><span class="anchor-wrapper"><span class="anchor-icon" pointing-to="com.suparnatural.core.concurrency/JobDispatcher/dispatchOnMainThread/#TypeParam(bounds=[kotlin.Any?])#kotlin.Function1[TypeParam(bounds=[kotlin.Any?]),TypeParam(bounds=[kotlin.Any?])]/PointingToDeclaration/"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <path d="M21.2496 5.3C20.3496 4.5 19.2496 4 18.0496 4C16.8496 4 15.6496 4.5 14.8496 5.3L10.3496 9.8L11.7496 11.2L16.2496 6.7C17.2496 5.7 18.8496 5.7 19.8496 6.7C20.8496 7.7 20.8496 9.3 19.8496 10.3L15.3496 14.8L16.7496 16.2L21.2496 11.7C22.1496 10.8 22.5496 9.7 22.5496 8.5C22.5496 7.3 22.1496 6.2 21.2496 5.3Z"/>
+    <path d="M8.35 16.7998C7.35 17.7998 5.75 17.7998 4.75 16.7998C3.75 15.7998 3.75 14.1998 4.75 13.1998L9.25 8.6998L7.85 7.2998L3.35 11.7998C1.55 13.5998 1.55 16.3998 3.35 18.1998C4.25 19.0998 5.35 19.4998 6.55 19.4998C7.75 19.4998 8.85 19.0998 9.75 18.1998L14.25 13.6998L12.85 12.2998L8.35 16.7998Z"/>
+</svg></span>
+                        <div class="copy-popup-wrapper "><svg width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <path d="M18 9C18 14 14 18 9 18C4 18 0 14 0 9C0 4 4 0 9 0C14 0 18 4 18 9ZM14.2 6.2L12.8 4.8L7.5 10.1L5.3 7.8L3.8 9.2L7.5 13L14.2 6.2Z" fill="#4DBB5F"/>
+</svg><span>Link copied to clipboard</span></div>
+                      </span></span>
+                    <div class="platform-tags">
+                      <div class="platform-tag common-like">common</div>
+                    </div>
+                  </div>
+                  <div class="platform-dependent-row keyValue">
+                    <div></div>
+                    <div class="title"><div class="divergent-group" data-filterable-current=":concurrency:dokkaHtml/commonMain" data-filterable-set=":concurrency:dokkaHtml/commonMain"><div class="brief-with-platform-tags"><div class="inner-brief-with-platform-tags"><div class="brief "><p class="paragraph">Dispatches a non-capturing lambda <span data-unresolved-link="com.suparnatural.core.concurrency/JobDispatcher/job/#/PointingToCallableParameters(-1)/">job</span> with <span data-unresolved-link="com.suparnatural.core.concurrency/JobDispatcher/jobInput/#/PointingToCallableParameters(-1)/">jobInput</span> as its input on the main thread. The <span data-unresolved-link="com.suparnatural.core.concurrency/JobDispatcher/jobInput/#/PointingToCallableParameters(-1)/">jobInput</span> is converted to an immutable object and then passed to the job as argument.</p></div></div>
+<span class="pull-right"></span></div>
+
+  <div class="main-subrow">
+    <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-depenent-content" data-active="" data-togglable=":concurrency:dokkaHtml/commonMain"><div class="symbol monospace">fun &lt;<a href="dispatch-on-main-thread.html">T</a>, <a href="dispatch-on-main-thread.html">V</a>&gt; <a href="dispatch-on-main-thread.html">dispatchOnMainThread</a>(jobInput: <a href="dispatch-on-main-thread.html">T</a>, job: (<a href="dispatch-on-main-thread.html">T</a>) -&gt; <a href="dispatch-on-main-thread.html">V</a>): <a href="../-future/index.html">Future</a>&lt;<a href="dispatch-on-main-thread.html">V</a>&gt;<span class="top-right-position"><span class="copy-icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path fill-rule="evenodd" clip-rule="evenodd" d="M5 4H15V16H5V4ZM17 7H19V18V20H17H8V18H17V7Z" fill="black"/>
+                       </svg></span><div class="copy-popup-wrapper popup-to-left"><svg width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <path d="M18 9C18 14 14 18 9 18C4 18 0 14 0 9C0 4 4 0 9 0C14 0 18 4 18 9ZM14.2 6.2L12.8 4.8L7.5 10.1L5.3 7.8L3.8 9.2L7.5 13L14.2 6.2Z" fill="#4DBB5F"/>
+</svg><span>Content copied to clipboard</span></div></span></div></div></div>
+  </div>
+</div>
+</div>
+                  </div>
+                </div>
+<a data-name="com.suparnatural.core.concurrency/JobDispatcher/dispatchOnNewBackgroundThread/#TypeParam(bounds=[kotlin.Any?])#kotlin.Function1[TypeParam(bounds=[kotlin.Any?]),TypeParam(bounds=[kotlin.Any?])]/PointingToDeclaration/"></a>
+                <div class="table-row" data-filterable-current=":concurrency:dokkaHtml/commonMain" data-filterable-set=":concurrency:dokkaHtml/commonMain">
+                  <div class="main-subrow "><span><a href="dispatch-on-new-background-thread.html">dispatchOnNewBackgroundThread</a><span class="anchor-wrapper"><span class="anchor-icon" pointing-to="com.suparnatural.core.concurrency/JobDispatcher/dispatchOnNewBackgroundThread/#TypeParam(bounds=[kotlin.Any?])#kotlin.Function1[TypeParam(bounds=[kotlin.Any?]),TypeParam(bounds=[kotlin.Any?])]/PointingToDeclaration/"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <path d="M21.2496 5.3C20.3496 4.5 19.2496 4 18.0496 4C16.8496 4 15.6496 4.5 14.8496 5.3L10.3496 9.8L11.7496 11.2L16.2496 6.7C17.2496 5.7 18.8496 5.7 19.8496 6.7C20.8496 7.7 20.8496 9.3 19.8496 10.3L15.3496 14.8L16.7496 16.2L21.2496 11.7C22.1496 10.8 22.5496 9.7 22.5496 8.5C22.5496 7.3 22.1496 6.2 21.2496 5.3Z"/>
+    <path d="M8.35 16.7998C7.35 17.7998 5.75 17.7998 4.75 16.7998C3.75 15.7998 3.75 14.1998 4.75 13.1998L9.25 8.6998L7.85 7.2998L3.35 11.7998C1.55 13.5998 1.55 16.3998 3.35 18.1998C4.25 19.0998 5.35 19.4998 6.55 19.4998C7.75 19.4998 8.85 19.0998 9.75 18.1998L14.25 13.6998L12.85 12.2998L8.35 16.7998Z"/>
+</svg></span>
+                        <div class="copy-popup-wrapper "><svg width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <path d="M18 9C18 14 14 18 9 18C4 18 0 14 0 9C0 4 4 0 9 0C14 0 18 4 18 9ZM14.2 6.2L12.8 4.8L7.5 10.1L5.3 7.8L3.8 9.2L7.5 13L14.2 6.2Z" fill="#4DBB5F"/>
+</svg><span>Link copied to clipboard</span></div>
+                      </span></span>
+                    <div class="platform-tags">
+                      <div class="platform-tag common-like">common</div>
+                    </div>
+                  </div>
+                  <div class="platform-dependent-row keyValue">
+                    <div></div>
+                    <div class="title"><div class="divergent-group" data-filterable-current=":concurrency:dokkaHtml/commonMain" data-filterable-set=":concurrency:dokkaHtml/commonMain"><div class="brief-with-platform-tags"><div class="inner-brief-with-platform-tags"><div class="brief "><p class="paragraph"><p class="paragraph">Dispatches a non-capturing lambda <span data-unresolved-link="com.suparnatural.core.concurrency/JobDispatcher/job/#/PointingToCallableParameters(-1)/">job</span> with <span data-unresolved-link="com.suparnatural.core.concurrency/JobDispatcher/jobInput/#/PointingToCallableParameters(-1)/">jobInput</span> as its input on a background thread. The <span data-unresolved-link="com.suparnatural.core.concurrency/JobDispatcher/jobInput/#/PointingToCallableParameters(-1)/">jobInput</span> is converted to an immutable object and then passed to the job as argument.</p><p class="paragraph">On Android, it uses Executor service and on iOS, it uses background queue.</p></p></div></div>
+<span class="pull-right"></span></div>
+
+  <div class="main-subrow">
+    <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-depenent-content" data-active="" data-togglable=":concurrency:dokkaHtml/commonMain"><div class="symbol monospace">fun &lt;<a href="dispatch-on-new-background-thread.html">T</a>, <a href="dispatch-on-new-background-thread.html">V</a>&gt; <a href="dispatch-on-new-background-thread.html">dispatchOnNewBackgroundThread</a>(jobInput: <a href="dispatch-on-new-background-thread.html">T</a>, job: (<a href="dispatch-on-new-background-thread.html">T</a>) -&gt; <a href="dispatch-on-new-background-thread.html">V</a>): <a href="../-future/index.html">Future</a>&lt;<a href="dispatch-on-new-background-thread.html">V</a>&gt;<span class="top-right-position"><span class="copy-icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path fill-rule="evenodd" clip-rule="evenodd" d="M5 4H15V16H5V4ZM17 7H19V18V20H17H8V18H17V7Z" fill="black"/>
+                       </svg></span><div class="copy-popup-wrapper popup-to-left"><svg width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <path d="M18 9C18 14 14 18 9 18C4 18 0 14 0 9C0 4 4 0 9 0C14 0 18 4 18 9ZM14.2 6.2L12.8 4.8L7.5 10.1L5.3 7.8L3.8 9.2L7.5 13L14.2 6.2Z" fill="#4DBB5F"/>
+</svg><span>Content copied to clipboard</span></div></span></div></div></div>
+  </div>
+</div>
+</div>
+                  </div>
+                </div>
+<a data-name="com.suparnatural.core.concurrency/JobDispatcher/dispatchOnWorker/#com.suparnatural.core.concurrency.Worker#TypeParam(bounds=[kotlin.Any?])#kotlin.Function1[TypeParam(bounds=[kotlin.Any?]),TypeParam(bounds=[kotlin.Any?])]/PointingToDeclaration/"></a>
+                <div class="table-row" data-filterable-current=":concurrency:dokkaHtml/commonMain" data-filterable-set=":concurrency:dokkaHtml/commonMain">
+                  <div class="main-subrow "><span><a href="dispatch-on-worker.html">dispatchOnWorker</a><span class="anchor-wrapper"><span class="anchor-icon" pointing-to="com.suparnatural.core.concurrency/JobDispatcher/dispatchOnWorker/#com.suparnatural.core.concurrency.Worker#TypeParam(bounds=[kotlin.Any?])#kotlin.Function1[TypeParam(bounds=[kotlin.Any?]),TypeParam(bounds=[kotlin.Any?])]/PointingToDeclaration/"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <path d="M21.2496 5.3C20.3496 4.5 19.2496 4 18.0496 4C16.8496 4 15.6496 4.5 14.8496 5.3L10.3496 9.8L11.7496 11.2L16.2496 6.7C17.2496 5.7 18.8496 5.7 19.8496 6.7C20.8496 7.7 20.8496 9.3 19.8496 10.3L15.3496 14.8L16.7496 16.2L21.2496 11.7C22.1496 10.8 22.5496 9.7 22.5496 8.5C22.5496 7.3 22.1496 6.2 21.2496 5.3Z"/>
+    <path d="M8.35 16.7998C7.35 17.7998 5.75 17.7998 4.75 16.7998C3.75 15.7998 3.75 14.1998 4.75 13.1998L9.25 8.6998L7.85 7.2998L3.35 11.7998C1.55 13.5998 1.55 16.3998 3.35 18.1998C4.25 19.0998 5.35 19.4998 6.55 19.4998C7.75 19.4998 8.85 19.0998 9.75 18.1998L14.25 13.6998L12.85 12.2998L8.35 16.7998Z"/>
+</svg></span>
+                        <div class="copy-popup-wrapper "><svg width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <path d="M18 9C18 14 14 18 9 18C4 18 0 14 0 9C0 4 4 0 9 0C14 0 18 4 18 9ZM14.2 6.2L12.8 4.8L7.5 10.1L5.3 7.8L3.8 9.2L7.5 13L14.2 6.2Z" fill="#4DBB5F"/>
+</svg><span>Link copied to clipboard</span></div>
+                      </span></span>
+                    <div class="platform-tags">
+                      <div class="platform-tag common-like">common</div>
+                    </div>
+                  </div>
+                  <div class="platform-dependent-row keyValue">
+                    <div></div>
+                    <div class="title"><div class="divergent-group" data-filterable-current=":concurrency:dokkaHtml/commonMain" data-filterable-set=":concurrency:dokkaHtml/commonMain"><div class="brief-with-platform-tags"><div class="inner-brief-with-platform-tags"><div class="brief "><p class="paragraph">Dispatches <span data-unresolved-link="com.suparnatural.core.concurrency/JobDispatcher/job/#/PointingToCallableParameters(-1)/">job</span> with <span data-unresolved-link="com.suparnatural.core.concurrency/JobDispatcher/jobInput/#/PointingToCallableParameters(-1)/">jobInput</span> on the <span data-unresolved-link="com.suparnatural.core.concurrency/JobDispatcher/worker/#/PointingToCallableParameters(-1)/">worker</span> instance</p></div></div>
+<span class="pull-right"></span></div>
+
+  <div class="main-subrow">
+    <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-depenent-content" data-active="" data-togglable=":concurrency:dokkaHtml/commonMain"><div class="symbol monospace">fun &lt;<a href="dispatch-on-worker.html">T</a>, <a href="dispatch-on-worker.html">V</a>&gt; <a href="dispatch-on-worker.html">dispatchOnWorker</a>(worker: <a href="../-worker/index.html">Worker</a>, jobInput: <a href="dispatch-on-worker.html">T</a>, job: (<a href="dispatch-on-worker.html">T</a>) -&gt; <a href="dispatch-on-worker.html">V</a>): <a href="../-future/index.html">Future</a>&lt;<a href="dispatch-on-worker.html">V</a>&gt;<span class="top-right-position"><span class="copy-icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path fill-rule="evenodd" clip-rule="evenodd" d="M5 4H15V16H5V4ZM17 7H19V18V20H17H8V18H17V7Z" fill="black"/>
+                       </svg></span><div class="copy-popup-wrapper popup-to-left"><svg width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <path d="M18 9C18 14 14 18 9 18C4 18 0 14 0 9C0 4 4 0 9 0C14 0 18 4 18 9ZM14.2 6.2L12.8 4.8L7.5 10.1L5.3 7.8L3.8 9.2L7.5 13L14.2 6.2Z" fill="#4DBB5F"/>
+</svg><span>Content copied to clipboard</span></div></span></div></div></div>
+  </div>
+</div>
+</div>
+                  </div>
+                </div>
+<a data-name="kotlin/Any/equals/#kotlin.Any?/PointingToDeclaration/"></a>
+                <div class="table-row" data-filterable-current=":concurrency:dokkaHtml/commonMain" data-filterable-set=":concurrency:dokkaHtml/commonMain">
+                  <div class="main-subrow "><span><a href="../-worker-factory/-companion/index.html#kotlin/Any/equals/#kotlin.Any?/PointingToDeclaration/">equals</a><span class="anchor-wrapper"><span class="anchor-icon" pointing-to="kotlin/Any/equals/#kotlin.Any?/PointingToDeclaration/"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <path d="M21.2496 5.3C20.3496 4.5 19.2496 4 18.0496 4C16.8496 4 15.6496 4.5 14.8496 5.3L10.3496 9.8L11.7496 11.2L16.2496 6.7C17.2496 5.7 18.8496 5.7 19.8496 6.7C20.8496 7.7 20.8496 9.3 19.8496 10.3L15.3496 14.8L16.7496 16.2L21.2496 11.7C22.1496 10.8 22.5496 9.7 22.5496 8.5C22.5496 7.3 22.1496 6.2 21.2496 5.3Z"/>
+    <path d="M8.35 16.7998C7.35 17.7998 5.75 17.7998 4.75 16.7998C3.75 15.7998 3.75 14.1998 4.75 13.1998L9.25 8.6998L7.85 7.2998L3.35 11.7998C1.55 13.5998 1.55 16.3998 3.35 18.1998C4.25 19.0998 5.35 19.4998 6.55 19.4998C7.75 19.4998 8.85 19.0998 9.75 18.1998L14.25 13.6998L12.85 12.2998L8.35 16.7998Z"/>
+</svg></span>
+                        <div class="copy-popup-wrapper "><svg width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <path d="M18 9C18 14 14 18 9 18C4 18 0 14 0 9C0 4 4 0 9 0C14 0 18 4 18 9ZM14.2 6.2L12.8 4.8L7.5 10.1L5.3 7.8L3.8 9.2L7.5 13L14.2 6.2Z" fill="#4DBB5F"/>
+</svg><span>Link copied to clipboard</span></div>
+                      </span></span>
+                    <div class="platform-tags">
+                      <div class="platform-tag common-like">common</div>
+                    </div>
+                  </div>
+                  <div class="platform-dependent-row keyValue">
+                    <div></div>
+                    <div class="title"><div class="divergent-group" data-filterable-current=":concurrency:dokkaHtml/commonMain" data-filterable-set=":concurrency:dokkaHtml/commonMain"><div class="brief-with-platform-tags"><div class="inner-brief-with-platform-tags"></div>
+<span class="pull-right"></span></div>
+
+  <div class="main-subrow">
+    <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-depenent-content" data-active="" data-togglable=":concurrency:dokkaHtml/commonMain"><div class="symbol monospace">open operator override fun <a href="../-worker-factory/-companion/index.html#kotlin/Any/equals/#kotlin.Any?/PointingToDeclaration/">equals</a>(other: <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/index.html">Any</a>?): <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html">Boolean</a><span class="top-right-position"><span class="copy-icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path fill-rule="evenodd" clip-rule="evenodd" d="M5 4H15V16H5V4ZM17 7H19V18V20H17H8V18H17V7Z" fill="black"/>
+                       </svg></span><div class="copy-popup-wrapper popup-to-left"><svg width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <path d="M18 9C18 14 14 18 9 18C4 18 0 14 0 9C0 4 4 0 9 0C14 0 18 4 18 9ZM14.2 6.2L12.8 4.8L7.5 10.1L5.3 7.8L3.8 9.2L7.5 13L14.2 6.2Z" fill="#4DBB5F"/>
+</svg><span>Content copied to clipboard</span></div></span></div></div></div>
+  </div>
+</div>
+</div>
+                  </div>
+                </div>
+<a data-name="kotlin/Any/hashCode/#/PointingToDeclaration/"></a>
+                <div class="table-row" data-filterable-current=":concurrency:dokkaHtml/commonMain" data-filterable-set=":concurrency:dokkaHtml/commonMain">
+                  <div class="main-subrow "><span><a href="../-worker-factory/-companion/index.html#kotlin/Any/hashCode/#/PointingToDeclaration/">hashCode</a><span class="anchor-wrapper"><span class="anchor-icon" pointing-to="kotlin/Any/hashCode/#/PointingToDeclaration/"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <path d="M21.2496 5.3C20.3496 4.5 19.2496 4 18.0496 4C16.8496 4 15.6496 4.5 14.8496 5.3L10.3496 9.8L11.7496 11.2L16.2496 6.7C17.2496 5.7 18.8496 5.7 19.8496 6.7C20.8496 7.7 20.8496 9.3 19.8496 10.3L15.3496 14.8L16.7496 16.2L21.2496 11.7C22.1496 10.8 22.5496 9.7 22.5496 8.5C22.5496 7.3 22.1496 6.2 21.2496 5.3Z"/>
+    <path d="M8.35 16.7998C7.35 17.7998 5.75 17.7998 4.75 16.7998C3.75 15.7998 3.75 14.1998 4.75 13.1998L9.25 8.6998L7.85 7.2998L3.35 11.7998C1.55 13.5998 1.55 16.3998 3.35 18.1998C4.25 19.0998 5.35 19.4998 6.55 19.4998C7.75 19.4998 8.85 19.0998 9.75 18.1998L14.25 13.6998L12.85 12.2998L8.35 16.7998Z"/>
+</svg></span>
+                        <div class="copy-popup-wrapper "><svg width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <path d="M18 9C18 14 14 18 9 18C4 18 0 14 0 9C0 4 4 0 9 0C14 0 18 4 18 9ZM14.2 6.2L12.8 4.8L7.5 10.1L5.3 7.8L3.8 9.2L7.5 13L14.2 6.2Z" fill="#4DBB5F"/>
+</svg><span>Link copied to clipboard</span></div>
+                      </span></span>
+                    <div class="platform-tags">
+                      <div class="platform-tag common-like">common</div>
+                    </div>
+                  </div>
+                  <div class="platform-dependent-row keyValue">
+                    <div></div>
+                    <div class="title"><div class="divergent-group" data-filterable-current=":concurrency:dokkaHtml/commonMain" data-filterable-set=":concurrency:dokkaHtml/commonMain"><div class="brief-with-platform-tags"><div class="inner-brief-with-platform-tags"></div>
+<span class="pull-right"></span></div>
+
+  <div class="main-subrow">
+    <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-depenent-content" data-active="" data-togglable=":concurrency:dokkaHtml/commonMain"><div class="symbol monospace">open override fun <a href="../-worker-factory/-companion/index.html#kotlin/Any/hashCode/#/PointingToDeclaration/">hashCode</a>(): <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html">Int</a><span class="top-right-position"><span class="copy-icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path fill-rule="evenodd" clip-rule="evenodd" d="M5 4H15V16H5V4ZM17 7H19V18V20H17H8V18H17V7Z" fill="black"/>
+                       </svg></span><div class="copy-popup-wrapper popup-to-left"><svg width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <path d="M18 9C18 14 14 18 9 18C4 18 0 14 0 9C0 4 4 0 9 0C14 0 18 4 18 9ZM14.2 6.2L12.8 4.8L7.5 10.1L5.3 7.8L3.8 9.2L7.5 13L14.2 6.2Z" fill="#4DBB5F"/>
+</svg><span>Content copied to clipboard</span></div></span></div></div></div>
+  </div>
+</div>
+</div>
+                  </div>
+                </div>
+<a data-name="kotlin/Any/toString/#/PointingToDeclaration/"></a>
+                <div class="table-row" data-filterable-current=":concurrency:dokkaHtml/commonMain" data-filterable-set=":concurrency:dokkaHtml/commonMain">
+                  <div class="main-subrow "><span><a href="../-worker-factory/-companion/index.html#kotlin/Any/toString/#/PointingToDeclaration/">toString</a><span class="anchor-wrapper"><span class="anchor-icon" pointing-to="kotlin/Any/toString/#/PointingToDeclaration/"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <path d="M21.2496 5.3C20.3496 4.5 19.2496 4 18.0496 4C16.8496 4 15.6496 4.5 14.8496 5.3L10.3496 9.8L11.7496 11.2L16.2496 6.7C17.2496 5.7 18.8496 5.7 19.8496 6.7C20.8496 7.7 20.8496 9.3 19.8496 10.3L15.3496 14.8L16.7496 16.2L21.2496 11.7C22.1496 10.8 22.5496 9.7 22.5496 8.5C22.5496 7.3 22.1496 6.2 21.2496 5.3Z"/>
+    <path d="M8.35 16.7998C7.35 17.7998 5.75 17.7998 4.75 16.7998C3.75 15.7998 3.75 14.1998 4.75 13.1998L9.25 8.6998L7.85 7.2998L3.35 11.7998C1.55 13.5998 1.55 16.3998 3.35 18.1998C4.25 19.0998 5.35 19.4998 6.55 19.4998C7.75 19.4998 8.85 19.0998 9.75 18.1998L14.25 13.6998L12.85 12.2998L8.35 16.7998Z"/>
+</svg></span>
+                        <div class="copy-popup-wrapper "><svg width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <path d="M18 9C18 14 14 18 9 18C4 18 0 14 0 9C0 4 4 0 9 0C14 0 18 4 18 9ZM14.2 6.2L12.8 4.8L7.5 10.1L5.3 7.8L3.8 9.2L7.5 13L14.2 6.2Z" fill="#4DBB5F"/>
+</svg><span>Link copied to clipboard</span></div>
+                      </span></span>
+                    <div class="platform-tags">
+                      <div class="platform-tag common-like">common</div>
+                    </div>
+                  </div>
+                  <div class="platform-dependent-row keyValue">
+                    <div></div>
+                    <div class="title"><div class="divergent-group" data-filterable-current=":concurrency:dokkaHtml/commonMain" data-filterable-set=":concurrency:dokkaHtml/commonMain"><div class="brief-with-platform-tags"><div class="inner-brief-with-platform-tags"></div>
+<span class="pull-right"></span></div>
+
+  <div class="main-subrow">
+    <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-depenent-content" data-active="" data-togglable=":concurrency:dokkaHtml/commonMain"><div class="symbol monospace">open override fun <a href="../-worker-factory/-companion/index.html#kotlin/Any/toString/#/PointingToDeclaration/">toString</a>(): <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html">String</a><span class="top-right-position"><span class="copy-icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path fill-rule="evenodd" clip-rule="evenodd" d="M5 4H15V16H5V4ZM17 7H19V18V20H17H8V18H17V7Z" fill="black"/>
+                       </svg></span><div class="copy-popup-wrapper popup-to-left"><svg width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <path d="M18 9C18 14 14 18 9 18C4 18 0 14 0 9C0 4 4 0 9 0C14 0 18 4 18 9ZM14.2 6.2L12.8 4.8L7.5 10.1L5.3 7.8L3.8 9.2L7.5 13L14.2 6.2Z" fill="#4DBB5F"/>
+</svg><span>Content copied to clipboard</span></div></span></div></div></div>
+  </div>
+</div>
+</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="footer"><span class="go-to-top-icon"><a href="#container"><svg width="12" height="10" viewBox="0 0 12 10" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <path d="M11.3337 9.66683H0.666992L6.00033 3.66683L11.3337 9.66683Z" fill="black"/>
+    <path d="M0.666992 0.333496H11.3337V1.66683H0.666992V0.333496Z" fill="black"/>
+</svg></a></span><span>© 2020 Copyright</span><span class="pull-right"><span>Sponsored and developed by dokka</span><a href="https://github.com/Kotlin/dokka"><span class="padded-icon"><svg width="8" height="8" viewBox="0 0 8 8" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <path d="M8 0H2.3949L4.84076 2.44586L0 7.28662L0.713376 8L5.55414 3.15924L8 5.6051V0Z" fill="black"/>
+</svg></span></a></span></div>
+      </div>
+    </div>
+  </body>
+</html>
+

@@ -1,7 +1,6 @@
 package com.suparnatural.core.graphql
 
 import com.suparnatural.core.rx.Observable
-import kotlinx.serialization.UnstableDefault
 import kotlinx.serialization.json.Json
 
 /**
@@ -35,12 +34,11 @@ interface JsonHttpFetcher : HttpFetcher<JsonHttpFetchRequest, JsonHttpFetchRespo
  */
 class JsonHttpGraphQlClient(chain: Link<GraphQlOperation<*>, *, JsonHttpFetchResponse>) : GraphQlClient<JsonHttpFetchResponse>(chain) {
 
-    @UnstableDefault
     override fun <T> execute(operation: GraphQlOperation<T>): Observable<Result<GraphQlResponse<T>, GraphQlClientFailureResponse<T>>> {
         return chain.execute(operation).map {
             try {
                 val body = it.body ?: "{}"
-                val json = Json.parse(GraphQlResponse.serializer(operation.responseSerializer), body)
+                val json = Json.decodeFromString(GraphQlResponse.serializer(operation.responseSerializer), body)
                 if (it.isFailure) {
                     return@map Result.Failure<GraphQlResponse<T>, GraphQlClientFailureResponse<T>>(GraphQlClientFailureResponse(GraphQlClientError.INVALID_RESPONSE, json))
                 }
@@ -77,7 +75,6 @@ open class JsonHttpGraphQlLink(
 
     private val contextKeyHeaders = "headers"
 
-    @UnstableDefault
     override fun execute(
             operation: GraphQlOperation<*>,
             next: Link<GraphQlOperation<*>, *, Unit>?

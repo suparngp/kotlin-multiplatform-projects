@@ -15,7 +15,7 @@ package com.suparnatural.core.concurrency
  *
  *
  */
-expect class AtomicReference<T>(value_: T) {
+expect class AtomicReference<T>(value: T) {
     /**
      * The wrapped value
      */

@@ -1,99 +1,139 @@
-import com.android.build.gradle.LibraryExtension
-import constants.Plugins
-import constants.ProjectConfig
-
 plugins {
-    id("suparnatural-project")
-    id("kotlinx-serialization")
+    id("com.android.library")
+    kotlin("multiplatform")
+    id("kotlin-android-extensions")
+    id("maven-publish")
+    id("org.jetbrains.dokka")
+    kotlin("plugin.serialization") version "1.4.10"
 }
 
-val serializationVersion = "0.20.0"
-version = ProjectConfig.version
-suparnatural {
-    name = "suparnatural-graphql"
-    description = "Graphql type safe models for Kotlin Multiplatform."
-    docsUrl = "https://suparngp.github.io/kotlin-multiplatform-projects/graphql/docs/suparnatural-graphql/index.html"
-    vcsUrl = "https://github.com/suparngp/kotlin-multiplatform-projects/tree/master/graphql"
-    versionLabel = project.version.toString()
-    supportsAndroid = true
-    supportsCocoapods = true
-    supportsIos = true
-    supportsJvm = true
-    buildNumber = ProjectConfig.buildNumber
-    bintray {
-        publish = true
-        repository = extra[ProjectConfig.Properties.bintrayRepository]!!.toString()
-        username = extra[ProjectConfig.Properties.bintrayUsername]!!.toString()
-        apiKey = extra[ProjectConfig.Properties.bintrayApiKey]!!.toString()
+val buildNumber = 12
+val versionLabel = "1.0"
+
+object DependencyVersion {
+    const val rx = "1.0.12"
+    const val serialization = "1.0.0-RC2"
+}
+
+
+group = "suparnatural-kotlin-multiplatform"
+version = "$versionLabel.$buildNumber"
+
+repositories {
+    gradlePluginPortal()
+    google()
+    jcenter()
+    mavenCentral()
+    maven {
+        url = uri("https://dl.bintray.com/suparnatural/kotlin-multiplatform")
     }
-    androidMain {
-        dependencies {
-            additional {
-                implementation("org.jetbrains.kotlinx:kotlinx-serialization-runtime:$serializationVersion")
-            }
+}
+
+android {
+    compileSdkVersion(29)
+    defaultConfig {
+        minSdkVersion(21)
+        targetSdkVersion(29)
+        versionCode = buildNumber
+        versionName = versionLabel
+
+        testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
+
+    }
+    buildTypes {
+        val release by getting {
+            isMinifyEnabled = false
         }
-    }
-    androidRelease {
-        dependencies {
-            additional {
-                api("suparnatural-kotlin-multiplatform:rx-android:$version")
-            }
-        }
-    }
-    androidDebug {
-        dependencies {
-            additional {
-                api("suparnatural-kotlin-multiplatform:rx-android-debug:$version")
-            }
-        }
-    }
-    commonMain {
-        dependencies {
-            additional {
-                api("suparnatural-kotlin-multiplatform:rx-metadata:$version")
-                implementation("org.jetbrains.kotlinx:kotlinx-serialization-runtime-common:$serializationVersion")
-            }
+        val debug by getting {
+            isDebuggable = true
         }
     }
 
-    commonTest {
-        dependencies {
-            additional {
-                implementation("org.jetbrains.kotlinx:kotlinx-serialization-runtime-common:$serializationVersion")
-            }
+    sourceSets {
+        val main by getting {
+            java.srcDirs("src/androidMain/kotlin")
+            res.srcDirs("src/androidMain/res")
         }
-    }
-
-    iosX64Main {
-        dependencies {
-            additional {
-                api("suparnatural-kotlin-multiplatform:rx-iosx64:$version")
-                implementation("org.jetbrains.kotlinx:kotlinx-serialization-runtime-native:$serializationVersion")
-            }
-        }
-    }
-
-    iosArm64Main {
-        dependencies {
-            additional {
-                api("suparnatural-kotlin-multiplatform:rx-iosarm64:$version")
-                implementation("org.jetbrains.kotlinx:kotlinx-serialization-runtime-native:$serializationVersion")
-            }
-        }
-    }
-
-    jvmMain {
-        dependencies {
-            additional {
-                api("suparnatural-kotlin-multiplatform:rx-jvm:$version")
-                implementation("org.jetbrains.kotlinx:kotlinx-serialization-runtime:$serializationVersion")
-            }
+        val androidTest by getting {
+            java.srcDirs("src/androidTest/kotlin")
+            res.srcDirs("src/androidTest/res")
         }
     }
 }
 
-extensions.getByType(LibraryExtension::class).apply {
-    packagingOptions {
-        pickFirst("META-INF/kotlinx-serialization-runtime.kotlin_module")
+kotlin {
+    android {
+        publishLibraryVariants("release", "debug")
     }
+    ios {
+        val name = this.name
+        binaries {
+            framework {
+                baseName = "$name-graphql"
+            }
+        }
+    }
+    jvm()
+
+    sourceSets {
+        val commonMain by getting {
+            dependencies {
+                api("suparnatural-kotlin-multiplatform:rx:${DependencyVersion.rx}")
+                implementation("org.jetbrains.kotlinx:kotlinx-serialization-json:${DependencyVersion.serialization}")
+            }
+        }
+        val commonTest by getting {
+            dependencies {
+                implementation(kotlin("test-common"))
+                implementation(kotlin("test-annotations-common"))
+            }
+        }
+        val androidMain by getting {
+            dependencies {
+                implementation("androidx.core:core-ktx:1.3.1")
+            }
+        }
+        val androidTest by getting {
+            dependencies {
+                implementation(kotlin("test"))
+                implementation(kotlin("test-junit"))
+            }
+        }
+
+        val jvmTest by getting {
+            dependencies {
+                implementation(kotlin("test-junit"))
+            }
+        }
+    }
+
+}
+
+dependencies {
+    androidTestImplementation("androidx.test:runner:1.3.0")
+    androidTestImplementation("androidx.test:rules:1.3.0")
+    androidTestUtil("androidx.test:orchestrator:1.3.0")
+}
+
+publishing {
+    repositories {
+        maven {
+            val user = "suparnatural"
+            val repo = "kotlin-multiplatform"
+            val name = "graphql"
+            url = uri("https://api.bintray.com/maven/$user/$repo/$name/;publish=1;override=1")
+
+            credentials {
+                username = if (project.hasProperty("bintray.username")) project.property("bintray.username")
+                    .toString() else System.getenv("BINTRAY_USERNAME")
+                password = if (project.hasProperty("bintray.apiKey")) project.property("bintray.apiKey")
+                    .toString() else System.getenv("BINTRAY_API_KEY")
+            }
+        }
+    }
+}
+
+tasks.withType<org.jetbrains.dokka.gradle.DokkaTask>().configureEach {
+    outputDirectory.set(projectDir.resolve("docs"))
+    moduleName.set("suparnatural-graphql")
 }

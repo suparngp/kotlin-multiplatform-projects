@@ -6,6 +6,8 @@ import com.suparnatural.plugins.graphql.GraphQlPluginExtension
 import com.suparnatural.plugins.graphql.models.FieldGroup
 import kotlinx.serialization.*
 import kotlinx.serialization.json.*
+import kotlinx.serialization.encoding.*
+import kotlinx.serialization.descriptors.*
 
 const val FragmentsGroup = "FragmentsGroup"
 const val FragmentsAdapter = "FragmentsAdapter"
@@ -121,9 +123,9 @@ fun processFieldGroup(
                 .addModifiers(KModifier.OVERRIDE)
                 .addParameter(decoder)
                 .returns(fragmentsAdapterClassName)
-                .addStatement("val json = (%N as %T).decodeJson()", decoder, JsonInput::class)
+                .addStatement("val json = (%N as %T).decodeJsonElement()", decoder, JsonDecoder::class)
                 .addStatement(
-                    "val delegate = %T.nonstrict.fromJson(%T.serializer(), json)",
+                    "val delegate = %T { ignoreUnknownKeys = true }.decodeFromJsonElement(%T.serializer(), json)",
                     Json::class.asClassName(),
                     rootImplClassName
                 )
@@ -135,7 +137,7 @@ fun processFieldGroup(
                 .addParameter(encoder)
                 .addParameter(adapterObj)
                 .addStatement(
-                    "val jsonObjects = mutableListOf<%T>(%T.nonstrict.toJson(%T.serializer(), obj.delegate as %T).jsonObject)",
+                    "val jsonObjects = mutableListOf<%T>(%T { ignoreUnknownKeys = true }.encodeToJsonElement(%T.serializer(), obj.delegate as %T).jsonObject)",
                     JsonElement::class.asClassName(),
                     Json::class.asClassName(),
                     rootImplClassName,
@@ -150,13 +152,13 @@ fun processFieldGroup(
 
                 // change from json to fromJsonOrNull
                 deserializeFunSpec.addStatement(
-                    "val $fragmentSpreadPropertyName = %T.nonstrict.fromJson(%T.Companion, json)",
+                    "val $fragmentSpreadPropertyName = %T { ignoreUnknownKeys = true }.decodeFromJsonElement(%T.Companion, json)",
                     Json::class.asClassName(),
                     fragmentSpreadClassName
                 )
                 serializeFunSpec.addStatement("if (obj.fragments.$fragmentSpreadPropertyName != null) {")
                     .addStatement(
-                        "jsonObjects.add(%T.nonstrict.toJson(%T.Companion, obj.fragments.$fragmentSpreadPropertyName).jsonObject)",
+                        "jsonObjects.add(%T { ignoreUnknownKeys = true }.encodeToJsonElement(%T.Companion, obj.fragments.$fragmentSpreadPropertyName).jsonObject)",
                         Json::class.asClassName(),
                         fragmentSpreadClassName
                     )
@@ -177,8 +179,8 @@ fun processFieldGroup(
                 .addStatement("\t}")
                 .addStatement("}")
                 .addStatement(
-                    "(encoder as %T).encodeJson(%T(jsonMap))",
-                    JsonOutput::class,
+                    "(encoder as %T).encodeJsonElement(%T(jsonMap))",
+                    JsonEncoder::class,
                     JsonObject::class.asClassName()
                 )
 

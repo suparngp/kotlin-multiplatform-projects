@@ -6,7 +6,7 @@ import kotlinx.cinterop.usePinned
 import platform.Foundation.NSData
 import platform.Foundation.dataWithBytes
 
-@UseExperimental(ExperimentalUnsignedTypes::class)
+@OptIn(ExperimentalUnsignedTypes::class)
 fun NSData.toByteArray(): ByteArray? {
     if (bytes == null) {
         return null
@@ -14,7 +14,7 @@ fun NSData.toByteArray(): ByteArray? {
     return bytes!!.readBytes(length.toInt())
 }
 
-@UseExperimental(ExperimentalUnsignedTypes::class)
+@OptIn(ExperimentalUnsignedTypes::class)
 fun ByteArray.toNSData(): NSData? {
     if (isEmpty()) {
         return null

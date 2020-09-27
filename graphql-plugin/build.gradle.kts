@@ -2,7 +2,7 @@ import com.jfrog.bintray.gradle.BintrayExtension
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 
 plugins {
-    kotlin("jvm") version "1.3.70"
+    kotlin("jvm") version "1.4.10"
     `maven-publish`
     `kotlin-dsl`
     id ("com.jfrog.bintray") version "1.8.4"
@@ -14,7 +14,7 @@ buildscript {
     }
 }
 
-val versionLabel = "1.0.11"
+val versionLabel = "1.0.12"
 group = "com.suparnatural.plugins"
 version = versionLabel
 
@@ -29,7 +29,7 @@ dependencies {
     implementation(kotlin("stdlib-jdk8"))
     implementation("com.fasterxml.jackson.module:jackson-module-kotlin:2.9.9")
     implementation("com.squareup:kotlinpoet:1.3.0")
-    implementation("org.jetbrains.kotlinx:kotlinx-serialization-runtime:0.20.0")
+    implementation("org.jetbrains.kotlinx:kotlinx-serialization-json:1.0.0-RC2")
 
     testImplementation("org.junit.jupiter:junit-jupiter:5.5.1")
 }

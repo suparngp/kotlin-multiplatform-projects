@@ -3,6 +3,8 @@ package com.suparnatural.core.graphql
 import kotlinx.serialization.*
 import kotlinx.serialization.json.*
 import kotlin.collections.set
+import kotlinx.serialization.descriptors.*
+import kotlinx.serialization.encoding.*
 
 interface Fragments {
     @Serializable
@@ -47,16 +49,15 @@ interface Fragments {
             ) : Country by delegate {
                 companion object : KSerializer<CountryFragmentsAdapter> {
                     @InternalSerializationApi
-                    override val descriptor: SerialDescriptor = PrimitiveDescriptor("Country", PrimitiveKind.STRING)
+                    override val descriptor: SerialDescriptor = PrimitiveSerialDescriptor("Country", PrimitiveKind.STRING)
 
 
-                    @UnstableDefault
                     override fun serialize(encoder: Encoder, obj: CountryFragmentsAdapter) {
                         val jsonObjects =
-                                mutableListOf<JsonElement>(Json.nonstrict.toJson(CountryImpl.serializer(),
+                                mutableListOf<JsonElement>(Json { ignoreUnknownKeys = true }.encodeToJsonElement(CountryImpl.serializer(),
                                         obj.delegate as CountryImpl).jsonObject)
                         if (obj.fragments.countryDetails != null) {
-                            jsonObjects.add(Json.nonstrict.toJson(CountryDetails.Companion,
+                            jsonObjects.add(Json { ignoreUnknownKeys = true }.encodeToJsonElement(CountryDetails.Companion,
                                     obj.fragments.countryDetails).jsonObject)
                         }
                         val jsonMap = mutableMapOf<String, JsonElement>()
@@ -65,14 +66,13 @@ interface Fragments {
                                 jsonMap[key] = jsonObject[key]!!
                             }
                         }
-                        (encoder as JsonOutput).encodeJson(JsonObject(jsonMap))
+                        (encoder as JsonEncoder).encodeJsonElement(JsonObject(jsonMap))
                     }
 
-                    @UnstableDefault
                     override fun deserialize(decoder: Decoder): CountryFragmentsAdapter {
-                        val json = (decoder as JsonInput).decodeJson()
-                        val delegate = Json.nonstrict.fromJson(CountryImpl.serializer(), json)
-                        val countryDetails = Json.nonstrict.fromJson(CountryDetails.Companion, json)
+                        val json = (decoder as JsonDecoder).decodeJsonElement()
+                        val delegate = Json { ignoreUnknownKeys = true }.decodeFromJsonElement(CountryImpl.serializer(), json)
+                        val countryDetails = Json { ignoreUnknownKeys = true }.decodeFromJsonElement(CountryDetails.Companion, json)
                         return CountryFragmentsAdapter(delegate, FragmentsGroup(countryDetails))
                     }
                 }
@@ -139,7 +139,7 @@ class Operations {
           }
         }"""
 
-        override val variables: MutableMap<String, Any?> = mutableMapOf()
+        @Serializable override val variables: MutableMap<String, JsonElement?> = mutableMapOf()
 
         @Serializable
         data class CountriesResponse(
@@ -182,7 +182,7 @@ class Operations {
           }
         }"""
 
-        override val variables: MutableMap<String, Any?> = mutableMapOf("code" to code)
+        override val variables: MutableMap<String, JsonElement?> = mutableMapOf("code" to Json.decodeFromString(Json.encodeToString(code)))
 
         override val responseSerializer:
                 KSerializer<Operations.CountryCodeQuery.CountryCodeQueryResponse> =
@@ -210,16 +210,15 @@ class Operations {
                         val fragments: FragmentsGroup = FragmentsGroup()
                 ) : Country by delegate {
                     companion object : KSerializer<CountryFragmentsAdapter> {
-                        override val descriptor: SerialDescriptor = PrimitiveDescriptor("Country", PrimitiveKind.STRING)
+                        override val descriptor: SerialDescriptor = PrimitiveSerialDescriptor("Country", PrimitiveKind.STRING)
 
 
-                        @UnstableDefault
                         override fun serialize(encoder: Encoder, obj: CountryFragmentsAdapter) {
                             val jsonObjects =
-                                    mutableListOf<JsonElement>(Json.nonstrict.toJson(CountryImpl.serializer(),
+                                    mutableListOf<JsonElement>(Json { ignoreUnknownKeys = true }.encodeToJsonElement(CountryImpl.serializer(),
                                             obj.delegate as CountryImpl).jsonObject)
                             if (obj.fragments.countryDetails != null) {
-                                jsonObjects.add(Json.nonstrict.toJson(Fragments.CountryDetails.Companion,
+                                jsonObjects.add(Json{ignoreUnknownKeys = true}.encodeToJsonElement(Fragments.CountryDetails.Companion,
                                         obj.fragments.countryDetails).jsonObject)
                             }
                             val jsonMap = mutableMapOf<String, JsonElement>()
@@ -228,14 +227,13 @@ class Operations {
                                     jsonMap[key] = jsonObject[key]!!
                                 }
                             }
-                            (encoder as JsonOutput).encodeJson(JsonObject(jsonMap))
+                            (encoder as JsonEncoder).encodeJsonElement(JsonObject(jsonMap))
                         }
 
-                        @UnstableDefault
                         override fun deserialize(decoder: Decoder): CountryFragmentsAdapter {
-                            val json = (decoder as JsonInput).decodeJson()
-                            val delegate = Json.nonstrict.fromJson(CountryImpl.serializer(), json)
-                            val countryDetails = Json.nonstrict.fromJson(Fragments.CountryDetails.Companion, json)
+                            val json = (decoder as JsonDecoder).decodeJsonElement()
+                            val delegate = Json { ignoreUnknownKeys = true }.decodeFromJsonElement(CountryImpl.serializer(), json)
+                            val countryDetails = Json { ignoreUnknownKeys = true }.decodeFromJsonElement(Fragments.CountryDetails.Companion, json)
                             return CountryFragmentsAdapter(delegate, FragmentsGroup(countryDetails))
                         }
                     }
@@ -274,16 +272,15 @@ class Operations {
                             val fragments: FragmentsGroup = FragmentsGroup()
                     ) : Continent by delegate {
                         companion object : KSerializer<ContinentFragmentsAdapter> {
-                            override val descriptor: SerialDescriptor = PrimitiveDescriptor("Continent", PrimitiveKind.STRING)
+                            override val descriptor: SerialDescriptor = PrimitiveSerialDescriptor("Continent", PrimitiveKind.STRING)
 
 
-                            @UnstableDefault
                             override fun serialize(encoder: Encoder, obj: ContinentFragmentsAdapter) {
                                 val jsonObjects =
-                                        mutableListOf<JsonElement>(Json.nonstrict.toJson(ContinentImpl.serializer(),
+                                        mutableListOf<JsonElement>(Json { ignoreUnknownKeys = true }.encodeToJsonElement(ContinentImpl.serializer(),
                                                 obj.delegate as ContinentImpl).jsonObject)
                                 if (obj.fragments.continentDetails != null) {
-                                    jsonObjects.add(Json.nonstrict.toJson(Fragments.ContinentDetails.Companion,
+                                    jsonObjects.add(Json { ignoreUnknownKeys = true }.encodeToJsonElement(Fragments.ContinentDetails.Companion,
                                             obj.fragments.continentDetails).jsonObject)
                                 }
                                 val jsonMap = mutableMapOf<String, JsonElement>()
@@ -292,14 +289,13 @@ class Operations {
                                         jsonMap[key] = jsonObject[key]!!
                                     }
                                 }
-                                (encoder as JsonOutput).encodeJson(JsonObject(jsonMap))
+                                (encoder as JsonEncoder).encodeJsonElement(JsonObject(jsonMap))
                             }
 
-                            @UnstableDefault
                             override fun deserialize(decoder: Decoder): ContinentFragmentsAdapter {
-                                val json = (decoder as JsonInput).decodeJson()
-                                val delegate = Json.nonstrict.fromJson(ContinentImpl.serializer(), json)
-                                val continentDetails = Json.nonstrict.fromJson(Fragments.ContinentDetails.Companion,
+                                val json = (decoder as JsonDecoder).decodeJsonElement()
+                                val delegate = Json { ignoreUnknownKeys = true }.decodeFromJsonElement(ContinentImpl.serializer(), json)
+                                val continentDetails = Json { ignoreUnknownKeys = true }.decodeFromJsonElement(Fragments.ContinentDetails.Companion,
                                         json)
                                 return ContinentFragmentsAdapter(delegate, FragmentsGroup(continentDetails))
                             }
