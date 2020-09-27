@@ -1,9 +1,9 @@
 plugins {
     id("com.android.library")
-    kotlin("multiplatform") version "1.4.10"
+    kotlin("multiplatform")
     id("kotlin-android-extensions")
     id("maven-publish")
-    id("org.jetbrains.dokka") version "1.4.10"
+    id("org.jetbrains.dokka")
 }
 val buildNumber = 12
 val versionLabel = "1.0"
@@ -126,9 +126,9 @@ publishing {
 
             credentials {
                 username = if (project.hasProperty("bintray.username")) project.property("bintray.username")
-                        .toString() else System.getenv("BINTRAY_USERNAME")
+                    .toString() else System.getenv("BINTRAY_USERNAME")
                 password = if (project.hasProperty("bintray.apiKey")) project.property("bintray.apiKey")
-                        .toString() else System.getenv("BINTRAY_API_KEY")
+                    .toString() else System.getenv("BINTRAY_API_KEY")
             }
         }
     }

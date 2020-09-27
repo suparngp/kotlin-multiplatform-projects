@@ -1,9 +1,9 @@
 plugins {
     id("com.android.library")
-    kotlin("multiplatform") version "1.4.10"
+    kotlin("multiplatform")
     id("kotlin-android-extensions")
     id("maven-publish")
-    id("org.jetbrains.dokka") version "1.4.10"
+    id("org.jetbrains.dokka")
 }
 val buildNumber = 12
 val versionLabel = "1.0"

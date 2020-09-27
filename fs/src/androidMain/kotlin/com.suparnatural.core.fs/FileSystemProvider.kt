@@ -1,8 +1,6 @@
 package com.suparnatural.core.fs
 
 import android.content.Context
-import android.content.pm.ProviderInfo
-import android.util.Log
 import com.suparnatural.core.utilities.ModuleProvider
 
 /**
