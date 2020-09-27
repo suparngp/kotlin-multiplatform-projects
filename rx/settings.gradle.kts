@@ -13,6 +13,5 @@ pluginManagement {
         }
     }
 }
+rootProject.name = "rx"
 
-rootProject.name = "kotlin-multiplatform-projects"
-include("utilities", "fs", "concurrency", "rx")
