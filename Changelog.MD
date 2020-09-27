@@ -1,5 +1,14 @@
 # Change Log
 
+## v1.0.12
+1. Migrated `utilities`, `fs`, `concurrency`, `rx`, `rx-reaktive-runtime`, `graphl` and `graphql-plugin` to Kotlin 1.4.10
+2. Some major Changes in `graphql` due to kotlinx.serialization update. 
+3. Unable to migrate `cache` to `1.4.10` at this time due to a bug in resolving dependencies.
+
+## v1.0.11
+1. Support auth headers in graphql plugin
+2. Skipped for all other libs
+
 ## v1.0.10
 1. Update Kotlin to 1.3.70 
 
