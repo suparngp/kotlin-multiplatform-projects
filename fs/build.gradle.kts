@@ -105,7 +105,11 @@ kotlin {
             }
         }
 
-        val jsMain by getting
+        val jsMain by getting {
+            dependencies {
+                implementation("org.jetbrains.kotlinx:kotlinx-nodejs:0.0.7")
+            }
+        }
 
         all {
             languageSettings.useExperimentalAnnotation("kotlin.RequiresOptIn")
