@@ -67,9 +67,8 @@ actual object FileSystem {
      * For binary files, use `encoding` = [ContentEncoding.Base64].
      *
      */
-    actual fun readFile(path: String, encoding: ContentEncoding): String? {
-        TODO("Not yet implemented")
-    }
+    actual fun readFile(path: String, encoding: ContentEncoding): String? =
+            fs.readFileSync(path, encodingOptions(encoding)) as? String
 
     /**
      *
@@ -77,9 +76,8 @@ actual object FileSystem {
      * For binary files, use `encoding` = [ContentEncoding.Base64].
      *
      */
-    actual fun readFile(pathComponent: PathComponent, encoding: ContentEncoding): String? {
-        TODO("Not yet implemented")
-    }
+    actual fun readFile(pathComponent: PathComponent, encoding: ContentEncoding): String? =
+            pathComponent.component?.let { readFile(it, encoding) }
 
     /**
      * Returns the contents of the file located at `path` as ByteArray.
