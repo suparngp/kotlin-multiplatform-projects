@@ -1,5 +1,8 @@
 package com.suparnatural.core.fs
 
+import fs.readdirSync
+import path.path
+
 /**
  * A thread safe singleton to access file system apis.
  *
