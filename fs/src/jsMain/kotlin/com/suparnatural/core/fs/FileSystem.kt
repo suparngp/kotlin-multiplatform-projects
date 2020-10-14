@@ -1,5 +1,6 @@
 package com.suparnatural.core.fs
 
+import fs.`T$44`
 import fs.readdirSync
 import path.path
 
@@ -18,6 +19,11 @@ actual object FileSystem {
     actual val contentsDirectory: Path = Path(null, null)
     actual val cachesDirectory: Path = Path(null, null)
     actual val temporaryDirectory: Path = Path(null, null)
+
+    /** converts a [ContentEncoding] to an object compatible with the nodeJS generated fs options type */
+    private fun encodingOptions(encoding: ContentEncoding) = object : `T$44` {
+        override var encoding: String? = encoding.toString().toLowerCase()
+    }
 
     /**
      * Returns a list of stats for the contents of directory at `path`.
