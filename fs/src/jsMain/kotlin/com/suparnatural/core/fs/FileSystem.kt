@@ -19,9 +19,7 @@ actual object FileSystem {
     /**
      * Returns a list of stats for the contents of directory at `path`.
      */
-    actual fun readDir(path: String): List<StatResult>? {
-        TODO("Not yet implemented")
-    }
+    actual fun readDir(path: String): List<StatResult>? = readdirSync(path).map { stat(it)!! }
 
     /**
      * Returns a list of stats for the contents of directory at `pathComponent`.
