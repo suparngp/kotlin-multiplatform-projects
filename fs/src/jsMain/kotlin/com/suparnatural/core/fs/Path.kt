@@ -41,10 +41,11 @@ actual class Path actual constructor() {
  * A [Path] is made up of [PathComponent]s. For example, a path has [Path.absolutePath] and [Path.relativePath] which are both [PathComponent]s.
  */
 actual class PathComponent actual constructor(actual val component: String?) {
-    private object realpathOptions: `T$16` {
+    private object RealpathOptions : `T$16` {
         override var encoding: String? = "utf8"
     }
-    private val canonicalPath = if (component != null) fs.realpathSync(component, realpathOptions) as String else null
+
+    private val canonicalPath = if (component != null) fs.realpathSync(component, RealpathOptions) as String else null
 
     override fun toString(): String {
         return "[component=$component, canonicalPath=$canonicalPath]"
