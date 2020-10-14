@@ -59,9 +59,7 @@ actual object FileSystem {
     /**
      * Returns stats for the resource at `pathComponent`.
      */
-    actual fun stat(pathComponent: PathComponent): StatResult? {
-        TODO("Not yet implemented")
-    }
+    actual fun stat(pathComponent: PathComponent): StatResult? = pathComponent.component?.let { stat(it) }
 
     /**
      *
