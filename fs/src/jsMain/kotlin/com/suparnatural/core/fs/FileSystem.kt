@@ -33,9 +33,7 @@ actual object FileSystem {
     /**
      * Returns a list of stats for the contents of directory at `pathComponent`.
      */
-    actual fun readDir(pathComponent: PathComponent): List<StatResult>? {
-        TODO("Not yet implemented")
-    }
+    actual fun readDir(pathComponent: PathComponent): List<StatResult>? = pathComponent.component?.let { readDir(it) }
 
     /**
      * Returns stats for the resource at `path`.
