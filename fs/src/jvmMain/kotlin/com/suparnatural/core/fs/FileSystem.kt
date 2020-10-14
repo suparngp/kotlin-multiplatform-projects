@@ -45,8 +45,8 @@ actual object FileSystem {
     }
 
 
-    actual fun stat(path: String): StatResult? {
-        val file = File(path)
+    actual fun stat(fullPath: String): StatResult? {
+        val file = File(fullPath)
         return buildStats(file)
     }
 

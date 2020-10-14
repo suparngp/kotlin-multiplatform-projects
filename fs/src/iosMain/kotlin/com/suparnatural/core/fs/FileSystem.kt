@@ -138,7 +138,7 @@ actual object FileSystem {
                 type = type)
     }
 
-    actual fun stat(path: String): StatResult? = stat(Path.urlFromString(path))
+    actual fun stat(fullPath: String): StatResult? = stat(Path.urlFromString(fullPath))
     actual fun stat(pathComponent: PathComponent): StatResult? = stat(pathComponent.url)
 
 

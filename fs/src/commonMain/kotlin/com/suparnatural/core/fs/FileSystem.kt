@@ -42,9 +42,9 @@ expect object FileSystem {
     fun readDir(pathComponent: PathComponent): List<StatResult>?
 
     /**
-     * Returns stats for the resource at `path`.
+     * Returns stats for the resource at [fullPath].
      */
-    fun stat(path: String): StatResult?
+    fun stat(fullPath: String): StatResult?
 
     /**
      * Returns stats for the resource at `pathComponent`.

@@ -33,8 +33,22 @@ actual object FileSystem {
     /**
      * Returns stats for the resource at `path`.
      */
-    actual fun stat(path: String): StatResult? {
-        TODO("Not yet implemented")
+    actual fun stat(fullPath: String): StatResult? {
+        val stat = fs.statSync(fullPath)
+        return StatResult(
+                name = path.basename(fullPath),
+                absolutePath = PathComponent(fullPath),
+                canonicalPath = PathComponent(fullPath),
+                createdAt = stat.birthtime.getTime(),
+                size = stat.size.toDouble(),
+                type = {
+                    when (true) {
+                        stat.isFile() -> FileType.Regular
+                        stat.isDirectory() -> FileType.Directory
+                        else -> FileType.Unknown
+                    }
+                }()
+        )
     }
 
     /**
