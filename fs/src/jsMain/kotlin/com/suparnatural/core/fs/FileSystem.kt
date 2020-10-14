@@ -1,6 +1,7 @@
 package com.suparnatural.core.fs
 
 import fs.`T$44`
+import fs.`T$45`
 import fs.readdirSync
 import path.path
 
@@ -20,9 +21,10 @@ actual object FileSystem {
     actual val cachesDirectory: Path = Path(null, null)
     actual val temporaryDirectory: Path = Path(null, null)
 
-    /** converts a [ContentEncoding] to an object compatible with the nodeJS generated fs options type */
-    private fun encodingOptions(encoding: ContentEncoding) = object : `T$44` {
+    /** converts a [ContentEncoding] to an object compatible with the nodeJS generated fs options types */
+    private fun encodingOptions(encoding: ContentEncoding) = object : `T$44`, `T$45` {
         override var encoding: String? = encoding.toString().toLowerCase()
+        override var flag: String? = null
     }
 
     /**
@@ -96,7 +98,14 @@ actual object FileSystem {
      * * Returns true if operation is successful, otherwise false.
      */
     actual fun writeFile(path: String, contents: String, create: Boolean, encoding: ContentEncoding): Boolean {
-        TODO("Not yet implemented")
+        if (!exists(path))
+            if (!create) return false
+        return try {
+            fs.writeFileSync(path, contents, encodingOptions(encoding))
+            true
+        } catch (err: Throwable) {
+            false
+        }
     }
 
     /**
@@ -105,25 +114,22 @@ actual object FileSystem {
      * For binary files, use `encoding` = [ContentEncoding.Base64].
      * Returns true if operation is successful, otherwise false.
      */
-    actual fun writeFile(pathComponent: PathComponent, contents: String, create: Boolean, encoding: ContentEncoding): Boolean {
-        TODO("Not yet implemented")
-    }
+    actual fun writeFile(pathComponent: PathComponent, contents: String, create: Boolean, encoding: ContentEncoding): Boolean =
+            pathComponent.component?.let { writeFile(it, contents, create, encoding) } ?: false
 
     /**
      * Writes `contents` to the file located at `path`. If `create` is true, then file is created if it does not exist.
      * Returns true if operation is successful, otherwise false.
      */
-    actual fun writeFile(path: String, contents: ByteArray, create: Boolean): Boolean {
-        TODO("Not yet implemented")
-    }
+    actual fun writeFile(path: String, contents: ByteArray, create: Boolean): Boolean =
+            writeFile(path, contents.toString(), create, ContentEncoding.Utf8)
 
     /**
      * Writes `contents` to the file located at `pathComponent`. If `create` is true, then file is created if it does not exist.
      * Returns true if operation is successful, otherwise false.
      */
-    actual fun writeFile(pathComponent: PathComponent, contents: ByteArray, create: Boolean): Boolean {
-        TODO("Not yet implemented")
-    }
+    actual fun writeFile(pathComponent: PathComponent, contents: ByteArray, create: Boolean): Boolean =
+            pathComponent.component?.let { writeFile(it, contents, create) } ?: false
 
     /**
      * Appends `contents` to the file located at `path`. If `create` is true, then file is created if it does not exist.
