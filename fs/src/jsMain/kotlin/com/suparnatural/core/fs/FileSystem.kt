@@ -82,16 +82,13 @@ actual object FileSystem {
     /**
      * Returns the contents of the file located at `path` as ByteArray.
      */
-    actual fun readFile(path: String): ByteArray? {
-        TODO("Not yet implemented")
-    }
+    actual fun readFile(path: String): ByteArray? =
+            fs.readFileSync(path, encodingOptions(ContentEncoding.Utf8)).toString().encodeToByteArray()
 
     /**
      * Returns the contents of the file located at `pathComponent` as ByteArray.
      */
-    actual fun readFile(pathComponent: PathComponent): ByteArray? {
-        TODO("Not yet implemented")
-    }
+    actual fun readFile(pathComponent: PathComponent): ByteArray? = pathComponent.component?.let { readFile(it) }
 
     /**
      * Writes `contents` to the file located at `path`. If `create` is true, then file is created if it does not exist.
