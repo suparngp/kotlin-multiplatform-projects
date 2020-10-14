@@ -7,28 +7,31 @@ import path.path
  * Represents a file system path to a resource
  */
 actual class Path actual constructor() {
+
+    constructor(absolutePath: String?, relativePath: String?) : this() {
+        this.absolutePath = PathComponent(absolutePath)
+        this.relativePath = PathComponent(relativePath)
+    }
+
     /**
      * Absolute path to the resource
      */
-    actual var absolutePath: PathComponent?
-        get() = TODO("Not yet implemented")
-        set(value) {}
+    actual var absolutePath: PathComponent? = null
 
     /**
      * Relative Path to the resource
      */
-    actual var relativePath: PathComponent?
-        get() = TODO("Not yet implemented")
-        set(value) {}
+    actual var relativePath: PathComponent? = null
 
     actual companion object {
+
+        val Empty = Path()
+
         /**
          * Creates a new [Path] with the given [path] argument.
          * [path] is copied to both absolute and relative path components.
          */
-        actual fun simplified(path: String): Path {
-            TODO("Not yet implemented")
-        }
+        actual fun simplified(path: String): Path = Path(path, path)
     }
 
 }

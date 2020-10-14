@@ -12,26 +12,9 @@ package com.suparnatural.core.fs
  * ```
  */
 actual object FileSystem {
-    /**
-     * Path to the common contents directory. Directory is guaranteed to exist (created if not exists already).
-     *
-     * On Android, it points to `files` directory.
-     * On iOS, it points to `Documents` directory.
-     */
-    actual val contentsDirectory: Path
-        get() = TODO("Not yet implemented")
-
-    /**
-     * Path to caches directory. Directory is guaranteed to exist (created if not exists already).
-     */
-    actual val cachesDirectory: Path
-        get() = TODO("Not yet implemented")
-
-    /**
-     * Path to Temporary directory. Directory is guaranteed to exist (created if not exists already).
-     */
-    actual val temporaryDirectory: Path
-        get() = TODO("Not yet implemented")
+    actual val contentsDirectory: Path = Path(null, null)
+    actual val cachesDirectory: Path = Path(null, null)
+    actual val temporaryDirectory: Path = Path(null, null)
 
     /**
      * Returns a list of stats for the contents of directory at `path`.
