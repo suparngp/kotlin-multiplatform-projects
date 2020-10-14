@@ -72,12 +72,13 @@ kotlin {
     }
     jvm()
 
+    js {
+        nodejs()
+    }
+
     sourceSets {
-        val commonMain by getting {
-            dependencies {
-                implementation("suparnatural-kotlin-multiplatform:utilities:${DependencyVersion.utilities}")
-            }
-        }
+        val commonMain by getting
+
         val commonTest by getting {
             dependencies {
                 implementation(kotlin("test-common"))
@@ -87,6 +88,7 @@ kotlin {
         val androidMain by getting {
             dependencies {
                 implementation("androidx.core:core-ktx:1.3.1")
+                implementation("suparnatural-kotlin-multiplatform:utilities:${DependencyVersion.utilities}")
             }
         }
         val androidTest by getting {
@@ -99,8 +101,11 @@ kotlin {
         val jvmTest by getting {
             dependencies {
                 implementation(kotlin("test-junit"))
+                implementation("suparnatural-kotlin-multiplatform:utilities:${DependencyVersion.utilities}")
             }
         }
+
+        val jsMain by getting
 
         all {
             languageSettings.useExperimentalAnnotation("kotlin.RequiresOptIn")
