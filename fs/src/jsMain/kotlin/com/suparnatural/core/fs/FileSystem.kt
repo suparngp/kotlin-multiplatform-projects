@@ -198,10 +198,11 @@ actual object FileSystem {
      * If `recursive` is true, then intermediate directories are also created.
      * Returns true if directory is created successfully.
      */
+    @Suppress("UnsafeCastFromDynamic") //casting explicitly causes "illegal cast" exception
     actual fun mkdir(path: String, recursive: Boolean): Boolean = tryIfExists(path, true) {
         mkdirSync(path, object : MakeDirectoryOptions {
             override var recursive: Boolean? = recursive
-        }) as Unit
+        })
     }
 
     /**
