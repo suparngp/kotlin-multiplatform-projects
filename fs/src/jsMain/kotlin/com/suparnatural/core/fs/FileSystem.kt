@@ -93,20 +93,29 @@ actual object FileSystem {
     actual fun readFile(pathComponent: PathComponent): ByteArray? = pathComponent.component?.let { readFile(it) }
 
     /**
+     * tries to execute the given [callback]
+     * If [create] is true, then file is created if it does not exist.
+     * @return true if operation is successful, otherwise false.
+     */
+    private fun tryIfExists(path: String, create: Boolean, callback: () -> Unit): Boolean =
+            if (!create && !exists(path)) {
+                false
+            } else {
+                try {
+                    callback()
+                    true
+                } catch (error: Throwable) {
+                    false
+                }
+            }
+
+    /**
      * Writes `contents` to the file located at `path`. If `create` is true, then file is created if it does not exist.
      * For binary files, use `encoding` = [ContentEncoding.Base64].
      * * Returns true if operation is successful, otherwise false.
      */
-    actual fun writeFile(path: String, contents: String, create: Boolean, encoding: ContentEncoding): Boolean {
-        if (!exists(path))
-            if (!create) return false
-        return try {
-            fs.writeFileSync(path, contents, encodingOptions(encoding))
-            true
-        } catch (err: Throwable) {
-            false
-        }
-    }
+    actual fun writeFile(path: String, contents: String, create: Boolean, encoding: ContentEncoding): Boolean =
+            tryIfExists(path, create) { fs.writeFileSync(path, contents, encodingOptions(encoding)) }
 
     /**
      * Writes `contents` to the file located at `pathComponent`.
