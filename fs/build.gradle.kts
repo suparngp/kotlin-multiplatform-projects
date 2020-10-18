@@ -117,6 +117,13 @@ kotlin {
             }
         }
 
+        val jsTest by getting {
+            dependencies {
+                implementation(kotlin("test-common"))
+                implementation(kotlin("test-js"))
+            }
+        }
+
         all {
             languageSettings.useExperimentalAnnotation("kotlin.RequiresOptIn")
         }
