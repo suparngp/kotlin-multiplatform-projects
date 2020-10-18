@@ -171,17 +171,17 @@ actual object FileSystem {
      * Creates a file at `path` if it does not exist.
      * Returns false if file already exists, otherwise true.
      */
-    actual fun touch(path: String): Boolean {
-        TODO("Not yet implemented")
-    }
+    actual fun touch(path: String): Boolean =
+            if (exists(path))
+                false
+            else
+                true.also { fs.writeFileSync(path, "", encodingOptions(ContentEncoding.Utf8)) }
 
     /**
      * Creates a file at `pathComponent` if it does not exist.
      * Returns false if file already exists, otherwise true.
      */
-    actual fun touch(pathComponent: PathComponent): Boolean {
-        TODO("Not yet implemented")
-    }
+    actual fun touch(pathComponent: PathComponent): Boolean = pathComponent.component?.let { touch(it) } ?: false
 
     /**
      * Creates a directory on `path`.
