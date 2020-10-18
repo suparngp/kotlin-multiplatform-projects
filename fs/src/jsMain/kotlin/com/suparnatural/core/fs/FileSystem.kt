@@ -1,6 +1,7 @@
 package com.suparnatural.core.fs
 
 import fs.*
+import ncp
 import path.path
 
 /**
@@ -252,26 +253,30 @@ actual object FileSystem {
      * If `srcPath` is a directory, its contents including hidden files are moved.
      * Returns true if the move is successful, otherwise false.
      */
-    actual fun moveFile(srcPath: String, destPath: String): Boolean {
-        TODO("Not yet implemented")
-    }
+    actual fun moveFile(srcPath: String, destPath: String): Boolean = copyFile(srcPath, destPath) && unlink(srcPath)
 
     /**
      * Moves the file from `srcPathComponent` to `destPathComponent`.
      * If `srcPathComponent` is a directory, its contents including hidden files are moved.
      * Returns true if the move is successful, otherwise false.
      */
-    actual fun moveFile(srcPathComponent: PathComponent, destPathComponent: PathComponent): Boolean {
-        TODO("Not yet implemented")
-    }
+    actual fun moveFile(srcPathComponent: PathComponent, destPathComponent: PathComponent): Boolean =
+        copyFile(srcPathComponent, destPathComponent) && unlink(srcPathComponent)
 
     /**
      * Copies the file from `srcPath` to `destPath`.
      * If `srcPath` is a directory, its contents including hidden files are copied.
      * Returns true if the copy is successful, otherwise false.
      */
-    actual fun copyFile(srcPath: String, destPath: String): Boolean {
-        TODO("Not yet implemented")
+    actual fun copyFile(srcPath: String, destPath: String): Boolean = try {
+        when (stat(srcPath)!!.type) {
+            FileType.Regular -> copyFileSync(srcPath, destPath)
+            FileType.Directory -> ncp(srcPath, destPath) { err -> err?.let { error(it) } }
+            else -> error("unknown filetype")
+        }
+        true
+    } catch (error: Throwable) {
+        false
     }
 
     /**
@@ -279,9 +284,9 @@ actual object FileSystem {
      * If `srcPathComponent` is a directory, its contents including hidden files are copied.
      * Returns true if the copy is successful, otherwise false.
      */
-    actual fun copyFile(srcPathComponent: PathComponent, destPathComponent: PathComponent): Boolean {
-        TODO("Not yet implemented")
-    }
-
-
+    actual fun copyFile(srcPathComponent: PathComponent, destPathComponent: PathComponent): Boolean =
+        if (srcPathComponent.component == null || destPathComponent.component == null)
+            false
+        else
+            copyFile(srcPathComponent.component, destPathComponent.component)
 }

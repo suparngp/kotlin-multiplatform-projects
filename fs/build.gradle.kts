@@ -108,6 +108,8 @@ kotlin {
         val jsMain by getting {
             dependencies {
                 implementation("org.jetbrains.kotlinx:kotlinx-nodejs:0.0.7")
+                implementation(npm("ncp", "2.0.0"))
+                implementation(npm("@types/ncp", "2.0.4", true))
             }
         }
 
