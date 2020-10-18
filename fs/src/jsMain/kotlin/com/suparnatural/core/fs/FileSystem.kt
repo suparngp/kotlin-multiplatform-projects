@@ -150,9 +150,8 @@ actual object FileSystem {
      *
      * Returns true if operation is successful, otherwise false.
      */
-    actual fun appendFile(path: String, contents: String, create: Boolean, encoding: ContentEncoding): Boolean {
-        TODO("Not yet implemented")
-    }
+    actual fun appendFile(path: String, contents: String, create: Boolean, encoding: ContentEncoding): Boolean =
+            tryIfExists(path, create) { fs.appendFileSync(path, contents, encodingOptions(encoding)) }
 
     /**
      * Appends `contents` to the file located at `pathComponent`.
@@ -165,9 +164,8 @@ actual object FileSystem {
      *
      * Returns true if operation is successful, otherwise false.
      */
-    actual fun appendFile(pathComponent: PathComponent, contents: String, create: Boolean, encoding: ContentEncoding): Boolean {
-        TODO("Not yet implemented")
-    }
+    actual fun appendFile(pathComponent: PathComponent, contents: String, create: Boolean, encoding: ContentEncoding): Boolean =
+            pathComponent.component?.let { appendFile(it, contents, create, encoding) } ?: false
 
     /**
      * Creates a file at `path` if it does not exist.
