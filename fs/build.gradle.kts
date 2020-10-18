@@ -75,6 +75,7 @@ kotlin {
     jvm()
 
     js {
+        binaries.executable()
         nodejs()
         useCommonJs()
     }
