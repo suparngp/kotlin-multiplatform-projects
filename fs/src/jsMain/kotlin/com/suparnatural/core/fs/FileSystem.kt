@@ -1,9 +1,6 @@
 package com.suparnatural.core.fs
 
-import fs.MakeDirectoryOptions
-import fs.`T$44`
-import fs.`T$45`
-import fs.readdirSync
+import fs.*
 import path.path
 
 /**
@@ -42,7 +39,7 @@ actual object FileSystem {
      * Returns stats for the resource at `path`.
      */
     actual fun stat(fullPath: String): StatResult? {
-        val stat = fs.statSync(fullPath)
+        val stat = statSync(fullPath)
         return StatResult(
                 name = path.basename(fullPath),
                 absolutePath = PathComponent(fullPath),
@@ -71,7 +68,7 @@ actual object FileSystem {
      *
      */
     actual fun readFile(path: String, encoding: ContentEncoding): String? =
-            fs.readFileSync(path, encodingOptions(encoding)) as? String
+            readFileSync(path, encodingOptions(encoding)) as? String
 
     /**
      *
@@ -86,7 +83,7 @@ actual object FileSystem {
      * Returns the contents of the file located at `path` as ByteArray.
      */
     actual fun readFile(path: String): ByteArray? =
-            fs.readFileSync(path, encodingOptions(ContentEncoding.Utf8)).toString().encodeToByteArray()
+            readFileSync(path, encodingOptions(ContentEncoding.Utf8)).toString().encodeToByteArray()
 
     /**
      * Returns the contents of the file located at `pathComponent` as ByteArray.
@@ -116,7 +113,7 @@ actual object FileSystem {
      * * Returns true if operation is successful, otherwise false.
      */
     actual fun writeFile(path: String, contents: String, create: Boolean, encoding: ContentEncoding): Boolean =
-            tryIfExists(path, create) { fs.writeFileSync(path, contents, encodingOptions(encoding)) }
+            tryIfExists(path, create) { writeFileSync(path, contents, encodingOptions(encoding)) }
 
     /**
      * Writes `contents` to the file located at `pathComponent`.
@@ -152,7 +149,7 @@ actual object FileSystem {
      * Returns true if operation is successful, otherwise false.
      */
     actual fun appendFile(path: String, contents: String, create: Boolean, encoding: ContentEncoding): Boolean =
-            tryIfExists(path, create) { fs.appendFileSync(path, contents, encodingOptions(encoding)) }
+            tryIfExists(path, create) { appendFileSync(path, contents, encodingOptions(encoding)) }
 
     /**
      * Appends `contents` to the file located at `pathComponent`.
@@ -176,7 +173,7 @@ actual object FileSystem {
             if (exists(path))
                 false
             else
-                true.also { fs.writeFileSync(path, "", encodingOptions(ContentEncoding.Utf8)) }
+                true.also { writeFileSync(path, "", encodingOptions(ContentEncoding.Utf8)) }
 
     /**
      * Creates a file at `pathComponent` if it does not exist.
@@ -190,7 +187,7 @@ actual object FileSystem {
      * Returns true if directory is created successfully.
      */
     actual fun mkdir(path: String, recursive: Boolean): Boolean = tryIfExists(path, true) {
-        fs.mkdirSync(path, object : MakeDirectoryOptions {
+        mkdirSync(path, object : MakeDirectoryOptions {
             override var recursive: Boolean? = recursive
         }) as Unit
     }
@@ -206,7 +203,7 @@ actual object FileSystem {
     /**
      * Returns true if the file or directory exists at `path`.
      */
-    actual fun exists(path: String): Boolean = fs.existsSync(path)
+    actual fun exists(path: String): Boolean = existsSync(path)
 
     /**
      * Returns true if the file or directory exists at `pathComponent`.
