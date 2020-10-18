@@ -45,7 +45,8 @@ actual class PathComponent actual constructor(actual val component: String?) {
         override var encoding: String? = "utf8"
     }
 
-    private val canonicalPath = if (component != null) fs.realpathSync(component, RealpathOptions) as String else null
+    private val canonicalPath =
+        if (component != null) fs.realpathSync(component, RealpathOptions) as String else null
 
     override fun toString(): String {
         return "[component=$component, canonicalPath=$canonicalPath]"
