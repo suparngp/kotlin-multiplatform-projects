@@ -206,16 +206,12 @@ actual object FileSystem {
     /**
      * Returns true if the file or directory exists at `path`.
      */
-    actual fun exists(path: String): Boolean {
-        TODO("Not yet implemented")
-    }
+    actual fun exists(path: String): Boolean = fs.existsSync(path)
 
     /**
      * Returns true if the file or directory exists at `pathComponent`.
      */
-    actual fun exists(pathComponent: PathComponent): Boolean {
-        TODO("Not yet implemented")
-    }
+    actual fun exists(pathComponent: PathComponent): Boolean = pathComponent.component?.let { exists(it) } ?: false
 
     /**
      * Removes a file on `path`.
