@@ -215,18 +215,27 @@ actual object FileSystem {
      * If it is a directory, its contents are removed as well.
      * Returns true if file is deleted successfully, otherwise false.
      */
-    actual fun unlink(path: String): Boolean {
-        TODO("Not yet implemented")
-    }
+    actual fun unlink(path: String): Boolean =
+            try {
+                when (stat(path)!!.type) {
+                    FileType.Regular -> unlinkSync(path)
+                    FileType.Directory -> rmdirSync(path, object : RmDirOptions {
+                        override var recursive: Boolean? = true
+                    })
+                    else -> error("unknown filetype")
+                }
+                true
+            } catch (error: Throwable) {
+                false
+            }
+
 
     /**
      * Removes a file on `pathComponent`.
      * If it is a directory, its contents are removed as well.
      * Returns true if file is deleted successfully, otherwise false.
      */
-    actual fun unlink(pathComponent: PathComponent): Boolean {
-        TODO("Not yet implemented")
-    }
+    actual fun unlink(pathComponent: PathComponent): Boolean = pathComponent.component?.let { unlink(it) } ?: false
 
     /**
      * Moves the file from `srcPath` to `destPath`.
