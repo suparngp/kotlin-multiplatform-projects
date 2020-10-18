@@ -76,6 +76,7 @@ kotlin {
 
     js {
         nodejs()
+        useCommonJs()
     }
 
     sourceSets {
