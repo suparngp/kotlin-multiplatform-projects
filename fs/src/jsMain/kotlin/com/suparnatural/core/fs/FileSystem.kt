@@ -1,5 +1,6 @@
 package com.suparnatural.core.fs
 
+import fs.MakeDirectoryOptions
 import fs.`T$44`
 import fs.`T$45`
 import fs.readdirSync
@@ -188,8 +189,10 @@ actual object FileSystem {
      * If `recursive` is true, then intermediate directories are also created.
      * Returns true if directory is created successfully.
      */
-    actual fun mkdir(path: String, recursive: Boolean): Boolean {
-        TODO("Not yet implemented")
+    actual fun mkdir(path: String, recursive: Boolean): Boolean = tryIfExists(path, true) {
+        fs.mkdirSync(path, object : MakeDirectoryOptions {
+            override var recursive: Boolean? = recursive
+        }) as Unit
     }
 
     /**
@@ -197,9 +200,8 @@ actual object FileSystem {
      * If `recursive` is true, then intermediate directories are also created.
      * Returns true if directory is created successfully.
      */
-    actual fun mkdir(pathComponent: PathComponent, recursive: Boolean): Boolean {
-        TODO("Not yet implemented")
-    }
+    actual fun mkdir(pathComponent: PathComponent, recursive: Boolean): Boolean =
+            pathComponent.component?.let { mkdir(it, recursive) } ?: false
 
     /**
      * Returns true if the file or directory exists at `path`.
