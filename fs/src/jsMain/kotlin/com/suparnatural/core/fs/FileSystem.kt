@@ -273,7 +273,7 @@ actual object FileSystem {
     actual fun copyFile(srcPath: String, destPath: String): Boolean = try {
         when (stat(srcPath)!!.type) {
             FileType.Regular -> copyFileSync(srcPath, destPath)
-            FileType.Directory -> ncp(srcPath, destPath) { err -> err?.let { error(it) } }
+            FileType.Directory -> ncp(srcPath, destPath) { err -> err?.forEach { error(it) } }
             else -> error("unknown filetype")
         }
         true
