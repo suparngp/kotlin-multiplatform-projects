@@ -34,7 +34,7 @@ actual object FileSystem {
      * Returns a list of stats for the contents of directory at `path`.
      */
     actual fun readDir(path: String): List<StatResult>? =
-        readdirSync(path, encodingOptions(ContentEncoding.Utf8)).map { stat(it)!! }
+        readdirSync(fixPathString(path), encodingOptions(ContentEncoding.Utf8)).map { stat(it)!! }
 
     /**
      * Returns a list of stats for the contents of directory at `pathComponent`.
@@ -45,11 +45,12 @@ actual object FileSystem {
      * Returns stats for the resource at `path`.
      */
     actual fun stat(fullPath: String): StatResult? {
-        val stat = statSync(fullPath)
+        val fixedPath = fixPathString(fullPath)
+        val stat = statSync(fixedPath)
         return StatResult(
-            name = path.basename(fullPath),
-            absolutePath = PathComponent(fullPath),
-            canonicalPath = PathComponent(fullPath),
+            name = path.basename(fixedPath),
+            absolutePath = PathComponent(fixedPath),
+            canonicalPath = PathComponent(fixedPath),
             createdAt = stat.birthtime.getTime(),
             size = stat.size.toDouble(),
             type = {
@@ -74,7 +75,7 @@ actual object FileSystem {
      *
      */
     actual fun readFile(path: String, encoding: ContentEncoding): String? =
-        readFileSync(path, encodingOptions(encoding)) as? String
+        readFileSync(fixPathString(path), encodingOptions(encoding)) as? String
 
     /**
      *
@@ -89,7 +90,7 @@ actual object FileSystem {
      * Returns the contents of the file located at `path` as ByteArray.
      */
     actual fun readFile(path: String): ByteArray? =
-        readFileSync(path, encodingOptions(ContentEncoding.Utf8)).toString().encodeToByteArray()
+        readFileSync(fixPathString(path), encodingOptions(ContentEncoding.Utf8)).toString().encodeToByteArray()
 
     /**
      * Returns the contents of the file located at `pathComponent` as ByteArray.
@@ -102,14 +103,14 @@ actual object FileSystem {
      * @return true if operation is successful, otherwise false.
      */
     private fun tryIfExists(path: String, create: Boolean, callback: () -> Unit): Boolean =
-        if (!create && !exists(path)) {
+        if (!create && !exists(fixPathString(path))) {
             false
         } else {
             try {
                 callback()
                 true
             } catch (error: Throwable) {
-                false
+                throw error
             }
         }
 
@@ -119,7 +120,7 @@ actual object FileSystem {
      * * Returns true if operation is successful, otherwise false.
      */
     actual fun writeFile(path: String, contents: String, create: Boolean, encoding: ContentEncoding): Boolean =
-        tryIfExists(path, create) { writeFileSync(path, contents, encodingOptions(encoding)) }
+        tryIfExists(fixPathString(path), create) { writeFileSync(path, contents, encodingOptions(encoding)) }
 
     /**
      * Writes `contents` to the file located at `pathComponent`.
@@ -140,7 +141,7 @@ actual object FileSystem {
      * Returns true if operation is successful, otherwise false.
      */
     actual fun writeFile(path: String, contents: ByteArray, create: Boolean): Boolean =
-        writeFile(path, contents.toString(), create, ContentEncoding.Utf8)
+        writeFile(fixPathString(path), contents.toString(), create, ContentEncoding.Utf8)
 
     /**
      * Writes `contents` to the file located at `pathComponent`. If `create` is true, then file is created if it does not exist.
@@ -160,7 +161,7 @@ actual object FileSystem {
      * Returns true if operation is successful, otherwise false.
      */
     actual fun appendFile(path: String, contents: String, create: Boolean, encoding: ContentEncoding): Boolean =
-        tryIfExists(path, create) { appendFileSync(path, contents, encodingOptions(encoding)) }
+        tryIfExists(fixPathString(path), create) { appendFileSync(path, contents, encodingOptions(encoding)) }
 
     /**
      * Appends `contents` to the file located at `pathComponent`.
@@ -189,7 +190,7 @@ actual object FileSystem {
         if (exists(path))
             false
         else
-            true.also { writeFileSync(path, "", encodingOptions(ContentEncoding.Utf8)) }
+            true.also { writeFileSync(fixPathString(path), "", encodingOptions(ContentEncoding.Utf8)) }
 
     /**
      * Creates a file at `pathComponent` if it does not exist.
@@ -204,7 +205,7 @@ actual object FileSystem {
      */
     @Suppress("UnsafeCastFromDynamic") //casting explicitly causes "illegal cast" exception
     actual fun mkdir(path: String, recursive: Boolean): Boolean = tryIfExists(path, true) {
-        mkdirSync(path, object : MakeDirectoryOptions {
+        mkdirSync(fixPathString(path), object : MakeDirectoryOptions {
             override var recursive: Boolean? = recursive
         })
     }
@@ -220,7 +221,7 @@ actual object FileSystem {
     /**
      * Returns true if the file or directory exists at `path`.
      */
-    actual fun exists(path: String): Boolean = existsSync(path)
+    actual fun exists(path: String): Boolean = existsSync(fixPathString(path))
 
     /**
      * Returns true if the file or directory exists at `pathComponent`.
@@ -234,9 +235,10 @@ actual object FileSystem {
      */
     actual fun unlink(path: String): Boolean =
         try {
-            when (stat(path)!!.type) {
-                FileType.Regular -> unlinkSync(path)
-                FileType.Directory -> rmdirSync(path, object : RmDirOptions {
+            val fixedPath = fixPathString(path)
+            when (stat(fixedPath)!!.type) {
+                FileType.Regular -> unlinkSync(fixedPath)
+                FileType.Directory -> rmdirSync(fixedPath, object : RmDirOptions {
                     override var recursive: Boolean? = true
                 })
                 else -> error("unknown filetype")
@@ -245,7 +247,6 @@ actual object FileSystem {
         } catch (error: Throwable) {
             false
         }
-
 
     /**
      * Removes a file on `pathComponent`.
@@ -259,7 +260,8 @@ actual object FileSystem {
      * If `srcPath` is a directory, its contents including hidden files are moved.
      * Returns true if the move is successful, otherwise false.
      */
-    actual fun moveFile(srcPath: String, destPath: String): Boolean = copyFile(srcPath, destPath) && unlink(srcPath)
+    actual fun moveFile(srcPath: String, destPath: String): Boolean =
+        copyFile(fixPathString(srcPath), fixPathString(destPath)) && unlink(srcPath)
 
     /**
      * Moves the file from `srcPathComponent` to `destPathComponent`.
@@ -275,9 +277,11 @@ actual object FileSystem {
      * Returns true if the copy is successful, otherwise false.
      */
     actual fun copyFile(srcPath: String, destPath: String): Boolean = try {
+        val fixedSrc = fixPathString(srcPath)
+        val fixedDest = fixPathString(destPath)
         when (stat(srcPath)!!.type) {
-            FileType.Regular -> copyFileSync(srcPath, destPath)
-            FileType.Directory -> ncp(srcPath, destPath) { err -> err?.forEach { error(it) } }
+            FileType.Regular -> copyFileSync(fixedSrc, fixedDest)
+            FileType.Directory -> ncp(fixedSrc, fixedDest) { err -> err?.forEach { error(it) } }
             else -> error("unknown filetype")
         }
         true
