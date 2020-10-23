@@ -22,7 +22,7 @@ All docs are being moved to the new [docs website](https://kmpdocs.suparnatural.
 This library provides convenient methods and common implementations to simplify
 concurrency/multi-threading in Kotlin Multiplatform projects for `iOS` and `Android`.
 
-### [suparnatural-fs](fs/https://kmpdocs.suparnatural.com/fs/)
+### [suparnatural-fs](https://kmpdocs.suparnatural.com/fs/)
 
 Provides file system access for iOS and Android.
 
