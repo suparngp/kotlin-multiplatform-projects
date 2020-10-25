@@ -58,7 +58,7 @@ actual class PathComponent actual constructor(actual val component: String?) {
      */
     actual fun byAppending(component: String): PathComponent? {
         if (canonicalPath == null) return null
-        return PathComponent(path.join(component, canonicalPath))
+        return PathComponent(path.join(canonicalPath, component))
     }
 
 }
