@@ -46,8 +46,7 @@ actual class PathComponent actual constructor(actual val component: String?) {
     }
 
     private val canonicalPath =
-        if (component != null)
-            fs.realpathSync(FileSystem.fixPathString(component), RealpathOptions) as String else null
+        if (component != null) path.normalize(FileSystem.fixPathString(component)) else null
 
     override fun toString(): String {
         return "[component=$component, canonicalPath=$canonicalPath]"
