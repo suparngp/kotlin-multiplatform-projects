@@ -27,7 +27,7 @@ actual object FileSystem {
     }
 
     /** replaces `/` with `\` on windows because otherwise functions like [mkdir] don't work with recursive */
-    private fun fixPathString(path: String) =
+    internal fun fixPathString(path: String) =
         if (os.platform() == "win32") path.replace("/", "\\") else path
 
     /**
