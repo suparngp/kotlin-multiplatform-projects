@@ -235,14 +235,16 @@ actual object FileSystem {
      * If it is a directory, its contents are removed as well.
      * Returns true if file is deleted successfully, otherwise false.
      */
+    //cant create an object that extends RmDirOptions since the compiler changes the symbol name,
+    // and JsName isn't allowed on override values:
+    @Suppress("UNCHECKED_CAST_TO_EXTERNAL_INTERFACE")
     actual fun unlink(path: String): Boolean =
         try {
             val fixedPath = fixPathString(path)
             when (stat(fixedPath)!!.type) {
                 FileType.Regular -> unlinkSync(fixedPath)
-                FileType.Directory -> rmdirSync(fixedPath, object : RmDirOptions {
-                    override var recursive: Boolean? = true
-                })
+                //cant create an object that implements RmDirOptions as the compiler changes the symbol name:
+                FileType.Directory -> rmdirSync(fixedPath, js("{recursive: true}") as RmDirOptions)
                 else -> error("unknown filetype")
             }
             true
