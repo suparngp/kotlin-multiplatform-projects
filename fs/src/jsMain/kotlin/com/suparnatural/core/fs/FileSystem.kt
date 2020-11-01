@@ -33,8 +33,10 @@ actual object FileSystem {
     /**
      * Returns a list of stats for the contents of directory at `path`.
      */
-    actual fun readDir(path: String): List<StatResult>? =
-        readdirSync(fixPathString(path), encodingOptions(ContentEncoding.Utf8)).map { stat(it)!! }
+    actual fun readDir(directory: String): List<StatResult>? =
+        readdirSync(fixPathString(directory), encodingOptions(ContentEncoding.Utf8)).map {
+            stat(path.join(directory, it))!!
+        }
 
     /**
      * Returns a list of stats for the contents of directory at `pathComponent`.

@@ -110,7 +110,7 @@ actual object FileSystem {
         }
     }
 
-    actual fun readDir(path: String): List<StatResult>? = readDir(Path.urlFromString(path))
+    actual fun readDir(directory: String): List<StatResult>? = readDir(Path.urlFromString(directory))
     actual fun readDir(pathComponent: PathComponent): List<StatResult>? = readDir(pathComponent.url)
 
 

@@ -34,7 +34,7 @@ expect object FileSystem {
     /**
      * Returns a list of stats for the contents of directory at `path`.
      */
-    fun readDir(path: String): List<StatResult>?
+    fun readDir(directory: String): List<StatResult>?
 
     /**
      * Returns a list of stats for the contents of directory at `pathComponent`.

@@ -30,8 +30,8 @@ actual object FileSystem {
         )
     }
 
-    actual fun readDir(path: String): List<StatResult>? {
-        val parent = File(path).canonicalFile ?: return null
+    actual fun readDir(directory: String): List<StatResult>? {
+        val parent = File(directory).canonicalFile ?: return null
         val fileList = parent.listFiles() ?: return null
         return fileList.map {
             buildStats(it)
