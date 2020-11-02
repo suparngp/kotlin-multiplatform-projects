@@ -118,7 +118,7 @@ actual object FileSystem {
                 callback()
                 true
             } catch (error: Throwable) {
-                throw error
+                false
             }
         }
 
