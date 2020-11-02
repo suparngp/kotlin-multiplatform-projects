@@ -19,6 +19,7 @@ Put an `x` in the desired checkboxes
 - Android [ ]
 - JVM [ ]
 - macOS [ ]
+- JS [ ]
 - other [add name here]
 
 **Are you committed to support this new platform all by yourself?**

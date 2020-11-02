@@ -26,6 +26,7 @@ If applicable, add stacktrace to help explain your problem.
 - iOS [ ]
 - Android [ ]
 - JVM [ ]
+- JS [ ]
 
 **Additional context**
 Add any other context about the problem here.
