@@ -156,7 +156,7 @@ actual object FileSystem {
      * Returns true if operation is successful, otherwise false.
      */
     actual fun writeFile(path: String, contents: ByteArray, create: Boolean): Boolean =
-        writeFile(fixPathString(path), contents.toString(), create, ContentEncoding.Utf8)
+        writeFile(fixPathString(path), Buffer.from(contents).toString("utf8"), create, ContentEncoding.Utf8)
 
     /**
      * Writes `contents` to the file located at `pathComponent`. If `create` is true, then file is created if it does not exist.
