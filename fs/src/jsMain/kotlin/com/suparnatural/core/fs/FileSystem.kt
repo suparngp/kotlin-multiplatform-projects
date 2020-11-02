@@ -176,7 +176,13 @@ actual object FileSystem {
      * Returns true if operation is successful, otherwise false.
      */
     actual fun appendFile(path: String, contents: String, create: Boolean, encoding: ContentEncoding): Boolean =
-        tryIfExists(fixPathString(path), create) { appendFileSync(path, contents, encodingOptions(encoding)) }
+        tryIfExists(fixPathString(path), create) {
+            //nodejs fs base64 doesn't work properly so gotta do it this way instead:
+            if (encoding == ContentEncoding.Base64)
+                writeFile(path, readFile(path, encoding) + contents, create, encoding)
+            else
+                appendFileSync(path, contents, encodingOptions(encoding))
+        }
 
     /**
      * Appends `contents` to the file located at `pathComponent`.
