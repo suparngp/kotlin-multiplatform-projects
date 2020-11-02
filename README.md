@@ -32,7 +32,7 @@ Provides file system access for iOS and Android.
 A super fast, persistable, thread safe in-memory cache for iOS and Android
 
 
-| Project | iOS | Android | JVM | NodeJS |
+| Project | iOS | Android | JVM | JS |
 |---------|-----|---------|-----|-----|
 | [suparnatural-graphql](https://kmpdocs.suparnatural.com/graphql/) | Y | Y | Y | N |
 | [suparnatural-concurrency](https://kmpdocs.suparnatural.com/concurrency/) | Y | Y | N | N |
