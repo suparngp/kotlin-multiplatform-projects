@@ -77,7 +77,13 @@ actual object FileSystem {
      *
      */
     actual fun readFile(path: String, encoding: ContentEncoding): String? =
-        readFileSync(fixPathString(path), encodingOptions(encoding)) as? String
+        if (encoding == ContentEncoding.Base64)
+        //nodejs base64 encoding on readFile doesn't decode it, it just encodes it again,
+        //so instead we have to decode it ourself
+            Buffer.from(readFileSync(fixPathString(path), encodingOptions(ContentEncoding.Ascii)) as String, "base64")
+                .toString("ascii")
+        else
+            readFileSync(fixPathString(path), encodingOptions(encoding)) as? String
 
     /**
      *
@@ -122,7 +128,14 @@ actual object FileSystem {
      * * Returns true if operation is successful, otherwise false.
      */
     actual fun writeFile(path: String, contents: String, create: Boolean, encoding: ContentEncoding): Boolean =
-        tryIfExists(fixPathString(path), create) { writeFileSync(path, contents, encodingOptions(encoding)) }
+        tryIfExists(fixPathString(path), create) {
+            //nodejs fs base64 encoding option doesn't seem to work as expected.
+            // need to encode it separately then write to the file as ascii instead
+            if (encoding == ContentEncoding.Base64)
+                writeFileSync(path, Buffer.from(contents).toString("base64"), encodingOptions(ContentEncoding.Ascii))
+            else
+                writeFileSync(path, contents, encodingOptions(encoding))
+        }
 
     /**
      * Writes `contents` to the file located at `pathComponent`.
