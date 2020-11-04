@@ -130,7 +130,7 @@ actual object FileSystem {
      * * Returns true if operation is successful, otherwise false.
      */
     actual fun writeFile(path: String, contents: String, create: Boolean, encoding: ContentEncoding): Boolean =
-        tryIfExists(fixPathString(path), create) {
+        tryIfExists(path, create) {
             //nodejs fs base64 encoding option doesn't seem to work as expected.
             // need to encode it separately then write to the file as ascii instead
             if (encoding == ContentEncoding.Base64)
@@ -178,7 +178,7 @@ actual object FileSystem {
      * Returns true if operation is successful, otherwise false.
      */
     actual fun appendFile(path: String, contents: String, create: Boolean, encoding: ContentEncoding): Boolean =
-        tryIfExists(fixPathString(path), create) {
+        tryIfExists(path, create) {
             //nodejs fs base64 doesn't work properly so gotta do it this way instead:
             if (encoding == ContentEncoding.Base64)
                 writeFile(path, readFile(path, encoding) + contents, create, encoding)
