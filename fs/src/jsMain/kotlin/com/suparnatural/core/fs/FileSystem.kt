@@ -76,14 +76,16 @@ actual object FileSystem {
      * For binary files, use `encoding` = [ContentEncoding.Base64].
      *
      */
-    actual fun readFile(path: String, encoding: ContentEncoding): String? =
-        if (encoding == ContentEncoding.Base64)
+    actual fun readFile(path: String, encoding: ContentEncoding): String? {
+        val fixedPath = fixPathString(path)
+        return if (encoding == ContentEncoding.Base64)
         //nodejs base64 encoding on readFile doesn't decode it, it just encodes it again,
         //so instead we have to decode it ourself
-            Buffer.from(readFileSync(fixPathString(path), encodingOptions(ContentEncoding.Ascii)) as String, "base64")
+            Buffer.from(readFileSync(fixedPath, encodingOptions(ContentEncoding.Ascii)) as String, "base64")
                 .toString("ascii")
         else
-            readFileSync(fixPathString(path), encodingOptions(encoding)) as? String
+            readFileSync(fixedPath, encodingOptions(encoding)) as? String
+    }
 
     /**
      *
