@@ -2,7 +2,7 @@ package com.suparnatural.core.fs
 
 import fs.*
 import ncp
-import path.path
+import path.path as nodePath
 
 /**
  * A thread safe singleton to access file system apis.
@@ -33,9 +33,9 @@ actual object FileSystem {
     /**
      * Returns a list of stats for the contents of directory at `path`.
      */
-    actual fun readDir(directory: String): List<StatResult>? =
-        readdirSync(fixPathString(directory), encodingOptions(ContentEncoding.Utf8)).map {
-            stat(path.join(directory, it))!!
+    actual fun readDir(path: String): List<StatResult>? =
+        readdirSync(fixPathString(path), encodingOptions(ContentEncoding.Utf8)).map {
+            stat(nodePath.join(path, it))!!
         }
 
     /**
@@ -46,11 +46,11 @@ actual object FileSystem {
     /**
      * Returns stats for the resource at `path`.
      */
-    actual fun stat(fullPath: String): StatResult? {
-        val fixedPath = fixPathString(fullPath)
+    actual fun stat(path: String): StatResult? {
+        val fixedPath = fixPathString(path)
         val stat = statSync(fixedPath)
         return StatResult(
-            name = path.basename(fixedPath),
+            name = nodePath.basename(fixedPath),
             absolutePath = PathComponent(fixedPath),
             canonicalPath = PathComponent(fixedPath),
             createdAt = stat.birthtime.getTime(),

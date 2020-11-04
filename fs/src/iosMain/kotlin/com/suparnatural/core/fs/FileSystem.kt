@@ -110,7 +110,7 @@ actual object FileSystem {
         }
     }
 
-    actual fun readDir(directory: String): List<StatResult>? = readDir(Path.urlFromString(directory))
+    actual fun readDir(path: String): List<StatResult>? = readDir(Path.urlFromString(path))
     actual fun readDir(pathComponent: PathComponent): List<StatResult>? = readDir(pathComponent.url)
 
 
@@ -138,7 +138,7 @@ actual object FileSystem {
                 type = type)
     }
 
-    actual fun stat(fullPath: String): StatResult? = stat(Path.urlFromString(fullPath))
+    actual fun stat(path: String): StatResult? = stat(Path.urlFromString(path))
     actual fun stat(pathComponent: PathComponent): StatResult? = stat(pathComponent.url)
 
 
