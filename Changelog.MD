@@ -1,5 +1,9 @@
 # Change Log
 
+## v1.0.13
+1. Added support for node js in `fs` #80.
+2. Fix docs link #81.
+
 ## v1.0.12
 1. Migrated `utilities`, `fs`, `concurrency`, `rx`, `rx-reaktive-runtime`, `graphl` and `graphql-plugin` to Kotlin 1.4.10
 2. Some major Changes in `graphql` due to kotlinx.serialization update. 
