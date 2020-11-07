@@ -32,12 +32,12 @@ Provides file system access for iOS and Android.
 A super fast, persistable, thread safe in-memory cache for iOS and Android
 
 
-| Project | iOS | Android | JVM |
-|---------|-----|---------|-----|
-| [suparnatural-graphql](https://kmpdocs.suparnatural.com/graphql/) | Y | Y | Y |
-| [suparnatural-concurrency](https://kmpdocs.suparnatural.com/concurrency/) | Y | Y | N |
-| [suparnatural-fs](https://kmpdocs.suparnatural.com/fs/) | Y | Y | Y |
-| [suparnatural-cache](https://kmpdocs.suparnatural.com/cache/) | Y | Y | N |
+| Project | iOS | Android | JVM | JS |
+|---------|-----|---------|-----|-----|
+| [suparnatural-graphql](https://kmpdocs.suparnatural.com/graphql/) | Y | Y | Y | N |
+| [suparnatural-concurrency](https://kmpdocs.suparnatural.com/concurrency/) | Y | Y | N | N |
+| [suparnatural-fs](https://kmpdocs.suparnatural.com/fs/) | Y | Y | Y | Y |
+| [suparnatural-cache](https://kmpdocs.suparnatural.com/cache/) | Y | Y | N | N |
 
 ## A note about ios builds
 By default, KMP plugin cannot create universal binaries ( a single `klib` which works on both `X64` and `Arm64`). Each platform must be configured with a preset and a unique target name. However, the code base for each platform is same (at least, at the moment). So there is no reason to create different source sets for each of them. Therefore, a common source set `iosMain` and `iosTest` is configured (without any target preset) and the platform specific code targets simply used this common source set.

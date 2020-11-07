@@ -1,3 +1,5 @@
+@file:Suppress("UNUSED_VARIABLE")
+
 plugins {
     id("com.android.library")
     kotlin("multiplatform")
@@ -72,12 +74,15 @@ kotlin {
     }
     jvm()
 
+    js {
+        binaries.executable()
+        nodejs()
+        useCommonJs()
+    }
+
     sourceSets {
-        val commonMain by getting {
-            dependencies {
-                implementation("suparnatural-kotlin-multiplatform:utilities:${DependencyVersion.utilities}")
-            }
-        }
+        val commonMain by getting
+
         val commonTest by getting {
             dependencies {
                 implementation(kotlin("test-common"))
@@ -87,6 +92,7 @@ kotlin {
         val androidMain by getting {
             dependencies {
                 implementation("androidx.core:core-ktx:1.3.1")
+                implementation("suparnatural-kotlin-multiplatform:utilities:${DependencyVersion.utilities}")
             }
         }
         val androidTest by getting {
@@ -99,6 +105,22 @@ kotlin {
         val jvmTest by getting {
             dependencies {
                 implementation(kotlin("test-junit"))
+                implementation("suparnatural-kotlin-multiplatform:utilities:${DependencyVersion.utilities}")
+            }
+        }
+
+        val jsMain by getting {
+            dependencies {
+                implementation("org.jetbrains.kotlinx:kotlinx-nodejs:0.0.7")
+                implementation(npm("ncp", "2.0.0"))
+                implementation(npm("@types/ncp", "2.0.4"))
+            }
+        }
+
+        val jsTest by getting {
+            dependencies {
+                implementation(kotlin("test-common"))
+                implementation(kotlin("test-js"))
             }
         }
 
