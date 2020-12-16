@@ -1,5 +1,18 @@
 # Change Log
 
+## v1.1.0
+utilities, fs, concurrency, rx, graphql
+
+### Possible Breaking Changes
+All artifacts use hierarchical project structures.
+Read about [Kotlin 1.4.20 and Updated structure of multiplatform library publications](https://blog.jetbrains.com/kotlin/2020/11/kotlin-1-4-20-released/)
+I believe due to this, `rx-runtime-reaktive` is not compatible at the moment.
+It will require a future release.
+
+### Upgrades
+1. Kotlin 1.4.20
+2. androidx.core:core-ktx:1.3.2
+
 ## v1.0.13
 1. Added support for node js in `fs` #80.
 2. Fix docs link #81.

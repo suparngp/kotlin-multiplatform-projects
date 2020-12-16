@@ -5,8 +5,8 @@ plugins {
     id("maven-publish")
     id("org.jetbrains.dokka")
 }
-val buildNumber = 12
-val versionLabel = "1.0"
+val buildNumber = 0
+val versionLabel = "1.1"
 
 group = "suparnatural-kotlin-multiplatform"
 version = "$versionLabel.$buildNumber"
@@ -73,7 +73,7 @@ kotlin {
         }
         val androidMain by getting {
             dependencies {
-                implementation("androidx.core:core-ktx:1.3.1")
+                implementation("androidx.core:core-ktx:1.3.2")
             }
         }
         val androidTest by getting {
