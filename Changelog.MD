@@ -1,7 +1,7 @@
 # Change Log
 
 ## v1.1.0
-utilities, fs, concurrency, rx, graphql
+`utilities`, `fs`, `concurrency`, `rx`, `graphql`
 
 ### Possible Breaking Changes
 All artifacts use hierarchical project structures.
