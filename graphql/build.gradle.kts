@@ -4,15 +4,15 @@ plugins {
     id("kotlin-android-extensions")
     id("maven-publish")
     id("org.jetbrains.dokka")
-    kotlin("plugin.serialization") version "1.4.10"
+    kotlin("plugin.serialization") version "1.4.20"
 }
 
-val buildNumber = 12
-val versionLabel = "1.0"
+val buildNumber = 0
+val versionLabel = "1.1"
 
 object DependencyVersion {
-    const val rx = "1.0.12"
-    const val serialization = "1.0.0-RC2"
+    const val rx = "1.1.0"
+    const val serialization = "1.0.1"
 }
 
 
@@ -90,7 +90,7 @@ kotlin {
         }
         val androidMain by getting {
             dependencies {
-                implementation("androidx.core:core-ktx:1.3.1")
+                implementation("androidx.core:core-ktx:1.3.2")
             }
         }
         val androidTest by getting {
