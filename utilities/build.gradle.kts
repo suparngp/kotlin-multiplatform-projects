@@ -5,7 +5,7 @@ plugins {
     id("maven-publish")
     id("org.jetbrains.dokka")
 }
-val buildNumber = 12
+val buildNumber = 14
 val versionLabel = "1.0"
 
 group = "suparnatural-kotlin-multiplatform"
