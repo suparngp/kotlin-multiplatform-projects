@@ -6,8 +6,7 @@
 ### Possible Breaking Changes
 All artifacts use hierarchical project structures.
 Read about [Kotlin 1.4.20 and Updated structure of multiplatform library publications](https://blog.jetbrains.com/kotlin/2020/11/kotlin-1-4-20-released/)
-I believe due to this, `rx-runtime-reaktive` is not compatible at the moment.
-It will require a future release.
+I believe due to this, `com.badoo.reaktive:reaktive` is not compatible at the moment.
 
 ### Upgrades
 1. Kotlin 1.4.20
