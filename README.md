@@ -15,6 +15,7 @@ All docs are being moved to the new [docs website](https://kmpdocs.suparnatural.
 ## Projects
 
 ### [suparnatural-graphql](https://kmpdocs.suparnatural.com/graphql/)
+This generates Kotlin code from a GraphQL schema for queries and mutations.
 
 ### [suparnatural-concurrency](https://kmpdocs.suparnatural.com/concurrency/)
 

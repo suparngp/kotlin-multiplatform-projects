@@ -1,5 +1,8 @@
 # Change Log
 
+## v1.1.0 - re-release
+`utilities`, `fs`, `concurrency`, `rx`, `graphql` re-released on maven central.
+
 ## v1.1.0
 `utilities`, `fs`, `concurrency`, `rx`, `graphql`
 
