@@ -25,10 +25,9 @@ the `Worker` API in this package exposes and implementation based on the former 
         }
     }
     ```
-2. Add `implementation 'suparnatural-kotlin-multiplatform:concurrency-metadata:version'` to `commonMain`.
-3. Add `implementation 'suparnatural-kotlin-multiplatform:concurrency-iosx64(or iosarm64):version'` to `iosMain`.
-4. Add `implementation 'suparnatural-kotlin-multiplatform:concurrency-android:version'` to `androidMain`.
+2. Add `implementation 'com.suparnatural.kotlin:concurrency:version'` to `commonMain`.
 
+> With the hierarchical project structure, you generally need to add the dependency to `commonMain` only. Other targets are also available in case you need to override this behavior.
 
 ## Usage
 

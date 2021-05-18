@@ -4,4 +4,4 @@ plugins {
     id("kotlin-android-extensions") apply false
     id("org.jetbrains.dokka") version "1.4.20" apply false
 }
-group = "com.suparnatural"
+group = "com.suparnatural.kotlin"

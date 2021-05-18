@@ -1,5 +1,34 @@
 $dokka.format:html-v1
 $dokka.linkExtension:html
-
+$dokka.location:////PointingToDeclaration/[root]/index.html
+$dokka.location:/File///PointingToDeclaration/[root]/-file/index.html
+$dokka.location:/File/atime/#/PointingToDeclaration/[root]/-file/atime.html
+$dokka.location:/File/mode/#/PointingToDeclaration/[root]/-file/mode.html
+$dokka.location:/File/mtime/#/PointingToDeclaration/[root]/-file/mtime.html
+$dokka.location:/File/name/#/PointingToDeclaration/[root]/-file/name.html
+$dokka.location:/Options///PointingToDeclaration/[root]/-options/index.html
+$dokka.location:/Options/clobber/#/PointingToDeclaration/[root]/-options/clobber.html
+$dokka.location:/Options/dereference/#/PointingToDeclaration/[root]/-options/dereference.html
+$dokka.location:/Options/errs/#/PointingToDeclaration/[root]/-options/errs.html
+$dokka.location:/Options/filter/#/PointingToDeclaration/[root]/-options/filter.html
+$dokka.location:/Options/limit/#/PointingToDeclaration/[root]/-options/limit.html
+$dokka.location:/Options/stopOnErr/#/PointingToDeclaration/[root]/-options/stop-on-err.html
+$dokka.location:/Options/transform/#/PointingToDeclaration/[root]/-options/transform.html
+$dokka.location:/T$0///PointingToDeclaration/[root]/-t$0/index.html
+$dokka.location:/T$0/stopOnErr/#/PointingToDeclaration/[root]/-t$0/stop-on-err.html
+$dokka.location:/T$1///PointingToDeclaration/[root]/-t$1/index.html
+$dokka.location:/T$1/errs/#/PointingToDeclaration/[root]/-t$1/errs.html
+$dokka.location:/T$2///PointingToDeclaration/[root]/-t$2/index.html
+$dokka.location:/T$2/errs/#/PointingToDeclaration/[root]/-t$2/errs.html
+$dokka.location:/ncp///PointingToDeclaration/[root]/ncp/index.html
+$dokka.location:/ncp/__promisify__/#kotlin.String#kotlin.String#Options/PointingToDeclaration/[root]/ncp/__promisify__.html
+$dokka.location:/ncp/invoke/#kotlin.String#kotlin.String#Options#kotlin.Function1[fs.WriteStream?,kotlin.Unit]/PointingToDeclaration/[root]/ncp/invoke.html
+$dokka.location:/ncp/invoke/#kotlin.String#kotlin.String#Options#kotlin.Function1[kotlin.Any,kotlin.Unit]/PointingToDeclaration/[root]/ncp/invoke.html
+$dokka.location:/ncp/invoke/#kotlin.String#kotlin.String#Options#kotlin.Function1[kotlin.Array[kotlin.Error]?,kotlin.Unit]/PointingToDeclaration/[root]/ncp/invoke.html
+$dokka.location:/ncp/invoke/#kotlin.String#kotlin.String#Options#kotlin.Function1[kotlin.Error?,kotlin.Unit]/PointingToDeclaration/[root]/ncp/invoke.html
+$dokka.location:/ncp/invoke/#kotlin.String#kotlin.String#kotlin.Function1[kotlin.Array[kotlin.Error]?,kotlin.Unit]/PointingToDeclaration/[root]/ncp/invoke.html
+$dokka.location:/ncp/ncp/#/PointingToDeclaration/[root]/ncp/ncp.html
+$dokka.location:com.suparnatural.core.fs/Path.Companion/Empty/#/PointingToDeclaration/com.suparnatural.core.fs/-path/-companion/[jvm]-empty.html
+$dokka.location:com.suparnatural.core.fs/PathComponent/toString/#/PointingToDeclaration/com.suparnatural.core.fs/-path-component/[jvm]to-string.html
 com.suparnatural.core.fs
 

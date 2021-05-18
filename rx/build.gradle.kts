@@ -1,14 +1,18 @@
+import java.util.*
+import org.gradle.kotlin.dsl.signing
+
 plugins {
     id("com.android.library")
     kotlin("multiplatform")
     id("kotlin-android-extensions")
     id("maven-publish")
     id("org.jetbrains.dokka")
+    id("signing")
 }
 val buildNumber = 0
 val versionLabel = "1.1"
 
-group = "suparnatural-kotlin-multiplatform"
+group = "com.suparnatural.kotlin"
 version = "$versionLabel.$buildNumber"
 
 repositories {
@@ -120,4 +124,78 @@ publishing {
 tasks.withType<org.jetbrains.dokka.gradle.DokkaTask>().configureEach {
     outputDirectory.set(projectDir.resolve("docs"))
     moduleName.set("suparnatural-rx")
+}
+
+val secretPropsFile = project.rootProject.file("local.properties")
+if (secretPropsFile.exists()) {
+    secretPropsFile.reader().use {
+        Properties().apply {
+            load(it)
+        }
+    }.onEach { (name, value) ->
+        ext[name.toString()] = value
+    }
+} else {
+    ext["signing.keyId"] = System.getenv("SIGNING_KEY_ID")
+    ext["signing.password"] = System.getenv("SIGNING_PASSWORD")
+    ext["signing.secretKeyRingFile"] = System.getenv("SIGNING_SECRET_KEY_RING_FILE")
+    ext["ossrhUsername"] = System.getenv("OSSRH_USERNAME")
+    ext["ossrhPassword"] = System.getenv("OSSRH_PASSWORD")
+}
+
+val javadocJar by tasks.registering(Jar::class) {
+    archiveClassifier.set("javadoc")
+}
+
+fun getExtraString(name: String) = ext[name]?.toString()
+
+publishing {
+    // Configure maven central repository
+    repositories {
+        maven {
+            name = "sonatype"
+            setUrl("https://s01.oss.sonatype.org/service/local/staging/deploy/maven2/")
+            credentials {
+                username = getExtraString("ossrhUsername")
+                password = getExtraString("ossrhPassword")
+            }
+        }
+    }
+
+    // Configure all publications
+    publications.withType<MavenPublication> {
+
+        // Stub javadoc.jar artifact
+        artifact(javadocJar.get())
+
+        // Provide artifacts information requited by Maven Central
+        pom {
+            name.set("utilities")
+            description.set("RX API for suparnatural graphql")
+            url.set("https://github.com/suparngp/kotlin-multiplatform-projects/tree/master/rx")
+
+            licenses {
+                license {
+                    name.set("MIT")
+                    url.set("https://opensource.org/licenses/MIT")
+                }
+            }
+            developers {
+                developer {
+                    id.set("suparnatural")
+                    name.set("Suparn Gupta")
+                    email.set("hello@suparnatural.com")
+                }
+            }
+            scm {
+                url.set("https://github.com/suparngp/kotlin-multiplatform-projects/tree/master/rx")
+            }
+        }
+    }
+}
+
+// Signing artifacts. Signing.* extra properties values will be used
+
+signing {
+    sign(publishing.publications)
 }

@@ -15,4 +15,4 @@ pluginManagement {
 }
 
 rootProject.name = "kotlin-multiplatform-projects"
-include("utilities", "fs", "concurrency", "rx", "rx-runtime-reaktive", "graphql")
+include("utilities", "fs", "concurrency", "rx", "rx-runtime-reaktive", "graphql", "graphql-plugin")

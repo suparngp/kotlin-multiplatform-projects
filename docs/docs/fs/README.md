@@ -13,11 +13,9 @@ A Kotlin Multiplatform library for iOS and Android to provide file system access
         }
     }
     ```
-2. Add `implementation 'suparnatural-kotlin-multiplatform:fs-metadata:version'` to `commonMain`.
-3. Add `implementation 'suparnatural-kotlin-multiplatform:fs-iosx64(or iosarm64):version'` to `iosMain`
-4. Add `implementation 'suparnatural-kotlin-multiplatform:fs-android:version'` to `androidMain`
-4. Add `implementation 'suparnatural-kotlin-multiplatform:fs-jvm:version'` to `jvmMain`
+2. Add `implementation 'com.suparnatural.kotlin:fs:version'` to `commonMain`.
 
+> With the hierarchical project structure, you generally need to add the dependency to `commonMain` only. Other targets are also available in case you need to override this behavior.
 ## Usage
 
 Check out the [API Docs](https://suparngp.github.io/kotlin-multiplatform-projects/fs/docs/suparnatural-fs/index.html).

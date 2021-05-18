@@ -14,7 +14,7 @@ echo 'kmpdocs.suparnatural.com' > CNAME
 
 git init
 
-git config --local user.email "suparngupta+developer@icloud.com"
+git config --local user.email "hello@suparnatural.com"
 git config --local user.username "suparngp"
 
 git add -A

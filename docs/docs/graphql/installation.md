@@ -19,10 +19,10 @@ Configure `buildscript` section of your `build.gradle.kts` or `build.gradle` wit
 ```kotlin{3,6}
 buildscript {
     repositories {
-        maven(url="https://dl.bintray.com/suparnatural/kotlin-multiplatform")
+        mavenCentral()
     }
     dependencies {
-        classpath("com.suparnatural.plugins:graphql-plugin:1.0.0")
+        classpath("com.suparnatural.kotlin:graphql-plugin:1.0.12")
     }
 }
 
@@ -32,16 +32,14 @@ apply(plugin="com.suparnatural.plugins.graphql")
 ```groovy{4,8}
 buildscript {
     repositories {
-        maven{
-            url "https://dl.bintray.com/suparnatural/kotlin-multiplatform"
-        }
+        mavenCentral()
     }
     dependencies {
-        classpath "com.suparnatural.plugins:graphql-plugin:1.0.0"
+        classpath "com.suparnatural.kotlin:graphql-plugin:1.0.0"
     }
 }
 
-apply plugin: "com.suparnatural.plugins.graphql"
+apply plugin: "com.suparnatural.kotlin.graphql"
 ```
 
 ## Configure Gradle Plugin
@@ -83,15 +81,13 @@ Add the maven repository to `repositories` block.
 
 ```kotlin{2}
 repositories {
-    maven(url="https://dl.bintray.com/suparnatural/kotlin-multiplatform")
+    mavenCentral()
 }
 ```
 
 ```groovy{3}
 repositories {
-    maven{
-        url "https://dl.bintray.com/suparnatural/kotlin-multiplatform"
-    }
+    mavenCentral()
 }
 ```
 
@@ -100,7 +96,7 @@ Add the following to your commonMain target.
 ```kotlin{3}
 commonMain {
     dependencies {
-        implementation("suparnatural-kotlin-multiplatform:graphql-metadata:version")
+        implementation("com.suparnatural.kotlin:graphql:version")
     }
 }
 
@@ -109,29 +105,13 @@ commonMain {
 ```groovy{3}
 commonMain {
     dependencies {
-        implementation "suparnatural-kotlin-multiplatform:graphql-metadata:version"
+        implementation "com.suparnatural.kotlin:graphql:version"
     }
 }
 ```
 
-Next, add platform specific runtime dependencies for each platform target. For example
+> With the hierarchical project structure, you generally need to add the dependency to `commonMain` only. Other targets are also available in case you need to override this behavior.
 
-```kotlin{3}
-jvmMain {
-    dependencies {
-        implementation("suparnatural-kotlin-multiplatform:graphql-jvm:version")
-    }
-}
-
-```
-
-```groovy{3}
-jvmMain {
-    dependencies {
-        implementation "suparnatural-kotlin-multiplatform:graphql-jvm:version"
-    }
-}
-```
 
 | Platform        | Depdendency                                                     |
 | --------------- | --------------------------------------------------------------- |
@@ -191,7 +171,7 @@ If you are already using an `rx` library or you want more than `rx-runtime-reakt
 ```kotlin{3}
 commonMain {
     dependencies {
-        implementation("suparnatural-kotlin-multiplatform:rx-metadata:version")
+        implementation("com.suparnatural.kotlin:rx:version")
     }
 }
 ```
@@ -199,7 +179,7 @@ commonMain {
 ```groovy{3}
 commonMain {
     dependencies {
-        implementation "suparnatural-kotlin-multiplatform:rx-metadata:version"
+        implementation "com.suparnatural.kotlin:rx:version"
     }
 }
 ```

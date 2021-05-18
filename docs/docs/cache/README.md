@@ -16,10 +16,9 @@ Check the API documentation for details.
         }
     }
     ```
-2. Add `implementation 'suparnatural-kotlin-multiplatform:cache-metadata:version'` to `commonMain`.
-3. Add `implementation 'suparnatural-kotlin-multiplatform:cache-iosx64(or iosarm64):version'` to `iosMain`.
-4. Add `implementation 'suparnatural-kotlin-multiplatform:cache-android:version'` to `iosMain`.
+2. Add `implementation 'com.suparnatural.kotlin:cache:version'` to `commonMain`.
 
+> With the hierarchical project structure, you generally need to add the dependency to `commonMain` only. Other targets are also available in case you need to override this behavior.
 
 ## Concepts
 
