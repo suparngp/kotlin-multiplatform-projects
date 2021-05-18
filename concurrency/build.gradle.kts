@@ -147,7 +147,7 @@ publishing {
         pom {
             name.set("utilities")
             description.set("Kotlin multiplatform concurrency for android, iOS")
-            url.set("https://github.com/suparngp/kotlin-multiplatform-projects/tree/master/concurrency")
+            url.set("https://kmpdocs.suparnatural.com/concurrency/")
 
             licenses {
                 license {

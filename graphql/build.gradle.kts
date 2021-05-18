@@ -167,7 +167,7 @@ publishing {
         pom {
             name.set("utilities")
             description.set("Shared utilities for suparnatural kotlin multiplatform projects")
-            url.set("https://github.com/suparngp/kotlin-multiplatform-projects/tree/master/graphql")
+            url.set("https://kmpdocs.suparnatural.com/graphql/")
 
             licenses {
                 license {

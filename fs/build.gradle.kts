@@ -193,7 +193,7 @@ publishing {
         pom {
             name.set("utilities")
             description.set("Kotlin multiplatform file system i/o for android, iOS, Java and NodeJS")
-            url.set("https://github.com/suparngp/kotlin-multiplatform-projects/tree/master/fs")
+            url.set("https://kmpdocs.suparnatural.com/fs/")
 
             licenses {
                 license {
