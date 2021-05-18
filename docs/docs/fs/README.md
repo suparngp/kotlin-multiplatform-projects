@@ -8,9 +8,7 @@ A Kotlin Multiplatform library for iOS and Android to provide file system access
 1. Add the repository to your project.
     ```groovy
     repositories {
-        maven {
-            url  "https://dl.bintray.com/suparnatural/kotlin-multiplatform"
-        }
+        mavenCentral()
     }
     ```
 2. Add `implementation 'com.suparnatural.kotlin:fs:version'` to `commonMain`.

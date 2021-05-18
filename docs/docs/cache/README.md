@@ -11,9 +11,7 @@ Check the API documentation for details.
 1. Add the repository to your project.
     ```groovy
     repositories {
-        maven {
-            url  "https://dl.bintray.com/suparnatural/kotlin-multiplatform"
-        }
+        mavenCentral()
     }
     ```
 2. Add `implementation 'com.suparnatural.kotlin:cache:version'` to `commonMain`.

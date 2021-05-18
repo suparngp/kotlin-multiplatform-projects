@@ -20,9 +20,7 @@ the `Worker` API in this package exposes and implementation based on the former 
 1. Add the repository to your project.
     ``` groovy
     repositories {
-        maven {
-            url  "https://dl.bintray.com/suparnatural/kotlin-multiplatform"
-        }
+        mavenCentral()
     }
     ```
 2. Add `implementation 'com.suparnatural.kotlin:concurrency:version'` to `commonMain`.
